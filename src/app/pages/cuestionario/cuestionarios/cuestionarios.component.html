@@ -1,0 +1,119 @@
+<div class="row">
+
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-body">
+
+          <h4 class="card-title">Listado Cuestionarios</h4>
+          <!-- <h6 class="card-subtitle">Add<code>.table-striped</code>for borders on all sides of the table and cells.</h6> -->
+          <div class="table-responsive">
+              <table class="table table-striped">
+                  <thead>
+                      <tr>
+                          <th>Nombre</th>
+                          <th>Fecha</th>
+                          <th class="text-nowrap">Accion</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <td>Lunar probe project</td>
+                          <td>May 15, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Dream successful plan</td>
+                          <td>July 1, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Office automatization</td>
+                          <td>Apr 12, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>The sun climbing plan</td>
+                          <td>Aug 9, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Open strategy</td>
+                          <td>Apr 2, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                      <tr>
+                          <td>Tantas earum numeris</td>
+                          <td>July 11, 2015</td>
+                          <td class="text-nowrap">
+                              <!-- <a href="#" data-toggle="tooltip" data-original-title="Edit"> <i class="fa fa-pencil text-inverse m-r-10"></i> </a> -->
+                              <a href="#" data-toggle="tooltip" data-original-title="Close"> <i class="fa fa-close text-danger"></i> </a>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
+
+    </div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+          <form [formGroup]="cuestionarioForm"
+                (ngSubmit)="crearPreguntas()">
+
+              <h3 class="card-title">Crear Cuestionarios</h3>
+              <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+              <input type="text"
+                     class="form-control"
+                     placeholder="Ingrese titulo del cuestionario"
+                     formControlName="titulo">
+
+                     <div class="text-danger"
+                          *ngIf="cuestionarioForm.get('titulo').hasError('required') && cuestionarioForm.get('titulo').touched">
+                        El titulo <strong>es obligatorio</strong>
+
+                     </div>
+
+              <div class="form-group">
+                <br/>
+                <textarea class="form-control"
+                          placeholder="Ingrese descripcion del cuestionario"
+                          rows="5"
+                          formControlName="descripcion">
+                </textarea>
+
+                <div class="text-danger"
+                      *ngIf="cuestionarioForm.get('descripcion').hasError('required') && cuestionarioForm.get('descripcion').touched">
+                    La descripcion <strong>es obligatorio</strong>
+
+                </div>
+
+              </div>
+
+              <button [disabled]="cuestionarioForm.invalid"
+                      class="btn btn-info btn-md text-uppercase"
+                      type="submit">Nuevo Cuestionario</button>
+
+          </form>
+        </div>
+    </div>
+  </div>
+
+</div>
