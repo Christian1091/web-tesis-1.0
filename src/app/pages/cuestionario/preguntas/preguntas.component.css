@@ -1,5 +1,7 @@
-.delete-icon {
-  font-size: 29px;
-  color: red;
+.btnFinalizar {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin: 70px;
 }
 

@@ -1,165 +1,42 @@
+<div>
+  <h1 class="text-center">
+    {{ tituloCuestionario }}
+  </h1>
+  <h6 class="text-center">
+    {{ descripcionCuestionario }}
+  </h6>
+</div>
+
 <div class="row">
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <form>
-          <h3 class="card-title text-center">Listado Preguntas</h3>
-          <br />
-          <div>
-            <h6>No hay preguntas que mostrar</h6>
-          </div>
-        </form>
+
+        <h3 class="card-title text-center">Listado Preguntas</h3>
+        <hr>
+        <div *ngIf="listPreguntas.length == 0">
+          <h6>No hay preguntas que mostrar</h6>
+        </div>
+
       </div>
+
     </div>
   </div>
 
+  <!-- Inicio Card de Nueva Pregunta -->
   <div class="col-md-6">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title text-center">Nuevas Preguntas</h3>
 
-        <!-- Inicio del form para las opciones de respuesta-->
-        <form class="input-form">
-          <div class="row">
-            <div class="col-lg-6">
-              <div class="input-group">
-                <input type="text"
-                        class="form-control"
-                        placeholder="Pregunta sin titulo"/>
-              </div>
-            </div>
-
-            <!-- Seleccion de opcion pregunta -->
-            <div class="col-lg-6">
-              <button
-                type="button"
-                class="btn btn-secondary dropdown-toggle col-lg-12"
-                data-toggle="dropdown">
-                Opcion Respuestas
-              </button>
-                <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item"
-                      style="cursor: pointer"
-                      (click)="agregarRespuesta()">
-                    <i class="fa fa-check-circle"></i>
-                    Opcion Unica
-                  </a>
-                  <div role="separator" class="dropdown-divider"></div>
-                  <a class="dropdown-item"
-                      (click)="agregarRespuestaMultiples()">
-                    <i class="fa fa-check-square"></i>
-                    Opcion Multiple
-                  </a>
-                  <div role="separator" class="dropdown-divider"></div>
-                  <a class="dropdown-item"
-                      (click)="agregarRespuestaCortas()">
-                    <i class="fa fa-align-left"></i>
-                    Parrafo
-                  </a>
-                </div>
-            </div>
-            <!-- Fin seleccion opcion pregunta -->
-          </div>
-        </form>
-        <!-- Fin del form para las opciones de respuesta-->
-
-        <!-- Inicio del form pregunta unica -->
-        <form [formGroup]="respuestaCorta">
-            <div formArrayName="respuestas"
-                  *ngFor="let item of getRespuestas.controls; let i = index">
-            <div class="input-group"
-                  [formGroupName]="i"
-                  style="padding-top: 10px">
-
-              <div class="input-group-addon">
-                <div class="input-group-text">
-                  <input type="radio"
-                          name="esCorrecta"
-                          formControlName="esCorrecta"/>
-                </div>
-              </div>
-              <input type="text"
-                      class="form-control"
-                      placeholder="Respuesta {{ i + 1 }}"
-                      formControlName="descripcion"/>
-
-              <span class="material-icons delete-icon"
-                      style="color: red; font-size: 29px; cursor: pointer"
-                      (click)="eliminarRespuesta(i)">
-                delete
-              </span>
-            </div>
-          </div>
-        </form>
-        <!-- Fin del form pregunta unica -->
-
-        <!-- Inicio form para agregar respuesta multiples -->
-        <div [formGroup]="respuestaMultiple">
-          <div formArrayName="respuestas"
-                *ngFor="let item of getRespuestasMultiples.controls; let i = index">
-            <div class="input-group"
-                  [formGroupName]="i"
-                  style="padding-top: 10px">
-
-              <div class="input-group-addon">
-                <div class="input-group-text">
-                  <input type="checkbox"
-                          name="esCorrecta"
-                          formControlName="esCorrecta"/>
-                </div>
-              </div>
-              <input type="text"
-                      class="form-control"
-                      placeholder="Respuesta {{ i + 1 }}"
-                      formControlName="descripcion"/>
-
-              <span class="material-icons delete-icon"
-                      style="color: red; font-size: 29px; cursor: pointer"
-                      (click)="eliminarRespuestaMultiples(i)">
-                delete
-              </span>
-            </div>
-          </div>
-        </div>
-        <!-- Fin form para agregar respuesta multiples -->
-
-        <!-- Inicio form para agregar respuesta cortas -->
-        <div [formGroup]="respuestasCortas">
-          <div formArrayName="respuestas"
-               *ngFor="let item of getRespuestasCortas.controls; let i = index">
-            <div class="input-group"
-                  [formGroupName]="i"
-                  style="padding-top: 10px">
-              <input type="text"
-                      class="form-control"
-                      placeholder="Respuesta {{ i + 1 }}"
-                      formControlName="descripcion"/>
-
-              <span  class="material-icons delete-icon"
-                      style="color: red; font-size: 29px; cursor: pointer"
-                      (click)="eliminarRespuestaCortas(i)">
-                delete
-              </span>
-            </div>
-          </div>
-        </div>
-        <!-- Fin form para agregar respuesta cortas -->
-
-        <button
-          type="button"
-          class="btn btn-info btn-circle btn-lg"
-          style="cursor: pointer; float: right; margin-top: 15px"
-          (click)="agregarRespuestaMultiples()">
-          <i class="fa fa-plus"></i>
-        </button>
-
-        <br>
-        <br>
-
-        <button class="btn btn-info btn-ms text-uppercase" type="submit">
-          Agregar
-        </button>
+        <h3 class="card-title text-center">
+          Nueva Pregunta
+        </h3>
+        <hr>
+        <app-nueva-pregunta (enviarPregunta)="guardarPregunta($event)"></app-nueva-pregunta>
       </div>
+
     </div>
   </div>
+  <!-- Fin Card de Nueva Pregunta -->
 </div>
+<button class="btn btn-success btn-lg btnFinalizar" [disabled]="listPreguntas.length == 0">Finalizar Cuestionario</button>

@@ -1,0 +1,85 @@
+<!-- Inicio del form pregunta unica -->
+<form [formGroup]="nuevaPreguntaUnica">
+  <div class="row">
+    <div class="col-lg-6">
+      <div class="input-group">
+        <input type="text"
+                class="form-control"
+                placeholder="Pregunta sin titulo"
+                formControlName="titulo"/>
+      </div>
+      <span class="text-danger"
+            *ngIf="nuevaPreguntaUnica.get('titulo').hasError('required') && nuevaPreguntaUnica.get('titulo').touched">
+        La pregunta es requerida
+      </span>
+    </div>
+
+    <!-- Seleccion de opcion pregunta -->
+    <div class="col-lg-6">
+      <button type="button"
+              class="btn btn-secondary dropdown-toggle col-lg-12"
+              data-toggle="dropdown">
+        Opcion Respuestas
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a class="dropdown-item"
+            style="cursor: pointer"
+            (click)="agregarRespuestasUnicas()">
+          <i class="fa fa-check-circle"></i>
+          Opcion Unica
+        </a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item">
+          <i class="fa fa-check-square"></i>
+          Opcion Multiple
+        </a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item">
+          <i class="fa fa-align-left"></i>
+          Parrafo
+        </a>
+      </div>
+    </div>
+    <!-- Fin seleccion opcion pregunta -->
+  </div>
+
+  <div formArrayName="respuestas"
+        *ngFor="let item of getRespuestasUnicas.controls; let i = index">
+    <div class="input-group"
+          [formGroupName]="i"
+          style="padding-top: 10px">
+
+      <div class="input-group-addon">
+        <div class="input-group-text">
+          <input type="radio"
+                  name="esCorrecta"
+                  (change)="setRespuestasUnicasValidas(i)"
+                  [value]="i"
+                  formControlName="esCorrecta"/>
+        </div>
+      </div>
+      <input type="text"
+              class="form-control"
+              placeholder="Respuesta {{ i + 1 }}"
+              formControlName="descripcion"/>
+
+      <span class="material-icons delete-icon"
+            (click)="eliminarRespuestasUnicas(i)">
+        delete
+      </span>
+    </div>
+    <span class="text-danger"
+          *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
+      La respuesta es requerida
+    </span>
+  </div>
+
+  <br>
+  <br>
+  <button class="btn btn-primary float-right"
+          (click)="agregarPregunta()">
+    Agregar
+  </button>
+
+ </form>
+ <!-- Fin del form pregunta unica -->

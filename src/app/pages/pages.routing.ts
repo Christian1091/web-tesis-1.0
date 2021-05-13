@@ -42,8 +42,8 @@ const routes: Routes = [
       { path: 'usuarios', canActivate: [ AdminGuard ], component: UsuariosComponent , data: { titulo: 'Usuario de aplicacion'} },
 
       // Cuestionarios
-      { path: 'cuestionarios', component: CuestionariosComponent , data: { titulo: 'Cuestionarios'} },
-      { path: 'preguntas', component: PreguntasComponent  , data: { titulo: 'Crear Preguntas'} },
+      { path: 'cuestionarios', canActivate: [ AdminGuard ], component: CuestionariosComponent , data: { titulo: 'Cuestionarios'} },
+      { path: 'preguntas', canActivate: [ AdminGuard ], component: PreguntasComponent  , data: { titulo: 'Crear Preguntas'} },
 
     ]
   },

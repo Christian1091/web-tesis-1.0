@@ -20,6 +20,7 @@ import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component'
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { CuestionariosComponent } from './cuestionario/cuestionarios/cuestionarios.component';
 import { PreguntasComponent } from './cuestionario/preguntas/preguntas.component';
+import { NuevaPreguntaComponent } from './cuestionario/preguntas/nueva-pregunta/nueva-pregunta.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { PreguntasComponent } from './cuestionario/preguntas/preguntas.component
     BusquedaComponent,
     CuestionariosComponent,
     PreguntasComponent,
+    NuevaPreguntaComponent,
   ],
   exports: [
     DashboardComponent,
