@@ -1,11 +1,11 @@
 export class Respuesta {
   id?: number; //id puede ser opcional
   descripcion: string;
-  esCorrecta: boolean;
+  respuestas: any;
 
-  constructor( descripcion: string, esCorrecta: boolean, id?: number){
+  constructor( descripcion: string, respuestas: any, id?: number){
     this.id = id;
     this.descripcion = descripcion;
-    this.esCorrecta = esCorrecta;
+    this.respuestas = respuestas;
   }
 }

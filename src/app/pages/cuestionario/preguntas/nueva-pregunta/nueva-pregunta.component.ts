@@ -77,9 +77,9 @@ export class NuevaPreguntaComponent implements OnInit {
       const respuesta: Respuesta = new Respuesta(element.descripcion, false);
 
       /**Para verificar si al respuesta es correcta */
-      if( index === element.esCorrecta ) {
+      /*if( index === element.esCorrecta ) {
         respuesta.esCorrecta = true;
-      }
+      }*/
 
       arrayRta.push(respuesta);
     });
