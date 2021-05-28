@@ -1,6 +1,7 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
@@ -34,7 +35,8 @@ export class LoginComponent implements OnInit {
   constructor( private router: Router,
                private fb: FormBuilder,
                private usuarioService: UsuarioService,
-               private ngZone: NgZone ) { }
+               private ngZone: NgZone,
+               private cuestionarioService: CuestionarioService ) { }
 
   ngOnInit(): void {
     /**Aqui llamamos el render del boton */

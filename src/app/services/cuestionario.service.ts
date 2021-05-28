@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../src/environments/environment';
 
 import { Cuestionario } from '../models/cuestionario.model';
+
+import { CargarCuestionario } from '../interfaces/cargar-cuestionarios.interface';
 import { Observable } from 'rxjs';
 
 // Aqui llamamos al url que creamos en el envairoment
@@ -38,5 +40,12 @@ export class CuestionarioService {
 
     return this.http.post( url, cuestionario, this.headers );
   }
+
+  getListCuestionarioByIdUser() {
+   const url =  `${ base_url }/cuestionariosByIdUser`;
+
+   return this.http.get<CargarCuestionario>( url, this.headers );
+  }
+
 
 }
