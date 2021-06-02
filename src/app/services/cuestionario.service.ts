@@ -35,16 +35,28 @@ export class CuestionarioService {
     }
   }
 
+  getListCuestionarioByIdUser() {
+    const url =  `${ base_url }/cuestionarios`;
+
+    return this.http.get<CargarCuestionario>( url, this.headers );
+  }
+
   guardarCuestionario( cuestionario: Cuestionario ): Observable<any> {
     const url = `${ base_url }/cuestionarios`;
 
     return this.http.post( url, cuestionario, this.headers );
   }
 
-  getListCuestionarioByIdUser() {
-   const url =  `${ base_url }/cuestionariosByIdUser`;
+  eliminarCuestionario( _id: string) {
+    const url =  `${ base_url }/cuestionarios/${ _id }`;
 
-   return this.http.get<CargarCuestionario>( url, this.headers );
+    return this.http.delete( url, this.headers );
+  }
+
+  getVerCuestionario( _id: string ): Observable<any> {
+    const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
+
+    return this.http.get( url, this.headers );
   }
 
 

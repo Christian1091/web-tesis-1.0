@@ -46,14 +46,35 @@
 
 </div>
 
+<div class="row animated fadeIn fast"
+      *ngIf="cargando">
+  <div class="col-12">
+    <div class="alert alert-info text-center">
+      <h4 class="alert-heading">Cargando</h4>
+      <i class="fa fa-spin fa-refresh fa-2x"></i>
+      <p class="mb-0">Por favor espere</p>
+    </div>
+  </div>
+</div>
+
+
 <div class="card-columns mt-3">
   <div class="card" *ngFor="let cuestionario of cuestionarios">
     <div class="card-body text-center">
       <h4 class="card-title">{{ cuestionario.nombre }}</h4>
       <p class="card-text">{{ cuestionario.descripcion }}</p>
-      <button class="btn btn-success radius">VER</button>
-      <button class="btn btn-danger radius">ELIMINAR</button>
+      <button class="btn btn-success radius"
+              routerLink="../ver-cuestionario/{{ cuestionario._id }}">
+        VER
+      </button>
+      <button class="btn btn-danger radius"
+              (click)="eliminarCuestionario( cuestionario )">
+        ELIMINAR
+      </button>
     </div>
   </div>
 
 </div>
+
+<h3  *ngIf="cuestionarios.length == 0" class="text-center">No hay cuestionarios para mostrar</h3>
+

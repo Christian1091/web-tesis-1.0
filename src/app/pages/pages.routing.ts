@@ -17,8 +17,11 @@ import { PerfilComponent } from './perfil/perfil.component';
 
 // Mantenimientos
 import { UsuariosComponent } from './mantenimientos/usuarios/usuarios.component';
-import { CuestionariosComponent } from './cuestionario/cuestionarios/cuestionarios.component';
 import { PreguntasComponent } from './cuestionario/preguntas/preguntas.component';
+
+// Cuestionario
+import { CuestionariosComponent } from './cuestionario/cuestionarios/cuestionarios.component';
+import { VerCuestionarioComponent } from './cuestionario/ver-cuestionario/ver-cuestionario.component';
 
 const routes: Routes = [
   // Rutas hijas
@@ -44,6 +47,7 @@ const routes: Routes = [
       // Cuestionarios
       { path: 'cuestionarios', canActivate: [ AdminGuard ], component: CuestionariosComponent , data: { titulo: 'Cuestionarios'} },
       { path: 'preguntas', canActivate: [ AdminGuard ], component: PreguntasComponent  , data: { titulo: 'Crear Preguntas'} },
+      { path: 'ver-cuestionario/:id', canActivate: [ AdminGuard ], component: VerCuestionarioComponent , data: { titulo: 'Ver Cuestionario'} },
 
     ]
   },

@@ -1,0 +1,18 @@
+
+<div class="text-center" *ngFor="let cuestionario of cuestionario.cuestionarios">
+
+  <h2 class="card-title">{{ cuestionario.nombre }}</h2>
+  <p class="card-text">{{ cuestionario.descripcion }}</p>
+  <hr>
+  <div *ngFor="let pregunta of cuestionario.listPreguntas">
+    <div class="card-header">
+      <b> {{ pregunta.descripcion }} </b>
+    </div>
+    <ul class="list-group" *ngFor="let respuesta of pregunta.listRespuesta">
+      <li class="list-group-item">
+        {{ respuesta.descripcion }}
+      </li>
+    </ul>
+    <br>
+  </div>
+</div>

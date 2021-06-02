@@ -1,14 +1,16 @@
 import { Pregunta } from './pregunta.model';
 
 export class Cuestionario {
-  id?: number;
+
+  _id?: string;
   nombre: string;
   descripcion: string;
   fechaCreacion?: Date;
   listPreguntas: Pregunta[];
   //activo?: number;
 
-  constructor( nombre: string, descripcion: string, fechaCreacion: Date, listPreguntas: Pregunta[] ) {
+  constructor( _id: string, nombre: string, descripcion: string, fechaCreacion: Date, listPreguntas: Pregunta[] ) {
+    this._id = _id
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.fechaCreacion =fechaCreacion;
