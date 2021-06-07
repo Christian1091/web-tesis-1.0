@@ -5,6 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
 import { AuthModule} from './auth/auth.module';
 import { WebModule } from './web/web.module';
+import { TestModule } from './test/test.module';
 
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
@@ -25,7 +26,8 @@ import { ComponentsModule } from './components/components.module';
     PagesModule,
     AuthModule,
     WebModule,
-    ComponentsModule
+    ComponentsModule,
+    TestModule
   ],
   providers: [],
   bootstrap: [AppComponent]

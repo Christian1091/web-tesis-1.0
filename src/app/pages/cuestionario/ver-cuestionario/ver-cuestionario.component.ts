@@ -9,15 +9,13 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
   styles: [],
 })
 export class VerCuestionarioComponent implements OnInit {
-
+  //Id del cuestioanrio
   id: string;
 
   cuestionario: any = {};
 
-  constructor(
-    private cuestionarioService: CuestionarioService,
-    private activatedRoute: ActivatedRoute
-  ) {
+  constructor( private cuestionarioService: CuestionarioService,
+               private activatedRoute: ActivatedRoute ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
 

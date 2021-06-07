@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<section id="wrapper">
+  <div class="container">
+    <div class="card text-center">
+      <div>
+        <h4 class="card-title"> {{ obtenerPregunta() }} </h4>
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta;"
+              (click)="respuestaSeleccionada(respuesta)"
+              [ngClass]="AddClassOption(respuesta)">
+            {{ respuesta.descripcion }}
+          </li>
+        </ul>
+
+        <div class="mt-auto">
+          <button class="btn btn-primary btn-lg btn-sig"
+                  [disabled]="!rtaConfirmada"
+                  (click)="siguiente()">
+            Siguiente
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { PagesRoutingModule } from './pages/pages.routing';
 import { AuthRoutingModule } from './auth/auth.routing';
 import { WebRoutingModule } from './web/web.routing';
+import { TestRoutingModule } from './test/test.routing';
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
@@ -23,7 +24,8 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     PagesRoutingModule,
     AuthRoutingModule,
-    WebRoutingModule
+    WebRoutingModule,
+    TestRoutingModule
 
   ],
   exports: [RouterModule],

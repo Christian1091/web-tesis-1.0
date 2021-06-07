@@ -6,6 +6,7 @@ import { environment } from '../../../src/environments/environment';
 import { Cuestionario } from '../models/cuestionario.model';
 
 import { CargarCuestionario } from '../interfaces/cargar-cuestionarios.interface';
+
 import { Observable } from 'rxjs';
 
 // Aqui llamamos al url que creamos en el envairoment
@@ -35,10 +36,26 @@ export class CuestionarioService {
     }
   }
 
+  // Este get es para visualizar publicamente
+  getListCuestionarios() {
+    const url =  `${ base_url }/cuestionarios/list-cuestionarios`;
+
+    return this.http.get<CargarCuestionario>( url, this.headers );
+    //return this.http.get<ReqCuestionario>( url, this.headers );
+  }
+
+  // Este get es para visualizar dentro del usuario autenticado
   getListCuestionarioByIdUser() {
     const url =  `${ base_url }/cuestionarios`;
 
     return this.http.get<CargarCuestionario>( url, this.headers );
+  }
+
+  // Este get es para visualizar el cuestionario dentro del usuario autenticado
+  getVerCuestionario( _id: string ): Observable<any> {
+    const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
+
+    return this.http.get( url, this.headers );
   }
 
   guardarCuestionario( cuestionario: Cuestionario ): Observable<any> {
@@ -52,12 +69,5 @@ export class CuestionarioService {
 
     return this.http.delete( url, this.headers );
   }
-
-  getVerCuestionario( _id: string ): Observable<any> {
-    const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
-
-    return this.http.get( url, this.headers );
-  }
-
 
 }
