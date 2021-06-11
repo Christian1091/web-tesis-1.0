@@ -24,17 +24,18 @@ Login register and recover password Page
   background-position: center center;
   height: 100%;
   width: 100%;
-  padding: 10% 0;
+  padding: 6% 0;
   position: fixed;
 }
 
 .login-box {
   width: 400px;
   margin: 0 auto;
-  background-color: #FCFCFC ;
-  opacity: .95;
+  background-color: rgba(255, 255, 255, 0.8) ;
+  /*opacity: .95;*/
   border-radius: 10px;
-  border: 5px solid #3b4652;
+  box-shadow: 0 5px 35px rgba(0, 0, 0, 0.2);
+
 }
 
 .login-box .footer {
@@ -61,5 +62,9 @@ Login register and recover password Page
   right: 0px;
   position: absolute;
   height: 100%;
+}
+
+.fondoL {
+  background: linear-gradient( #eeeef1, #37517ea8);
 }
 

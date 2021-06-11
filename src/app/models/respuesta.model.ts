@@ -1,11 +1,11 @@
 export class Respuesta {
-  _id?: string; //id puede ser opcional
+  //id?: string; //id puede ser opcional
   descripcion: string;
-  respuestas: any;
+  //tipoRespuesta: any;
 
-  constructor( descripcion: string, respuestas: any, id?: string){
-    this._id = id;
+  constructor( descripcion: string ){
+    //this.id = id;
     this.descripcion = descripcion;
-    this.respuestas = respuestas;
+    //this.tipoRespuesta = tipoRespuesta;
   }
 }

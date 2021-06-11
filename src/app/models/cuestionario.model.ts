@@ -9,13 +9,12 @@ export class Cuestionario {
   listPreguntas: Pregunta[];
   //activo?: number;
 
-  constructor( _id: string, nombre: string, descripcion: string, fechaCreacion: Date, listPreguntas: Pregunta[] ) {
-    this._id = _id
+  constructor( id: string, nombre: string, descripcion: string, fechaCreacion: Date, listPreguntas: Pregunta[] ) {
+    this._id = id
     this.nombre = nombre;
     this.descripcion = descripcion;
     this.fechaCreacion =fechaCreacion;
     this.listPreguntas = listPreguntas;
-    //this.activo = 1;
   }
 
 }

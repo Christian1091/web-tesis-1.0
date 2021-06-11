@@ -1,34 +1,93 @@
 <app-navbar></app-navbar>
+<!-- ============================================================== -->
+<!-- Main wrapper - style you can find in pages.scss -->
+<!-- ============================================================== -->
 <section id="wrapper">
-  <div class="col-md-6">
-    <div class="card card-body">
-        <h3 class="box-title m-b-0">Sample Basic Forms</h3>
-        <p class="text-muted m-b-30 font-13"> Bootstrap Elements </p>
-        <div class="row">
-            <div class="col-sm-12 col-xs-12">
+  <div class="login-register fondoL">
+    <div class="login-box card">
+      <div class="card-body">
 
-                    <div class="form-group">
-                        <label>Nombre y Apellido</label>
-                        <input type="text" class="form-control" placeholder="Enter Nombre" [(ngModel)]="nombreParticipante">
-                    </div>
-                    <div class="form-group">
-                        <label for="exampleInputEmail1">Correo electronico</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-                    </div>
-                    <div class="form-group">
-                      <label for="exampleInputEmail1">Confirmar Correo electronico</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter confirmar email">
-                    </div>
-                    <button type="submit"
-                            class="btn btn-success waves-effect waves-light m-r-10"
-                            (click)="siguiente()"
-                            [disabled]="nombreParticipante == ''">Siguiente</button>
-                    <button type="submit"
-                            class="btn btn-inverse waves-effect waves-light"
-                            routerLink="/listCuestionarios">Cancelar</button>
-
-            </div>
+        <h3 class="box-title m-t-40 m-b-0">Registrate</h3>
+        <small>Crea tu cuenta para poder realizar la encuesta</small>
+        <div class="form-group m-t-20">
+          <div class="col-xs-12">
+            <input class="form-control"
+                    type="text"
+                    placeholder="Nombres"
+                    [(ngModel)]="nombreParticipante"/>
+          </div>
         </div>
+
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control"
+                    type="text"
+                    required=""
+                    placeholder="Ingrese su correo electronico"/>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control"
+                    type="text"
+                    required=""
+                    placeholder="Ingrese la Institucion a la que pertenece"/>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-lg-6">
+            <select class="custom-select col-12" id="inlineFormCustomSelect">
+                <option selected="">Selecione la provincia</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+          </div>
+
+          <div class="col-lg-6">
+            <select class="custom-select col-12" id="inlineFormCustomSelect">
+                <option selected="">Selecione su ciudad</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+          </div>
+        </div>
+        <br>
+
+        <div class="form-group row">
+          <div class="col-md-12">
+            <div class="checkbox checkbox-primary p-t-0">
+              <input id="checkbox-signup" type="checkbox" />
+              <label for="checkbox-signup">
+                I agree to all <a href="#">Terms</a>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group text-center m-t-20">
+          <div class="col-xs-12">
+            <button
+              type="submit"
+              class="btn btn-success waves-effect waves-light m-r-10"
+              (click)="siguiente()"
+              [disabled]="nombreParticipante == ''">
+              Siguiente
+            </button>
+            <button
+              type="submit"
+              class="btn btn-inverse waves-effect waves-light"
+              routerLink="/listCuestionarios">
+              Cancelar
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
+<!-- ============================================================== -->
+<!-- End Wrapper -->
+<!-- ============================================================== -->

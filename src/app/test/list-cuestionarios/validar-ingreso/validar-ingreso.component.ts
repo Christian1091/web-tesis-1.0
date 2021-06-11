@@ -5,7 +5,8 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
 @Component({
   selector: 'app-validar-ingreso',
   templateUrl: './validar-ingreso.component.html',
-  styles: [
+  styleUrls: [
+    './validar-ingreso.component.css',
   ]
 })
 export class ValidarIngresoComponent implements OnInit {

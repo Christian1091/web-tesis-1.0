@@ -20,8 +20,13 @@ export class PreguntaComponent implements OnInit {
   listPreguntas: Pregunta [] = [];
   listRespuesta: Respuesta [] = [];
   rtaConfirmada = false;
+  indexPregunta = 0;
+
+  // Respuesta Usuario
   opcionSeleccionada: any;
-  index = 0;
+  indexSeleccionado: any;
+  puntosTotales = 0;
+  listRespuestaUsuario: any [] = [];
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                private cuestionarioService: CuestionarioService,
@@ -51,16 +56,18 @@ export class PreguntaComponent implements OnInit {
   }
 
   obtenerPregunta(): string {
-    return this.listPreguntas[this.index]?.descripcion;
+    return this.listPreguntas[this.indexPregunta]?.descripcion;
   }
 
   getIndex(): number {
-    return this.index;
+    return this.indexPregunta;
   }
 
-  respuestaSeleccionada( respuesta: any ) {
+  respuestaSeleccionada( respuesta: any, index: number ) {
     this.opcionSeleccionada = respuesta;
     this.rtaConfirmada = true;
+
+    this.indexSeleccionado = index;
   }
 
   AddClassOption( respuesta: any ): string {
@@ -70,10 +77,17 @@ export class PreguntaComponent implements OnInit {
   }
 
   siguiente() {
-    this.rtaConfirmada = false;
-    this.index ++;
 
-    if ( this.index === this.listPreguntas.length ) {
+    // Creamos un objeto respuesta y lo agregamos al array
+    // const respuestaUsuario: any = {
+    //   titulo: this.listPreguntas[this.indexPregunta].descripcion
+    // }
+    this.rtaConfirmada = false;
+    this.indexPregunta ++;
+
+    if ( this.indexPregunta === this.listPreguntas.length ) {
+      // Guardamos las respuestas en mongo
+      // Redireccionamos al proximo componente
       this.router.navigateByUrl('/respuestaCuestionario');
    }
   }

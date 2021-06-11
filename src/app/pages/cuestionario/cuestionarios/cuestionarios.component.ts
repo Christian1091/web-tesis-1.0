@@ -41,6 +41,7 @@ export class CuestionariosComponent implements OnInit {
 
   }
 
+  /**CReamos las preguntas */
   crearPreguntas() {
 
     this.cuestionarioService.tituloCuestionario = this.cuestionarioForm.value.titulo;

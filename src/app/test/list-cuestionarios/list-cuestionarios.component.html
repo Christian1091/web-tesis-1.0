@@ -8,8 +8,8 @@
         <br>
         <h1>Bienvenidos</h1>
         <h4 *ngIf="listCuestionarios.length == 0">No hay cuestionarios para visualizar</h4>
-        <div class="card-columns">
-          <div class="card" style="background-color: #E4DDDC;" *ngFor="let cuestionario of listCuestionarios">
+        <div class="card-columns" style="display: grid; grid-template-columns: repeat(3, 350px);">
+          <div class="card cardList" style="background-color: #E4DDDC;" *ngFor="let cuestionario of listCuestionarios">
             <div class="card-body text-center">
               <h4 class="card-title"> {{ cuestionario.nombre }} </h4>
               <p class="card-text"> {{ cuestionario.descripcion }} </p>

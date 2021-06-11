@@ -1,23 +1,4 @@
-/*
-Template Name: Admin pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*
-Template Name: Admin Pro Admin
-Author: Wrappixel
-Email: niravjoshi87@gmail.com
-File: scss
-*/
-/*Theme Colors*/
-/*bootstrap Color*/
-/*Light colors*/
-/*Normal Color*/
-/*Extra Variable*/
-/*******************
-Login register and recover password Page
-******************/
+
 .login-register {
   background-size: cover;
   background-repeat: no-repeat;
@@ -29,7 +10,7 @@ Login register and recover password Page
 }
 
   .login-box {
-    width: 400px;
+    width: 500px;
     margin: 0 auto;
     background-color: rgba(255, 255, 255, 0.8) ;
     /*opacity: .95;*/

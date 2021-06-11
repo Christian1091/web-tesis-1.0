@@ -18,7 +18,7 @@ export class NuevaPreguntaComponent implements OnInit {
   pregunta: Pregunta;
 
   /**Para almacenar la respuesta del radio button */
-  rtaCorrecta = 0;
+  //rtaCorrecta;
 
    /**Enviar pregunta al listado de preguntas */
    @Output() enviarPregunta = new EventEmitter<Pregunta>();
@@ -44,8 +44,7 @@ export class NuevaPreguntaComponent implements OnInit {
    /**Metodo para agregar mas respuestas al array*/
    agregarRespuestasUnicas() {
     this.getRespuestasUnicas.push( this.fb.group({
-      descripcion:['', Validators.required],
-      esCorrecta: 0
+      descripcion:['', Validators.required]
     }));
   }
 
@@ -53,9 +52,9 @@ export class NuevaPreguntaComponent implements OnInit {
     this.getRespuestasUnicas.removeAt( index );
   }
 
-  setRespuestasUnicasValidas( index: number) {
-    this.rtaCorrecta = index;
-  }
+  // setRespuestasUnicasValidas( index: any) {
+  //   this.rtaCorrecta = index;
+  // }
 
   agregarPregunta() {
     /**Obtenemos el titulo de la pregunta */
@@ -74,7 +73,7 @@ export class NuevaPreguntaComponent implements OnInit {
       /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
        * la respuesta element.descripcion
       */
-      const respuesta: Respuesta = new Respuesta(element.descripcion, false);
+      const respuesta: Respuesta = new Respuesta(element.descripcion);
 
       /**Para verificar si al respuesta es correcta */
       /*if( index === element.esCorrecta ) {

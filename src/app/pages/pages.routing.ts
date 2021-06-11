@@ -22,6 +22,10 @@ import { PreguntasComponent } from './cuestionario/preguntas/preguntas.component
 // Cuestionario
 import { CuestionariosComponent } from './cuestionario/cuestionarios/cuestionarios.component';
 import { VerCuestionarioComponent } from './cuestionario/ver-cuestionario/ver-cuestionario.component';
+import { BuzonComponent } from './correo/buzon/buzon.component';
+import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.component';
+import { RedactarCorreoComponent } from './correo/redactar-correo/redactar-correo.component';
+import { EnviadosComponent } from './correo/enviados/enviados.component';
 
 const routes: Routes = [
   // Rutas hijas
@@ -40,6 +44,11 @@ const routes: Routes = [
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
 
+      // Correo
+      { path: 'buzon', component: BuzonComponent, data: { titulo: 'Buzon de entrada'} },
+      { path: 'buzondetalle', component: BuzonDetalleComponent, data: { titulo: 'Correos'} },
+      { path: 'nuevomensaje', component: RedactarCorreoComponent, data: { titulo: 'Nuevo mensaje'} },
+      { path: 'enviados', component: EnviadosComponent, data: { titulo: 'Enviados'} },
       // { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
       /**Mantenimientos - con el canActivate implementamos nuestro Guard*/
       { path: 'usuarios', canActivate: [ AdminGuard ], component: UsuariosComponent , data: { titulo: 'Usuario de aplicacion'} },

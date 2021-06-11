@@ -22,6 +22,10 @@ import { CuestionariosComponent } from './cuestionario/cuestionarios/cuestionari
 import { PreguntasComponent } from './cuestionario/preguntas/preguntas.component';
 import { NuevaPreguntaComponent } from './cuestionario/preguntas/nueva-pregunta/nueva-pregunta.component';
 import { VerCuestionarioComponent } from './cuestionario/ver-cuestionario/ver-cuestionario.component';
+import { BuzonComponent } from './correo/buzon/buzon.component';
+import { RedactarCorreoComponent } from './correo/redactar-correo/redactar-correo.component';
+import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.component';
+import { EnviadosComponent } from './correo/enviados/enviados.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +43,10 @@ import { VerCuestionarioComponent } from './cuestionario/ver-cuestionario/ver-cu
     PreguntasComponent,
     NuevaPreguntaComponent,
     VerCuestionarioComponent,
+    BuzonComponent,
+    RedactarCorreoComponent,
+    BuzonDetalleComponent,
+    EnviadosComponent,
   ],
   exports: [
     DashboardComponent,

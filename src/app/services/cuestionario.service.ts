@@ -44,14 +44,14 @@ export class CuestionarioService {
     //return this.http.get<ReqCuestionario>( url, this.headers );
   }
 
-  // Este get es para visualizar dentro del usuario autenticado
+  // Este get es para visualizar los cuestionarios creados por el usuario ya autenticado
   getListCuestionarioByIdUser() {
     const url =  `${ base_url }/cuestionarios`;
 
     return this.http.get<CargarCuestionario>( url, this.headers );
   }
 
-  // Este get es para visualizar el cuestionario dentro del usuario autenticado
+ /* Este get es para visualizar un cuestionario en especifico dentro del usuario autenticado */
   getVerCuestionario( _id: string ): Observable<any> {
     const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
 

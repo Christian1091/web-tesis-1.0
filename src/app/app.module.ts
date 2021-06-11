@@ -17,7 +17,7 @@ import { ComponentsModule } from './components/components.module';
   declarations: [
     AppComponent,
     NopagefoundComponent,
-    Grafica1Component
+    Grafica1Component,
 
   ],
   imports: [
