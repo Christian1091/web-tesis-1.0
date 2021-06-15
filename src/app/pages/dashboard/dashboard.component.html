@@ -1,1 +1,177 @@
-<p>dashboard works!</p>
+<div class="row">
+  <div class="col-lg-4 col-xlg-3 col-md-5">
+    <div class="card">
+      <div class="card-body">
+        <form class="form p-t-20">
+          <div class="m-t-30 text-center">
+            <img [src]="usuario.imagenUrl" class="img-circle" width="150" />
+            <h4 style="padding: 20px">{{ usuario.nombre }}</h4>
+            <h6 class="card-subtitle">{{ usuario.email }}</h6>
+          </div>
+        </form>
+      </div>
+      <div>
+        <hr/>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabs Post, blog, editar perfil -->
+
+  <div class="col-lg-8 col-xlg-9 col-md-7">
+    <div class="card">
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs profile-tab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" data-toggle="tab" href="#home" role="tab">Posts</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#profile" role="tab">Nuevo Post</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" data-toggle="tab" href="#settings" role="tab">Settings</a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div class="tab-pane active" id="home" role="tabpanel">
+          <div class="card-body">
+            <div class="row">
+              <div class="column col-md-6" *ngFor="let post of posts">
+                <!-- <div class="col-md-6"> -->
+                  <div class="card">
+                    <div class="card-body cardList">
+                      <h4 class="card-header text-white"
+                          style="background-color: #1D5BAC">
+                          {{ post.titulo }}
+                      </h4>
+                      <p class="card-text" style="padding: 10px">
+                        {{ post.descripcion }}
+                      </p>
+                      <hr>
+                      <i class="fa fa-eye icon" style="color: #2269C7"></i>
+                      <i class="fa fa-edit icon"
+                         style="color: #168116"
+                      ></i>
+                      <i class="fa fa-trash icon"
+                         (click)="eliminarPost( post )"
+                         style="color: #EF2421;"></i>
+                    </div>
+                  </div>
+                <!-- </div> -->
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--second tab-->
+        <div class="tab-pane" id="profile" role="tabpanel">
+          <div class="card-body">
+            <form class="form-horizontal form-material"
+                  [formGroup]="postForm"
+                  (ngSubmit)="crearPost()">
+              <div class="form-group">
+                <div class="col-md-12">
+                  <input type="text"
+                          placeholder="Titulo"
+                          class="form-control form-control-line"
+                          formControlName="titulo"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12">
+                  <input type="text"
+                          placeholder="Descripcion"
+                          class="form-control form-control-line"
+                          formControlName="descripcion"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-md-12">
+                  <label>Redactar</label>
+                  <textarea class="form-control"
+                            rows="12"
+                            formControlName="texto"></textarea>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <button class="btn btn-success">Guardar</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="tab-pane" id="settings" role="tabpanel">
+          <div class="card-body">
+            <form class="form-horizontal form-material">
+              <div class="form-group">
+                <label class="col-md-12">Full Name</label>
+                <div class="col-md-12">
+                  <input type="text"
+                          placeholder="Johnathan Doe"
+                          class="form-control form-control-line"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="example-email" class="col-md-12">Email</label>
+                <div class="col-md-12">
+                  <input type="email"
+                          placeholder="johnathan@admin.com"
+                          class="form-control form-control-line"
+                          name="example-email"
+                          id="example-email"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-12">Password</label>
+                <div class="col-md-12">
+                  <input type="password"
+                    value="password"
+                    class="form-control form-control-line"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-12">Phone No</label>
+                <div class="col-md-12">
+                  <input type="text"
+                          placeholder="123 456 7890"
+                          class="form-control form-control-line"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-12">Message</label>
+                <div class="col-md-12">
+                  <textarea rows="5"
+                            class="form-control form-control-line">
+                  </textarea>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-12">Select Country</label>
+                <div class="col-sm-12">
+                  <select class="form-control form-control-line">
+                    <option>London</option>
+                    <option>India</option>
+                    <option>Usa</option>
+                    <option>Canada</option>
+                    <option>Thailand</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="col-sm-12">
+                  <button class="btn btn-success">Update Profile</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

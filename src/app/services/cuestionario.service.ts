@@ -44,7 +44,7 @@ export class CuestionarioService {
     //return this.http.get<ReqCuestionario>( url, this.headers );
   }
 
-  // Este get es para visualizar los cuestionarios creados por el usuario ya autenticado
+  // Este get es para visualizar los cuestionarios creados por el usuario ya autenticado en los cards
   getListCuestionarioByIdUser() {
     const url =  `${ base_url }/cuestionarios`;
 

@@ -35,7 +35,7 @@ const routes: Routes = [
     component: PagesComponent,
     canActivate: [ AuthGuard ],
     children: [
-      { path: '', component: DashboardComponent, data: { titulo: 'Dashboard'} },
+      { path: '', component: DashboardComponent, data: { titulo: 'Mi Perfil'} },
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Tema'} },
       { path: 'buscar/:termino', component: BusquedaComponent, data: { titulo: 'Busquedas'} },
       // { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica'} },

@@ -58,19 +58,26 @@
   </div>
 </div>
 
-<div class="card-columns mt-3" style="display: grid; grid-template-columns: repeat(3, 365px);">
-  <div class="card cardList" *ngFor="let cuestionario of cuestionarios">
-    <div class="card-body text-center">
-      <h4 class="card-title">{{ cuestionario.nombre }}</h4>
-      <p class="card-text">{{ cuestionario.descripcion }}</p>
-      <button class="btn btn-success radius"
+
+<div class="card-body">
+  <div class="row">
+    <div class="column col-md-6" *ngFor="let cuestionario of cuestionarios">
+      <!-- <div class="col-md-6"> -->
+        <div class="card">
+          <div class="card-body cardList">
+            <h4 class="card-title">{{ cuestionario.nombre }}</h4>
+            <p class="card-text">{{ cuestionario.descripcion }}</p>
+            <button class="btn btn-success radius"
               routerLink="../ver-cuestionario/{{ cuestionario._id }}">
-        VER
-      </button>
-      <button class="btn btn-danger radius"
-              (click)="eliminarCuestionario( cuestionario )">
-        ELIMINAR
-      </button>
+              VER
+            </button>
+            <button class="btn btn-danger radius"
+                    (click)="eliminarCuestionario( cuestionario )">
+              ELIMINAR
+            </button>
+          </div>
+        </div>
+      <!-- </div> -->
     </div>
   </div>
 
