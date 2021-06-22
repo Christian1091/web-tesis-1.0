@@ -7,6 +7,8 @@ import { PostService } from 'src/app/services/post.service';
 
 import Swal from 'sweetalert2';
 import { Post } from 'src/app/models/post.model';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -17,15 +19,10 @@ import { Post } from 'src/app/models/post.model';
 })
 export class DashboardComponent implements OnInit{
 
-   // Definimos el formulario
-   public postForm = this.fb.group({
+   public id: string;
 
-    /**Si es que queremos una sola validacion podemos quitar los corchetes, si son mas van dentro de ellos */
-    titulo:['', [ Validators.required]],
-    descripcion: ['', [ Validators.required]],
-    texto: ['', Validators.required]
-  })
-
+   cont_post: any = {};
+  /** Fin Obtener contenido cuestioanrio */
 
   /**Para obtener nuestros datos en las etiquetas
    * del fomrulario de editar perfil
@@ -44,10 +41,12 @@ export class DashboardComponent implements OnInit{
   constructor( private fb: FormBuilder,
                private usuarioService: UsuarioService,
                private postService: PostService,
-               private fileUploadService: FileUploadService) {
+               private fileUploadService: FileUploadService,
+               private router: Router,
+               private activatedRoute: ActivatedRoute) {
 
     this.usuario = usuarioService.usuario;
-
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
 
   ngOnInit(): void {
@@ -58,32 +57,33 @@ export class DashboardComponent implements OnInit{
   cargarListPostByIdUser() {
     //this.cargando = true;
     this.postService.getListPostByIdUser()
-                            .subscribe( ({ posts }) => {
-                              this.posts = posts;
-                              console.log(posts)
+                            .subscribe( ({ post }) => {
+                              this.posts = post;
+                              console.log(post)
                               //this.cargando = false;
                             })
 
   }
 
-  crearPost() {
+  verContenidoPost(post: Post) {
+    console.log('ID POST ' + post._id);
+    this.postService.getVerContenidoPost( post._id )
+                            .subscribe ( data => {
+                                //console.log(data);
+                                this.cont_post = data;
+                                Swal.fire({
+                                  //icon: 'error',
+                                  title: `${ post.titulo }`,
+                                  text: `${ post.texto }`,
 
-    Swal.fire({
-      position: 'top-end',
-      icon: 'success',
-      title: 'Post guardado',
-      showConfirmButton: false,
-      timer: 1500
-    })
-    console.log(this.postForm.value);
-    this.postService.crearPost(this.postForm.value)
-                      .subscribe( res => {
-                        console.log('post creado');
-                      },  err => {
-                        Swal.fire('Error', err.error.msg, 'error');
-                        console.log(err);
-    });
-    this.resetPostFormulario();
+                                })
+                                //console.log(Object.values(data));
+                                //this.cuestionario = Object.values(data);
+                              }, error => {
+                                console.log(error);
+                              }
+                            )
+
   }
 
   eliminarPost( post: Post ) {
@@ -107,32 +107,6 @@ export class DashboardComponent implements OnInit{
             });
           }
     })
-  }
-
-  actualizarPost() {
-    console.log(this.postForm.value);
-    this.postService.actulizarPost( this.postForm.value)
-        .subscribe( resp => {
-          //console.log(resp);
-          /**Para que se me refresquen los cambios al actualizar
-           * los datos
-           */
-          const { titulo, descripcion, texto } =  this.postForm.value;
-          this.post.titulo = titulo;
-          this.post.descripcion = descripcion;
-          this.post.texto = texto;
-
-          Swal.fire('Guardado', 'Cambios realizados', 'success')
-        }, (err) => {
-          Swal.fire('Error', err.error.msg, 'error')
-          //console.log(err.error.msg)
-        })
-
-  }
-
-  resetPostFormulario() {
-    this.postForm.reset();
-    //this.getRespuestasUnicas.clear();
   }
 
 }

@@ -51,7 +51,7 @@ export class CuestionarioService {
     return this.http.get<CargarCuestionario>( url, this.headers );
   }
 
- /* Este get es para visualizar un cuestionario en especifico dentro del usuario autenticado */
+ /* Este get es para visualizar el contenido de un cuestionario en especifico dentro del usuario autenticado */
   getVerCuestionario( _id: string ): Observable<any> {
     const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
 

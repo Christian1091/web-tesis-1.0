@@ -9,6 +9,7 @@ import { TestRoutingModule } from './test/test.routing';
 
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
+import { VerpostComponent } from './post/verpost/verpost.component';
 
 const routes: Routes = [
   //path: '/dashboard' PagesRouting
@@ -16,6 +17,7 @@ const routes: Routes = [
 
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
   { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica'} },
+  { path: 'post/publico/:id', component: VerpostComponent },
   { path: '**', component: NopagefoundComponent },
 ];
 

@@ -11,8 +11,15 @@
 }
 
 .icon {
-  font-size: 29px;
+  font-size: 22px;
   cursor: pointer;
-  padding: 10px;
+  padding: 5px;
+  margin-top: 15px;
+
+}
+
+.add {
+  background-color: #4DBE0B;
+  border: none;
 }
 

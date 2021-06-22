@@ -26,6 +26,7 @@ import { BuzonComponent } from './correo/buzon/buzon.component';
 import { RedactarCorreoComponent } from './correo/redactar-correo/redactar-correo.component';
 import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.component';
 import { EnviadosComponent } from './correo/enviados/enviados.component';
+import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +48,7 @@ import { EnviadosComponent } from './correo/enviados/enviados.component';
     RedactarCorreoComponent,
     BuzonDetalleComponent,
     EnviadosComponent,
+    NuevopostComponent,
   ],
   exports: [
     DashboardComponent,

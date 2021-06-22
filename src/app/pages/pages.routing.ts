@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { AuthGuard } from '../guards/auth.guard';
 import { AdminGuard } from '../guards/admin.guard';
 
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProgressComponent } from './progress/progress.component';
 import { Grafica1Component } from '../grafica1/grafica1.component';
 import { AccountSettingsComponent } from './account-settings/account-settings.component';
@@ -27,6 +26,11 @@ import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.comp
 import { RedactarCorreoComponent } from './correo/redactar-correo/redactar-correo.component';
 import { EnviadosComponent } from './correo/enviados/enviados.component';
 
+// Post
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
+
+
 const routes: Routes = [
   // Rutas hijas
   {
@@ -43,6 +47,10 @@ const routes: Routes = [
       { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress'} },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },
       { path: 'rxjs', component: RxjsComponent, data: { titulo: 'Rxjs'} },
+
+      // Post
+      { path: 'nuevopost', component: NuevopostComponent },
+      { path: 'editarPost/:id', component: NuevopostComponent },
 
       // Correo
       { path: 'buzon', component: BuzonComponent, data: { titulo: 'Buzon de entrada'} },

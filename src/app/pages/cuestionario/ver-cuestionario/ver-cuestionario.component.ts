@@ -17,6 +17,7 @@ export class VerCuestionarioComponent implements OnInit {
   constructor( private cuestionarioService: CuestionarioService,
                private activatedRoute: ActivatedRoute ) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    //console.log('----- ' + this.id);
   }
 
   ngOnInit(): void {
@@ -26,7 +27,7 @@ export class VerCuestionarioComponent implements OnInit {
   obtenerCuestionario() {
     this.cuestionarioService.getVerCuestionario( this.id )
                             .subscribe ( data => {
-                                console.log(data);
+                                //console.log(data);
                                 this.cuestionario = data;
                                 //console.log(Object.values(data));
                                 //this.cuestionario = Object.values(data);

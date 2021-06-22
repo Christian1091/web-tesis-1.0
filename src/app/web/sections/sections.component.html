@@ -103,7 +103,9 @@
             <span>{{ item.titulo }}</span>
             <p>{{ item.descripcion }}</p>
             <div class="social">
-              <a href=""><i class="ri-twitter-fill"></i></a>
+              <a><i class="fa fa-edit icon float-right"
+                style="color: #168116"
+                [routerLink]="['/post/publico', item._id]"></i></a>
               <a href=""><i class="ri-facebook-fill"></i></a>
               <a href=""><i class="ri-instagram-fill"></i></a>
               <a href=""> <i class="ri-linkedin-box-fill"></i> </a>

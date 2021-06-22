@@ -63,18 +63,19 @@
   <div class="row">
     <div class="column col-md-6" *ngFor="let cuestionario of cuestionarios">
       <!-- <div class="col-md-6"> -->
-        <div class="card">
+        <div class="card sizeCard">
           <div class="card-body cardList">
             <h4 class="card-title">{{ cuestionario.nombre }}</h4>
             <p class="card-text">{{ cuestionario.descripcion }}</p>
-            <button class="btn btn-success radius"
-              routerLink="../ver-cuestionario/{{ cuestionario._id }}">
-              VER
-            </button>
-            <button class="btn btn-danger radius"
-                    (click)="eliminarCuestionario( cuestionario )">
-              ELIMINAR
-            </button>
+            <hr>
+            <i class="fa fa-eye icon"
+               style="color: #2269C7"
+               routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
+
+            <i class="fa fa-times icon"
+               (click)="eliminarCuestionario( cuestionario )"
+               style="color: #EF2421;"></i>
+
           </div>
         </div>
       <!-- </div> -->

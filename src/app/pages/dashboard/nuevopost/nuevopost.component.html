@@ -1,0 +1,38 @@
+<h3 class="box-title m-b-20">{{ cabeceraTitulo }}</h3>
+
+  <div class="login-box card">
+    <div class="card-body">
+      <form class="form-horizontal form-material"
+            [formGroup]="postForm"
+            (ngSubmit)="crearPost()">
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control"
+                    type="text"
+                    placeholder="Titulo"
+                    formControlName="titulo"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12">
+            <input class="form-control"
+                    type="text"
+                    placeholder="Descripcion"
+                    formControlName="descripcion"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <textarea class="form-control"
+                    placeholder="Ingrese el texto"
+                    rows="12"
+                    formControlName="texto"></textarea>
+        </div>
+        <div class="form-group p-b-20 float-right">
+          <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Guardar</button>
+          <button class="btn btn-inverse waves-effect waves-light"
+                  routerLink="/">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
