@@ -26,4 +26,5 @@ export class ValidarIngresoComponent implements OnInit {
      this.respuestaCuestionarioService.nombreParticipante = this.nombreParticipante;
      this.router.navigateByUrl('/pregunta');
   }
+
 }

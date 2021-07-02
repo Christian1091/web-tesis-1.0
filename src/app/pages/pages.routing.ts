@@ -29,6 +29,8 @@ import { EnviadosComponent } from './correo/enviados/enviados.component';
 // Post
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { RespuestaCuestionarioComponent } from '../test/list-cuestionarios/respuesta-cuestionario/respuesta-cuestionario.component';
 
 
 const routes: Routes = [
@@ -65,6 +67,8 @@ const routes: Routes = [
       { path: 'cuestionarios', canActivate: [ AdminGuard ], component: CuestionariosComponent , data: { titulo: 'Cuestionarios'} },
       { path: 'preguntas', canActivate: [ AdminGuard ], component: PreguntasComponent  , data: { titulo: 'Crear Preguntas'} },
       { path: 'ver-cuestionario/:id', canActivate: [ AdminGuard ], component: VerCuestionarioComponent , data: { titulo: 'Ver Cuestionario'} },
+      { path: 'estadisticas/:id', canActivate: [ AdminGuard ], component: EstadisticasComponent , data: { titulo: 'Estadisticas'} },
+      { path: 'respuestaUsuarioAdmin/:id', canActivate: [ AdminGuard ], component: RespuestaCuestionarioComponent, data: { titulo: 'Estadisticas Usuarios'} },
 
     ]
   },

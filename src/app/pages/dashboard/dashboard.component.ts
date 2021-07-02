@@ -29,7 +29,7 @@ export class DashboardComponent implements OnInit{
    */
   public usuario: Usuario;
 
-  public post: Post;
+  //public post: Post;
 
   /**Creamos una propiedad para subir la imagen */
   public imagenSubir: File;

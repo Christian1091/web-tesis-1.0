@@ -27,6 +27,7 @@ import { RedactarCorreoComponent } from './correo/redactar-correo/redactar-corre
 import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.component';
 import { EnviadosComponent } from './correo/enviados/enviados.component';
 import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
+import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
     BuzonDetalleComponent,
     EnviadosComponent,
     NuevopostComponent,
+    EstadisticasComponent,
   ],
   exports: [
     DashboardComponent,

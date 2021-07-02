@@ -6,7 +6,8 @@ import { PostService } from 'src/app/services/post.service';
 @Component({
   selector: 'app-sections',
   templateUrl: './sections.component.html',
-  styles: [
+  styleUrls: [
+    './sections.component.css'
   ]
 })
 export class SectionsComponent implements OnInit {

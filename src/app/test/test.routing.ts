@@ -9,8 +9,8 @@ import { PreguntaComponent } from '../test/list-cuestionarios/pregunta/pregunta.
 const routes: Routes = [
   { path: 'listCuestionarios', component: ListCuestionariosComponent },
   { path: 'pregunta', component: PreguntaComponent },
-  { path: 'respuestaCuestionario', component: RespuestaCuestionarioComponent },
   { path: 'validarIngreso', component: ValidarIngresoComponent },
+  { path: 'respuestaCuestionario/:id', component: RespuestaCuestionarioComponent },
 
 ];
 

@@ -93,8 +93,7 @@
       <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
     </div>
 
-    <div class="row" >
-
+    <div class="row">
       <div class="col-lg-6" *ngFor="let item of listPost">
         <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100" style="margin-top: 15px;">
           <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
@@ -103,12 +102,8 @@
             <span>{{ item.titulo }}</span>
             <p>{{ item.descripcion }}</p>
             <div class="social">
-              <a><i class="fa fa-edit icon float-right"
-                style="color: #168116"
-                [routerLink]="['/post/publico', item._id]"></i></a>
-              <a href=""><i class="ri-facebook-fill"></i></a>
-              <a href=""><i class="ri-instagram-fill"></i></a>
-              <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
+              <button type="button" class="btn waves-effect waves-light btn-block btn-info"
+                      [routerLink]="['/post/publico', item._id]">Leer mas</button>
             </div>
           </div>
         </div>

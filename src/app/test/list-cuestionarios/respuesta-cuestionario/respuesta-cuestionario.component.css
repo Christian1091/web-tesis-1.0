@@ -1,0 +1,14 @@
+.list-group-item {
+  font-size: 20px;
+  color: black;
+  text-align: center;
+}
+
+.fondoL {
+  background: linear-gradient( #eeeef1, #37517ea8);
+}
+
+.classSeleccionada {
+  background-color: #198754;
+  color: white;
+}
