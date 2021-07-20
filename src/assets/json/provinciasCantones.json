@@ -1,0 +1,655 @@
+[
+  {
+    "id": 1,
+    "nombreProvincia":"AZUAY"
+  },
+  {
+    "id": 2,
+    "nombreProvincia": "BOLIVAR"
+  },
+  {
+    "nombreProvincia": "CAÑAR",
+    "cantones": [{
+      "canton": "AZOGUES"
+    },
+    {
+      "canton": "BIBLIÁN"
+    },
+    {
+      "canton": "CAÑAR"
+    },
+    {
+      "canton": "LA TRONCAL"
+    },
+    {
+      "canton": "EL TAMBO"
+    },
+    {
+      "canton": "DÉLEG"
+    },
+    {
+      "canton": "SUSCAL"
+    }]
+  },
+  {
+    "nombreProvincia": "CARCHI",
+    "cantones": [{
+      "canton": "TULCÁN"
+    },
+    {
+      "canton": "BOLÍVAR"
+    },
+    {
+      "canton": "ESPEJO"
+    },
+    {
+      "canton": "MIRA"
+    },
+    {
+      "canton": "MONTÚFAR"
+    },
+    {
+      "canton": "SAN PEDRO DE HUACA"
+    }]
+  },
+  {
+    "nombreProvincia": "COTOPAXI",
+    "cantones": [{
+      "canton": "LATACUNGA"
+      },
+      {
+        "canton": "LA MANÁ"
+      },
+      {
+        "canton": "PANGUA"
+      },
+      {
+        "canton": "PUJILI"
+      },
+      {
+        "canton": "SALCEDO"
+      },
+      {
+        "canton": "SAQUISILÍ"
+
+      },
+      {
+        "canton": "SIGCHOS"
+    }]
+  },
+  {
+    "nombreProvincia": "CHIMBORAZO",
+    "cantones": [{
+      "canton": "RIOBAMBA"
+    },
+    {
+      "canton": "ALAUSI"
+    },
+    {
+      "canton": "COLTA"
+    },
+    {
+      "canton": "CHAMBO"
+    },
+    {
+      "canton": "CHUNCHI"
+    },
+    {
+      "canton": "GUAMOTE"
+    },
+    {
+      "canton": "GUANO"
+    },
+    {
+      "canton": "PALLATANGA"
+    },
+    {
+      "canton": "PENIPE"
+    },
+    {
+      "canton": "CUMANDÁ"
+    }]
+  },
+  {
+    "nombreProvincia": "EL ORO",
+    "cantones": [{
+      "canton": "MACHALA"
+      },
+      {
+        "canton": "ARENILLAS"
+      },
+      {
+        "canton": "ATAHUALPA"
+      },
+      {
+        "canton": "BALSAS"
+      },
+      {
+        "canton": "CHILLA"
+      },
+      {
+        "canton": "EL GUABO"
+      },
+      {
+        "canton": "HUAQUILLAS"
+      },
+      {
+        "canton": "MARCABELÍ"
+      },
+      {
+        "canton": "PASAJE"
+      },
+      {
+        "canton": "PIÑAS"
+      },
+      {
+        "canton": "PORTOVELO"
+      },
+      {
+        "canton": "SANTA ROSA"
+      },
+      {
+        "canton": "ZARUMA"
+      },
+      {
+        "canton": "LAS LAJAS"
+    }]
+  },
+  {
+    "nombreProvincia": "ESMERALDAS",
+    "cantones": [{
+      "canton": "ESMERALDAS"
+    },
+    {
+      "canton": "ELOY ALFARO"
+    },
+    {
+      "canton": "MUISNE"
+    },
+    {
+      "canton": "QUININDÉ"
+    },
+    {
+      "canton": "SAN LORENZO"
+    },
+    {
+      "canton": "ATACAMES"
+    },
+    {
+      "canton": "RIOVERDE"
+    },
+    {
+      "canton": "LA CONCORDIA"
+    }]
+  },
+  {
+    "nombreProvincia": "GUAYAS",
+    "cantones": [{
+      "canton": "GUAYAQUIL"
+    },
+    {
+      "canton": "ALFREDO BAQUERIZO MORENO (JUJÁN)"
+    },
+    {
+      "canton": "BALAO"
+    },
+    {
+      "canton": "BALZAR"
+    },
+    {
+      "canton": "COLIMES"
+    },
+    {
+      "canton": "DAULE"
+    },
+    {
+      "canton": "DURÁN"
+    },
+    {
+      "canton": "EL EMPALME"
+    },
+    {
+      "canton": "EL TRIUNFO"
+    },
+    {
+      "canton": "MILAGRO"
+    },
+    {
+      "canton": "NARANJAL"
+    },
+    {
+      "canton": "NARANJITO"
+    },
+    {
+      "canton": "PALESTINA"
+    },
+    {
+      "canton": "PEDRO CARBO"
+    },
+    {
+      "canton": "SAMBORONDÓN"
+    },
+    {
+      "canton": "SANTA LUCÍA"
+    },
+    {
+      "canton": "SALITRE (URBINA JADO)"
+    },
+    {
+      "canton": "SAN JACINTO DE YAGUACHI"
+    },
+    {
+      "canton": "PLAYAS"
+    },
+    {
+      "canton": "SIMÓN BOLÍVAR"
+    },
+    {
+      "canton": "CORONEL MARCELINO MARIDUEÑA"
+    },
+    {
+      "canton": "LOMAS DE SARGENTILLO"
+    },
+    {
+      "canton": "NOBOL"
+    },
+    {
+      "canton": "GENERAL ANTONIO ELIZALDE"
+    },
+    {
+      "canton": "ISIDRO AYORA"
+    }]
+  },
+  {
+    "nombreProvincia": "IMBABURA",
+    "cantones": [{
+      "canton": "IBARRA"
+    },
+    {
+      "canton": "ANTONIO ANTE"
+    },
+    {
+      "canton": "COTACACHI"
+    },
+    {
+      "canton": "OTAVALO"
+    },
+    {
+      "canton": "PIMAMPIRO"
+    },
+    {
+      "canton": "SAN MIGUEL DE URCUQUÍ"
+    }]
+  },
+  {
+    "nombreProvincia": "LOJA",
+    "cantones": [{
+      "canton": "LOJA"
+    },
+    {
+      "canton": "CALVAS"
+    },
+    {
+      "canton": "CATAMAYO"
+    },
+    {
+      "canton": "CELICA"
+    },
+    {
+      "canton": "CHAGUARPAMBA"
+    },
+    {
+      "canton": "ESPÍNDOLA"
+    },
+    {
+      "canton": "GONZANAMÁ"
+    },
+    {
+      "canton": "MACARÁ"
+    },
+    {
+      "canton": "PALTAS"
+    }]
+  },
+  {
+    "nombreProvincia": "LOS RIOS",
+    "cantones": [{
+      "canton": "BABAHOYO"
+    },
+    {
+      "canton": "BABA"
+    },
+    {
+      "canton": "MONTALVO"
+    },
+    {
+      "canton": "PUEBLOVIEJO"
+    },
+    {
+      "canton": "QUEVEDO"
+    },
+    {
+      "canton": "URDANETA"
+    },
+    {
+      "canton": "VENTANAS"
+    },
+    {
+      "canton": "VÍNCES"
+    },
+    {
+      "canton": "PALENQUE"
+    },
+    {
+      "canton": "BUENA FÉ"
+    },
+    {
+      "canton": "VALENCIA"
+    },
+    {
+      "canton": "MOCACHE"
+    },
+    {
+      "canton": "QUINSALOMA"
+    }]
+  },
+  {
+    "nombreProvincia": "MANABI",
+    "cantones": [{
+      "canton": "PORTOVIEJO"
+    },
+    {
+      "canton": "BOLÍVAR"
+    },
+    {
+       "canton": "CHONE"
+    },
+    {
+      "canton": "EL CARMEN"
+    },
+    {
+      "canton": "FLAVIO ALFARO"
+    },
+    {
+      "canton": "JIPIJAPA"
+    },
+    {
+      "canton": "JUNÍN"
+    },
+    {
+      "canton": "MANTA"
+    },
+    {
+      "canton": "MONTECRISTI"
+    },
+    {
+      "canton": "PAJÁN"
+    },
+    {
+      "canton": "PICHINCHA"
+    },
+    {
+      "canton": "ROCAFUERTE"
+    },
+    {
+      "canton": "SANTA ANA"
+    },
+    {
+      "canton": "SUCRE"
+    },
+    {
+      "canton": "TOSAGUA"
+    },
+    {
+      "canton": "24 DE MAYO"
+    },
+    {
+      "canton": "PEDERNALES"
+    },
+    {
+      "canton": "OLMEDO"
+    },
+    {
+      "canton": "PUERTO LÓPEZ"
+    },
+    {
+      "canton": "JAMA"
+    },
+    {
+      "canton": "JARAMIJÓ"
+    },
+    {
+      "canton": "SAN VICENTE"
+    }]
+  },
+  {
+    "nombreProvincia": "MORONA SANTIAGO",
+    "cantones": [{
+      "canton": "MORONA"
+    },
+    {
+      "canton": "GUALAQUIZA"
+    },
+    {
+      "canton": "LIMÓN INDANZA"
+    },
+    {
+      "canton": "PALORA"
+    },
+    {
+      "canton": "SANTIAGO"
+    },
+    {
+      "canton": "SUCÚA"
+    },
+    {
+      "canton": "HUAMBOYA"
+    },
+    {
+      "canton": "SAN JUAN BOSCO"
+    },
+    {
+      "canton": "TAISHA"
+    },
+    {
+      "canton": "LOGROÑO"
+    },
+    {
+      "canton": "PABLO SEXTO"
+    },
+    {
+      "canton": "TIWINTZA"
+    }]
+  },
+  {
+    "nombreProvincia": "NAPO",
+    "cantones": [{
+      "canton": "PALESTINA"
+    },
+    {
+      "canton": "ARCHIDONA"
+    },
+    {
+      "canton": "EL CHACO"
+    },
+    {
+      "canton": "QUIJOS"
+    },
+    {
+      "canton": "CARLOS JULIO AROSEMENA TOLA"
+    }]
+  },
+  {
+    "nombreProvincia": "PASTAZA",
+    "cantones": [{
+      "canton": "PASTAZA"
+    },
+    {
+      "canton": "ESMERALDAS"
+    },
+    {
+      "canton": "SANTA CLARA"
+    },
+    {
+      "canton": "ARAJUNO"
+    }]
+  },
+  {
+    "nombreProvincia": "PICHINCHA",
+    "cantones": [{
+      "canton": "QUITO"
+    },
+    {
+      "canton": "CAYAMBE"
+    },
+    {
+      "canton": "MEJIA"
+    },
+    {
+      "canton": "PEDRO MONCAYO"
+    },
+    {
+      "canton": "RUMIÑAHUI"
+    },
+    {
+      "canton": "SAN MIGUEL DE LOS BANCOS"
+    },
+    {
+      "canton": "PEDRO VICENTE MALDONADO"
+    },
+    {
+      "canton": "PUERTO QUITO"
+    }]
+  },
+  {
+    "nombreProvincia": "TUNGURAHUA",
+    "cantones": [{
+      "canton": "AMBATO"
+    },
+    {
+      "canton": "BAÑOS DE AGUA SANTA"
+    },
+    {
+      "canton": "CEVALLOS"
+    },
+    {
+      "canton": "MOCACHE"
+    },
+    {
+      "canton": "PATATE"
+    },
+    {
+      "canton": "QUERO"
+    },
+    {
+      "canton": "SAN PEDRO DE PELILEO"
+    },
+    {
+      "canton": "SANTIAGO DE PÍLLARO"
+    },
+    {
+      "canton": "TISALEO"
+    }]
+  },
+  {
+    "nombreProvincia": "ZAMORA CHINCHIPE",
+    "cantones": [{
+      "canton": "ZAMORA"
+    },
+    {
+      "canton": "CHINCHIPE"
+    },
+    {
+      "canton": "NANGARITZA"
+    },
+    {
+      "canton": "YACUAMBI"
+    },
+    {
+      "canton": "YANTZAZA (YANZATZA)"
+    },
+    {
+      "canton": "EL PANGUI"
+    },
+    {
+      "canton": "CENTINELA DEL CÓNDOR"
+    },
+    {
+      "canton": "PALANDA"
+    },
+    {
+      "canton": "PAQUISHA"
+    }]
+  },
+  {
+    "nombreProvincia": "GALAPAGOS",
+    "cantones": [{
+      "canton": "SAN CRISTÓBAL"
+    },
+    {
+      "canton": "ISABELA"
+    },
+    {
+      "canton": "SANTA CRUZ"
+    }]
+  },
+  {
+    "nombreProvincia": "SUCUMBIOS",
+    "cantones": [{
+      "canton": "LAGO AGRIO"
+    },
+    {
+      "canton": "GONZALO PIZARRO"
+    },
+    {
+      "canton": "PUTUMAYO"
+    },
+    {
+      "canton": "SHUSHUFINDI"
+    },
+    {
+      "canton": "SUCUMBÍOS"
+    },
+    {
+      "canton": "CASCALES"
+    },
+    {
+      "canton": "CUYABENO"
+    }]
+  },
+  {
+    "nombreProvincia": "ORELLANA",
+    "cantones": [{
+      "canton": "ORELLANA"
+    },
+    {
+      "canton": "AGUARICO"
+    },
+    {
+      "canton": "LA JOYA DE LOS SACHAS"
+    },
+    {
+      "canton": "LORETO"
+    }]
+  },
+  {
+    "nombreProvincia": "SANTO DOMINGO DE LOS TSACHILAS",
+    "cantones": [{
+      "canton": "SANTO DOMINGO"
+    }]
+  },
+  {
+    "nombreProvincia": "SANTA ELENA",
+    "cantones": [{
+      "canton": "SANTA ELENA"
+    },
+    {
+      "canton": "LA LIBERTAD"
+    },
+    {
+      "canton": "SALINAS"
+    }]
+  }
+]
+
+

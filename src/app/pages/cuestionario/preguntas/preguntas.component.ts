@@ -19,7 +19,7 @@ export class PreguntasComponent implements OnInit {
 
   tituloCuestionario: string;
   descripcionCuestionario: string;
-
+  puntajeCuestionario: number;
   listPreguntas: Pregunta[] = [];
 
   constructor( private fb: FormBuilder,
@@ -29,6 +29,7 @@ export class PreguntasComponent implements OnInit {
   ngOnInit(): void {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
     this.descripcionCuestionario = this.cuestionarioService.descripcionCuestionario;
+    this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
   }
 
   guardarPregunta( pregunta: Pregunta) {
@@ -44,6 +45,7 @@ export class PreguntasComponent implements OnInit {
     const cuestionario: Cuestionario = {
       nombre: this.tituloCuestionario,
       descripcion: this.descripcionCuestionario,
+      puntajeCuestionario: this.puntajeCuestionario,
       listPreguntas: this.listPreguntas
     };
     //console.log(cuestionario);
@@ -58,6 +60,7 @@ export class PreguntasComponent implements OnInit {
     /**Enviamos el cuestionario al backend */
     this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
       this.router.navigateByUrl('/dashboard/cuestionarios');
+      //console.log(res);
 
     }, err => {
       Swal.fire('Error', err.error.msg, 'error');

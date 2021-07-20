@@ -16,10 +16,15 @@ const base_url = environment.base_url;
 })
 export class RespuestaCuestionarioService {
 
-  nombreParticipante: string;
-  idCuestionario: string;
+  public idCuestionario: string;
   //respuestas: number[] = [];
-  cuestionario!: Cuestionario;
+  public cuestionario!: Cuestionario;
+
+  public nombreParticipante: string;
+  public correoParticipante: string;
+  public institucionParticipante: string;
+  public provinciaParticipante: string;
+  public ciudadParticipante: string;
 
   get token(): string {
     return localStorage.getItem('token') || '';
@@ -38,7 +43,7 @@ export class RespuestaCuestionarioService {
 
   guardarRespuestaUsuario( respuestaUsuario: any ): Observable<any> {
     const url = `${ base_url }/respuestaCuestionarios`;
-    //console.log(respuestaUsuario);
+    //console.log('probando' + respuestaUsuario);
     return this.http.post( url, respuestaUsuario, this.headers );
   }
 

@@ -1,6 +1,10 @@
 .delete-icon {
-  color: red;
-  font-size: 29px;
-  cursor: pointer;
+    color: red;
+    font-size: 29px;
+    cursor: pointer;
 }
 
+#input::placeholder {
+    color: red;
+    font-size: 1.2em;
+}

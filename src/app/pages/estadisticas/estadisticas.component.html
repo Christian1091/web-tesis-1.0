@@ -1,40 +1,48 @@
-<div class="container">
-  <div class="d-flex justify-content-center mt-3">
-    <div class="card">
-      <div class="card-body text-center">
-        <h2 class="titulo">LISTADO DE RESPUESTAS</h2>
-      </div>
-    </div>
-  </div>
+<div class="container cardL">
 
-  <div class="row mt-3">
-    <div class="col-lg-8 offset-lg-2">
-      <div class="card">
-        <div class="card-body">
-          <table class="table">
-            <thead>
-              <tr>
-                <th class="text-center">Participante</th>
-                <th class="text-center">Fecha</th>
-                <th class="text-center">Puntos</th>
-                <th class="text-center" style="width: 20%;">Acciones</th>
-              </tr>
-            </thead>
+    <div class="row mt-3">
+        <div class="col-lg-12">
+            <div class="row mt-2">
+                <div class="col-lg-6">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <h6 (click)="verPuntosRespuestaUsuario()">Estadísticas Cuestionarios</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="text-center">Participante</th>
+                                <th class="text-center">Email</th>
+                                <th class="text-center">Institucion</th>
+                                <th class="text-center">Ciudad</th>
+                                <th class="text-center">Fecha</th>
+                                <th class="text-center">Puntos</th>
+                                <th class="text-center" style="width: 20%;">Acciones</th>
+                            </tr>
+                        </thead>
 
-            <tbody>
-              <tr *ngFor="let respuestas of listRespuestasUsuario">
-                <td class="text-center"> {{ respuestas.nombreParticipante }} </td>
-                <td class="text-center"> {{ respuestas.fechaCreacion | date:'dd/MM/yyyy' }} </td>
-                <td class="text-center"> {{ respuestas.puntosTotales }} </td>
-                <td class="text-center">
-                  <i class="fa fa-search" [routerLink]="['/dashboard/respuestaUsuarioAdmin', respuestas.id]"></i>
-                  <i class="fa fa-trash" (click)="eliminarRespuestaUsuario( respuestas.id )"></i>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+                        <tbody>
+                            <tr *ngFor="let respuestas of listRespuestasUsuario">
+                                <td class="text-center"> {{ respuestas.nombreParticipante }} </td>
+                                <td class="text-center"> {{ respuestas.correoParticipante }} </td>
+                                <td class="text-center"> {{ respuestas.institucionParticipante }} </td>
+                                <td class="text-center"> {{ respuestas.ciudadParticipante }} </td>
+                                <td class="text-center"> {{ respuestas.fechaCreacion | date:'dd/MM/yyyy' }} </td>
+                                <td class="text-center"> {{ respuestas.puntosTotales }}/{{obtenerPuntosCuestionario?.cuestionarios[0].puntajeCuestionario}} </td>
+                                <td class="text-center">
+                                    <i class="fa fa-search" [routerLink]="['/dashboard/respuestaUsuarioAdmin', respuestas.id]"></i>
+                                    <i class="fa fa-trash" (click)="eliminarRespuestaUsuario( respuestas.id )"></i>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </div>

@@ -19,6 +19,7 @@ export class CuestionariosComponent implements OnInit {
 
   tituloCuestionario: string;
   descripcionCuestionario: string;
+  puntajeCuestionario: number;
   listPregunta: Pregunta[] = [];
 
   public cuestionarios: Cuestionario[] = [];
@@ -26,7 +27,8 @@ export class CuestionariosComponent implements OnInit {
 
   public cuestionarioForm = this.fb.group({
     titulo: ['',Validators.required],
-    descripcion: ['', Validators.required]
+    descripcion: ['', Validators.required],
+    puntaje: ['', Validators.required]
   })
 
   constructor( private cuestionarioService: CuestionarioService,
@@ -36,19 +38,22 @@ export class CuestionariosComponent implements OnInit {
   ngOnInit(): void {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
     this.descripcionCuestionario = this.cuestionarioService.descripcionCuestionario;
+    this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
 
     this.cargarListCuestioanrios();
 
   }
 
-  /**CReamos las preguntas */
+  /**Creamos las preguntas */
   crearPreguntas() {
 
     this.cuestionarioService.tituloCuestionario = this.cuestionarioForm.value.titulo;
     this.cuestionarioService.descripcionCuestionario = this.cuestionarioForm.value.descripcion;
+    this.cuestionarioService.puntajecuestionario = this.cuestionarioForm.value.puntaje;
 
     //console.log("Nos vamos a las preguntas");
     this.router.navigateByUrl('/dashboard/preguntas');
+
   }
 
   guardarPregunta( pregunta: Pregunta ) {
@@ -61,7 +66,7 @@ export class CuestionariosComponent implements OnInit {
     this.cuestionarioService.getListCuestionarioByIdUser()
                             .subscribe( ({ cuestionarios }) => {
                               this.cuestionarios = cuestionarios;
-                              //console.log(cuestionarios)
+                              console.log(cuestionarios)
                               this.cargando = false;
                             })
 

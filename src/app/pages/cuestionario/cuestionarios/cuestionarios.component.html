@@ -1,88 +1,82 @@
 <div class="row">
 
-  <div class="col-md-12">
-    <div class="card cardList">
-        <div class="card-body">
-          <form [formGroup]="cuestionarioForm"
-                (ngSubmit)="crearPreguntas()">
+    <div class="col-md-12">
+        <div class="card cardList">
+            <div class="card-body">
+                <form [formGroup]="cuestionarioForm" (ngSubmit)="crearPreguntas()">
 
-              <h3 class="card-title">Crear Cuestionarios</h3>
-              <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-              <input type="text"
-                     class="form-control"
-                     placeholder="Ingrese titulo del cuestionario"
-                     formControlName="titulo">
+                    <h3 class="card-title">Crear Cuestionarios</h3>
+                    <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
+                    <input type="text" class="form-control" placeholder="Ingrese titulo del cuestionario" formControlName="titulo">
 
-                     <div class="text-danger"
-                          *ngIf="cuestionarioForm.get('titulo').hasError('required') && cuestionarioForm.get('titulo').touched">
+                    <div class="text-danger" *ngIf="cuestionarioForm.get('titulo').hasError('required') && cuestionarioForm.get('titulo').touched">
                         El titulo <strong>es obligatorio</strong>
 
-                     </div>
+                    </div>
 
-              <div class="form-group">
-                <br/>
-                <textarea class="form-control"
-                          placeholder="Ingrese descripcion del cuestionario"
-                          rows="5"
-                          formControlName="descripcion">
-                </textarea>
 
-                <div class="text-danger"
-                      *ngIf="cuestionarioForm.get('descripcion').hasError('required') && cuestionarioForm.get('descripcion').touched">
-                    La descripcion <strong>es obligatorio</strong>
+                    <div class="form-group">
+                        <br/>
+                        <textarea class="form-control" placeholder="Ingrese descripcion del cuestionario" rows="5" formControlName="descripcion">
+                    </textarea>
 
-                </div>
+                        <div class="text-danger" *ngIf="cuestionarioForm.get('descripcion').hasError('required') && cuestionarioForm.get('descripcion').touched">
+                            La descripcion <strong>es obligatorio</strong>
 
-              </div>
+                        </div>
 
-              <button [disabled]="cuestionarioForm.invalid"
-                      class="btn btn-info btn-md text-uppercase float-right"
-                      type="submit">Nuevo Cuestionario</button>
+                    </div>
 
-          </form>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <input id="input" type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje">
+                            <div class="text-danger" *ngIf="cuestionarioForm.get('puntaje').hasError('required') && cuestionarioForm.get('puntaje').touched">
+                                El Puntaje <strong>es obligatorio</strong>
+
+                            </div>
+                        </div>
+                        <div class="col-md-10">
+                            <button [disabled]="cuestionarioForm.invalid" class="btn btn-info btn-md text-uppercase float-right" type="submit">Nuevo Cuestionario</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-  </div>
 </div>
 
-<h3  *ngIf="cuestionarios.length == 0" class="text-center">No hay cuestionarios para mostrar</h3>
+<h3 *ngIf="cuestionarios.length == 0" class="text-center">No hay cuestionarios para mostrar</h3>
 
-<div class="row animated fadeIn fast"
-      *ngIf="cargando">
-  <div class="col-12">
-    <div class="alert alert-info text-center">
-      <h4 class="alert-heading">Cargando</h4>
-      <i class="fa fa-spin fa-refresh fa-2x"></i>
-      <p class="mb-0">Por favor espere</p>
+<div class="row animated fadeIn fast" *ngIf="cargando">
+    <div class="col-12">
+        <div class="alert alert-info text-center">
+            <h4 class="alert-heading">Cargando</h4>
+            <i class="fa fa-spin fa-refresh fa-2x"></i>
+            <p class="mb-0">Por favor espere</p>
+        </div>
     </div>
-  </div>
 </div>
 
 
 <div class="card-body">
-  <div class="row">
-    <div class="column col-md-6" *ngFor="let cuestionario of cuestionarios">
-      <!-- <div class="col-md-6"> -->
-        <div class="card sizeCard">
-          <div class="card-body cardList">
-            <h4 class="card-title">{{ cuestionario.nombre }}</h4>
-            <p class="card-text">{{ cuestionario.descripcion }}</p>
-            <hr>
-            <i class="fa fa-eye icon"
-               style="color: #2269C7"
-               routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
+    <div class="row">
+        <div class="column col-md-6" *ngFor="let cuestionario of cuestionarios">
+            <!-- <div class="col-md-6"> -->
+            <div class="card sizeCard">
+                <div class="card-body cardList">
+                    <h4 class="card-title">{{ cuestionario.nombre }}</h4>
+                    <!-- <p class="card-text">{{ cuestionario.descripcion }}</p> -->
+                    <hr>
+                    <i class="fa fa-eye icon" style="color: #2269C7" routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
 
-            <i class="fa fa-times icon"
-               (click)="eliminarCuestionario( cuestionario )"
-               style="color: #EF2421;"></i>
+                    <i class="fa fa-times icon" (click)="eliminarCuestionario( cuestionario )" style="color: #EF2421;"></i>
 
-               <i class="fa fa-bar-chart-o icon"
-                  routerLink="../estadisticas/{{ cuestionario._id }}"></i>
+                    <i class="fa fa-bar-chart-o icon" routerLink="../estadisticas/{{ cuestionario._id }}"></i>
 
-          </div>
+                </div>
+            </div>
+            <!-- </div> -->
         </div>
-      <!-- </div> -->
     </div>
-  </div>
 
 </div>

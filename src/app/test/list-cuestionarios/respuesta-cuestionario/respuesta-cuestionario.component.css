@@ -12,3 +12,8 @@
   background-color: #198754;
   color: white;
 }
+
+.btn-regresar {
+  /*width: 25%;*/
+  font-size: 20px;
+}

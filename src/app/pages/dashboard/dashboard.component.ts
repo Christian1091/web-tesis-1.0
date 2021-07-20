@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit{
     this.postService.getListPostByIdUser()
                             .subscribe( ({ post }) => {
                               this.posts = post;
-                              console.log(post)
+                              //console.log(post)
                               //this.cargando = false;
                             })
 

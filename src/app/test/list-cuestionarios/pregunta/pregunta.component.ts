@@ -25,12 +25,21 @@ export class PreguntaComponent implements OnInit {
   rtaConfirmada = false;
   indexPregunta = 0;
 
+  //Agrego un contador: Para tener el index de pregunta
+  contador = 0;
+
   // Respuesta Usuario
-  opcionSeleccionada: any;
-  indexSeleccionado: any;
+  opcionSeleccionada: any; // Nos ayuda a pintar la respuesta seleccionada
+  indexSeleccionado: any; // Almacenar cual es la opcion seleccionada
+  //indexPuntosSeleccionado: any;
   puntosTotales = 0;
+  //puntosPregunta = 0;
   listRespuestaUsuario: any [] = [];
   nombreParticipante = '';
+  correoParticipante = '';
+  institucionParticipante = '';
+  provinciaParticipante = '';
+  ciudadParticipante = '';
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                private cuestionarioService: CuestionarioService,
@@ -40,6 +49,10 @@ export class PreguntaComponent implements OnInit {
 
     this.cuestionario = this.respuestaCuestionarioService.cuestionario;
     this.nombreParticipante = this.respuestaCuestionarioService.nombreParticipante;
+    this.correoParticipante = this.respuestaCuestionarioService.correoParticipante;
+    this.institucionParticipante = this.respuestaCuestionarioService.institucionParticipante;
+    this.provinciaParticipante = this.respuestaCuestionarioService.provinciaParticipante;
+    this.ciudadParticipante = this.respuestaCuestionarioService.ciudadParticipante;
 
     this.idCuestionario = this.respuestaCuestionarioService.idCuestionario;
     if (this.idCuestionario == null ){
@@ -58,7 +71,7 @@ export class PreguntaComponent implements OnInit {
                               //console.log(res.cuestionarios[0].listPreguntas);
                               this.listPreguntas = res.cuestionarios[0].listPreguntas;
                               //this.listRespuesta = this.listPreguntas[1].listRespuesta;
-                              console.log(this.listRespuesta);
+                              //console.log(this.listRespuesta);
                             });
   }
 
@@ -66,11 +79,17 @@ export class PreguntaComponent implements OnInit {
     return this.listPreguntas[this.indexPregunta]?.descripcion;
   }
 
+  // obtenerpuntosRespuesta(): string {
+  //   return this.listPreguntas[this.indexPregunta]?.;
+  // }
+
   getIndex(): number {
     return this.indexPregunta;
   }
 
   respuestaSeleccionada( respuesta: any, index: number ) {
+    //console.log('************');
+    //console.log(respuesta);
     this.opcionSeleccionada = respuesta;
     this.rtaConfirmada = true;
 
@@ -83,21 +102,35 @@ export class PreguntaComponent implements OnInit {
     }
   }
 
-  siguiente() {
-    this.agregarRespuesta();
+  siguiente(i) {
+    this.agregarRespuesta(i);
+    this.contador = this.contador + 1;
   }
 
-  agregarRespuesta() {
+  agregarRespuesta(i) {
+    let indexAux;
+    //let respuestaUsuario;
+
 
     // Creamos un objeto respuesta y lo agregamos al array
+    //for (let i = 0; i < this.listPreguntas.length; i++) {
+    indexAux = this.obtenemosIndexSeleccionado();
+    //this.puntosPregunta = this.listPreguntas[i].listRespuesta[indexAux].puntosRespuesta;
+
     const respuestaUsuario: any = {
       tituloPregunta: this.listPreguntas[this.indexPregunta].descripcion,
-      puntosObtenidos: '',
-      indexRespuestaSeleccionada: this.obtenemosIndexSeleccionado(),
+      puntajePregunta: this.listPreguntas[this.indexPregunta].puntajePregunta,
+      indexRespuestaSeleccionada: indexAux,
+      puntosObtenidos: this.listPreguntas[i].listRespuesta[indexAux].puntosRespuesta,
+      //puntos: this.obtenemosPuntosPregunta(),
       // Hacemos una copia del listado respuestas
       listRespuesta: this.listPreguntas[this.indexPregunta].listRespuesta,
+
     }
 
+    //console.log(respuestaUsuario);
+
+    //console.log(respuestaUsuario)
     this.listRespuestaUsuario.push(respuestaUsuario);
 
     this.opcionSeleccionada = undefined;
@@ -128,18 +161,35 @@ export class PreguntaComponent implements OnInit {
     }
   }
 
+  obtenemosPuntosTotales(): number {
+
+    console.log('Puntos Totales');
+    for (let i = 0; i < this.listRespuestaUsuario.length; i++) {
+      const puntosAux = this.listRespuestaUsuario[i].puntosObtenidos
+      this.puntosTotales = Number(this.puntosTotales) + Number(puntosAux);
+
+    }
+
+    return this.puntosTotales;
+    //console.log(this.puntosTotales);
+  }
+
   guardamosRespuestaCuestionario() {
     const respuestaCuestionario: any = {
       idCuestionario: this.idCuestionario,
       nombreParticipante: this.nombreParticipante,
+      correoParticipante: this.correoParticipante,
+      institucionParticipante: this.institucionParticipante,
+      provinciaParticipante: this.provinciaParticipante,
+      ciudadParticipante: this.ciudadParticipante,
       fecha: new Date(),
-      puntosTotales: this.puntosTotales,
+      puntosTotales: this.obtenemosPuntosTotales(),
       listRespuestaUsuario: this.listRespuestaUsuario
     }
     //console.log(respuestaCuestionario);
     // Almacenamos la respuesta en mongoDB
     this.respuestaCuestionarioService.guardarRespuestaUsuario( respuestaCuestionario ).subscribe( res => {
-      //console.log(res);
+      console.log(res);
       //console.log(res.respuestaCuestionario._id);
       this.router.navigateByUrl(`/respuestaCuestionario/${ res.respuestaCuestionario._id }`);
     }, err => {

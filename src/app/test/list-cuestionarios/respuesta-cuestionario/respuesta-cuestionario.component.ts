@@ -28,8 +28,9 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
   obtenerRespuestaUsuario() {
     this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe( res => {
-      console.log(res);
+      //console.log(res);
       this.respuestaCuestionario = res;
+      console.log(this.respuestaCuestionario)
     });
   }
 

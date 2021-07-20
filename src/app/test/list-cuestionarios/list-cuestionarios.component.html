@@ -1,30 +1,29 @@
 <app-navbar></app-navbar>
-<section id="wrapper">
-  <!-- <br>
+<section id="wrapper" class="fondoL">
+    <!-- <br>
 <p>list-cuestionarios works! hola</p> -->
-  <div class="container">
-    <div class="row" style="width: 100%;">
-      <div class="car text-center" style="width: 100%;">
-        <br>
-        <h1>Bienvenidos</h1>
-        <h4 *ngIf="listCuestionarios.length == 0">No hay cuestionarios para visualizar</h4>
-        <div class="card-columns" style="display: grid; grid-template-columns: repeat(3, 350px);">
-          <div class="card cardList" style="background-color: #E4DDDC;" *ngFor="let cuestionario of listCuestionarios">
-            <div class="card-body text-center">
-              <h4 class="card-title"> {{ cuestionario.nombre }} </h4>
-              <p class="card-text"> {{ cuestionario.descripcion }} </p>
-              <div>
-                <strong> Creado por: </strong> {{ cuestionario.usuario.nombre }}
-              </div>
-              <div>
-                <strong> Fecha creacion: </strong> {{ cuestionario.fecha | date: "dd/MM/yyyy" }}
-              </div>
-              <button class="btn btn-success btn-ing"
-                      style="margin-bottom: 20px;" (click)="ingresarNombre(cuestionario._id)">INGRESAR</button>
+    <div class="container">
+        <div class="row" style="width: 100%;">
+            <div class="car text-center" style="width: 100%;">
+                <br>
+                <h1>Bienvenidos</h1>
+                <h4 *ngIf="listCuestionarios.length == 0">No hay cuestionarios para visualizar</h4>
+                <div class="card-columns" style="display: grid; grid-template-columns: repeat(3, 350px);">
+                    <div class="card cardList" style="background-color: #E4DDDC;" *ngFor="let cuestionario of listCuestionarios">
+                        <div class="card-body text-center">
+                            <h4 class="card-title"> {{ cuestionario.nombre }} </h4>
+                            <p class="card-text"> {{ cuestionario.descripcion }} </p>
+                            <div>
+                                <strong> Creado por: </strong> {{ cuestionario.usuario.nombre }}
+                            </div>
+                            <div>
+                                <strong> Fecha creacion: </strong> {{ cuestionario.fechaCreacion | date: "dd/MM/yyyy" }}
+                            </div>
+                            <button class="btn btn-success btn-ing" style="margin-bottom: 20px;" (click)="ingresarNombre(cuestionario._id)">INGRESAR</button>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>

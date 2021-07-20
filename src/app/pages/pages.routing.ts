@@ -67,7 +67,7 @@ const routes: Routes = [
       { path: 'cuestionarios', canActivate: [ AdminGuard ], component: CuestionariosComponent , data: { titulo: 'Cuestionarios'} },
       { path: 'preguntas', canActivate: [ AdminGuard ], component: PreguntasComponent  , data: { titulo: 'Crear Preguntas'} },
       { path: 'ver-cuestionario/:id', canActivate: [ AdminGuard ], component: VerCuestionarioComponent , data: { titulo: 'Ver Cuestionario'} },
-      { path: 'estadisticas/:id', canActivate: [ AdminGuard ], component: EstadisticasComponent , data: { titulo: 'Estadisticas'} },
+      { path: 'estadisticas/:id', canActivate: [ AdminGuard ], component: EstadisticasComponent , data: { titulo: 'Listado de Respuestas'} },
       { path: 'respuestaUsuarioAdmin/:id', canActivate: [ AdminGuard ], component: RespuestaCuestionarioComponent, data: { titulo: 'Estadisticas Usuarios'} },
 
     ]

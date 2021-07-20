@@ -9,6 +9,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { WebModule } from '../web/web.module';
 import { RouterModule } from '@angular/router';
 
+import {ProgressBarModule} from "angular-progress-bar"
+
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     WebModule,
     ReactiveFormsModule,
+    ProgressBarModule,
     HttpClientModule
   ]
 })

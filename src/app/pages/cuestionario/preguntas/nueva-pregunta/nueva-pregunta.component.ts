@@ -17,6 +17,9 @@ export class NuevaPreguntaComponent implements OnInit {
    * la pregunta con las respuestas */
   pregunta: Pregunta;
 
+  /**Icremento puntos */
+  puntosRespuesta: number = 0;
+
   /**Para almacenar la respuesta del radio button */
   //rtaCorrecta;
 
@@ -27,6 +30,7 @@ export class NuevaPreguntaComponent implements OnInit {
   public nuevaPreguntaUnica = this.fb.group({
 
     titulo: ['', Validators.required],
+    puntaje: [''],
     respuestas: this.fb.array([])
 
   });
@@ -44,7 +48,8 @@ export class NuevaPreguntaComponent implements OnInit {
    /**Metodo para agregar mas respuestas al array*/
    agregarRespuestasUnicas() {
     this.getRespuestasUnicas.push( this.fb.group({
-      descripcion:['', Validators.required]
+      descripcion:['', Validators.required],
+      puntosRespuesta:['',Validators.required]
     }));
   }
 
@@ -59,6 +64,10 @@ export class NuevaPreguntaComponent implements OnInit {
   agregarPregunta() {
     /**Obtenemos el titulo de la pregunta */
     const descripcionPregunta = this.nuevaPreguntaUnica.get('titulo').value;
+    const puntajePregunta = this.nuevaPreguntaUnica.get('puntaje').value;
+
+    /**Obtenemos puntos de la pregunta */
+    //const puntosPregunta = this.nuevaPreguntaUnica.get('puntos').value;
 
     /**Obtenemos el array de respuestas que puso el usuario */
     const arrayRespuestas = this.nuevaPreguntaUnica.get('respuestas').value;
@@ -73,7 +82,7 @@ export class NuevaPreguntaComponent implements OnInit {
       /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
        * la respuesta element.descripcion
       */
-      const respuesta: Respuesta = new Respuesta(element.descripcion);
+      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta);
 
       /**Para verificar si al respuesta es correcta */
       /*if( index === element.esCorrecta ) {
@@ -84,7 +93,7 @@ export class NuevaPreguntaComponent implements OnInit {
     });
 
     /**Creamos un nuevo objeto pregunta en donde vamos almacenar*/
-    const pregunta: Pregunta = new Pregunta( descripcionPregunta, arrayRta );
+    const pregunta: Pregunta = new Pregunta( descripcionPregunta, puntajePregunta, arrayRta );
     console.log(pregunta);
     this.enviarPregunta.emit(pregunta);
     this.resetFormulario();
@@ -93,7 +102,11 @@ export class NuevaPreguntaComponent implements OnInit {
   resetFormulario() {
     this.nuevaPreguntaUnica.reset();
     this.getRespuestasUnicas.clear();
+    this.puntosRespuesta = 0;
   }
 
+  agregarPuntos() {
+    this.puntosRespuesta++
+  }
 
 }

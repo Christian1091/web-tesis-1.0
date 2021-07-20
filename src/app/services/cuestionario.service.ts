@@ -20,6 +20,7 @@ export class CuestionarioService {
 
   tituloCuestionario: string;
   descripcionCuestionario: string;
+  puntajecuestionario: number;
 
   constructor( private http: HttpClient ) { }
 

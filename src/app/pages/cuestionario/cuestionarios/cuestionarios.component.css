@@ -1,26 +1,28 @@
 .radius {
-  width: 100px;
-  border-radius: 300px;
-  margin-left: 10px;
+    width: 100px;
+    border-radius: 300px;
+    margin-left: 10px;
 }
 
 .cardList {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  /*background-color: #f1f1f1;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    /*background-color: #f1f1f1;*/
 }
 
 .icon {
-  font-size: 25px;
-  cursor: pointer;
-  padding: 5px;
-  /*margin-top: 15px;*/
-
+    font-size: 25px;
+    cursor: pointer;
+    padding: 5px;
+    /*margin-top: 15px;*/
 }
 
 .sizeCard {
-  height: 180px;
+    height: auto;
 }
 
-
+#input::placeholder {
+    color: red;
+    font-size: 1.2em;
+}

@@ -1,0 +1,106 @@
+[
+  {
+    "id": 1,
+    " provinciaId": 1,
+    "canton": "CUENCA"
+  },
+  {
+    "id": 2,
+    " provinciaId": 1,
+    "canton": "GIRÓN"
+  },
+  {
+    "id": 3,
+    " provinciaId": 1,
+    "canton": "GUALACEO"
+  },
+  {
+    "id": 4,
+    " provinciaId": 1,
+    "canton": "NABÓN"
+  },
+  {
+    "id": 5,
+    " provinciaId": 1,
+    "canton": "PAUTE"
+  },
+  {
+    "id": 6,
+    " provinciaId": 1,
+    "canton": "PUCARA"
+  },
+  {
+    "id": 7,
+    " provinciaId": 1,
+    "canton": "SAN FERNANDO"
+  },
+  {
+    "id": 8,
+    " provinciaId": 1,
+    "canton": "SANTA ISABEL"
+  },
+  {
+    "id": 9,
+    " provinciaId": 1,
+    "canton": "SIGSIG"
+  },
+  {
+    "id": 10,
+    " provinciaId": 1,
+    "canton": "OÑA"
+  },
+  {
+    "id": 11,
+    " provinciaId": 1,
+    "canton": "CHORDELEG"
+  },
+  {
+    "id": 12,
+    " provinciaId": 1,
+    "canton": "EL PAN"
+  },
+  {
+    "id": 13,
+    " provinciaId": 1,
+    "canton": "SEVILLA DE ORO"
+  },
+  {
+    "id": 14,
+    " provinciaId": 1,
+    "canton": "GUACHAPALA"
+  },
+  {
+    "id": 15,
+    " provinciaId": 1,
+    "canton": "CAMILO PONCE ENRÍQUEZ"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "GUARANDA"
+  },
+  {
+    "id":1,
+    " provinciaId": 2,
+    "canton": "CHILLANES"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "CHIMBO"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "ECHEANDÍA"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "SAN MIGUEL"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "CALUMA"
+  },
+  {
+    " provinciaId": 2,
+    "canton": "LAS NAVES"
+  }
+]
