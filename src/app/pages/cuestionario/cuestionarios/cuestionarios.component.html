@@ -29,7 +29,7 @@
 
                     <div class="row">
                         <div class="col-md-2">
-                            <input id="input" type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje">
+                            <input type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje">
                             <div class="text-danger" *ngIf="cuestionarioForm.get('puntaje').hasError('required') && cuestionarioForm.get('puntaje').touched">
                                 El Puntaje <strong>es obligatorio</strong>
 

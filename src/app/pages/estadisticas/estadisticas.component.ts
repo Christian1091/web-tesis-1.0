@@ -55,6 +55,7 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
                 nombreParticipante: element.nombreParticipante,
                 correoParticipante: element.correoParticipante,
                 institucionParticipante: element.institucionParticipante,
+                provinciaParticipante: element.provinciaParticipante,
                 ciudadParticipante: element.ciudadParticipante,
                 fechaCreacion: element.fechaCreacion,
                 puntosTotales: element.puntosTotales,

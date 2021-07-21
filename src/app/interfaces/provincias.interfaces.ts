@@ -1,11 +1,11 @@
 export interface Provincias {
-  id: number;
-  nombreProvincia: string;
+  id: string;
+  //nombreProvincia: string;
 
 }
 
 export interface Cantones {
   id: number;
-  provinciaId: number;
+  provinciaId: string;
   nombreCanton: string;
 }

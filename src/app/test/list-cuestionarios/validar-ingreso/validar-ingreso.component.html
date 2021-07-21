@@ -3,114 +3,87 @@
 <!-- Main wrapper - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <section id="wrapper">
-  <div class="login-register fondoL">
-    <div class="login-box card">
-      <div class="card-body">
+    <div class="login-register fondoL">
+        <div class="login-box card">
+            <div class="card-body">
+                <h3 class="box-title m-t-40 m-b-0">Formulario</h3>
+                <small>Llena el fromulario para poder realizar la encuesta</small>
+                <div class="form-group m-t-20">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" placeholder="Ingrese Nombre y Apellido" [(ngModel)]="nombreParticipante" />
+                    </div>
+                </div>
 
-        <h3 class="box-title m-t-40 m-b-0">Registrate</h3>
-        <small>Crea tu cuenta para poder realizar la encuesta</small>
-        <div class="form-group m-t-20">
-          <div class="col-xs-12">
-            <input class="form-control"
-                    type="text"
-                    placeholder="Ingrese Nombre y Apellido"
-                    [(ngModel)]="nombreParticipante"/>
-          </div>
-        </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Ingrese su correo electronico" [(ngModel)]="correoParticipante" />
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control"
-                    type="text"
-                    required=""
-                    placeholder="Ingrese su correo electronico"
-                    [(ngModel)]="correoParticipante"/>
-          </div>
-        </div>
+                <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Ingrese la Institucion a la que pertenece" [(ngModel)]="institucionParticipante" />
+                    </div>
+                </div>
 
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control"
-                    type="text"
-                    required=""
-                    placeholder="Ingrese la Institucion a la que pertenece"
-                    [(ngModel)]="institucionParticipante"/>
-          </div>
-        </div>
+                <!-- <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Ingrese su Provincia" [(ngModel)]="provinciaParticipante" />
+                    </div>
+                </div> -->
 
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control"
-                    type="text"
-                    required=""
-                    placeholder="Ingrese su Provincia"
-                    [(ngModel)]="provinciaParticipante"/>
-          </div>
-        </div>
+                <!-- <div class="form-group">
+                    <div class="col-xs-12">
+                        <input class="form-control" type="text" required="" placeholder="Ingrese su Ciudad" [(ngModel)]="ciudadParticipante" />
+                    </div>
+                </div> -->
 
-        <div class="form-group">
-          <div class="col-xs-12">
-            <input class="form-control"
-                    type="text"
-                    required=""
-                    placeholder="Ingrese su Ciudad"
-                    [(ngModel)]="ciudadParticipante"/>
-          </div>
-        </div>
-
-        <div class="form-group">
-          <div class="col-xs-3">
-            <select class="form-control" [(ngModel)]="selectedProvincia.id"
-                    (change)="onSelect($event.target.value)">
-              <option *ngFor="let provincia of provincias" value="{{ provincia.id}}">
-                {{ provincia.nombreProvincia }}
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <select class="form-control" (change)="onSelect($event.target.value)" [(ngModel)]="provinciaParticipante">
+              <option value="" selected disabled> Seleccione la provincia </option>
+              <option *ngFor="let provincia of provincias"
+                      value="{{provincia.id}}">
+                {{ provincia.id }}
               </option>
             </select>
-          </div>
-        </div>
+                    </div>
 
-        <div class="form-group">
-          <div class="col-xs-3">
-            <select>
-              <option *ngFor="let canton of cantones" value="{{ canton.id}}">
-                {{ canton.canton }}
-              </option>
-            </select>
-          </div>
-        </div>
+                    <div class="form-group col-md-6">
+                        <select class="form-control" [(ngModel)]="ciudadParticipante">
+                          <option value="" selected disabled> Seleccione el canton </option>
+                          <option *ngFor="let canton of cantones" value="{{ canton.nombreCanton }}">
+                            {{ canton.nombreCanton }}
+                          </option>
+                        </select>
+                    </div>
+                </div>
 
-        <br>
+                <br />
 
-        <div class="form-group row">
-          <div class="col-md-12">
-            <div class="checkbox checkbox-primary p-t-0">
-              <input id="checkbox-signup" type="checkbox" />
-              <label for="checkbox-signup">
+                <div class="form-group row">
+                    <div class="col-md-12">
+                        <div class="checkbox checkbox-primary p-t-0">
+                            <input id="checkbox-signup" type="checkbox" />
+                            <label for="checkbox-signup">
                 I agree to all <a href="#">Terms</a>
               </label>
-            </div>
-          </div>
-        </div>
-        <div class="form-group text-center m-t-20">
-          <div class="col-xs-12">
-            <button
-              type="submit"
-              class="btn btn-success waves-effect waves-light m-r-10"
-              (click)="siguiente()"
-              [disabled]="nombreParticipante == ''">
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center m-t-20">
+                    <div class="col-xs-12">
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10" (click)="siguiente()" [disabled]="nombreParticipante == ''">
               Siguiente
             </button>
-            <button
-              type="submit"
-              class="btn btn-inverse waves-effect waves-light"
-              routerLink="/listCuestionarios">
+                        <button type="submit" class="btn btn-inverse waves-effect waves-light" routerLink="/listCuestionarios">
               Cancelar
             </button>
-          </div>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
 </section>
 <!-- ============================================================== -->
 <!-- End Wrapper -->

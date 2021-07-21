@@ -19,6 +19,7 @@
                                 <th class="text-center">Participante</th>
                                 <th class="text-center">Email</th>
                                 <th class="text-center">Institucion</th>
+                                <th class="text-center">Provincia</th>
                                 <th class="text-center">Ciudad</th>
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Puntos</th>
@@ -31,6 +32,7 @@
                                 <td class="text-center"> {{ respuestas.nombreParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.correoParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.institucionParticipante }} </td>
+                                <td class="text-center"> {{ respuestas.provinciaParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.ciudadParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.fechaCreacion | date:'dd/MM/yyyy' }} </td>
                                 <td class="text-center"> {{ respuestas.puntosTotales }}/{{obtenerPuntosCuestionario?.cuestionarios[0].puntajeCuestionario}} </td>

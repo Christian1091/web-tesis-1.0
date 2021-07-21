@@ -30,7 +30,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
     this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe( res => {
       //console.log(res);
       this.respuestaCuestionario = res;
-      console.log(this.respuestaCuestionario)
+      //console.log(this.respuestaCuestionario)
     });
   }
 

@@ -163,7 +163,7 @@ export class PreguntaComponent implements OnInit {
 
   obtenemosPuntosTotales(): number {
 
-    console.log('Puntos Totales');
+    //console.log('Puntos Totales');
     for (let i = 0; i < this.listRespuestaUsuario.length; i++) {
       const puntosAux = this.listRespuestaUsuario[i].puntosObtenidos
       this.puntosTotales = Number(this.puntosTotales) + Number(puntosAux);
