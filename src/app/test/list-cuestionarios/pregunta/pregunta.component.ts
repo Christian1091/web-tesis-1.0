@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 
 import { Pregunta } from 'src/app/models/pregunta.model';
@@ -16,6 +16,8 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
   ]
 })
 export class PreguntaComponent implements OnInit {
+
+  public id: string;
 
   cuestionario!: Cuestionario;
 
@@ -43,22 +45,25 @@ export class PreguntaComponent implements OnInit {
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                private cuestionarioService: CuestionarioService,
-               private router: Router ) { }
+               private activatedRoute: ActivatedRoute,
+               private router: Router ) {
+                this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+                }
 
   ngOnInit(): void {
 
-    this.cuestionario = this.respuestaCuestionarioService.cuestionario;
+    this.idCuestionario = this.id;
     this.nombreParticipante = this.respuestaCuestionarioService.nombreParticipante;
     this.correoParticipante = this.respuestaCuestionarioService.correoParticipante;
     this.institucionParticipante = this.respuestaCuestionarioService.institucionParticipante;
     this.provinciaParticipante = this.respuestaCuestionarioService.provinciaParticipante;
     this.ciudadParticipante = this.respuestaCuestionarioService.ciudadParticipante;
 
-    this.idCuestionario = this.respuestaCuestionarioService.idCuestionario;
-    if (this.idCuestionario == null ){
-      this.router.navigateByUrl('/');
-      return;
-    }
+    // this.idCuestionario = this.respuestaCuestionarioService.idCuestionario;
+    // if (this.idCuestionario == null ){
+    //   this.router.navigateByUrl('/');
+    //   return;
+    // }
 
     this.getCuestionario();
 

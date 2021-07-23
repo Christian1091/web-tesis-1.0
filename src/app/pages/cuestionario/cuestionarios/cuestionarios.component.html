@@ -66,6 +66,7 @@
                 <div class="card-body cardList">
                     <h4 class="card-title">{{ cuestionario.nombre }}</h4>
                     <!-- <p class="card-text">{{ cuestionario.descripcion }}</p> -->
+                    <a href="{{url}}/validarIngreso/{{ cuestionario._id }}" class="card-text">{{url}}/validarIngreso/{{ cuestionario._id }}</a>
                     <hr>
                     <i class="fa fa-eye icon" style="color: #2269C7" routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
 
@@ -73,10 +74,15 @@
 
                     <i class="fa fa-bar-chart-o icon" routerLink="../estadisticas/{{ cuestionario._id }}"></i>
 
+                    <i class="fa fa-copy icon" style="color: #42910D;" (click)="crearLink(cuestionario)"></i>
+
+
                 </div>
             </div>
             <!-- </div> -->
         </div>
     </div>
+
+
 
 </div>

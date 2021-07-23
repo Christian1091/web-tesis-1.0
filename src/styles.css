@@ -1,50 +1,53 @@
 /* You can add global styles to this file, and also import other style files */
-#themecolors .selector, .cursor {
-  cursor: pointer;
+
+#themecolors .selector,
+.cursor {
+    cursor: pointer;
 }
 
 #google-btn {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  text-align: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    text-align: center;
 }
 
 .img-avatar {
-  height: 200px;
-  width: 200px;
+    height: 200px;
+    width: 200px;
 }
 
+
 /* Para estilisar la tabla */
+
 .w100 {
-  width: 100px;
+    width: 100px;
 }
 
 .w140 {
-  width: 140px;
+    width: 140px;
 }
 
 .avatar {
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
 }
 
 .oculto {
-  display: none;
+    display: none;
 }
 
 .fondo-modal-imagen {
-  background-color: rgba(0, 0, 0, 0.4);
-  left: 0px;
-  height: 100%;
-  position: fixed;
-  top: 0px;
-  width: 100%;
-  z-index: 9999;
+    background-color: rgba(0, 0, 0, 0.4);
+    left: 0px;
+    height: 100%;
+    position: fixed;
+    top: 0px;
+    width: 100%;
+    z-index: 9999;
 }
 
 .fondoL {
-  background: linear-gradient( #eeeef1, #37517ea8);
+    background: linear-gradient( #eeeef1, #37517ea8);
 }
-

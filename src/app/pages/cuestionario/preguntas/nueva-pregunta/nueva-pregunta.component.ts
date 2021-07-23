@@ -35,6 +35,15 @@ export class NuevaPreguntaComponent implements OnInit {
 
   });
 
+   /**Form Pregunta Multiple */
+   public respuestaMultiple = this.fb.group({
+
+    titulo: ['', Validators.required],
+    puntaje: [''],
+    respuestas: this.fb.array([])
+
+  });
+
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
@@ -45,12 +54,28 @@ export class NuevaPreguntaComponent implements OnInit {
     return this.nuevaPreguntaUnica.get('respuestas') as FormArray;
   }
 
+   /**Respuestas Multiples*/
+   get getRespuestasMultiples(): FormArray {
+    return this.respuestaMultiple.get('respuestas') as FormArray;
+  }
+
    /**Metodo para agregar mas respuestas al array*/
    agregarRespuestasUnicas() {
     this.getRespuestasUnicas.push( this.fb.group({
       descripcion:['', Validators.required],
       puntosRespuesta:['',Validators.required]
     }));
+  }
+
+  agregarRespuestaMultiples() {
+    this.getRespuestasMultiples.push( this.fb.group({
+      descripcion:['', Validators.required],
+      puntosRespuesta:['',Validators.required]
+    }));
+  }
+
+  eliminarRespuestaMultiples( index: number ) {
+    this.getRespuestasMultiples.removeAt( index );
   }
 
   eliminarRespuestasUnicas( index: number ) {

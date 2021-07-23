@@ -1,25 +1,23 @@
 .cardList {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-  padding: 16px;
-  text-align: center;
-  /*background-color: #f1f1f1;*/
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    /*text-align: center;*/
+    /*background-color: #f1f1f1;*/
 }
 
 .row {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .icon {
-  font-size: 22px;
-  cursor: pointer;
-  padding: 5px;
-  margin-top: 15px;
-
+    font-size: 22px;
+    cursor: pointer;
+    padding: 5px;
+    margin-top: 15px;
 }
 
 .add {
-  background-color: #4DBE0B;
-  border: none;
+    background-color: #4DBE0B;
+    border: none;
 }
-

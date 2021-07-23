@@ -1,19 +1,27 @@
 .list-group-item {
-  font-size: 20px;
-  color: black;
-  text-align: center;
+    font-size: 20px;
+    color: black;
+    text-align: center;
 }
 
 .fondoL {
-  background: linear-gradient( #eeeef1, #37517ea8);
+    background: linear-gradient( #eeeef1, #37517ea8);
 }
 
 .classSeleccionada {
-  background-color: #198754;
-  color: white;
+    background-color: #198754;
+    color: white;
 }
 
 .btn-regresar {
-  /*width: 25%;*/
-  font-size: 20px;
+    /*width: 25%;*/
+    font-size: 20px;
+}
+
+.cardList {
+    border-radius: 5px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    /*background-color: #f1f1f1;*/
 }

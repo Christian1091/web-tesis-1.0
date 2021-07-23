@@ -29,7 +29,8 @@ import { VerpostComponent } from './post/verpost/verpost.component';
     AuthModule,
     WebModule,
     ComponentsModule,
-    TestModule
+    TestModule,
+
   ],
   providers: [],
   bootstrap: [AppComponent]

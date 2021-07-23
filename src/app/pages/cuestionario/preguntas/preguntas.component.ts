@@ -22,6 +22,8 @@ export class PreguntasComponent implements OnInit {
   puntajeCuestionario: number;
   listPreguntas: Pregunta[] = [];
 
+  cuestionarioAux: any;
+
   constructor( private fb: FormBuilder,
                private cuestionarioService: CuestionarioService,
                private router: Router) { }
@@ -61,7 +63,11 @@ export class PreguntasComponent implements OnInit {
     this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
       this.router.navigateByUrl('/dashboard/cuestionarios');
       //console.log(res);
-
+      this.cuestionarioAux = res;
+      // const idCuestionario =  this.cuestionarioAux.cuestionario._id;
+      // const linkCuestionario = '/validarIngreso';
+      // console.log("ID Cuestionario");
+      // console.log(idCuestionario);
     }, err => {
       Swal.fire('Error', err.error.msg, 'error');
       console.log(err);

@@ -29,13 +29,14 @@ export class ListCuestionariosComponent implements OnInit {
                               .subscribe(({ cuestionarios }) => {
                                 //console.log(cuestionarios);
                                 this.listCuestionarios = cuestionarios;
+                                console.log(this.listCuestionarios);
                               })
   }
 
   ingresarNombre( idCuestionario: string ) {
     this.respuestaCuestionarioService.idCuestionario = idCuestionario;
-    //console.log(idCuestionario);
-    this.router.navigateByUrl('/validarIngreso');
+    console.log(idCuestionario);
+    this.router.navigateByUrl(`/validarIngreso/${idCuestionario}`);
   }
 
 }

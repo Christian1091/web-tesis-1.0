@@ -1,6 +1,6 @@
 
 import { Component, OnInit, Pipe } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { Provincias, Cantones } from '../../../interfaces/provincias.interfaces';
 import { ProvinciasService } from '../../../services/provincias.service';
@@ -27,16 +27,22 @@ export class ValidarIngresoComponent implements OnInit {
   public provincias: Provincias[] ;
   public cantones: Cantones[];
 
-  public nombrePro: any;
+  //public nombrePro: any;
+
+  public id: string;
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
+               private activatedRoute: ActivatedRoute,
                private router: Router,
-               private provinciaService: ProvinciasService ) {}
+               private provinciaService: ProvinciasService ) {
+                this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+                console.log(this.id);
+               }
 
   ngOnInit(): void {
-    if (this.respuestaCuestionarioService.idCuestionario == null ) {
-      this.router.navigateByUrl('/');
-    }
+    // if (this.respuestaCuestionarioService.idCuestionario === undefined ) {
+    //   this.router.navigateByUrl('/');
+    // }
 
     //this.provincias = this.provinciaService.getProvincias();
     this.provinciaService.getProvincias().subscribe( (res: any) => {
@@ -54,7 +60,7 @@ export class ValidarIngresoComponent implements OnInit {
      this.respuestaCuestionarioService.provinciaParticipante = this.provinciaParticipante;
      this.respuestaCuestionarioService.ciudadParticipante = this.ciudadParticipante;
 
-     this.router.navigateByUrl('/pregunta');
+     this.router.navigateByUrl(`/pregunta/${this.id}`);
   }
 
   onSelect( id ) {

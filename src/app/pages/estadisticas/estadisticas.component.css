@@ -1,15 +1,21 @@
 .fa {
-  cursor: pointer;
-  font-size: 25px;
-  margin: 0px 2px;
+    cursor: pointer;
+    font-size: 25px;
+    margin: 0px 2px;
 }
 
 .fa.fa-trash {
-  color: #a71c28;
-
+    color: #a71c28;
 }
 
 .cardL {
-  display: flex;
-  justify-content: center;
+    display: flex;
+    justify-content: center;
+}
+
+.cardList {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    /*background-color: #f1f1f1;*/
 }

@@ -8,8 +8,8 @@ import { PreguntaComponent } from '../test/list-cuestionarios/pregunta/pregunta.
 
 const routes: Routes = [
   { path: 'listCuestionarios', component: ListCuestionariosComponent },
-  { path: 'pregunta', component: PreguntaComponent },
-  { path: 'validarIngreso', component: ValidarIngresoComponent },
+  { path: 'pregunta/:id', component: PreguntaComponent },
+  { path: 'validarIngreso/:id', component: ValidarIngresoComponent },
   { path: 'respuestaCuestionario/:id', component: RespuestaCuestionarioComponent },
 
 ];

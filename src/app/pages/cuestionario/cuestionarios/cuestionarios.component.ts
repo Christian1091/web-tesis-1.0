@@ -2,11 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import { Router } from '@angular/router';
+import { ClipboardService } from 'ngx-clipboard';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 import { Pregunta } from 'src/app/models/pregunta.model';
+import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 import { CuestionarioService } from '../../../services/cuestionario.service';
+
 
 @Component({
   selector: 'app-cuestionarios',
@@ -16,6 +19,8 @@ import { CuestionarioService } from '../../../services/cuestionario.service';
   ]
 })
 export class CuestionariosComponent implements OnInit {
+
+  public url = "http://localhost:4200";
 
   tituloCuestionario: string;
   descripcionCuestionario: string;
@@ -33,7 +38,8 @@ export class CuestionariosComponent implements OnInit {
 
   constructor( private cuestionarioService: CuestionarioService,
                private fb: FormBuilder,
-               private router: Router) { }
+               private router: Router,
+               private _clipboardService: ClipboardService) { }
 
   ngOnInit(): void {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
@@ -66,7 +72,7 @@ export class CuestionariosComponent implements OnInit {
     this.cuestionarioService.getListCuestionarioByIdUser()
                             .subscribe( ({ cuestionarios }) => {
                               this.cuestionarios = cuestionarios;
-                              console.log(cuestionarios)
+                              //console.log(cuestionarios)
                               this.cargando = false;
                             })
 
@@ -94,4 +100,16 @@ export class CuestionariosComponent implements OnInit {
           }
     })
   }
+  // copyDynamicText() {
+  //   this._clipboardService.copyFromContent(this.title)
+  // }
+
+  crearLink( cuestionario: Cuestionario) {
+    const idCuestionario = cuestionario._id;
+
+    const link = this.url;
+    console.log(`${link}/validarIngreso/${idCuestionario}`);
+
+  }
+
 }
