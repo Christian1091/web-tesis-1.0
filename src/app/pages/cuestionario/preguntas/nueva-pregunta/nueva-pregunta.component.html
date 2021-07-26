@@ -43,7 +43,7 @@
 
             <div class="input-group-addon">
                 <div class="input-group-text">
-                    <input type="radio" name="esCorrecta" (change)="setRespuestasUnicasValidas(i)" [value]="i" />
+                    <input type="radio" [value]="i" />
                 </div>
             </div>
             <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}" formControlName="descripcion" />
@@ -51,14 +51,13 @@
             <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Puntos" formControlName="puntosRespuesta" />
 
             <span class="material-icons delete-icon" (click)="eliminarRespuestasUnicas(i)">
-        delete
-      </span>
+              delete
+            </span>
         </div>
         <span class="text-danger" *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
-      La respuesta es requerida
-    </span>
+          La respuesta es requerida
+        </span>
     </div>
-
 
     <br>
     <br>

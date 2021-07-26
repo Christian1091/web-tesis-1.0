@@ -26,7 +26,7 @@ export class NuevaPreguntaComponent implements OnInit {
    /**Enviar pregunta al listado de preguntas */
    @Output() enviarPregunta = new EventEmitter<Pregunta>();
 
-  /**Form Pregunta Unica */
+  /**Form Pregunta Unica 2 Paso */
   public nuevaPreguntaUnica = this.fb.group({
 
     titulo: ['', Validators.required],
@@ -47,9 +47,10 @@ export class NuevaPreguntaComponent implements OnInit {
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.agregarRespuestasPorDefecto();
   }
 
-  /**Metodo para devolver el array de las respuestas */
+  /**Metodo para devolver el array de las respuestas - 3 paso*/
   get getRespuestasUnicas(): FormArray {
     return this.nuevaPreguntaUnica.get('respuestas') as FormArray;
   }
@@ -59,8 +60,13 @@ export class NuevaPreguntaComponent implements OnInit {
     return this.respuestaMultiple.get('respuestas') as FormArray;
   }
 
-   /**Metodo para agregar mas respuestas al array*/
-   agregarRespuestasUnicas() {
+  agregarRespuestasPorDefecto() {
+    this.agregarRespuestaMultiples();
+    this.agregarRespuestaMultiples();
+  }
+
+  /**Metodo para agregar mas respuestas al array - 4 paso*/
+  agregarRespuestasUnicas() {
     this.getRespuestasUnicas.push( this.fb.group({
       descripcion:['', Validators.required],
       puntosRespuesta:['',Validators.required]

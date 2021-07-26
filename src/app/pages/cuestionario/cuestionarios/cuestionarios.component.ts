@@ -20,8 +20,8 @@ import { CuestionarioService } from '../../../services/cuestionario.service';
 })
 export class CuestionariosComponent implements OnInit {
 
-  public url = "http://localhost:4200";
-
+  //public url = "http://localhost:4200";
+  public url = "https://portalweb-tesis.netlify.app";
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;
@@ -107,8 +107,9 @@ export class CuestionariosComponent implements OnInit {
   crearLink( cuestionario: Cuestionario) {
     const idCuestionario = cuestionario._id;
 
-    const link = this.url;
-    console.log(`${link}/validarIngreso/${idCuestionario}`);
+    const link =` ${this.url}/validarIngreso/${idCuestionario}`;
+    this._clipboardService.copyFromContent(link);
+    //console.log(link);
 
   }
 

@@ -1,11 +1,13 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+
+import Swal from 'sweetalert2';
+
 import { Subscription } from 'rxjs';
+
 import { Cuestionario } from 'src/app/models/cuestionario.model';
-import { respuestaUsuario } from 'src/app/models/respuestaUsuario.model';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
-import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-estadisticas',
@@ -62,7 +64,7 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
                 listRespuestaUsuario: element.listRespuestasUsuario
             })
           });
-          //console.log(this.listRespuestasUsuario);
+          console.log(this.listRespuestasUsuario);
 
         }, error => {
           console.log(error);
@@ -106,9 +108,19 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
     this.cuestionarioService.getVerCuestionario(this.id)
                             .subscribe( res => {
                               this.obtenerPuntosCuestionario =  res;
-                              console.log(res);
+                              //console.log("Puntos: ");
+                              //console.log(res);
                             });
 
+  }
+
+  /**Sacar puntos por preguntas */
+  verRespuestaCuestionario() {
+    for( let i=0 ; i < this.listRespuestasUsuario.length; i++) {
+
+      const cuestionarios =  this.listRespuestasUsuario[i].listRespuestaUsuario[0].tituloPregunta;
+      console.log(cuestionarios);
+    }
   }
 
 }
