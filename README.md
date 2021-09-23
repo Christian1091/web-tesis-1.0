@@ -13,7 +13,9 @@ Ejemplo: git clone https://github.com/Christian1091/SeleniumTesting.git
 
 Abrimos el proyecto con Visual Studio Code
 Luego abrimos una terminal dentro del editor de Visual Studio Code y ejecutamos el siguiente comando:
+```
 npm install
+```
 
 ## Corremos el servidor de desarrollo
 
