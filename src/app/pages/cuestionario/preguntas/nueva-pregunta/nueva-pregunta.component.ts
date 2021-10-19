@@ -17,7 +17,7 @@ export class NuevaPreguntaComponent implements OnInit {
    * la pregunta con las respuestas */
   pregunta: Pregunta;
 
-  /**Icremento puntos */
+  /**Incremento puntos */
   puntosRespuesta: number = 0;
 
   /**Para almacenar la respuesta del radio button */
@@ -102,7 +102,8 @@ export class NuevaPreguntaComponent implements OnInit {
 
     /**Obtenemos el array de respuestas que puso el usuario */
     const arrayRespuestas = this.nuevaPreguntaUnica.get('respuestas').value;
-
+    const arrayResppuestasM = this.respuestaMultiple.get('respuestas').value; 
+    
     /**Creamos un array de tipo respuestas */
     const arrayRta: Respuesta[] = [];
 
@@ -110,6 +111,20 @@ export class NuevaPreguntaComponent implements OnInit {
      * objetos respuestas y lo vamos a ir insertando en el arrayRta
      */
     arrayRespuestas.forEach(( element, index ) => {
+      /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
+       * la respuesta element.descripcion
+      */
+      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta);
+
+      /**Para verificar si al respuesta es correcta */
+      /*if( index === element.esCorrecta ) {
+        respuesta.esCorrecta = true;
+      }*/
+
+      arrayRta.push(respuesta);
+    });
+
+    arrayResppuestasM.forEach(( element, index ) => {
       /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
        * la respuesta element.descripcion
       */

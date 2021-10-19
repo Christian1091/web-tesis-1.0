@@ -12,6 +12,8 @@ import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
 import { ComponentsModule } from './components/components.module';
 import { VerpostComponent } from './post/verpost/verpost.component';
+import { ClipboardModule} from 'ngx-clipboard';
+
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { VerpostComponent } from './post/verpost/verpost.component';
     WebModule,
     ComponentsModule,
     TestModule,
+    ClipboardModule,
 
   ],
   providers: [],
