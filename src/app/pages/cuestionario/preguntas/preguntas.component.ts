@@ -59,6 +59,7 @@ export class PreguntasComponent implements OnInit {
       timer: 1500
     })
 
+    console.log(cuestionario);
     /**Enviamos el cuestionario al backend */
     this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
       this.router.navigateByUrl('/dashboard/cuestionarios');

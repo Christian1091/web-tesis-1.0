@@ -109,13 +109,14 @@ export class NuevaPreguntaComponent implements OnInit {
     /**Obtenemos el titulo de la pregunta */
     const descripcionPregunta = this.opcionRespuestas.get('titulo').value;
     const puntajePregunta = this.opcionRespuestas.get('puntaje').value;
+    const otraRespuesta = this.opcionRespuestas.get('respuestaOtros').value;
 
     /**Obtenemos puntos de la pregunta */
     //const puntosPregunta = this.nuevaPreguntaUnica.get('puntos').value;
 
     /**Obtenemos el array de respuestas que puso el usuario */
     const arrayRespuestas = this.opcionRespuestas.get('respuestas').value;
-    const arrayResppuestasM = this.opcionRespuestas.get('respuestas').value; 
+
     
     /**Creamos un array de tipo respuestas */
     const arrayRta: Respuesta[] = [];
@@ -137,12 +138,13 @@ export class NuevaPreguntaComponent implements OnInit {
       arrayRta.push(respuesta);
     });
 
-
+    
     /**Creamos un nuevo objeto pregunta en donde vamos almacenar*/
-    const pregunta: Pregunta = new Pregunta( descripcionPregunta, puntajePregunta, arrayRta );
+    const pregunta: Pregunta = new Pregunta( descripcionPregunta, puntajePregunta, arrayRta, otraRespuesta );
     console.log(pregunta);
     this.enviarPregunta.emit(pregunta);
     this.resetFormulario();
+    this.habilitar = false;
   }
 
   resetFormulario() {
