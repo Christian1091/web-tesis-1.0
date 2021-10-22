@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, Validators, FormArray } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 
 import { Pregunta } from '../../../../models/pregunta.model';
 import { Respuesta } from '../../../../models/respuesta.model';
@@ -13,13 +13,15 @@ import { Respuesta } from '../../../../models/respuesta.model';
 })
 export class NuevaPreguntaComponent implements OnInit {
 
+  esMultiple: boolean = false;
+
   /**Aqui creamos una variable pregunta de tipo pregunta donde vamos almacenar
    * la pregunta con las respuestas */
   pregunta: Pregunta;
 
   /**Incremento puntos */
   puntosRespuesta: number = 0;
-
+ 
   /**Para almacenar la respuesta del radio button */
   //rtaCorrecta;
 
@@ -27,53 +29,64 @@ export class NuevaPreguntaComponent implements OnInit {
    @Output() enviarPregunta = new EventEmitter<Pregunta>();
 
   /**Form Pregunta Unica 2 Paso */
-  public nuevaPreguntaUnica = this.fb.group({
-
-    titulo: ['', Validators.required],
-    puntaje: [''],
-    respuestas: this.fb.array([])
-
-  });
+ // public nuevaPreguntaUnica : FormGroup;
 
    /**Form Pregunta Multiple */
-   public respuestaMultiple = this.fb.group({
+   public opcionRespuestas : FormGroup;
+   public habilitar: boolean = false;
 
-    titulo: ['', Validators.required],
-    puntaje: [''],
-    respuestas: this.fb.array([])
+  cargarFormulario() 
+  {
+    this.opcionRespuestas = this.fb.group({
 
-  });
+      titulo: ['', Validators.required],
+      puntaje: [''],
+      respuestas: this.fb.array([]),
+      respuestaOtros: [false]
+  
+    });
+  }
 
+  habilitarOtros() {
+    this.habilitar = (this.habilitar) ? false: true;
+    this.opcionRespuestas.get("respuestaOtros").setValue(this.habilitar)
+  }
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
+    this.cargarFormulario();
     this.agregarRespuestasPorDefecto();
+
+    
+    
   }
 
+ 
   /**Metodo para devolver el array de las respuestas - 3 paso*/
   get getRespuestasUnicas(): FormArray {
-    return this.nuevaPreguntaUnica.get('respuestas') as FormArray;
+    return this.opcionRespuestas.get('respuestas') as FormArray;
   }
 
    /**Respuestas Multiples*/
    get getRespuestasMultiples(): FormArray {
-    return this.respuestaMultiple.get('respuestas') as FormArray;
+    return this.opcionRespuestas.get('respuestas') as FormArray;
   }
 
   agregarRespuestasPorDefecto() {
-    this.agregarRespuestaMultiples();
     this.agregarRespuestaMultiples();
   }
 
   /**Metodo para agregar mas respuestas al array - 4 paso*/
   agregarRespuestasUnicas() {
-    this.getRespuestasUnicas.push( this.fb.group({
+    this.esMultiple = false;
+    this.getRespuestasMultiples.push( this.fb.group({
       descripcion:['', Validators.required],
       puntosRespuesta:['',Validators.required]
     }));
   }
 
   agregarRespuestaMultiples() {
+    this.esMultiple = true;
     this.getRespuestasMultiples.push( this.fb.group({
       descripcion:['', Validators.required],
       puntosRespuesta:['',Validators.required]
@@ -94,15 +107,15 @@ export class NuevaPreguntaComponent implements OnInit {
 
   agregarPregunta() {
     /**Obtenemos el titulo de la pregunta */
-    const descripcionPregunta = this.nuevaPreguntaUnica.get('titulo').value;
-    const puntajePregunta = this.nuevaPreguntaUnica.get('puntaje').value;
+    const descripcionPregunta = this.opcionRespuestas.get('titulo').value;
+    const puntajePregunta = this.opcionRespuestas.get('puntaje').value;
 
     /**Obtenemos puntos de la pregunta */
     //const puntosPregunta = this.nuevaPreguntaUnica.get('puntos').value;
 
     /**Obtenemos el array de respuestas que puso el usuario */
-    const arrayRespuestas = this.nuevaPreguntaUnica.get('respuestas').value;
-    const arrayResppuestasM = this.respuestaMultiple.get('respuestas').value; 
+    const arrayRespuestas = this.opcionRespuestas.get('respuestas').value;
+    const arrayResppuestasM = this.opcionRespuestas.get('respuestas').value; 
     
     /**Creamos un array de tipo respuestas */
     const arrayRta: Respuesta[] = [];
@@ -124,19 +137,6 @@ export class NuevaPreguntaComponent implements OnInit {
       arrayRta.push(respuesta);
     });
 
-    arrayResppuestasM.forEach(( element, index ) => {
-      /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
-       * la respuesta element.descripcion
-      */
-      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta);
-
-      /**Para verificar si al respuesta es correcta */
-      /*if( index === element.esCorrecta ) {
-        respuesta.esCorrecta = true;
-      }*/
-
-      arrayRta.push(respuesta);
-    });
 
     /**Creamos un nuevo objeto pregunta en donde vamos almacenar*/
     const pregunta: Pregunta = new Pregunta( descripcionPregunta, puntajePregunta, arrayRta );
@@ -146,7 +146,7 @@ export class NuevaPreguntaComponent implements OnInit {
   }
 
   resetFormulario() {
-    this.nuevaPreguntaUnica.reset();
+    this.opcionRespuestas.reset();
     this.getRespuestasUnicas.clear();
     this.puntosRespuesta = 0;
   }

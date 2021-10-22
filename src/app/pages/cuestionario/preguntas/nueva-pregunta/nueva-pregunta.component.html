@@ -1,12 +1,12 @@
 <!-- Inicio del form pregunta unica -->
-<form [formGroup]="nuevaPreguntaUnica">
+<form [formGroup]="opcionRespuestas">
     <div class="row">
         <div class="col-md-9">
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="Pregunta sin titulo" formControlName="titulo" />
 
             </div>
-            <span class="text-danger" *ngIf="nuevaPreguntaUnica.get('titulo').hasError('required') && nuevaPreguntaUnica.get('titulo').touched" >
+            <span class="text-danger" *ngIf="opcionRespuestas.get('titulo').hasError('required') && opcionRespuestas.get('titulo').touched" >
               La pregunta es requerida
             </span>
         </div>
@@ -15,8 +15,9 @@
                 <input type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje" />
             </div>
         </div>
+
     </div>
-    <hr>
+  
     <!-- Seleccion de opcion pregunta -->
     <div>
         <button type="button" class="btn btn-secondary dropdown-toggle col-lg-12" data-toggle="dropdown">
@@ -38,58 +39,67 @@
     </div>
     <!-- Fin seleccion opcion pregunta -->
 
-    <div formArrayName="respuestas" *ngFor="let item of getRespuestasUnicas.controls; let i = index">
-        <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
-
-            <div class="input-group-addon">
-                <div class="input-group-text">
-                    <input type="radio" [value]="i" />
+    <div *ngIf="!esMultiple" formArrayName="respuestas">
+        <div *ngFor="let item of getRespuestasUnicas.controls; let i = index">
+            <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
+    
+                <div class="input-group-addon">
+                    <div class="input-group-text">
+                        <input type="radio" [value]="i" name="radio" />
+                    </div>
                 </div>
+                <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}" formControlName="descripcion" />
+    
+                <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Puntos" formControlName="puntosRespuesta" />
+    
+                <span class="material-icons delete-icon" (click)="eliminarRespuestasUnicas(i)">
+                  delete
+                </span>
             </div>
-            <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}" formControlName="descripcion" />
-
-            <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Puntos" formControlName="puntosRespuesta" />
-
-            <span class="material-icons delete-icon" (click)="eliminarRespuestasUnicas(i)">
-              delete
+            <span class="text-danger" *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
+              La respuesta es requerida
             </span>
         </div>
-        <span class="text-danger" *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
-          La respuesta es requerida
-        </span>
+
+    </div>
+
+    <br>
+    <br>
+    <div  *ngIf="esMultiple" formArrayName="respuestas">
+
+        <div *ngFor="let item of getRespuestasMultiples.controls; let i = index">
+            <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
+    
+                <div class="input-group-addon">
+                    <div class="input-group-text">
+                        <input type="checkbox" [value]="i" />
+                    </div>
+                </div>
+                <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}" formControlName="descripcion" />
+    
+                <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Puntos" formControlName="puntosRespuesta" />
+    
+                <span class="material-icons delete-icon" (click)="eliminarRespuestaMultiples(i)">
+                delete
+                </span>
+            </div>
+            <span class="text-danger" *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
+            La respuesta es requerida
+            </span>
+        </div>
     </div>
 
     <br>
     <br>
 
-    <div formArrayName="respuestas" *ngFor="let item of getRespuestasMultiples.controls; let i = index">
-        <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
-
-            <div class="input-group-addon">
-                <div class="input-group-text">
-                    <input type="checkbox" [value]="i" />
-                </div>
-            </div>
-            <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}" formControlName="descripcion" />
-
-            <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Puntos" formControlName="puntosRespuesta" />
-
-            <span class="material-icons delete-icon" (click)="eliminarRespuestaMultiples(i)">
-              delete
-            </span>
-        </div>
-        <span class="text-danger" *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
-          La respuesta es requerida
-        </span>
+    <div class="row">
+        <button *ngIf="!habilitar" class="btn btn-warning" (click)="habilitarOtros()">Habilitar otros</button>
+        <button *ngIf="habilitar" class="btn btn-warning" (click)="habilitarOtros()">Desabilitar otros</button>
+        <button class="btn btn-primary float-right" (click)="agregarPregunta()">
+            Agregar
+          </button>
     </div>
-
-    <br>
-    <br>
-
-
-    <button class="btn btn-primary float-right" (click)="agregarPregunta()">
-      Agregar
-    </button>
+   
 
 </form>
 <!-- Fin del form pregunta unica -->
