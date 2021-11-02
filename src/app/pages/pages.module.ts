@@ -29,6 +29,9 @@ import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.comp
 import { EnviadosComponent } from './correo/enviados/enviados.component';
 import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuestionario/actualizar-cuestionario.component';
+
 
 @NgModule({
   declarations: [
@@ -52,6 +55,7 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
     EnviadosComponent,
     NuevopostComponent,
     EstadisticasComponent,
+    ActualizarCuestionarioComponent
   ],
   exports: [
     DashboardComponent,
@@ -67,8 +71,16 @@ import { EstadisticasComponent } from './estadisticas/estadisticas.component';
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ClipboardModule
+    ClipboardModule,
+    MatDialogModule
 
-  ]
+  ],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+ }, {
+    provide: MAT_DIALOG_DATA,
+    useValue: {} // Add any data you wish to test if it is passed/used correctly
+ }]
 })
 export class PagesModule { }

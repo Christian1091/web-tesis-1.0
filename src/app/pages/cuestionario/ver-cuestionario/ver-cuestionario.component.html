@@ -1,10 +1,9 @@
-
 <div class="text-center" *ngFor="let cuestionario of cuestionario.cuestionarios">
 
   <h2 class="card-title">{{ cuestionario.nombre }}</h2>
   <p class="card-text">{{ cuestionario.descripcion }}</p>
   <hr>
-  <div *ngFor="let pregunta of cuestionario.listPreguntas">
+  <div *ngFor="let pregunta of cuestionario.listPreguntas ; let i = index">
     <div class="card-header">
       <b> {{ pregunta.descripcion }} </b>
     </div>
@@ -14,5 +13,8 @@
       </li>
     </ul>
     <br>
+    <div class="container">
+      <button class="btn btn-danger" (click)="cargarCuestionario(cuestionario, i)">Actualizar</button>
+    </div>
   </div>
 </div>

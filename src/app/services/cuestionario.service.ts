@@ -71,4 +71,8 @@ export class CuestionarioService {
     return this.http.delete( url, this.headers );
   }
 
+  actualizarCuestionario(cuestionario: Cuestionario) {
+    const url =  `${ base_url }/cuestionarios/${ cuestionario._id }`;
+    return this.http.put(url, cuestionario, this.headers);
+  }
 }
