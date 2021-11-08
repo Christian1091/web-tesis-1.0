@@ -42,6 +42,7 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
   }
 
   getRespuestaByIdCuestionario() {
+    //console.log("id: " + this.id);
 
     this.respuestaCuestionario = this.respuestaCuestionarioService.getRespuestaByIdCuestionario( this.id )
         .subscribe( (res: any) => {
@@ -117,10 +118,14 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
   /**Sacar puntos por preguntas */
   verRespuestaCuestionario() {
     for( let i=0 ; i < this.listRespuestasUsuario.length; i++) {
-
-      const cuestionarios =  this.listRespuestasUsuario[i].listRespuestaUsuario[0].tituloPregunta;
-      console.log(cuestionarios);
-    }
+      //for( let j= 0; j < this.listRespuestasUsuario[i].listRespuestaUsuario.length; j++){
+        //const cuestionarios =  this.listRespuestasUsuario[i].listRespuestaUsuario[j].tituloPregunta;
+        const cuestionarios =  this.listRespuestasUsuario[i].listRespuestaUsuario[0].tituloPregunta;
+        const puntos =  this.listRespuestasUsuario[i].listRespuestaUsuario[0].puntosObtenidos;
+        console.log(cuestionarios);
+        console.log(puntos);
+      }
+    //}
   }
 
 }

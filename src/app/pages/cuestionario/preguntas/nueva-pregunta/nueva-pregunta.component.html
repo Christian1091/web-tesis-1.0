@@ -1,5 +1,5 @@
-<!-- Inicio del form pregunta unica -->
 <form [formGroup]="nuevaPreguntaUnica">
+
     <div class="row">
         <div class="col-md-9">
             <div class="input-group">
@@ -7,8 +7,8 @@
 
             </div>
             <span class="text-danger" *ngIf="nuevaPreguntaUnica.get('titulo').hasError('required') && nuevaPreguntaUnica.get('titulo').touched">
-              La pregunta es requerida
-            </span>
+        La pregunta es requerida
+      </span>
         </div>
         <div class="col-md-3">
             <div class="input-group">
@@ -20,14 +20,14 @@
     <!-- Seleccion de opcion pregunta -->
     <div>
         <button type="button" class="btn btn-secondary dropdown-toggle col-lg-12" data-toggle="dropdown">
-          Opcion Respuestas
-        </button>
+    Opcion Respuestas
+  </button>
         <div class="dropdown-menu dropdown-menu-right">
             <a class="dropdown-item" style="cursor: pointer" (click)="agregarRespuestasUnicas()">
                 <i class="fa fa-check-circle"></i> Opcion Unica
             </a>
             <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item">
+            <a class="dropdown-item" style="cursor: pointer;">
                 <i class="fa fa-check-square"></i> Opcion Multiple
             </a>
             <div role="separator" class="dropdown-divider"></div>
@@ -36,7 +36,6 @@
             </a>
         </div>
     </div>
-    <!-- Fin seleccion opcion pregunta -->
 
     <div formArrayName="respuestas" *ngFor="let item of getRespuestasUnicas.controls; let i = index">
         <div class="input-group" [formGroupName]="i" style="padding-top: 10px">

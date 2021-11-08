@@ -20,8 +20,8 @@ import { CuestionarioService } from '../../../services/cuestionario.service';
 })
 export class CuestionariosComponent implements OnInit {
 
-  //public url = "http://localhost:4200";
-  public url = "https://portalweb-tesis.netlify.app";
+  public url = "http://localhost:4200";
+  //public url = "https://portalweb-tesis.netlify.app";
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;

@@ -123,6 +123,7 @@ export class PreguntaComponent implements OnInit {
     //this.puntosPregunta = this.listPreguntas[i].listRespuesta[indexAux].puntosRespuesta;
 
     const respuestaUsuario: any = {
+      idPregunta: this.listPreguntas[this.indexPregunta]._id,
       tituloPregunta: this.listPreguntas[this.indexPregunta].descripcion,
       puntajePregunta: this.listPreguntas[this.indexPregunta].puntajePregunta,
       indexRespuestaSeleccionada: indexAux,

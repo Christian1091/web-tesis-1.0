@@ -44,7 +44,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent, data: { titulo: 'Mi Perfil'} },
       { path: 'account-settings', component: AccountSettingsComponent, data: { titulo: 'Tema'} },
       { path: 'buscar/:termino', component: BusquedaComponent, data: { titulo: 'Busquedas'} },
-      // { path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica'} },
+      //{ path: 'grafica1', component: Grafica1Component, data: { titulo: 'Grafica'} },
       { path: 'perfil', component: PerfilComponent, data: { titulo: 'Perfil de Usuario'} },
       { path: 'progress', component: ProgressComponent, data: { titulo: 'Progress'} },
       { path: 'promesas', component: PromesasComponent, data: { titulo: 'Promesas'} },

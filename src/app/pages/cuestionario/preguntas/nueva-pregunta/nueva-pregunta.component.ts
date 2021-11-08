@@ -16,9 +16,7 @@ export class NuevaPreguntaComponent implements OnInit {
   /**Aqui creamos una variable pregunta de tipo pregunta donde vamos almacenar
    * la pregunta con las respuestas */
   pregunta: Pregunta;
-
-  /**Icremento puntos */
-  puntosRespuesta: number = 0;
+  idPregunta = 1;
 
   /**Para almacenar la respuesta del radio button */
   //rtaCorrecta;
@@ -28,41 +26,22 @@ export class NuevaPreguntaComponent implements OnInit {
 
   /**Form Pregunta Unica 2 Paso */
   public nuevaPreguntaUnica = this.fb.group({
-
     titulo: ['', Validators.required],
     puntaje: [''],
     respuestas: this.fb.array([])
-
   });
 
-   /**Form Pregunta Multiple */
-   public respuestaMultiple = this.fb.group({
-
-    titulo: ['', Validators.required],
-    puntaje: [''],
-    respuestas: this.fb.array([])
-
-  });
 
   constructor( private fb: FormBuilder ) { }
 
   ngOnInit(): void {
-    this.agregarRespuestasPorDefecto();
+    //this.idPregunta =  this.pregunta.id;
+
   }
 
   /**Metodo para devolver el array de las respuestas - 3 paso*/
   get getRespuestasUnicas(): FormArray {
     return this.nuevaPreguntaUnica.get('respuestas') as FormArray;
-  }
-
-   /**Respuestas Multiples*/
-   get getRespuestasMultiples(): FormArray {
-    return this.respuestaMultiple.get('respuestas') as FormArray;
-  }
-
-  agregarRespuestasPorDefecto() {
-    this.agregarRespuestaMultiples();
-    this.agregarRespuestaMultiples();
   }
 
   /**Metodo para agregar mas respuestas al array - 4 paso*/
@@ -71,17 +50,6 @@ export class NuevaPreguntaComponent implements OnInit {
       descripcion:['', Validators.required],
       puntosRespuesta:['',Validators.required]
     }));
-  }
-
-  agregarRespuestaMultiples() {
-    this.getRespuestasMultiples.push( this.fb.group({
-      descripcion:['', Validators.required],
-      puntosRespuesta:['',Validators.required]
-    }));
-  }
-
-  eliminarRespuestaMultiples( index: number ) {
-    this.getRespuestasMultiples.removeAt( index );
   }
 
   eliminarRespuestasUnicas( index: number ) {
@@ -94,6 +62,8 @@ export class NuevaPreguntaComponent implements OnInit {
 
   agregarPregunta() {
     /**Obtenemos el titulo de la pregunta */
+    //console.log(idPregunta);
+    const idPregunta = this.idPregunta++;
     const descripcionPregunta = this.nuevaPreguntaUnica.get('titulo').value;
     const puntajePregunta = this.nuevaPreguntaUnica.get('puntaje').value;
 
@@ -124,7 +94,7 @@ export class NuevaPreguntaComponent implements OnInit {
     });
 
     /**Creamos un nuevo objeto pregunta en donde vamos almacenar*/
-    const pregunta: Pregunta = new Pregunta( descripcionPregunta, puntajePregunta, arrayRta );
+    const pregunta: Pregunta = new Pregunta( idPregunta, descripcionPregunta, puntajePregunta, arrayRta );
     console.log(pregunta);
     this.enviarPregunta.emit(pregunta);
     this.resetFormulario();
@@ -133,11 +103,6 @@ export class NuevaPreguntaComponent implements OnInit {
   resetFormulario() {
     this.nuevaPreguntaUnica.reset();
     this.getRespuestasUnicas.clear();
-    this.puntosRespuesta = 0;
-  }
-
-  agregarPuntos() {
-    this.puntosRespuesta++
   }
 
 }
