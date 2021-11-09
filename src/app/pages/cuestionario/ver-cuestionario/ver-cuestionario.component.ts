@@ -47,8 +47,6 @@ export class VerCuestionarioComponent implements OnInit {
     let cuestionario: Cuestionario = r;
     console.log(cuestionario.listPreguntas[i]);
     const modal = this.dialog.open(NuevaPreguntaComponent, {
-      width: '100%',
-      height: '95%',
       data: {
         "pos": i,
         "cuestionario": cuestionario

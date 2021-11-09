@@ -1,3 +1,4 @@
+import { VerCuestionarioComponent } from './../../ver-cuestionario/ver-cuestionario.component';
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -26,7 +27,7 @@ export class NuevaPreguntaComponent implements OnInit {
   pregunta: Pregunta;
   /**Incremento puntos */
   puntosRespuesta: number = 0;
-  public title = "Agregar";
+  public tittle = "Agregar";
   /**Enviar pregunta al listado de preguntas */
 
 
@@ -51,7 +52,7 @@ export class NuevaPreguntaComponent implements OnInit {
     this.habilitar = (this.habilitar) ? false : true;
     this.opcionRespuestas.get("respuestaOtros").setValue(this.habilitar)
   }
-constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private cuestionarioService: CuestionarioService) {
+constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private cuestionarioService: CuestionarioService, private dialogRef: MatDialogRef<VerCuestionarioComponent>) {
 
     this.cuestionario=data["cuestionario"];
     this.pos = data["pos"]
@@ -68,10 +69,10 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     this.cargarFormulario();
     if (this.cuestionario == null || this.cuestionario == undefined) {
       this.agregarRespuestasPorDefecto();
-      this.title = "Agregar";
+      this.tittle = "Agregar Pregunta";
     } else {
 
-      this.title = "Actualizar";
+      this.tittle = "Actualizar";
       this.opcionRespuestas.get("titulo").setValue(this.cuestionario.listPreguntas[this.pos].descripcion);
       this.opcionRespuestas.get("puntaje").setValue(this.cuestionario.listPreguntas[this.pos].puntajePregunta);
       //this.opcionRespuestas.get("respuestas").setValue(this.cuestionario.listPreguntas[this.pos].listRespuesta);
@@ -79,7 +80,8 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       this.cuestionario.listPreguntas[this.pos].listRespuesta.forEach(r => {
         this.getRespuestasMultiples.push(this.fb.group({
           descripcion: [r.descripcion, Validators.required],
-          puntosRespuesta: [r.puntosRespuesta, Validators.required]
+          puntosRespuesta: [r.puntosRespuesta, Validators.required],
+          texto: [r.texto]
         }));
       })
       this.habilitar = this.cuestionario.listPreguntas[this.pos].otraRespuesta;
@@ -99,23 +101,17 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
   }
 
   agregarRespuestasPorDefecto() {
-    this.agregarRespuestaMultiples();
+    this.agregarRespuesta(true, false);
   }
 
   /**Metodo para agregar mas respuestas al array - 4 paso*/
-  agregarRespuestasUnicas() {
-    this.esMultiple = false;
-    this.getRespuestasMultiples.push(this.fb.group({
-      descripcion: ['', Validators.required],
-      puntosRespuesta: ['', Validators.required]
-    }));
-  }
 
-  agregarRespuestaMultiples() {
-    this.esMultiple = true;
+  agregarRespuesta(opcion: boolean, texto: boolean) {
+    this.esMultiple = opcion;
     this.getRespuestasMultiples.push(this.fb.group({
       descripcion: ['', Validators.required],
-      puntosRespuesta: ['', Validators.required]
+      puntosRespuesta: ['', Validators.required],
+      texto: [texto]
     }));
   }
 
@@ -151,7 +147,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     arrayRespuestas.forEach((element, index) => {
       /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
        * la respuesta element.descripcion*/
-      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta);
+      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta, element.texto);
       /**Para verificar si al respuesta es correcta */
       /*if( index === element.esCorrecta ) {
         respuesta.esCorrecta = true;
@@ -166,9 +162,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     this.habilitar = false;
 
     }
-   
   }
-
   
   resetFormulario() {
     this.opcionRespuestas.reset();
@@ -190,11 +184,13 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       this.cuestionario.listPreguntas[this.pos].descripcion = descripcionPregunta;
       this.cuestionario.listPreguntas[this.pos].puntajePregunta = puntajePregunta;
       this.cuestionario.listPreguntas[this.pos].otraRespuesta = this.habilitar;
+      this.cuestionario.listPreguntas[this.pos].listRespuesta = this.opcionRespuestas.get('respuestas').value;
     console.log(this.cuestionario);
     console.log("xdxdxd");
     
     this.cuestionarioService.actualizarCuestionario(this.cuestionario).subscribe(res => {
       console.log(res);
+      this.dialogRef.close();
       
     })
   }

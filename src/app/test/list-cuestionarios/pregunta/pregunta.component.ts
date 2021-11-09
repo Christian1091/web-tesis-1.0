@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 
@@ -18,7 +19,7 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
 export class PreguntaComponent implements OnInit {
 
   public id: string;
-
+  respuestaTexto = new FormControl();
   cuestionario!: Cuestionario;
 
   idCuestionario: string;
@@ -42,6 +43,7 @@ export class PreguntaComponent implements OnInit {
   institucionParticipante = '';
   provinciaParticipante = '';
   ciudadParticipante = '';
+  opcionOtros: boolean[] = [];
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                private cuestionarioService: CuestionarioService,
@@ -58,7 +60,7 @@ export class PreguntaComponent implements OnInit {
     this.institucionParticipante = this.respuestaCuestionarioService.institucionParticipante;
     this.provinciaParticipante = this.respuestaCuestionarioService.provinciaParticipante;
     this.ciudadParticipante = this.respuestaCuestionarioService.ciudadParticipante;
-
+   
     // this.idCuestionario = this.respuestaCuestionarioService.idCuestionario;
     // if (this.idCuestionario == null ){
     //   this.router.navigateByUrl('/');
@@ -76,7 +78,10 @@ export class PreguntaComponent implements OnInit {
                               //console.log(res.cuestionarios[0].listPreguntas);
                               this.listPreguntas = res.cuestionarios[0].listPreguntas;
                               //this.listRespuesta = this.listPreguntas[1].listRespuesta;
-                              //console.log(this.listRespuesta);
+                              this.listPreguntas.forEach( p => {
+                                this.opcionOtros.push(p.otraRespuesta);
+                              })
+                              
                             });
   }
 
@@ -92,13 +97,16 @@ export class PreguntaComponent implements OnInit {
     return this.indexPregunta;
   }
 
-  respuestaSeleccionada( respuesta: any, index: number ) {
+  respuestaSeleccionada( respuesta: Respuesta, index: number ) {
     //console.log('************');
     //console.log(respuesta);
-    this.opcionSeleccionada = respuesta;
-    this.rtaConfirmada = true;
-
-    this.indexSeleccionado = index;
+    if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
+       respuesta.descripcion = this.respuestaTexto.value;
+      }
+      this.opcionSeleccionada = respuesta;
+      this.rtaConfirmada = true;
+      
+      this.indexSeleccionado = index;
   }
 
   AddClassOption( respuesta: any ): string {
@@ -110,6 +118,8 @@ export class PreguntaComponent implements OnInit {
   siguiente(i) {
     this.agregarRespuesta(i);
     this.contador = this.contador + 1;
+    this.respuestaTexto.setValue(''); 
+    
   }
 
   agregarRespuesta(i) {

@@ -56,11 +56,15 @@
                 <hr>
                 <app-nueva-pregunta (enviarPregunta)="guardarPregunta($event)"></app-nueva-pregunta>
             </div>
-
         </div>
     </div>
+    
     <!-- Fin Card de Nueva Pregunta -->
+    <div>
+        <button class="btn btn-success btn-lg btnFinalizar" [disabled]="listPreguntas.length == 0" (click)="guardarCuestionario()">
+            Finalizar Cuestionario
+          </button>
+    </div>
+
 </div>
-<button class="btn btn-success btn-lg btnFinalizar" [disabled]="listPreguntas.length == 0" (click)="guardarCuestionario()">
-  Finalizar Cuestionario
-</button>
+

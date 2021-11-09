@@ -20,3 +20,8 @@
 .list-group-item {
   cursor: pointer;
 }
+
+.textoResp {
+  text-transform: uppercase;
+}
+

@@ -7,13 +7,18 @@
 
                 <ul class="list-group">
                     <li class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta; let i = index;" (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)">
-                        {{ respuesta.descripcion }}
+                        <div *ngIf="respuesta.texto">
+                            
+                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i)" placeholder="Su respuesta..."/>
+                        </div>
+                        <div *ngIf="!respuesta.texto">
+                            {{ respuesta.descripcion }}
+                        </div>
                     </li>
                 </ul>
-
                 <div class="mt-auto">
                     <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada" (click)="siguiente(contador)">
-            Siguiente
+            Siguientes
           </button>
                 </div>
             </div>
