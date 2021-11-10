@@ -1,29 +1,53 @@
 <app-navbar></app-navbar>
-<section id="wrapper">
 
-  <div class="row">
-    <!-- <div class="col-6">
-      <app-dona title="Ventas"></app-dona>
-    </div> -->
+<!-- Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+<aside class="left-sidebar">
+    <!-- Sidebar scroll-->
+    <div class="scroll-sidebar">
+        <!-- Sidebar navigation-->
+        <nav class="sidebar-nav">
+            <ul id="sidebarnav">
 
-    <div class="col-6">
-      <app-dona [labels]="labels1"
-                [data]="data1"
-                title="Compras">
-    </app-dona>
+                <li class="nav-small-cap">DATOS</li>
+                <div *ngFor="let cuestionario of listCuestionarios">
+
+                    <li>
+                        <a (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a></li>
+                </div>
+            </ul>
+        </nav>
+        <!-- End Sidebar navigation -->
+    </div>
+    <!-- End Sidebar scroll-->
+</aside>
+<!-- ============================================================== -->
+<!-- End Left Sidebar - style you can find in sidebar.scss  -->
+<!-- ============================================================== -->
+
+<div class=" page-wrapper ">
+
+    <div class="row ">
+        <div class="col-md-6 ">
+            <app-dona title="Ventas "></app-dona>
+        </div>
+
+        <div class="col-md-6 ">
+            <app-dona [labels]="labels1 " [data]="data1 " title="Compras ">
+            </app-dona>
+        </div>
+
     </div>
 
-  </div>
+    <div class="row ">
+        <div class="col-md-6 ">
+            <app-dona title="Cambios "></app-dona>
+        </div>
 
-  <div class="row">
-    <!-- <div class="col-6">
-      <app-dona title="Cambios"></app-dona>
+        <div class="col-6 ">
+            <app-dona title="Compras2 "></app-dona>
+        </div>
+
     </div>
 
-    <div class="col-6">
-      <app-dona title="Compras2"></app-dona>
-    </div> -->
-
-  </div>
-
-</section>
+</div>

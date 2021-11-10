@@ -1,4 +1,4 @@
-export class respuestaByIdCuestionario {
+export class  respuestaByIdCuestionario {
 
 
   constructor(

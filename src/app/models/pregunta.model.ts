@@ -1,6 +1,7 @@
 import { Respuesta } from './respuesta.model';
 
 export class Pregunta {
+  _id?: number;
   descripcion: string;
   puntajePregunta: number;
   listRespuesta: Respuesta[];

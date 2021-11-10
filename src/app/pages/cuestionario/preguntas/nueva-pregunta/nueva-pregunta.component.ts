@@ -167,11 +167,6 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
   resetFormulario() {
     this.opcionRespuestas.reset();
     this.getRespuestasUnicas.clear();
-    this.puntosRespuesta = 0;
-  }
-
-  agregarPuntos() {
-    this.puntosRespuesta++
   }
 
   actualizar() {

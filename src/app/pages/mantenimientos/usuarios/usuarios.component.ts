@@ -24,6 +24,7 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   public usuariosTemp: Usuario[] = [];
 
   public imgSubs: Subscription;
+
   /**Creamos una variable para saber cuale es la pagina actual */
   public desde: number = 0;
 
