@@ -1,6 +1,6 @@
 import { VerCuestionarioComponent } from './../../ver-cuestionario/ver-cuestionario.component';
 import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
-import { FormBuilder, Validators, FormArray, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
@@ -19,6 +19,9 @@ import { Respuesta } from '../../../../models/respuesta.model';
 
 export class NuevaPreguntaComponent implements OnInit {
 
+  public tituloCuestionario = new FormControl();
+  public descripcionCuestionario = new FormControl();
+  public puntajeCuestionario= new FormControl();
   public cuestionario?: Cuestionario;
   esMultiple: boolean = false;
   public posicion: number;
@@ -57,6 +60,9 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     this.cuestionario=data["cuestionario"];
     this.pos = data["pos"]
     
+    this.tituloCuestionario.setValue(this.cuestionario.nombre);
+    this.descripcionCuestionario.setValue(this.cuestionario.descripcion);
+    this.puntajeCuestionario.setValue(this.cuestionario.puntajeCuestionario);
     //this.opcionRespuestas.get("respuestaOtros").setValue(this.)
 
    }
@@ -183,6 +189,11 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     console.log(this.cuestionario);
     console.log("xdxdxd");
     
+    this.cuestionario.nombre = this.tituloCuestionario.value;
+    this.cuestionario.descripcion = this.descripcionCuestionario.value;
+    this.cuestionario.puntajeCuestionario = this.puntajeCuestionario.value;
+    
+
     this.cuestionarioService.actualizarCuestionario(this.cuestionario).subscribe(res => {
       console.log(res);
       this.dialogRef.close();

@@ -14,6 +14,7 @@ import { ComponentsModule } from './components/components.module';
 import { VerpostComponent } from './post/verpost/verpost.component';
 import { ClipboardModule} from 'ngx-clipboard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -35,6 +36,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     TestModule,
     ClipboardModule,
     BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule,
 
   ],
   providers: [],

@@ -11,9 +11,9 @@
 
                 <li class="nav-small-cap">DATOS</li>
                 <div *ngFor="let cuestionario of listCuestionarios">
-
                     <li>
-                        <a (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a></li>
+                        <a (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a>
+                    </li>
                 </div>
             </ul>
         </nav>
@@ -27,27 +27,22 @@
 
 <div class=" page-wrapper ">
 
-    <div class="row ">
-        <div class="col-md-6 ">
-            <app-dona title="Ventas "></app-dona>
-        </div>
+    <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" />
+    <datalist id="pre">
+        <option *ngFor="let p of texto" [value]="p">{{p}}</option>
+    </datalist>
 
-        <div class="col-md-6 ">
-            <app-dona [labels]="labels1 " [data]="data1 " title="Compras ">
-            </app-dona>
-        </div>
+    <select id="cursos" [formControl]="tipo">
+        <option value="0">Seleccione una gráfica</option>
+        <option value="line">line</option>
+        <option value="bar">bar</option>
+        <option value="polarArea">Polar Area</option>
+        <option value="pie">Pie</option>
+    </select>
 
-    </div>
+    <canvas #grafico style="height: 20vh; width: 40vw;">
 
-    <div class="row ">
-        <div class="col-md-6 ">
-            <app-dona title="Cambios "></app-dona>
-        </div>
+    </canvas>
 
-        <div class="col-6 ">
-            <app-dona title="Compras2 "></app-dona>
-        </div>
-
-    </div>
 
 </div>

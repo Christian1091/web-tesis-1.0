@@ -1,5 +1,22 @@
 <!-- Inicio del form pregunta unica -->
 <form [formGroup]="opcionRespuestas">
+
+    <h3 class="card-title">Actualizar Cuestionario</h3>
+
+    <input type="text" class="form-control" placeholder="Ingrese el titulo del Cuestionario" [formControl]="tituloCuestionario">
+
+    <div class="form-group">
+        <br/>
+        <textarea class="formControl" placeholder="Ingrese la descripcion del cuestionario"  cols="100" rows="3" [formControl]="descripcionCuestionario"></textarea>
+    </div>
+
+    <div class="row">
+        <div calss="col-nd-2">
+            <input type="text" class="form-control text-center" placeholder="Puntaje" [formControl]="puntajeCuestionario">
+        </div>
+
+    </div>
+
     <div class="row">
         <div class="col-md-8">
             <div class="input-group">
