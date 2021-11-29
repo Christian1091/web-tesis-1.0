@@ -60,11 +60,14 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     this.cuestionario=data["cuestionario"];
     this.pos = data["pos"]
     
-    this.tituloCuestionario.setValue(this.cuestionario.nombre);
-    this.descripcionCuestionario.setValue(this.cuestionario.descripcion);
-    this.puntajeCuestionario.setValue(this.cuestionario.puntajeCuestionario);
+   
     //this.opcionRespuestas.get("respuestaOtros").setValue(this.)
-
+    if (this.cuestionario != null || this.cuestionario != undefined) {
+      this.tituloCuestionario.setValue(this.cuestionario.nombre ?? '');
+      this.descripcionCuestionario.setValue(this.cuestionario.descripcion ?? '');
+      this.puntajeCuestionario.setValue(this.cuestionario.puntajeCuestionario ?? 0);   
+      
+    }
    }
 
   cargarCuestionario() {
