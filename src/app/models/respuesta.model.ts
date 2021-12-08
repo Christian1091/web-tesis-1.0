@@ -3,14 +3,13 @@ export class Respuesta {
   descripcion: string;
   puntosRespuesta: number;
   texto: boolean;
-  
-  //tipoRespuesta: any;
+  tipoRespuesta: boolean;
 
-  constructor( descripcion: string, puntosRespuesta:number, texto: boolean ){
+  constructor( descripcion: string, puntosRespuesta:number, texto: boolean, tipoRespuesta: boolean){
     //this.id = id;
     this.descripcion = descripcion;
     this.puntosRespuesta = puntosRespuesta;
     this.texto = texto;
-    //this.tipoRespuesta = tipoRespuesta;
+    this.tipoRespuesta = tipoRespuesta;
   }
 }

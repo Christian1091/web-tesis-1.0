@@ -39,6 +39,13 @@ export class PostService {
       return this.post._id || '';
   }
 
+  //servicio para cargar el archivo
+  uploadPdf(pdf:File):Observable<any> {
+    const data = new FormData();
+    data.append('imagen',pdf);
+    return this.http.post(`${base_url}/post/upload`, data, this.headers);
+  }
+
   // Este get es para visualizar todos los post creados por todos los usuarios
   getListPost() {
     const url =  `${ base_url }/post/listPosts`;

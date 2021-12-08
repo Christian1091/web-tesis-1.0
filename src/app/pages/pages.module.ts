@@ -31,6 +31,8 @@ import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
 import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuestionario/actualizar-cuestionario.component';
+import { VerPostComponent } from './dashboard/ver-post/ver-post.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuest
     EnviadosComponent,
     NuevopostComponent,
     EstadisticasComponent,
-    ActualizarCuestionarioComponent
+    ActualizarCuestionarioComponent,
+    VerPostComponent
   ],
   exports: [
     DashboardComponent,
@@ -72,7 +75,8 @@ import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuest
     RouterModule,
     ComponentsModule,
     ClipboardModule,
-    MatDialogModule
+    MatDialogModule,
+    PdfViewerModule
 
   ],
   providers: [{

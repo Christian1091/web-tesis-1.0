@@ -8,6 +8,7 @@ export class Post {
     public texto: string,
     //public img?: string,
     public uid?: string,
+    public nombrePdf?: string
 
 ) {  }
 }

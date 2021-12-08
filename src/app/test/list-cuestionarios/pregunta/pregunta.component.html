@@ -5,20 +5,29 @@
             <div>
                 <h4 class="card-title"> {{ obtenerPregunta() }} </h4>
 
-                <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta; let i = index;" (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)">
+                <!-- <ul class="list-group"> -->
+                    <div class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta; let i = index;" (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)">
                         <div *ngIf="respuesta.texto">
                             
                             <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i)" placeholder="Su respuesta..."/>
                         </div>
+                        <div *ngIf="respuesta.tipoRespuesta">
+                            <input type="checkbox" [value]="respuesta.descripcion" name="checkbox" />
+                          
+                        </div>
+                        <div *ngIf="!respuesta.tipoRespuesta">
+                            <input type="radio" [value]="respuesta.descripcion" name="radio" />
+                          
+                        </div>
                         <div *ngIf="!respuesta.texto">
                             {{ respuesta.descripcion }}
+                           
                         </div>
-                    </li>
-                </ul>
+                    </div>
+                <!-- </ul> -->
                 <div class="mt-auto">
                     <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada" (click)="siguiente(contador)">
-            Siguientes
+            Siguiente
           </button>
                 </div>
             </div>

@@ -25,6 +25,7 @@ export class NuevaPreguntaComponent implements OnInit {
   public cuestionario?: Cuestionario;
   esMultiple: boolean = false;
   public posicion: number;
+  public bandera = false;
 
   /**variable pregunta donde almacena la pregunta con las respuestas */
   pregunta: Pregunta;
@@ -79,9 +80,11 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     if (this.cuestionario == null || this.cuestionario == undefined) {
       this.agregarRespuestasPorDefecto();
       this.tittle = "Agregar Pregunta";
+      this.bandera= true;
     } else {
 
       this.tittle = "Actualizar";
+      this.bandera = false;
       this.opcionRespuestas.get("titulo").setValue(this.cuestionario.listPreguntas[this.pos].descripcion);
       this.opcionRespuestas.get("puntaje").setValue(this.cuestionario.listPreguntas[this.pos].puntajePregunta);
       //this.opcionRespuestas.get("respuestas").setValue(this.cuestionario.listPreguntas[this.pos].listRespuesta);
@@ -120,7 +123,8 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     this.getRespuestasMultiples.push(this.fb.group({
       descripcion: ['', Validators.required],
       puntosRespuesta: ['', Validators.required],
-      texto: [texto]
+      texto: [texto],
+      esMultiple: [this.esMultiple]
     }));
   }
 
@@ -156,7 +160,8 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     arrayRespuestas.forEach((element, index) => {
       /**Por cada respuesta creamo un objeto de tipo respuesta en donde setiamos
        * la respuesta element.descripcion*/
-      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta, element.texto);
+      element.esMultiple;
+      const respuesta: Respuesta = new Respuesta(element.descripcion, element.puntosRespuesta, element.texto, element.tipoRespuesta);
       /**Para verificar si al respuesta es correcta */
       /*if( index === element.esCorrecta ) {
         respuesta.esCorrecta = true;

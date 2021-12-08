@@ -8,6 +8,8 @@ import { PostService } from 'src/app/services/post.service';
 import Swal from 'sweetalert2';
 import { Post } from 'src/app/models/post.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { VerPostComponent } from './ver-post/ver-post.component';
 
 
 @Component({
@@ -43,6 +45,7 @@ export class DashboardComponent implements OnInit{
                private postService: PostService,
                private fileUploadService: FileUploadService,
                private router: Router,
+               private dialog: MatDialog,
                private activatedRoute: ActivatedRoute) {
 
     this.usuario = usuarioService.usuario;
@@ -66,23 +69,14 @@ export class DashboardComponent implements OnInit{
   }
 
   verContenidoPost(post: Post) {
-    console.log('ID POST ' + post._id);
-    this.postService.getVerContenidoPost( post._id )
-                            .subscribe ( data => {
-                                //console.log(data);
-                                this.cont_post = data;
-                                Swal.fire({
-                                  //icon: 'error',
-                                  title: `${ post.titulo }`,
-                                  text: `${ post.texto }`,
-
-                                })
-                                //console.log(Object.values(data));
-                                //this.cuestionario = Object.values(data);
-                              }, error => {
-                                console.log(error);
-                              }
-                            )
+    const dialog = this.dialog.open(VerPostComponent,{
+      width:'100%',
+      height:'95%',
+      data:post,
+      panelClass: 'my-dialog',
+      disableClose:false
+    });
+ 
 
   }
 
@@ -101,7 +95,7 @@ export class DashboardComponent implements OnInit{
               /**Para refrescar la tabla despues de haber eliminado el usuario */
               this.cargarListPostByIdUser();
               Swal.fire(
-              'Cuestionario borrado',
+              'Post eliminado',
               `${ post.titulo } Fue eliminado exitosamente!`,
               'success');
             });
