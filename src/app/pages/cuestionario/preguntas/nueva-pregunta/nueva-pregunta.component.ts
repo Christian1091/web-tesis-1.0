@@ -126,14 +126,35 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       texto: [texto],
       esMultiple: [this.esMultiple]
     }));
+    let size = this.getRespuestasMultiples.length;
+    let p = (size==0)? 1: (1/size);
+    for (let i = 0; i < this.getRespuestasMultiples.length; i++){
+      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+    }
   }
 
   eliminarRespuestaMultiples(index: number) {
     this.getRespuestasMultiples.removeAt(index);
+    console.log(this.getRespuestasMultiples.length);
+
+    let size = this.getRespuestasMultiples.length;
+    let p = (size==0)? 1: (1/size);
+    for (let i = 0; i < this.getRespuestasMultiples.length; i++){
+      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+    }
+    
   }
 
   eliminarRespuestasUnicas(index: number) {
     this.getRespuestasUnicas.removeAt(index);
+    let size = this.getRespuestasMultiples.length;
+    let p = (size==0)? 1: (1/size);
+    for (let i = 0; i < this.getRespuestasMultiples.length; i++){
+      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+    }
   }
 
   agregarPregunta() {
