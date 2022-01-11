@@ -759,9 +759,9 @@ Main sidebar
   top: 0px;
   z-index: 20;
   padding-top: 70px;
-  background: #fff;
+  background: rgb(6, 15, 63);
   -webkit-box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08);
-  box-shadow: 1px 0px 20px rgba(0, 0, 0, 0.08); }
+  box-shadow: 1px 0px 20px rgba(255, 0, 0, 0.08); }
 
 .fix-sidebar .left-sidebar {
   position: fixed; }
@@ -786,22 +786,22 @@ sidebar navigation
     left: 2px;
     right: auto;
     background: none;
-    width: 6px;
+    width: 60px;
     /* If using `left`, there shouldn't be a `right`. */ }
 
 .collapse.in {
   display: block; }
 
 .sidebar-nav {
-  background: #fff;
+  background:rgb(6, 15, 63);
   padding: 15px 0 0 0px; }
   .sidebar-nav ul {
     margin: 0px;
-    padding: 0px; }
+    padding: 10px; }
     .sidebar-nav ul li {
       list-style: none; }
       .sidebar-nav ul li a {
-        color: #687384;
+        color: #053e94;
         padding: 8px 35px 8px 15px;
         display: block;
         font-size: 14px;
@@ -920,7 +920,7 @@ When click on sidebar toggler and also for tablet
   .mini-sidebar .sidebar-nav #sidebarnav > li > a.has-arrow:after {
     display: none; }
   .mini-sidebar .left-sidebar {
-    width: 70px; }
+    width: 150px; }
   .mini-sidebar .sidebar-nav #sidebarnav .user-profile > a {
     padding: 12px 20px; }
   .mini-sidebar .scroll-sidebar {
@@ -935,7 +935,7 @@ When click on sidebar toggler and also for tablet
   .mini-sidebar .nav-devider {
     width: 70px; }
   .mini-sidebar .sidebar-nav {
-    background: transparent; }
+    /* background: transparent; } */
   .mini-sidebar .sidebar-nav #sidebarnav > li > a {
     padding: 12px 24px;
     width: 70px; }
@@ -995,7 +995,7 @@ File: scss
     display: none; }
 
 .page-wrapper {
-  background: #f4f6f9;
+  background: #e5edf8;
   padding-bottom: 60px;
   position: relative; }
 
@@ -2771,11 +2771,11 @@ This is for the checkbox radio button and switch
 ******************/
 /* Radio Buttons
    ========================================================================== */
-[type="radio"]:not(:checked),
+/* [type="radio"]:not(:checked),
 [type="radio"]:checked {
   position: absolute;
   left: -9999px;
-  opacity: 0; }
+  opacity: 0; } */
 
 [type="radio"]:not(:checked) + label,
 [type="radio"]:checked + label {

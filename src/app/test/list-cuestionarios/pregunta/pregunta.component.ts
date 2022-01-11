@@ -23,10 +23,11 @@ export class PreguntaComponent implements OnInit {
   cuestionario!: Cuestionario;
 
   idCuestionario: string;
-  listPreguntas: Pregunta [] = [];
-  listRespuesta: Respuesta [] = [];
+  listPreguntas: Pregunta[] = [];
+  listRespuesta: Respuesta[] = [];
   rtaConfirmada = false;
   indexPregunta = 0;
+  cargoPregunta = false;
 
   //Agrego un contador: Para tener el index de pregunta
   contador = 0;
@@ -37,20 +38,22 @@ export class PreguntaComponent implements OnInit {
   //indexPuntosSeleccionado: any;
   puntosTotales = 0;
   //puntosPregunta = 0;
-  listRespuestaUsuario: any [] = [];
+  listRespuestaUsuario: any[] = [];
   nombreParticipante = '';
   correoParticipante = '';
   institucionParticipante = '';
   provinciaParticipante = '';
   ciudadParticipante = '';
   opcionOtros: boolean[] = [];
+  indices: number[] = [];
 
-  constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
-               private cuestionarioService: CuestionarioService,
-               private activatedRoute: ActivatedRoute,
-               private router: Router ) {
-                this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-                }
+  constructor(private respuestaCuestionarioService: RespuestaCuestionarioService,
+    private cuestionarioService: CuestionarioService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    this.getCuestionario();
+  }
 
   ngOnInit(): void {
 
@@ -60,29 +63,29 @@ export class PreguntaComponent implements OnInit {
     this.institucionParticipante = this.respuestaCuestionarioService.institucionParticipante;
     this.provinciaParticipante = this.respuestaCuestionarioService.provinciaParticipante;
     this.ciudadParticipante = this.respuestaCuestionarioService.ciudadParticipante;
-   
+
     // this.idCuestionario = this.respuestaCuestionarioService.idCuestionario;
     // if (this.idCuestionario == null ){
     //   this.router.navigateByUrl('/');
     //   return;
     // }
 
-    this.getCuestionario();
+
 
     //console.log(this.respuestaCuestionarioService.idCuestionario);
   }
 
   getCuestionario() {
-    this.cuestionarioService.getVerCuestionario(this.idCuestionario)
-                            .subscribe( res  => {
-                              //console.log(res.cuestionarios[0].listPreguntas);
-                              this.listPreguntas = res.cuestionarios[0].listPreguntas;
-                              //this.listRespuesta = this.listPreguntas[1].listRespuesta;
-                              this.listPreguntas.forEach( p => {
-                                this.opcionOtros.push(p.otraRespuesta);
-                              })
-                              
-                            });
+    this.cuestionarioService.getVerCuestionario(this.id)
+      .subscribe(res => {
+        //console.log(res.cuestionarios[0].listPreguntas);
+        this.listPreguntas = res.cuestionarios[0].listPreguntas;
+        //this.listRespuesta = this.listPreguntas[1].listRespuesta;
+        this.listPreguntas.forEach(p => {
+          this.opcionOtros.push(p.otraRespuesta);
+        })
+        this.cargoPregunta = true;
+      });
   }
 
   obtenerPregunta(): string {
@@ -97,20 +100,20 @@ export class PreguntaComponent implements OnInit {
     return this.indexPregunta;
   }
 
-  respuestaSeleccionada( respuesta: Respuesta, index: number ) {
+  respuestaSeleccionada(respuesta: Respuesta, index: number) {
     //console.log('************');
     //console.log(respuesta);
     if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
-       respuesta.descripcion = this.respuestaTexto.value;
-      }
-      this.opcionSeleccionada = respuesta;
-      this.rtaConfirmada = true;
-      
-      this.indexSeleccionado = index;
+      respuesta.descripcion = this.respuestaTexto.value;
+    }
+    this.opcionSeleccionada = respuesta;
+    this.rtaConfirmada = true;
+    this.indexSeleccionado = index;
+    this.indices.push(index)
   }
 
-  AddClassOption( respuesta: any ): string {
-    if ( respuesta === this.opcionSeleccionada ) {
+  AddClassOption(respuesta: any): string {
+    if (respuesta === this.opcionSeleccionada) {
       return 'active text-light';
     }
   }
@@ -118,8 +121,8 @@ export class PreguntaComponent implements OnInit {
   siguiente(i) {
     this.agregarRespuesta(i);
     this.contador = this.contador + 1;
-    this.respuestaTexto.setValue(''); 
-    
+    this.respuestaTexto.setValue('');
+
   }
 
   agregarRespuesta(i) {
@@ -136,7 +139,7 @@ export class PreguntaComponent implements OnInit {
       idPregunta: this.listPreguntas[this.indexPregunta]._id,
       tituloPregunta: this.listPreguntas[this.indexPregunta].descripcion,
       puntajePregunta: this.listPreguntas[this.indexPregunta].puntajePregunta,
-      indexRespuestaSeleccionada: indexAux,
+      indexRespuestaSeleccionada: this.indices,
       puntosObtenidos: this.listPreguntas[i].listRespuesta[indexAux].puntosRespuesta,
       //puntos: this.obtenemosPuntosPregunta(),
       // Hacemos una copia del listado respuestas
@@ -148,29 +151,28 @@ export class PreguntaComponent implements OnInit {
 
     //console.log(respuestaUsuario)
     this.listRespuestaUsuario.push(respuestaUsuario);
-
     this.opcionSeleccionada = undefined;
     this.indexSeleccionado = undefined;
-
     // const respuestaUsuario: any = {
     //   titulo: this.listPreguntas[this.indexPregunta].descripcion
     // }
     this.rtaConfirmada = false;
-    this.indexPregunta ++;
+    this.indexPregunta++;
 
-    if ( this.indexPregunta === this.listPreguntas.length ) {
+    if (this.indexPregunta === this.listPreguntas.length) {
       // Guardamos las respuestas en mongo
       // Creamos un nuevo objeto para almacenar en la BD
       this.guardamosRespuestaCuestionario();
       // Redireccionamos al proximo componente
       //console.log(this.listRespuestaUsuario);
 
-   }
-
+    }
+    console.log(this.indices);
+    this.indices = [];
   }
 
   obtenemosIndexSeleccionado(): any {
-    if( this.opcionSeleccionada === undefined ) {
+    if (this.opcionSeleccionada === undefined) {
       return '';
     } else {
       return this.indexSeleccionado;
@@ -204,10 +206,10 @@ export class PreguntaComponent implements OnInit {
     }
     //console.log(respuestaCuestionario);
     // Almacenamos la respuesta en mongoDB
-    this.respuestaCuestionarioService.guardarRespuestaUsuario( respuestaCuestionario ).subscribe( res => {
+    this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
       console.log(res);
       //console.log(res.respuestaCuestionario._id);
-      this.router.navigateByUrl(`/respuestaCuestionario/${ res.respuestaCuestionario._id }`);
+      this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
     }, err => {
       //Swal.fire('Error', err.error.msg, 'error');
       console.log(err);

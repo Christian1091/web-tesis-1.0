@@ -26,15 +26,19 @@
                 <!-- </ul> -->
 
 
-                <!-- <ul class="list-group" *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
-                    <div *ngIf="true">
-                        <li>
-                            <input type="checkbox" [value]="respuesta.descripcion" name="checkbox" [name]="listPreguntas[getIndex()].descripcion"  (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)"/>{{respuesta.descripcion}}<br>
+                <div *ngIf="cargoPregunta">
+                    <ul class="list-group" *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
+                        <li *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
+                            <input type="checkbox" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion"  (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)"/> check {{respuesta.descripcion}}<br>
                         </li>
-                        
-                    </div>
-                </ul> -->
-
+                        <li *ngIf="!respuesta.tipoRespuesta && !respuesta.texto">
+                            <input type="radio" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion"  (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)"/> check {{respuesta.descripcion}}<br>
+                        </li>
+                        <li *ngIf="respuesta.texto">
+                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i)" placeholder="Su respuesta..."/>
+                        </li>
+                    </ul>
+                </div>
 
                 <div class="mt-auto">
                     <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada" (click)="siguiente(contador)">

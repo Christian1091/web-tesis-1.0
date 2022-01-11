@@ -124,7 +124,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       descripcion: ['', Validators.required],
       puntosRespuesta: ['', Validators.required],
       texto: [texto],
-      esMultiple: [this.esMultiple]
+      tipoRespuesta: [this.esMultiple]
     }));
     let size = this.getRespuestasMultiples.length;
     let p = (size==0)? 1: (1/size);

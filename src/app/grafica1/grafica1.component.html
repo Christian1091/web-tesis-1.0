@@ -9,10 +9,10 @@
         <nav class="sidebar-nav">
             <ul id="sidebarnav">
 
-                <li class="nav-small-cap">DATOS</li>
-                <div *ngFor="let cuestionario of listCuestionarios">
+                <li class="navPrincipal">CUESTIONARIOS</li>
+                <div *ngFor="let cuestionario of listCuestionarios" class="navBar">
                     <li>
-                        <a (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a>
+                        <a id="listaCuestionarios" (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a>
                     </li>
                 </div>
             </ul>
@@ -39,12 +39,9 @@
         <option value="polarArea">Polar Area</option>
         <option value="pie">Pie</option>
     </select>
-
-    <canvas #grafico style="height: 20vh; width: 40vw;">
-
-    </canvas>
-
     <button class="btn btn-primary" (click)="calcularNivelMadurez()" *ngIf="isActive">Calcular nivel de madurez</button>
+    <button class="btn bttn-secundary" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0 ">Calcular Promedio</button>
     <span>{{madurez}}</span>
+    <canvas #grafico style="height: 20vh; width: 40vw;"></canvas>
 
 </div>

@@ -1,0 +1,16 @@
+.navPrincipal{
+    border: 60mm;
+    background-color: brown;
+}
+
+.navPrincipal:hover{
+    color:maroon
+}
+
+.nav-small-cap{
+    position: relative;
+
+}
+.navPrincipal.a:hover {
+    color: hotpink;
+  }

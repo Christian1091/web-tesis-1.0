@@ -25,3 +25,7 @@
   text-transform: uppercase;
 }
 
+ul li {
+  list-style: none;
+}
+

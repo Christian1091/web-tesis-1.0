@@ -13,6 +13,7 @@ import { ChartType } from 'chart.js'
   selector: 'app-grafica1',
   templateUrl: './grafica1.component.html',
   styles: [
+    './grafica1.component.css',
   ]
 })
 export class Grafica1Component {
@@ -43,6 +44,7 @@ export class Grafica1Component {
   public firts = true;
   public tipo = new FormControl();
   public madurez: string = "";
+  public promedioMadurez = 0;
 
   constructor(private cuestioanrioService: CuestionarioService,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
@@ -104,6 +106,25 @@ export class Grafica1Component {
         console.log(this.listCuestionarios);
       })
   }
+  obtenerPromedio() {
+    this.promedioMadurez = 0; 
+    this.listCuestionarios.forEach(cuestionario => {
+      this.respuestaCuestionarioService.getRespuestaByIdCuestionario(cuestionario._id).toPromise().then(response => {
+        this.datosCuestionario = response as DatosCuestionario[];
+        this.calcularNivelMadurez();
+        console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
+        this.madurez = "";
+      }); 
+    });
+  }
+
+  obtenerCuestionario(id) { 
+    this.respuestaCuestionarioService.getRespuestaByIdCuestionario(id).toPromise().then(response =>{
+      this.datosCuestionario = [];
+      this.datosCuestionario = response as DatosCuestionario[];
+    });
+  }
+
 
   getListCuestionarioById(idC: string, i) {
     this.pos = i;
@@ -176,6 +197,7 @@ export class Grafica1Component {
     });
     console.log(zz);
     this.madurez = zz+"";
+    this.promedioMadurez += zz; 
   }
   onlyUnique(value, index, self){
     return self.indexOf(value) === index; 
