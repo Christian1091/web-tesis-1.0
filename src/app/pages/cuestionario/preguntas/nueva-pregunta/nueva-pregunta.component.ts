@@ -7,6 +7,7 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
 
 import { Pregunta } from '../../../../models/pregunta.model';
 import { Respuesta } from '../../../../models/respuesta.model';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-nueva-pregunta',
@@ -78,7 +79,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
   ngOnInit(): void {
     this.cargarFormulario();
     if (this.cuestionario == null || this.cuestionario == undefined) {
-      this.agregarRespuestasPorDefecto();
+      //this.agregarRespuestasPorDefecto();
       this.tittle = "Agregar Pregunta";
       this.bandera= true;
     } else {
@@ -126,10 +127,12 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       texto: [texto],
       tipoRespuesta: [this.esMultiple]
     }));
+   // this.getRespuestasMultiples.get("respuestas").get("tipoRespuesta").setValue(this.esMultiple);
     let size = this.getRespuestasMultiples.length;
     let p = (size==0)? 1: (1/size);
     for (let i = 0; i < this.getRespuestasMultiples.length; i++){
       this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
       console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
     }
   }

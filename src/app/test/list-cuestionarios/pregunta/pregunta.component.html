@@ -29,13 +29,13 @@
                 <div *ngIf="cargoPregunta">
                     <ul class="list-group" *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
                         <li *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
-                            <input type="checkbox" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion"  (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)"/> check {{respuesta.descripcion}}<br>
+                            <input type="checkbox" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)"  (click)="respuestaSeleccionada(respuesta, i, true)" [ngClass]="AddClassOption(respuesta)"/> {{respuesta.descripcion}}<br>
                         </li>
                         <li *ngIf="!respuesta.tipoRespuesta && !respuesta.texto">
-                            <input type="radio" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion"  (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)"/> check {{respuesta.descripcion}}<br>
+                            <input type="radio" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)" (click)="respuestaSeleccionada(respuesta, i, false)" [ngClass]="AddClassOption(respuesta)"/> {{respuesta.descripcion}}<br>
                         </li>
                         <li *ngIf="respuesta.texto">
-                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i)" placeholder="Su respuesta..."/>
+                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta..."/>
                         </li>
                     </ul>
                 </div>

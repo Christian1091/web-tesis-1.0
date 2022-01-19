@@ -78,7 +78,7 @@ export class Grafica1Component {
 
     this.preguntas.forEach((pre, index) => {
       if (pre.tituloPregunta === this.pregunta) {
-        let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion;
+        let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion?? "";
         this.preguntas[index].listRespuesta.forEach(p => {
           const existe = this.labels.indexOf(p.descripcion);
           if (existe == -1) {

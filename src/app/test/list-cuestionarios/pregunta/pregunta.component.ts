@@ -100,16 +100,47 @@ export class PreguntaComponent implements OnInit {
     return this.indexPregunta;
   }
 
-  respuestaSeleccionada(respuesta: Respuesta, index: number) {
+  respuestaSeleccionada(respuesta: Respuesta, index: number, esMultiple: boolean) {
     //console.log('************');
     //console.log(respuesta);
-    if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
-      respuesta.descripcion = this.respuestaTexto.value;
-    }
     this.opcionSeleccionada = respuesta;
     this.rtaConfirmada = true;
     this.indexSeleccionado = index;
-    this.indices.push(index)
+    console.log(index);
+    if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
+      respuesta.descripcion = this.respuestaTexto.value;
+
+    }
+    if ( esMultiple){
+      let existe=false;
+      if(this.indices.length == 0){
+        this.indices.push(index)
+        existe = true;
+        console.log("primera vez")
+      }else{
+        this.indices.map((value,i)=>{
+          
+          if (value == index){
+           console.log("ya existe")
+           existe = true;
+          this.indices.splice(i,1);
+          }
+          
+        })
+      }
+      if (!existe){
+        this.indices.push(index)
+      }
+    }
+    else{
+      this.indices=[]
+      this.indices.push(index);
+    }
+    console.log(this.indices);
+  }
+
+  respSelect (value,index){
+console.log(value,index);
   }
 
   AddClassOption(respuesta: any): string {

@@ -17,6 +17,8 @@
                 </div>
             </ul>
         </nav>
+        <button class="btn bttn-secundary" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0 ">Calcular Promedio</button>
+    <span>{{madurez}}</span>
         <!-- End Sidebar navigation -->
     </div>
     <!-- End Sidebar scroll-->
@@ -27,6 +29,7 @@
 
 <div class=" page-wrapper ">
 
+    <canvas #grafico style="height: 20vh; width: 40vw;"></canvas>
     <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" />
     <datalist id="pre">
         <option *ngFor="let p of texto" [value]="p">{{p}}</option>
@@ -40,8 +43,6 @@
         <option value="pie">Pie</option>
     </select>
     <button class="btn btn-primary" (click)="calcularNivelMadurez()" *ngIf="isActive">Calcular nivel de madurez</button>
-    <button class="btn bttn-secundary" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0 ">Calcular Promedio</button>
-    <span>{{madurez}}</span>
-    <canvas #grafico style="height: 20vh; width: 40vw;"></canvas>
+   
 
 </div>
