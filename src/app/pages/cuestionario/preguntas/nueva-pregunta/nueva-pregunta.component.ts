@@ -27,6 +27,7 @@ export class NuevaPreguntaComponent implements OnInit {
   esMultiple: boolean = false;
   public posicion: number;
   public bandera = false;
+  public anterior: boolean = false; 
 
   /**variable pregunta donde almacena la pregunta con las respuestas */
   pregunta: Pregunta;
@@ -91,10 +92,13 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
       //this.opcionRespuestas.get("respuestas").setValue(this.cuestionario.listPreguntas[this.pos].listRespuesta);
   
       this.cuestionario.listPreguntas[this.pos].listRespuesta.forEach(r => {
+        //const valor = Math.round((r.puntosRespuesta+Number.EPSILON)*100)/100
+        //console.log("mi valor ", valor)
         this.getRespuestasMultiples.push(this.fb.group({
           descripcion: [r.descripcion, Validators.required],
-          puntosRespuesta: [r.puntosRespuesta, Validators.required],
-          texto: [r.texto]
+          puntosRespuesta: [r.puntosRespuesta.toFixed(2), Validators.required],
+          texto: [r.texto],
+          tipoRespuesta: [r.tipoRespuesta]
         }));
       })
       this.habilitar = this.cuestionario.listPreguntas[this.pos].otraRespuesta;
@@ -121,6 +125,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
 
   agregarRespuesta(opcion: boolean, texto: boolean) {
     this.esMultiple = opcion;
+     
     this.getRespuestasMultiples.push(this.fb.group({
       descripcion: ['', Validators.required],
       puntosRespuesta: ['', Validators.required],
@@ -130,11 +135,26 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
    // this.getRespuestasMultiples.get("respuestas").get("tipoRespuesta").setValue(this.esMultiple);
     let size = this.getRespuestasMultiples.length;
     let p = (size==0)? 1: (1/size);
-    for (let i = 0; i < this.getRespuestasMultiples.length; i++){
-      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
-      this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
-      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+
+    if(texto){
+      for (let i = 0; i < this.getRespuestasMultiples.length; i++){
+        this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
+      if(this.anterior == opcion){
+        this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
+      }else{
+        this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(!this.esMultiple)
+      }
+        console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+      }
     }
+    else{
+      for (let i = 0; i < this.getRespuestasMultiples.length; i++){
+        this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))     
+        this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)  
+        console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
+      }
+    }
+    
   }
 
   eliminarRespuestaMultiples(index: number) {
@@ -144,7 +164,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     let size = this.getRespuestasMultiples.length;
     let p = (size==0)? 1: (1/size);
     for (let i = 0; i < this.getRespuestasMultiples.length; i++){
-      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
       console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
     }
     
@@ -155,7 +175,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     let size = this.getRespuestasMultiples.length;
     let p = (size==0)? 1: (1/size);
     for (let i = 0; i < this.getRespuestasMultiples.length; i++){
-      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p)
+      this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
       console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
     }
   }
@@ -211,8 +231,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
     
     const descripcionPregunta = this.opcionRespuestas.get('titulo').value;
       const puntajePregunta = this.opcionRespuestas.get('puntaje').value;
-      const otraRespuesta = this.opcionRespuestas.get('respuestaOtros').value;
-      
+      const otraRespuesta = this.opcionRespuestas.get('respuestaOtros').value;   
       
       this.cuestionario.listPreguntas[this.pos].descripcion = descripcionPregunta;
       this.cuestionario.listPreguntas[this.pos].puntajePregunta = puntajePregunta;

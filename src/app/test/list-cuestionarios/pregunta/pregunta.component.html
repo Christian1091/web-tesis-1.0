@@ -35,7 +35,7 @@
                             <input type="radio" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)" (click)="respuestaSeleccionada(respuesta, i, false)" [ngClass]="AddClassOption(respuesta)"/> {{respuesta.descripcion}}<br>
                         </li>
                         <li *ngIf="respuesta.texto">
-                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta..."/>
+                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta"/>
                         </li>
                     </ul>
                 </div>

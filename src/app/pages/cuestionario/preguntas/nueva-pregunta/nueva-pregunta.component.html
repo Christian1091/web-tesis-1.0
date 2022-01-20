@@ -61,8 +61,11 @@
             <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
 
                 <div class="input-group-addon">
-                    <div class="input-group-text">
+                    <div *ngIf="!item.get('tipoRespuesta').value" class="input-group-text">
                         <input type="radio" [value]="i" name="radio" />
+                    </div>
+                    <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
+                        <input type="checkbox" [value]="i" name="check" />
                     </div>
                 </div>
                 <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}"
@@ -85,21 +88,25 @@
 
     <br>
     <br>
-    <div *ngIf="esMultiple" formArrayName="respuestas">
+    
+     <div *ngIf="esMultiple" formArrayName="respuestas">
 
         <div *ngFor="let item of getRespuestasMultiples.controls; let i = index">
             <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
 
                 <div class="input-group-addon">
-                    <div class="input-group-text">
-                        <input type="checkbox" [value]="i" />
+                    <div *ngIf="!item.get('tipoRespuesta').value" class="input-group-text">
+                        <input type="radio" [value]="i" name="radio" />
+                    </div>
+                    <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
+                        <input type="checkbox" [value]="i" name="check" />
                     </div>
                 </div>
                 <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}"
                     formControlName="descripcion" />
 
                 <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Pts."
-                    formControlName="puntosRespuesta" />
+                    formControlName="puntosRespuesta"  /> 
 
                 <span class="material-icons delete-icon" (click)="eliminarRespuestaMultiples(i)">
                     delete
@@ -110,7 +117,7 @@
                 La respuesta es requerida
             </span>
         </div>
-    </div>
+    </div> 
     <br>
     <br>
     <div class="row-md-2" id="brnAgr">

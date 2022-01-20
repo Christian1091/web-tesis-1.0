@@ -51,7 +51,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
           tituloPregunta: res["tituloPregunta"],
           listRespuesta: res["listRespuesta"] as [],
           indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],
-          puntosObtenidos: res["puntosObtenidos"],
+          puntosObtenidos: Math.round((res["puntosObtenidos"]+Number.EPSILON)*100)/100,
           puntajePregunta: res["puntajePregunta"]
         };
         this.rs.push(pre);
