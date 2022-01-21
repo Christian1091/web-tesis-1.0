@@ -2,6 +2,6 @@
 
 export const environment = {
   production: true,
-  base_url: 'https://159.223.174.18:3000/api'
+  base_url: 'https://tranformaciondigitalgih4pc.tech/api'
 
 };
