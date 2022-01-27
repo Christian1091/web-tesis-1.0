@@ -12,7 +12,7 @@ import { ChartType } from 'chart.js'
 @Component({
   selector: 'app-grafica1',
   templateUrl: './grafica1.component.html',
-  styles: [
+  styleUrls: [
     './grafica1.component.css',
   ]
 })
@@ -31,7 +31,7 @@ export class Grafica1Component {
   public id: string;
   public listCuestionarios: Cuestionario[] = [];
   public pregunta: string = "";
-  public pos:number = 0;
+  public pos: number = 0;
 
   @ViewChild('grafico') grafico?: ElementRef;
   public datosCuestionario: DatosCuestionario[] = [];
@@ -40,7 +40,7 @@ export class Grafica1Component {
   public texto: string[] = [];
   public labels = [];
   public data = [];
-  public colores: string[] = ['#FF0000', '#FF8000', '#FFFF00', '#80FF00', '#00FFFF', '#0080FF','#0000FF', '#BF00FF', '#FE2EC8', '#FF0080', '#FF0040', '#D8D8D8', '#F6CECE', '#610B0B', '#210B61', '#64FE2E', '#0080FF', '#3B0B24', '#8A0808','#8A4B08', '#5E610B', '#0B6121','#0B2161','#220A29', '#A9A9F5', '#81BEF7', '#2E64FE','#0B173B', '#848484', '#585858', '#585858', '#3B0B17', '#610B21', '#610B4B', '#0A0A2A'  ];
+  public colores: string[] = ['#FF0000', '#FF8000', '#FFFF00', '#80FF00', '#00FFFF', '#0080FF', '#0000FF', '#BF00FF', '#FE2EC8', '#FF0080', '#FF0040', '#D8D8D8', '#F6CECE', '#610B0B', '#210B61', '#64FE2E', '#0080FF', '#3B0B24', '#8A0808', '#8A4B08', '#5E610B', '#0B6121', '#0B2161', '#220A29', '#A9A9F5', '#81BEF7', '#2E64FE', '#0B173B', '#848484', '#585858', '#585858', '#3B0B17', '#610B21', '#610B4B', '#0A0A2A'];
   public firts = true;
   public tipo = new FormControl();
   public madurez: string = "";
@@ -66,6 +66,38 @@ export class Grafica1Component {
     });
   }
 
+  ngAfterViewInit(): void {
+    this.graficarInfo();
+  }
+
+  graficarInfo(tipo: ChartType = 'horizontalBar') {
+    const x = [0, 1, 2, 3, 5];
+    const y = ["TIC Excluido", "TIC Básico", "TIC Desarrollado", "TIC Avanzado", "Hiper TIC"];
+    this.chart = new Chart(this.grafico?.nativeElement, {
+      options: {
+        labels: x,
+        title: {
+          display: true,
+          text: "Niveles del modelo de madurez de Transformacion Digital",
+        },
+        tooltips: {
+          callbacks: {
+
+          }
+        },
+      },
+      type: tipo,
+      data: {
+        labels: y,
+        datasets: [{
+          backgroundColor: ['#2ecc71', '#3498db', '#95a5a6', '#9b59b6', '$f1c40f'],
+          data: x,
+          label: y,
+        }]
+      }
+    });
+  }
+
   mostrar() {
     if (this.chart != null || this.chart != undefined) {
       this.chart.destroy();
@@ -78,17 +110,31 @@ export class Grafica1Component {
 
     this.preguntas.forEach((pre, index) => {
       if (pre.tituloPregunta === this.pregunta) {
-        let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion?? "";
-        this.preguntas[index].listRespuesta.forEach(p => {
-          const existe = this.labels.indexOf(p.descripcion);
-          if (existe == -1) {
-            this.labels.push(p.descripcion);
-            this.data.push(0);
-          }
+
+        this.preguntas[index].indexRespuestaSeleccionada.forEach(res => {
+          let sele = this.preguntas[index].listRespuesta[res].descripcion ?? "";
+          this.preguntas[index].listRespuesta.forEach(p => {
+            const existe = this.labels.indexOf(p.descripcion);
+            if (existe == -1) {
+              this.labels.push(p.descripcion);
+              this.data.push(0);
+            }
+          });
+          const pos = this.labels.indexOf(sele);
+          this.data[pos] += 1;
+          this.preguntas.push(pre);
         });
-        const pos = this.labels.indexOf(sele);
-        this.data[pos] += 1;
-        
+        // let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion?? "";
+        // this.preguntas[index].listRespuesta.forEach(p => {
+        //   const existe = this.labels.indexOf(p.descripcion);
+        //   if (existe == -1) {
+        //     this.labels.push(p.descripcion);
+        //     this.data.push(0);
+        //   }
+        // });
+        // const pos = this.labels.indexOf(sele);
+        // this.data[pos] += 1;
+
       }
     });
 
@@ -107,19 +153,19 @@ export class Grafica1Component {
       })
   }
   obtenerPromedio() {
-    this.promedioMadurez = 0; 
+    this.promedioMadurez = 0;
     this.listCuestionarios.forEach(cuestionario => {
       this.respuestaCuestionarioService.getRespuestaByIdCuestionario(cuestionario._id).toPromise().then(response => {
         this.datosCuestionario = response as DatosCuestionario[];
         this.calcularNivelMadurez();
         console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
         this.madurez = "";
-      }); 
+      });
     });
   }
 
-  obtenerCuestionario(id) { 
-    this.respuestaCuestionarioService.getRespuestaByIdCuestionario(id).toPromise().then(response =>{
+  obtenerCuestionario(id) {
+    this.respuestaCuestionarioService.getRespuestaByIdCuestionario(id).toPromise().then(response => {
       this.datosCuestionario = [];
       this.datosCuestionario = response as DatosCuestionario[];
     });
@@ -145,18 +191,22 @@ export class Grafica1Component {
     });
     this.isActive = true;
   }
-  calcularNivelMadurez(){
+  calcularNivelMadurez() {
     let temp = 0;
     let respuestas = {
-      'respuestas':[],
-      'indice':[],
-      'total':[]
+      'respuestas': [],
+      'indice': [],
+      'total': []
     };
     console.log(this.datosCuestionario);
-    this.datosCuestionario.map((res, index) =>{
+    this.datosCuestionario.map((res, index) => {
       res.listRespuestasUsuario.map(l => {
         respuestas['indice'].push(index)
-        respuestas['respuestas'].push(l.tituloPregunta+"/"+l.listRespuesta[l.indexRespuestaSeleccionada].descripcion+"/"+(1/l.listRespuesta.length))
+        l.indexRespuestaSeleccionada.map(r => {
+          respuestas['respuestas'].push(l.tituloPregunta + "/" + l.listRespuesta[r].descripcion + "/" + (1 / l.listRespuesta.length))
+
+        });
+        // respuestas['respuestas'].push(l.tituloPregunta+"/"+l.listRespuesta[l.indexRespuestaSeleccionada].descripcion+"/"+(1/l.listRespuesta.length))
         respuestas['total'].push(l.listRespuesta.length)
       })
     });
@@ -170,40 +220,40 @@ export class Grafica1Component {
       const rr = r.split("/");
       respuestas.respuestas.map(res => {
         const rrs = res.split("/");
-        if(rrs[0] == rr[0]){
-          porcentajes[rrs[1]] +=1;
+        if (rrs[0] == rr[0]) {
+          porcentajes[rrs[1]] += 1;
         } else {
-          porcentajes[rrs[1]] = 1; 
+          porcentajes[rrs[1]] = 1;
         }
       })
     });
     console.log(porcentajes);
-    let total: number = 0; 
+    let total: number = 0;
     let ps = 0;
     Object.values(porcentajes).map(v => {
-      total += Number(v+"");
+      total += Number(v + "");
     });
     let x = [];
     Object.values(porcentajes).map(v => {
-      x.push(((Number(v) * 100)/total))
+      x.push(((Number(v) * 100) / total))
     });
-    let zz=0
+    let zz = 0
     x.map(x => {
-      respuestas.respuestas.map(r => { 
+      respuestas.respuestas.map(r => {
         const q = r.split("/")
         ps = Number(q[2]);
       })
       zz += x * ps;
     });
     console.log(zz);
-    this.madurez = zz+"";
-    this.promedioMadurez += zz; 
+    this.madurez = zz + "";
+    this.promedioMadurez += zz;
   }
-  onlyUnique(value, index, self){
-    return self.indexOf(value) === index; 
+  onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
   }
 
-  graficar(tipo: ChartType = 'bar') {
+  graficar(tipo: ChartType = 'horizontalBar') {
     let porcentajes: number[] = [];
     let suma = 0;
     this.data.forEach(d => {
@@ -222,6 +272,7 @@ export class Grafica1Component {
     }
     this.chart = new Chart(this.grafico?.nativeElement, {
       options: {
+        labels: this.labels,
         title: {
           display: true,
           text: this.pregunta,
@@ -236,18 +287,19 @@ export class Grafica1Component {
               return currentValue + '%';
             }
           }
-        }, 
+        },
       },
       type: tipo,
       data: {
         labels: this.labels,
         datasets: [{
           backgroundColor: colors,
-          data: porcentajes
+          data: porcentajes,
+          label: this.labels,
         }]
       }
     });
     this.pregunta = "";
   }
-  
+
 }

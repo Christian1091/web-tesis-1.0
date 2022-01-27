@@ -5,6 +5,7 @@ import { Cuestionario } from 'src/app/models/cuestionario.model';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { ActualizarCuestionarioComponent } from '../actualizar-cuestionario/actualizar-cuestionario.component';
 import { NuevaPreguntaComponent } from '../preguntas/nueva-pregunta/nueva-pregunta.component';
+import { Overlay } from '@angular/cdk/overlay';
 
 
 @Component({
@@ -21,8 +22,10 @@ export class VerCuestionarioComponent implements OnInit {
 
   constructor(private cuestionarioService: CuestionarioService,
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog) {
+    private dialog: MatDialog,
+    private overlay: Overlay) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    
     //console.log('----- ' + this.id);
   }
 
@@ -42,8 +45,9 @@ export class VerCuestionarioComponent implements OnInit {
       }
       )
   }
+
   cargarCuestionario(r, i) {
-    
+    const scrollStrategy = this.overlay.scrollStrategies.block();
     let cuestionario: Cuestionario = r;
     console.log(cuestionario.listPreguntas[i]);
     const modal = this.dialog.open(NuevaPreguntaComponent, {
@@ -51,7 +55,14 @@ export class VerCuestionarioComponent implements OnInit {
         "pos": i,
         "cuestionario": cuestionario
       },
-      disableClose: false
+      disableClose: false,
+      scrollStrategy: scrollStrategy,
+      width: '800px',
+			height: '600px',
+			autoFocus: false,
+			panelClass: 'custom-modalbox',
+			hasBackdrop: true,
+			backdropClass: 'backdrop',
     });
 
   }

@@ -2927,7 +2927,7 @@ form p:last-child {
   -ms-user-select: none;
   /* IE10+ */ }
 
-[type="checkbox"] + label:before,
+/* [type="checkbox"] + label:before,
 [type="checkbox"]:not(.filled-in) + label:after {
   content: '';
   position: absolute;
@@ -2941,7 +2941,7 @@ form p:last-child {
   margin-top: 2px;
   -webkit-transition: .2s;
   -o-transition: .2s;
-  transition: .2s; }
+  transition: .2s; } */
 
 [type="checkbox"]:not(.filled-in) + label:after {
   border: 0;

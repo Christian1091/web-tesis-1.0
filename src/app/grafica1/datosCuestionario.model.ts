@@ -16,10 +16,9 @@ export interface DatosCuestionario {
 export interface ListRespuestasUsuario{
     tituloPregunta: string;
     puntajePregunta: string;
-    indexRespuestaSeleccionada:number;
+    indexRespuestaSeleccionada:number[];
     puntosObtenidos: string;
     listRespuesta: ListRespuesta[];
-
 }
 
 export interface ListRespuesta{

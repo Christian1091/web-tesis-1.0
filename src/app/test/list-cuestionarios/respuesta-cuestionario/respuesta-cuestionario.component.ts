@@ -47,14 +47,21 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
       const r = res['listRespuestasUsuario'];
       r.forEach(res => {
+        let suma = 0 ; 
+        const indices:[] = res["indexRespuestaSeleccionada"];
+        indices.map(indice =>{
+          suma += Number.parseFloat(res["listRespuesta"][indice].puntosRespuesta.toString())
+        });
         let pre: Pre = {
           tituloPregunta: res["tituloPregunta"],
           listRespuesta: res["listRespuesta"] as [],
           indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],
-          puntosObtenidos: Math.round((res["puntosObtenidos"]+Number.EPSILON)*100)/100,
+          puntosObtenidos: suma,
+          //puntosObtenidos: Math.round((res["puntosObtenidos"]+Number.EPSILON)*100)/100,
           puntajePregunta: res["puntajePregunta"]
         };
         this.rs.push(pre);
+        suma = 0; 
       });
       this.nombre = res["nombreParticipante"];
       this.puntos = res["puntosTotales"].toString();

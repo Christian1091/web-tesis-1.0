@@ -15,7 +15,7 @@
 
                         <div class="col-lg-6">
                             <h3 class="titulo">
-                                Puntos: {{ puntos }}
+                                Puntos: {{ puntos | number:"1.2-2" }}
                             </h3>
                         </div>
                     </div>
@@ -31,7 +31,8 @@
                             </h3>
                             <h4>
                                 <small>Resultado: </small>
-                                <div class="pull-right"> {{ p.puntosObtenidos}}/{{ p.puntajePregunta }}</div>
+                                <div class="pull-right"> 
+                                    {{ p.puntosObtenidos | number: "1.2-2" }}/{{p.puntajePregunta}}</div>
                                 <progress-bar [progress]="p.puntosObtenidos*100/p.puntajePregunta" [color]="'#488aff'">
                                 </progress-bar>
                             </h4>

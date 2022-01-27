@@ -1,48 +1,58 @@
 <app-navbar></app-navbar>
 
-<!-- Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
-<aside class="left-sidebar">
-    <!-- Sidebar scroll-->
-    <div class="scroll-sidebar">
-        <!-- Sidebar navigation-->
-        <nav class="sidebar-nav">
-            <ul id="sidebarnav">
-
-                <li class="navPrincipal">CUESTIONARIOS</li>
-                <div *ngFor="let cuestionario of listCuestionarios" class="navBar">
-                    <li>
-                        <a id="listaCuestionarios" (click)="getListCuestionarioById(cuestionario._id)">{{ cuestionario.nombre }}</a>
-                    </li>
-                </div>
-            </ul>
-        </nav>
-        <button class="btn bttn-secundary" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0 ">Calcular Promedio</button>
-    <span>{{madurez}}</span>
-        <!-- End Sidebar navigation -->
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer class="example-sidenav" mode="side">
+    <br /><br /><br /><br />
+    <dl>CUESTIONARIOS</dl>
+    <div *ngFor="let cuestionario of listCuestionarios">
+      <hr />
+      <div class="buttonC">
+        <p (click)="getListCuestionarioById(cuestionario._id)">
+          {{ cuestionario.nombre }}
+        </p>
+      </div>
     </div>
-    <!-- End Sidebar scroll-->
-</aside>
-<!-- ============================================================== -->
-<!-- End Left Sidebar - style you can find in sidebar.scss  -->
-<!-- ============================================================== -->
+    <br /> <br /> <br />
+    <div class="center">
+      <button class="noselect red" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0">
+        Nivel MMTD
+      </button>
+    </div>
 
-<div class=" page-wrapper ">
 
-    <canvas #grafico style="height: 20vh; width: 40vw;"></canvas>
-    <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" />
-    <datalist id="pre">
-        <option *ngFor="let p of texto" [value]="p">{{p}}</option>
-    </datalist>
+    <span>{{ madurez }}</span>
+  </mat-drawer>
 
-    <select id="cursos" [formControl]="tipo">
-        <option value="0">Seleccione una gráfica</option>
-        <option value="line">line</option>
-        <option value="bar">bar</option>
+  <div class="controls">
+    <div class="space">
+      <label for="">Seleccione la pregunta</label>
+      <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" />
+      <datalist id="pre">
+        <option *ngFor="let p of texto" [value]="p">{{ p }}</option>
+      </datalist>
+  
+      <label class="text" for="">Seleccione el tipo de grafica</label>
+      <select id="cursos" [formControl]="tipo">
+        <option value="line">Lineal</option>
+        <option value="bar">Barra</option>
         <option value="polarArea">Polar Area</option>
         <option value="pie">Pie</option>
-    </select>
-    <button class="btn btn-primary" (click)="calcularNivelMadurez()" *ngIf="isActive">Calcular nivel de madurez</button>
-   
+        <option value="horizontalBar">Barra Horizontal </option>
+      </select>
+    </div>
+  </div>
+  <button class="noselect red" type="button" mat-button (click)="drawer.toggle()">
+    <<
+  </button>
 
-</div>
+  <button class="noselect red" (click)="calcularNivelMadurez()" *ngIf="isActive">
+    Evaluación de MM
+  </button>
+
+  <div class="grafico">
+    <div class="canvas">
+      <canvas #grafico></canvas>
+    </div>
+  </div>
+
+</mat-drawer-container>

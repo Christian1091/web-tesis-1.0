@@ -96,7 +96,7 @@ constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, 
         //console.log("mi valor ", valor)
         this.getRespuestasMultiples.push(this.fb.group({
           descripcion: [r.descripcion, Validators.required],
-          puntosRespuesta: [r.puntosRespuesta.toFixed(2), Validators.required],
+          puntosRespuesta: [r.puntosRespuesta, Validators.required],
           texto: [r.texto],
           tipoRespuesta: [r.tipoRespuesta]
         }));
