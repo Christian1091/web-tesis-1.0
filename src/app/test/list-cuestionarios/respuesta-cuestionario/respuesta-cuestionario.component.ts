@@ -1,6 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
+
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+import pdfMake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import htmlToPdfmake from 'html-to-pdfmake';
 
 export interface Pre 
 {
@@ -23,10 +31,9 @@ export class RespuestaCuestionarioComponent implements OnInit {
   public id: string;
   public respuestaCuestionario: any;
   public rutaAnterior = '';
-
+  public titulo: string = "";
   public nombre: string = "";
   public puntos: string = "";
-
   public rs = [];
 
   constructor( private respuestaUsuarioService: RespuestaCuestionarioService,
@@ -36,9 +43,188 @@ export class RespuestaCuestionarioComponent implements OnInit {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
 
+  
+
   ngOnInit(): void {
     this.obtenerRespuestaUsuario();
   }
+
+  public downloadAsPDF(div_id) {
+
+		let data = document.getElementById(div_id);
+		html2canvas(data).then(canvas => {
+			const contentDataURL = canvas.toDataURL('image/png')
+			let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
+			// let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
+			pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
+
+			pdf.save('cuestionario.pdf');
+		});
+	}
+
+	async downloadAsPDF1() {
+		let evaluacion: string = "";
+		const puntos = Number.parseInt(this.puntos);
+		if (puntos >= 0 && puntos < 12) {
+			evaluacion = "1 - TIC Excluido";
+		} else if (puntos > 12 && puntos < 31) {
+			evaluacion = "2 - TIC Básico";
+		} else if (puntos > 30 && puntos < 56) {
+			evaluacion = "3 - TIC Desarrollado";
+		} else if (puntos > 55 && puntos < 76) {
+			evaluacion = "4 - TIC Avanzado";
+		} else if (puntos > 75 && puntos < 101) {
+			evaluacion = "5 - Hiper TIC";
+		}
+		const info = {
+			content: [
+        {
+          image:  await this.getBase64ImageFromURL(
+            "https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_Universidad_Polit%C3%A9cnica_Salesiana_del_Ecuador.png"
+            
+          ),
+          width: 300 ,
+          alignment: 'center',
+        },
+				{
+					text: this.titulo,
+					bold: true,
+					fontSize: 20,
+					alignment: 'center',
+					margin: [0, 0, 0, 20]
+				},
+				{
+					columns: [
+           
+						[{
+							text: "Usuario:" + this.nombre,
+							style: 'name',
+             
+						},
+						{
+							text: "Correo: admin@admin.com"
+						},
+						{
+							text: "Institución: Ups"
+						},
+						{
+							text: "Provincia: Azuay",
+							// link: this.resume.socialProfile,
+							color: 'blue',
+						},
+						{
+							text: "Canton: Cuenca",
+							// link: this.resume.socialProfile,
+							color: 'blue',
+						},
+						{
+							text: "Puntos: " + this.puntos,
+							color: 'red',
+						},
+						{
+							text: "Nivel MM: " + evaluacion,
+							color: 'red',
+						},
+						]
+					]
+				},
+				{
+					text: 'Resultados',
+					style: 'header',
+					table: {
+
+						widths: ['*', '*'],
+						body: [
+							[{
+								text: 'Pregunta',
+								style: 'tableHeader',
+                width: '80%',
+							},
+							{
+								text: 'Puntos',
+								style: 'tableHeader',
+                width: '20%',
+							},
+							],
+							...this.rs.map(ed => {
+								return [ed.tituloPregunta, ed.puntosObtenidos];
+							})
+						]
+					},
+				}
+			],
+			info: {
+				title: this.nombre + 'Usuario',
+				author: this.nombre,
+				subject: 'RESUME',
+				keywords: 'RESUME, ONLINE RESUME',
+			},
+			styles: {
+				header: {
+					fontSize: 14,
+					bold: false,
+					margin: [0, 20, 0, 10],
+				},
+
+				name: {
+					fontSize: 16,
+					bold: true
+				},
+				jobTitle: {
+					fontSize: 14,
+					bold: true,
+					italics: true
+				},
+				sign: {
+					margin: [0, 50, 0, 10],
+					alignment: 'right',
+					italics: true
+				},
+				tableHeader: {
+					bold: true,
+				}
+			}
+		};
+
+    
+		pdfMake.createPdf(info).open();
+		// const doc = new jsPDF();
+
+		// const pdfTable = this.pdfTable.nativeElement;
+
+		// var html = htmlToPdfmake(pdfTable.innerHTML);
+
+		// const documentDefinition = { content: html };
+		// pdfMake.createPdf(documentDefinition).open();
+
+	}
+
+  getBase64ImageFromURL(url) {
+    return new Promise((resolve, reject) => {
+      var img = new Image();
+      img.setAttribute("crossOrigin", "anonymous");
+
+      img.onload = () => {
+        var canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        var ctx = canvas.getContext("2d");
+        ctx.drawImage(img, 0, 0);
+
+        var dataURL = canvas.toDataURL("image/png");
+
+        resolve(dataURL);
+      };
+
+      img.onerror = error => {
+        reject(error);
+      };
+
+      img.src = url;
+    });
+  }
+
 
   obtenerRespuestaUsuario() {
 
@@ -64,6 +250,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
         suma = 0; 
       });
       this.nombre = res["nombreParticipante"];
+      this.titulo = res["nombre"];
       this.puntos = res["puntosTotales"].toString();
       this.respuestaCuestionario = res;
       //console.log(this.respuestaCuestionario)

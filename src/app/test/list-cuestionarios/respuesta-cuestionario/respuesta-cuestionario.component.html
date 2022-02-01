@@ -1,5 +1,5 @@
 <app-navbar></app-navbar>
-<section id="wrapper" class="fondoL">
+<section class="fondoL" id="pdfTable" #pdfTable>
     <!-- mt-5 es para separar el titulo del navbar -->
     <div class="container mt-5">
         <div class="text-center">
@@ -60,4 +60,10 @@
           <i class="fa fa-angle-left"></i>
         </button>
     </div>
+    <button class="btn btn-primary" (click)="downloadAsPDF('pdfTable')">
+        Export To PDF
+      </button>
+      <button class="btn btn-primary" (click)="downloadAsPDF1()">
+        Export To PDF 1
+      </button>
 </section>

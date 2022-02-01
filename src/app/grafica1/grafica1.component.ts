@@ -108,6 +108,7 @@ export class Grafica1Component {
     let res = {};
     let p = [];
 
+
     this.preguntas.forEach((pre, index) => {
       if (pre.tituloPregunta === this.pregunta) {
 
@@ -122,7 +123,7 @@ export class Grafica1Component {
           });
           const pos = this.labels.indexOf(sele);
           this.data[pos] += 1;
-          this.preguntas.push(pre);
+         
         });
         // let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion?? "";
         // this.preguntas[index].listRespuesta.forEach(p => {

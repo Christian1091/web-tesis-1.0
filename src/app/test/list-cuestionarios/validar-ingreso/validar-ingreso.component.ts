@@ -1,10 +1,10 @@
 
 import { Component, OnInit, Pipe } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
 import { Provincias, Cantones } from '../../../interfaces/provincias.interfaces';
 import { ProvinciasService } from '../../../services/provincias.service';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
+import { Validators, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-validar-ingreso',
@@ -30,6 +30,8 @@ export class ValidarIngresoComponent implements OnInit {
   //public nombrePro: any;
 
   public id: string;
+  public  ok: boolean = false; 
+  public email = new FormControl('',[Validators.required, Validators.email]); 
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                private activatedRoute: ActivatedRoute,
@@ -37,6 +39,10 @@ export class ValidarIngresoComponent implements OnInit {
                private provinciaService: ProvinciasService ) {
                 this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
                 console.log(this.id);
+               }
+               activar ()
+               {
+                 this.ok = !this.ok; 
                }
 
   ngOnInit(): void {
@@ -55,7 +61,7 @@ export class ValidarIngresoComponent implements OnInit {
 
   siguiente() {
      this.respuestaCuestionarioService.nombreParticipante = this.nombreParticipante;
-     this.respuestaCuestionarioService.correoParticipante = this.correoParticipante;
+     this.respuestaCuestionarioService.correoParticipante = this.email.value;
      this.respuestaCuestionarioService.institucionParticipante = this.institucionParticipante;
      this.respuestaCuestionarioService.provinciaParticipante = this.provinciaParticipante;
      this.respuestaCuestionarioService.ciudadParticipante = this.ciudadParticipante;
