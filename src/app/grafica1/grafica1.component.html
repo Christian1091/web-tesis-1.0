@@ -17,16 +17,16 @@
       <button class="noselect red" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0">
         Nivel MMTD
       </button>
+      <br />
+      <span>{{ mmtd }}</span>
     </div>
 
-
-    <span>{{ madurez }}</span>
   </mat-drawer>
 
   <div class="controls">
     <div class="space">
       <label for="">Seleccione la pregunta</label>
-      <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" />
+      <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" placeholder="Seleccione la pregunta" />
       <datalist id="pre">
         <option *ngFor="let p of texto" [value]="p">{{ p }}</option>
       </datalist>
@@ -41,7 +41,14 @@
       </select>
     </div>
   </div>
-  <button class="noselect red" type="button" mat-button (click)="drawer.toggle()">
+ 
+
+  <div class="grafico">
+    <div class="canvas">
+      <canvas #grafico></canvas>
+    </div>
+  </div>
+  <button class="btnBack" type="button" mat-button (click)="drawer.toggle()">
     <<
   </button>
 
@@ -49,10 +56,8 @@
     Evaluación de MM
   </button>
 
-  <div class="grafico">
-    <div class="canvas">
-      <canvas #grafico></canvas>
-    </div>
-  </div>
+  <span>{{ madurez }}</span>
+
+
 
 </mat-drawer-container>

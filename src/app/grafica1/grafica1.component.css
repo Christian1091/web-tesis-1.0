@@ -180,9 +180,47 @@
     text-align: center;
     color: rgb(59, 38, 7);
     padding: 5px 15px;
+    
   }
 
+ input:hover{
+  cursor: pointer;
+  box-shadow: -2px -2px 5px rgb(158, 199, 228), 2px 2px 5px rgb(158, 199, 228);
+}
+
+#cursos:hover{
+  box-shadow: -2px -2px 5px rgb(158, 199, 228), 2px 2px 5px rgb(158, 199, 228);
+}
+#cursos{
+  cursor: pointer;
+  
+}
   input:focus{
     box-shadow: -2px -2px 5px rgb(158, 199, 228), 2px 2px 5px rgb(158, 199, 228);
     border-color: rgb(19, 67, 135);
+    cursor: pointer;
+  }
+
+  .btnBack{
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+     -khtml-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  color: rgb(255, 255, 255) ;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+  width: 70px;
+  height: 50px;
+  cursor: pointer;
+  background: #eb812a;
+  margin: 25px;
+  border: none;
+  border-radius: 10px;
+  box-shadow:  5px 5px 15px rgb(140, 140, 139), inset 5px 5px 5px #f7b662, inset -5px -5px 5px rgb(164, 80, 2);
+  color: rgb(240, 227, 128);
+  font-size: 14px;
+
   }

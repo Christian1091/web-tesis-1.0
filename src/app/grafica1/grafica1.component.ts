@@ -45,6 +45,7 @@ export class Grafica1Component {
   public tipo = new FormControl();
   public madurez: string = "";
   public promedioMadurez = 0;
+  public mmtd = 0 ;
 
   constructor(private cuestioanrioService: CuestionarioService,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
@@ -155,11 +156,15 @@ export class Grafica1Component {
   }
   obtenerPromedio() {
     this.promedioMadurez = 0;
+    this.mmtd = 0 ; 
     this.listCuestionarios.forEach(cuestionario => {
       this.respuestaCuestionarioService.getRespuestaByIdCuestionario(cuestionario._id).toPromise().then(response => {
         this.datosCuestionario = response as DatosCuestionario[];
         this.calcularNivelMadurez();
         console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
+        this.mmtd = (this.promedioMadurez / this.listCuestionarios.length);
+        //console.log(this.mmtd);
+
         this.madurez = "";
       });
     });
