@@ -9,18 +9,18 @@
         <form class="form-horizontal form-material" autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()"
           id="loginform">
 
-          <h3 class="box-title m-b-20 text-center">Inicio Sesión</h3>
+          <h3 class="box-title m-b-20 text-center">Inicia sesión</h3>
           <div class="form-group ">
 
             <div class="col-xs-12">
-              <input class="form-control" type="email" placeholder="Email" formControlName="email">
+              <input class="form-control" type="email" placeholder="Correo electrónico" formControlName="email">
             </div>
 
           </div>
           <div class="form-group">
             <div class="col-xs-12">
 
-              <input class="form-control" type="password" placeholder="Password" formControlName="password">
+              <input class="form-control" type="password" placeholder="Constraseña" formControlName="password">
 
             </div>
           </div>
@@ -30,7 +30,7 @@
 
                 <input type="checkbox" formControlName="remember">
 
-                <label for="checkbox-signup"> Recuerdame </label>
+                <label for="checkbox-signup"> Recuérdame </label>
 
               </div>
               <!-- <a href="javascript:void(0)" id="to-recover" class="text-dark pull-right">
@@ -46,17 +46,17 @@
             </div>
           </div>
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 mb-4 text-center" id="google-btn">
+            <div class="col-xs-12 col-sm-12 col-md-12 m-t-10 mb-4 text-center" id="google-btn" data-text="hola">
 
-              <div id="my-signin2">
-
+              <div id="my-signin2" >
+                
               </div>
 
             </div>
           </div>
           <div class="form-group m-b-0">
             <div class="col-sm-12 text-center">
-              ¿Quieres ser miembro? <a routerLink="/register" class="text-primary m-l-5"><b>Registrate</b></a>
+              ¿Aún no tienes cuenta? <a routerLink="/register" class="text-primary m-l-5"><b>Registrate</b></a>
             </div>
           </div>
         </form>

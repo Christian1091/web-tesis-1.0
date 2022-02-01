@@ -10,10 +10,9 @@ import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
 
-export interface Pre 
-{
+export interface Pre {
   listRespuesta: [],
-  tituloPregunta:string,
+  tituloPregunta: string,
   puntosObtenidos: number,
   indexRespuestaSeleccionada: [],
   puntajePregunta: number
@@ -35,15 +34,20 @@ export class RespuestaCuestionarioComponent implements OnInit {
   public nombre: string = "";
   public puntos: string = "";
   public rs = [];
+  public correo: string = "";
+  public institucionParticipante: String = "";
+  public provinciaParticipante: string = "";
+  public ciudadParticipante: string = "";
 
-  constructor( private respuestaUsuarioService: RespuestaCuestionarioService,
-               private activatedRoute: ActivatedRoute,
-               private router: Router ) {
+
+  constructor(private respuestaUsuarioService: RespuestaCuestionarioService,
+    private activatedRoute: ActivatedRoute,
+    private router: Router) {
     this.rutaAnterior = this.activatedRoute.snapshot.url[0].path;
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
 
-  
+
 
   ngOnInit(): void {
     this.obtenerRespuestaUsuario();
@@ -51,153 +55,143 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
   public downloadAsPDF(div_id) {
 
-		let data = document.getElementById(div_id);
-		html2canvas(data).then(canvas => {
-			const contentDataURL = canvas.toDataURL('image/png')
-			let pdf = new jsPDF('l', 'cm', 'a4'); //Generates PDF in landscape mode
-			// let pdf = new jspdf('p', 'cm', 'a4'); Generates PDF in portrait mode
-			pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
+    let data = document.getElementById(div_id);
+    html2canvas(data).then(canvas => {
+      const contentDataURL = canvas.toDataURL('image/png')
+      let pdf = new jsPDF('l', 'cm', 'a4');
+      pdf.addImage(contentDataURL, 'PNG', 0, 0, 29.7, 21.0);
 
-			pdf.save('cuestionario.pdf');
-		});
-	}
+      pdf.save('cuestionario.pdf');
+    });
+  }
 
-	async downloadAsPDF1() {
-		let evaluacion: string = "";
-		const puntos = Number.parseInt(this.puntos);
-		if (puntos >= 0 && puntos < 12) {
-			evaluacion = "1 - TIC Excluido";
-		} else if (puntos > 12 && puntos < 31) {
-			evaluacion = "2 - TIC Básico";
-		} else if (puntos > 30 && puntos < 56) {
-			evaluacion = "3 - TIC Desarrollado";
-		} else if (puntos > 55 && puntos < 76) {
-			evaluacion = "4 - TIC Avanzado";
-		} else if (puntos > 75 && puntos < 101) {
-			evaluacion = "5 - Hiper TIC";
-		}
-		const info = {
-			content: [
+  async downloadAsPDF1() {
+    let evaluacion: string = "";
+    const puntos = Number.parseInt(this.puntos);
+    if (puntos >= 0 && puntos < 12) {
+      evaluacion = "1 - TIC Excluido";
+    } else if (puntos > 12 && puntos < 31) {
+      evaluacion = "2 - TIC Básico";
+    } else if (puntos > 30 && puntos < 56) {
+      evaluacion = "3 - TIC Desarrollado";
+    } else if (puntos > 55 && puntos < 76) {
+      evaluacion = "4 - TIC Avanzado";
+    } else if (puntos > 75 && puntos < 101) {
+      evaluacion = "5 - Hiper TIC";
+    }
+    const info = {
+      content: [
         {
-          image:  await this.getBase64ImageFromURL(
+          image: await this.getBase64ImageFromURL(
             "https://upload.wikimedia.org/wikipedia/commons/b/b0/Logo_Universidad_Polit%C3%A9cnica_Salesiana_del_Ecuador.png"
-            
+
           ),
-          width: 300 ,
+          width: 300,
           alignment: 'center',
         },
-				{
-					text: this.titulo,
-					bold: true,
-					fontSize: 20,
-					alignment: 'center',
-					margin: [0, 0, 0, 20]
-				},
-				{
-					columns: [
-           
-						[{
-							text: "Usuario:" + this.nombre,
-							style: 'name',
-             
-						},
-						{
-							text: "Correo: admin@admin.com"
-						},
-						{
-							text: "Institución: Ups"
-						},
-						{
-							text: "Provincia: Azuay",
-							// link: this.resume.socialProfile,
-							color: 'blue',
-						},
-						{
-							text: "Canton: Cuenca",
-							// link: this.resume.socialProfile,
-							color: 'blue',
-						},
-						{
-							text: "Puntos: " + this.puntos,
-							color: 'red',
-						},
-						{
-							text: "Nivel MM: " + evaluacion,
-							color: 'red',
-						},
-						]
-					]
-				},
-				{
-					text: 'Resultados',
-					style: 'header',
-					table: {
+        {
+          text: this.titulo,
+          bold: true,
+          fontSize: 20,
+          alignment: 'center',
+          margin: [0, 0, 0, 20]
+        },
+        {
+          columns: [
 
-						widths: ['*', '*'],
-						body: [
-							[{
-								text: 'Pregunta',
-								style: 'tableHeader',
+            [{
+              text: "Usuario: " + this.nombre,
+              style: 'name',
+
+            },
+            {
+              text: "Correo: " + this.correo,
+            },
+            {
+              text: "Institución: " + this.institucionParticipante,
+            },
+            {
+              text: "Provincia: " + this.provinciaParticipante,
+
+              color: 'blue',
+            },
+            {
+              text: "Cantón: " + this.ciudadParticipante,
+
+              color: 'blue',
+            },
+            {
+              text: "Puntos: " + this.puntos,
+              color: 'red',
+            },
+            {
+              text: "Nivel MM: " + evaluacion,
+              color: 'red',
+            },
+            ]
+          ]
+        },
+        {
+          text: 'Resultados',
+          style: 'header',
+          table: {
+
+            widths: ['*', '*'],
+            body: [
+              [{
+                text: 'Pregunta',
+                style: 'tableHeader',
                 width: '80%',
-							},
-							{
-								text: 'Puntos',
-								style: 'tableHeader',
+              },
+              {
+                text: 'Puntos',
+                style: 'tableHeader',
                 width: '20%',
-							},
-							],
-							...this.rs.map(ed => {
-								return [ed.tituloPregunta, ed.puntosObtenidos];
-							})
-						]
-					},
-				}
-			],
-			info: {
-				title: this.nombre + 'Usuario',
-				author: this.nombre,
-				subject: 'RESUME',
-				keywords: 'RESUME, ONLINE RESUME',
-			},
-			styles: {
-				header: {
-					fontSize: 14,
-					bold: false,
-					margin: [0, 20, 0, 10],
-				},
+              },
+              ],
+              ...this.rs.map(ed => {
+                return [ed.tituloPregunta, ed.puntosObtenidos];
+              })
+            ]
+          },
+        }
+      ],
+      info: {
+        title: this.nombre + 'Usuario',
+        author: this.nombre,
+        subject: 'RESUME',
+        keywords: 'RESUME, ONLINE RESUME',
+      },
+      styles: {
+        header: {
+          fontSize: 14,
+          bold: false,
+          margin: [0, 20, 0, 10],
+        },
 
-				name: {
-					fontSize: 16,
-					bold: true
-				},
-				jobTitle: {
-					fontSize: 14,
-					bold: true,
-					italics: true
-				},
-				sign: {
-					margin: [0, 50, 0, 10],
-					alignment: 'right',
-					italics: true
-				},
-				tableHeader: {
-					bold: true,
-				}
-			}
-		};
+        name: {
+          fontSize: 16,
+          bold: true
+        },
+        jobTitle: {
+          fontSize: 14,
+          bold: true,
+          italics: true
+        },
+        sign: {
+          margin: [0, 50, 0, 10],
+          alignment: 'right',
+          italics: true
+        },
+        tableHeader: {
+          bold: true,
+        }
+      }
+    };
 
-    
-		pdfMake.createPdf(info).open();
-		// const doc = new jsPDF();
 
-		// const pdfTable = this.pdfTable.nativeElement;
-
-		// var html = htmlToPdfmake(pdfTable.innerHTML);
-
-		// const documentDefinition = { content: html };
-		// pdfMake.createPdf(documentDefinition).open();
-
-	}
+    pdfMake.createPdf(info).open();
+  }
 
   getBase64ImageFromURL(url) {
     return new Promise((resolve, reject) => {
@@ -229,13 +223,13 @@ export class RespuestaCuestionarioComponent implements OnInit {
   obtenerRespuestaUsuario() {
 
     this.rs = [];
-    this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe( res => {
+    this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(res => {
 
       const r = res['listRespuestasUsuario'];
       r.forEach(res => {
-        let suma = 0 ; 
-        const indices:[] = res["indexRespuestaSeleccionada"];
-        indices.map(indice =>{
+        let suma = 0;
+        const indices: [] = res["indexRespuestaSeleccionada"];
+        indices.map(indice => {
           suma += Number.parseFloat(res["listRespuesta"][indice].puntosRespuesta.toString())
         });
         let pre: Pre = {
@@ -243,23 +237,26 @@ export class RespuestaCuestionarioComponent implements OnInit {
           listRespuesta: res["listRespuesta"] as [],
           indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],
           puntosObtenidos: suma,
-          //puntosObtenidos: Math.round((res["puntosObtenidos"]+Number.EPSILON)*100)/100,
           puntajePregunta: res["puntajePregunta"]
         };
         this.rs.push(pre);
-        suma = 0; 
+        suma = 0;
       });
       this.nombre = res["nombreParticipante"];
       this.titulo = res["nombre"];
+      this.correo = res["correoParticipante"];
       this.puntos = res["puntosTotales"].toString();
+      this.institucionParticipante = res["institucionParticipante"];
+      this.provinciaParticipante = res["provinciaParticipante"];
+      this.ciudadParticipante = res["ciudadParticipante"];
       this.respuestaCuestionario = res;
-      //console.log(this.respuestaCuestionario)
+
     });
   }
 
   volver() {
 
-    if ( this.rutaAnterior === 'respuestaUsuarioAdmin') {
+    if (this.rutaAnterior === 'respuestaUsuarioAdmin') {
       console.log(this.respuestaCuestionario.cuestionarioId)
       this.router.navigateByUrl(`/dashboard/estadisticas/${this.respuestaCuestionario.cuestionarioId}`);
     } else {

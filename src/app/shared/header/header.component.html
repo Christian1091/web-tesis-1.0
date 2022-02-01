@@ -9,33 +9,19 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="index.html">
                 <!-- Logo icon --><b>
-          <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-          <!-- Dark Logo icon -->
-          <img
-            src="./assets/images/logo-icon.png"
-            alt="homepage"
-            class="dark-logo"
-          />
-          <!-- Light Logo icon -->
-          <img
-            src="./assets/images/logo-light-icon.png"
-            alt="homepage"
-            class="light-logo"
-          />
-        </b>
+                    <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                    <!-- Dark Logo icon -->
+
+                    <!-- Light Logo icon -->
+                    <a routerLink="/web">   UPS</a>
+                    <!-- <img src="./assets/images/GIHP4Cnombre3.png" routerLink="/web" alt="homepage" class="logogih4" width="50px" height="50ps" border-radius="50px" /> -->
+                </b>
                 <!--End Logo icon -->
                 <!-- Logo text --><span>
-          <!-- dark Logo text -->
-          <img
-            src="./assets/images/logo-text.png"
-            alt="homepage"
-            class="dark-logo" />
-          <!-- Light Logo text -->
-          <img
-            src="./assets/images/logo-light-text.png"
-            class="light-logo"
-            alt="homepage"
-        /></span>
+                    <!-- dark Logo text -->
+
+                    <!-- Light Logo text -->
+                </span>
             </a>
         </div>
         <!-- ============================================================== -->
@@ -48,12 +34,12 @@
             <ul class="navbar-nav mr-auto">
                 <!-- This is  -->
                 <li class="nav-item">
-                    <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i
-          ></a>
+                    <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i
+                            class="ti-menu"></i></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark" href="javascript:void(0)"><i class="ti-menu"></i
-          ></a>
+                    <a class="nav-link sidebartoggler hidden-sm-down waves-effect waves-dark"
+                        href="javascript:void(0)"><i class="ti-menu"></i></a>
                 </li>
                 <li class="nav-item hidden-sm-down"></li>
             </ul>
@@ -87,7 +73,8 @@
                 <!-- Comment -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <!-- <i class="mdi mdi-message"></i> -->
                         <div class="notify">
                             <span class="heartbit"></span> <span class="point"></span>
@@ -118,9 +105,8 @@
                                         </div>
                                         <div class="mail-contnet">
                                             <h5>Event today</h5>
-                                            <span class="mail-desc">Just a reminder that you have event</span
-                      >
-                      <span class="time">9:10 AM</span>
+                                            <span class="mail-desc">Just a reminder that you have event</span>
+                                            <span class="time">9:10 AM</span>
                                         </div>
                                     </a>
                                     <!-- Message -->
@@ -130,9 +116,8 @@
                                         </div>
                                         <div class="mail-contnet">
                                             <h5>Settings</h5>
-                                            <span class="mail-desc">You can customize this template as you want</span
-                      >
-                      <span class="time">9:08 AM</span>
+                                            <span class="mail-desc">You can customize this template as you want</span>
+                                            <span class="time">9:08 AM</span>
                                         </div>
                                     </a>
                                     <!-- Message -->
@@ -164,7 +149,8 @@
                 <!-- Messages -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" id="2" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
                         <!-- <i class="mdi mdi-email"></i> -->
                         <div class="notify">
                             <span class="heartbit"></span> <span class="point"></span>
@@ -197,9 +183,8 @@
                                         </div>
                                         <div class="mail-contnet">
                                             <h5>Sonu Nigam</h5>
-                                            <span class="mail-desc">I've sung a song! See you at</span
-                      >
-                      <span class="time">9:10 AM</span>
+                                            <span class="mail-desc">I've sung a song! See you at</span>
+                                            <span class="time">9:10 AM</span>
                                         </div>
                                     </a>
                                     <!-- Message -->
@@ -273,7 +258,9 @@
                 <!-- Profile -->
                 <!-- ============================================================== -->
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img [src]="usuario.imagenUrl" alt="user" class="profile-pic" /></a>
+                    <a class="nav-link dropdown-toggle waves-effect waves-dark" href="" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false"><img [src]="usuario.imagenUrl" alt="user"
+                            class="profile-pic" /></a>
                     <div class="dropdown-menu dropdown-menu-right animated fadeIn">
                         <ul class="dropdown-user">
                             <li>
@@ -284,7 +271,8 @@
                                     <div class="u-text">
                                         <h4>{{ usuario.nombre }}</h4>
                                         <p class="text-muted">
-                                            {{ usuario.email | slice:0:20 }}{{ (usuario.email.length > 20) ? '...': '' }}
+                                            {{ usuario.email | slice:0:20 }}{{ (usuario.email.length > 20) ? '...': ''
+                                            }}
                                         </p>
                                         <!-- <a
                       href="pages-profile.html"
@@ -302,7 +290,7 @@
                                 <a href="#"><i class="ti-wallet"></i> My Balance</a>
                             </li> -->
                             <li>
-                                <a routerLink="./buzon"><i class="ti-email"></i> Inbox</a>
+                                <a routerLink="./buzon"><i class="ti-email"></i> Bandeja</a>
                             </li>
                             <!-- <li role="separator" class="divider"></li>
                             <li>
@@ -311,7 +299,7 @@
                             <li role="separator" class="divider"></li>
                             <li>
                                 <a (click)="logout()">
-                                    <i class="fa fa-power-off"></i> Logout
+                                    <i class="fa fa-power-off"></i> Cerrar Sesión
                                 </a>
                             </li>
                         </ul>

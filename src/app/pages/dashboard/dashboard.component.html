@@ -6,7 +6,7 @@
                     <div class="m-t-30 text-center">
                         <img [src]="usuario.imagenUrl" class="img-circle" width="150" />
                         <h4 style="padding: 20px">{{ usuario.nombre }}</h4>
-                        <h6 class="card-subtitle">{{ usuario.email }}</h6>
+                        <h3 class="card-subtitle">{{ usuario.email }}</h3>
                     </div>
                 </form>
             </div>
@@ -26,7 +26,7 @@
                 <div class="col-12">
                     <ul class="nav nav-tabs profile-tab" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#post" role="tab">Mis Posts</a>
+                            <a class="nav-link active" data-toggle="tab" href="#post" role="tab">Mis artículos</a>
                         </li>
                     </ul>
                 </div>
@@ -45,7 +45,7 @@
                                         <i class="fa fa-eye icon float-right" style="color: #2269C7" (click)="verContenidoPost(post)"></i>
 
                                         <a>{{ post.titulo }}</a>
-                                        <span class="sl-date"> 5 minutes ago</span>
+                                        <span class="sl-date"> Hace 5 minutos </span>
                                         <p> {{ post.descripcion }} </p>
                                     </div>
                                     <hr>

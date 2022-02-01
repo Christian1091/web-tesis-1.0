@@ -7,26 +7,26 @@
         <div class="login-box card">
             <div class="card-body">
                 <h3 class="box-title m-t-40 m-b-0">Formulario</h3>
-                <small>Llena el fromulario para poder realizar la encuesta</small>
+                <small>Llene todo el fromulario para poder realizar la encuesta</small>
                 <div class="form-group m-t-20">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" placeholder="Ingrese Nombre y Apellido" [(ngModel)]="nombreParticipante" />
+                        <input class="form-control" type="text" placeholder="Ingrese nombre y apellido" [(ngModel)]="nombreParticipante" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Ingrese su correo electronico" [formControl]="email" />
+                        <input class="form-control" type="text" required="" placeholder="Ingrese su correo electrónico" [formControl]="email" />
                         <div *ngIf="email.touched && email.invalid">
                             <math-error *ngIf="email.hasError('email')"
-                            >Correo no validarIngreso </math-error>
+                            >Correo no válido </math-error>
                         </div>
                         </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-xs-12">
-                        <input class="form-control" type="text" required="" placeholder="Ingrese la Institucion a la que pertenece" [(ngModel)]="institucionParticipante" />
+                        <input class="form-control" type="text" required="" placeholder="Ingrese la Institución a la que pertenece" [(ngModel)]="institucionParticipante" />
                     </div>
                 </div>
 
@@ -55,7 +55,7 @@
 
                     <div class="form-group col-md-6">
                         <select class="form-control" [(ngModel)]="ciudadParticipante">
-                          <option value="" selected disabled> Seleccione el canton </option>
+                          <option value="" selected disabled> Seleccione el cantón </option>
                           <option *ngFor="let canton of cantones" value="{{ canton.nombreCanton }}">
                             {{ canton.nombreCanton }}
                           </option>
@@ -70,7 +70,8 @@
                         <div class="checkbox checkbox-primary p-t-0">
                             <input id="checkbox-signup" type="checkbox" (change)="activar()" />
                             <label for="checkbox-signup">
-                I agree to all <a href="#">Terms</a>
+                Acepto todos los términos y condiciones. 
+                <!-- <a href="#">Terms</a> -->
               </label>
                         </div>
                     </div>

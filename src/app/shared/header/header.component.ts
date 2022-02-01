@@ -6,7 +6,10 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
-  styles: [
+  styles: ['./header.component.css'
+
+
+
   ]
 })
 export class HeaderComponent {
@@ -15,25 +18,25 @@ export class HeaderComponent {
    * Instanciamos nuestro modelo para llamar a nuestros atributos
    * en este caso la imagen y el nombre en el html
    */
-   public usuario: Usuario;
+  public usuario: Usuario;
 
   // Inyectamos nuestro servicio para llamar al logout
-  constructor( private usuarioService: UsuarioService,
-               private router: Router ) {
+  constructor(private usuarioService: UsuarioService,
+    private router: Router) {
     this.usuario = usuarioService.usuario;
-   }
+  }
 
   logout() {
     this.usuarioService.logout();
   }
 
-  buscar( termino: string ) {
+  buscar(termino: string) {
 
-    if ( termino.length === 0 ) {
-     //this.router.navigateByUrl('/dashboard');
-     return;
+    if (termino.length === 0) {
+      //this.router.navigateByUrl('/dashboard');
+      return;
     }
     //console.log(termino);
-    this.router.navigateByUrl(`/dashboard/buscar/${ termino }`);
+    this.router.navigateByUrl(`/dashboard/buscar/${termino}`);
   }
 }
