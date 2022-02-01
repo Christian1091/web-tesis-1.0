@@ -3263,7 +3263,7 @@ input[type=checkbox]:not(:disabled).tabbed:focus ~ .lever::after {
   display: inline-block; }
 
 [type="checkbox"] + label {
-  padding-left: 26px;
+  padding-left: 6px;
   height: 25px;
   line-height: 21px;
   font-weight: normal; }
