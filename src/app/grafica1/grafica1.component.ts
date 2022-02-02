@@ -8,6 +8,10 @@ import { CuestionarioService } from '../services/cuestionario.service';
 import { RespuestaCuestionarioService } from '../services/respuesta-cuestionario.service';
 import Chart from 'chart.js';
 import { ChartType } from 'chart.js'
+import { MatDialog } from '@angular/material/dialog';
+import { InformeComponent } from '../informe/informe.component';
+
+
 
 @Component({
   selector: 'app-grafica1',
@@ -19,10 +23,10 @@ import { ChartType } from 'chart.js'
 export class Grafica1Component {
 
   public niveles = {
-    1: 'excluido',
-    2: 'basico',
-    3: 'desarrollado',
-    4: 'avanzado',
+    1: 'TIC excluido',
+    2: 'TIC basico',
+    3: 'TIC desarrollado',
+    4: 'TIC avanzado',
     5: 'hiper TIC'
   };
 
@@ -45,11 +49,13 @@ export class Grafica1Component {
   public tipo = new FormControl();
   public madurez: string = "";
   public promedioMadurez = 0;
-  public mmtd = 0 ;
+  public promedioTotal = 0;
+  public mmtd = 0;
 
   constructor(private cuestioanrioService: CuestionarioService,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
     private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
     private router: Router) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
   }
@@ -79,7 +85,7 @@ export class Grafica1Component {
         labels: x,
         title: {
           display: true,
-          text: "Niveles del modelo de madurez de Transformacion Digital",
+          text: "Niveles del modelo de madurez de Transformación Digital",
         },
         tooltips: {
           callbacks: {
@@ -124,7 +130,7 @@ export class Grafica1Component {
           });
           const pos = this.labels.indexOf(sele);
           this.data[pos] += 1;
-         
+
         });
         // let sele = this.preguntas[index].listRespuesta[this.preguntas[index].indexRespuestaSeleccionada].descripcion?? "";
         // this.preguntas[index].listRespuesta.forEach(p => {
@@ -156,16 +162,17 @@ export class Grafica1Component {
   }
   obtenerPromedio() {
     this.promedioMadurez = 0;
-    this.mmtd = 0 ; 
+    this.mmtd = 0;
     this.listCuestionarios.forEach(cuestionario => {
       this.respuestaCuestionarioService.getRespuestaByIdCuestionario(cuestionario._id).toPromise().then(response => {
         this.datosCuestionario = response as DatosCuestionario[];
         this.calcularNivelMadurez();
+        this.promedioTotal = this.promedioMadurez / this.listCuestionarios.length;
         console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
         this.mmtd = (this.promedioMadurez / this.listCuestionarios.length);
         //console.log(this.mmtd);
 
-        this.madurez = "";
+        //this.madurez = "";
       });
     });
   }
@@ -180,12 +187,14 @@ export class Grafica1Component {
 
   getListCuestionarioById(idC: string, i) {
     this.pos = i;
+    const sumas = [];
     this.respuestaCuestionarioService.getRespuestaByIdCuestionario(idC).subscribe(response => {
       this.preguntas = [];
       this.texto = [];
       this.datosCuestionario = [];
       this.datosCuestionario = response as DatosCuestionario[];
       this.datosCuestionario.map(dc => {
+        let suma = 0 ; 
         dc.listRespuestasUsuario.map(pre => {
           const posi = this.texto.indexOf(pre.tituloPregunta);
           if (posi == -1) {
@@ -193,9 +202,59 @@ export class Grafica1Component {
           }
           this.preguntas.push(pre);
         });
+        sumas.push(suma);
+        suma = 0;
       });
+      const niveles = {
+        'Tic-Excluido': [],
+        'Tic-Basico': [],
+        'Tic-Desarrollado': [],
+        'Tic-Avanzado': [],
+        'HiperTic': []
+      }
+      const total = sumas.length;
+      sumas.map(suma => {
+        if (suma >= 0 && suma <= 12) {
+          const size = niveles['Tic-Excluido'].length + 1;
+          niveles['Tic-Excluido'].push((size * 100) / total);
+        } else if (suma >= 13 && suma <= 30) {
+          const size = niveles['Tic-Basico'].length + 1;
+          niveles['Tic-Basico'].push((size * 100) / total);
+        } else if (suma >= 31 && suma <= 55) {
+          const size = niveles['Tic-Desarrollado'].length + 1;
+          niveles['Tic-Desarrollado'].push((size * 100) / total);
+        } else if (suma >= 56 && suma <= 75) {
+          const size = niveles['Tic-Avanzado'].length + 1;
+          niveles['Tic-Avanzado'].push((size * 100) / total);
+        } else if (suma >= 76 && suma <= 100) {
+          const size = niveles['HiperTic'].length + 1;
+          niveles['HiperTic'].push((size * 100) / total);
+        }
+      });
+      console.log(niveles['Tic-Excluido'].slice(-1));
+      console.log(niveles['Tic-Basico'].slice(-1));
+      console.log(niveles['Tic-Desarrollado'].slice(-1));
+      console.log(niveles['Tic-Avanzado'].slice(-1));
+      console.log(niveles['HiperTic'].slice(-1));
+      this.obtenerPromedio();
+      setTimeout(() => {
+
+        const dialog = this.dialog.open(InformeComponent, {
+          width: '100%',
+          height: '95%',
+          data: {
+            'niveles': niveles,
+            'promedio': this.madurez,
+          },
+          panelClass: 'my-dialog',
+          disableClose: false
+        })
+      }, 1000);
     });
     this.isActive = true;
+    this.madurez = ""; 
+    
+    
   }
   calcularNivelMadurez() {
     let temp = 0;

@@ -17,6 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { InformeComponent } from './informe/informe.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     NopagefoundComponent,
     Grafica1Component,
     VerpostComponent,
+    InformeComponent,
 
   ],
   imports: [

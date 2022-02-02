@@ -158,11 +158,16 @@
     font-size: 14px;
 
   }
+
   
   button:hover {
-    box-shadow: -5px -5px 15px rgb(253, 126, 8), 5px 5px 15px rgb(165, 81, 3), inset 5px 5px 10px rgb(250, 193, 119), inset -5px -5px 10px rgb(164, 80, 2);
+    box-shadow:  5px 5px 15px rgb(165, 81, 3), inset 3px 3px 3px rgb(250, 193, 119), inset -3px -3px 3px rgb(164, 80, 2);
     font-size: 15px;
     transition: 500ms;
+    
+  }
+  button:active{
+    color: rgb(59, 38, 7);
   }
   
   button:focus {
@@ -171,16 +176,13 @@
   }
   
   .red:hover {
-    color: #020202;
-    text-shadow: 0px 0px 10px #a29090;
-    
+    text-shadow: 1px 1px 5px #c26f03;
   }
 
   label{
     text-align: center;
     color: rgb(59, 38, 7);
     padding: 5px 15px;
-    
   }
 
  input:hover{
@@ -191,6 +193,8 @@
 #cursos:hover{
   box-shadow: -2px -2px 5px rgb(158, 199, 228), 2px 2px 5px rgb(158, 199, 228);
 }
+
+
 #cursos{
   cursor: pointer;
   
@@ -209,9 +213,8 @@
         -ms-user-select: none;
             user-select: none;
     -webkit-tap-highlight-color: transparent;
-  color: rgb(255, 255, 255) ;
+  color: rgb(255, 255, 255);
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-
   width: 70px;
   height: 50px;
   cursor: pointer;
@@ -220,7 +223,5 @@
   border: none;
   border-radius: 10px;
   box-shadow:  5px 5px 15px rgb(140, 140, 139), inset 5px 5px 5px #f7b662, inset -5px -5px 5px rgb(164, 80, 2);
-  color: rgb(240, 227, 128);
-  font-size: 14px;
-
+  font-size: 18px;
   }
