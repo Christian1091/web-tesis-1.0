@@ -4,22 +4,22 @@
   <mat-drawer #drawer class="example-sidenav" mode="side">
     <br /><br /><br /><br />
     <dl>CUESTIONARIOS</dl>
-    <div *ngFor="let cuestionario of listCuestionarios">
+    <div *ngFor="let cuestionario of listCuestionarios; let i = index">
       <hr />
       <div class="buttonC">
-        <p (click)="getListCuestionarioById(cuestionario._id)">
+        <p (click)="getListCuestionarioById(cuestionario._id, i)">
           {{ cuestionario.nombre }}
         </p>
       </div>
     </div>
     <br /> <br /> <br />
-    <div class="center">
+    <!-- <div class="center">
       <button class="noselect red" (click)="obtenerPromedio()" *ngIf="listCuestionarios.length > 0">
         Nivel MMTD
       </button>
       <br />
-      <span>{{ mmtd }}</span>
-    </div>
+      <span>{{madurez}}</span>
+    </div> -->
 
   </mat-drawer>
 
@@ -52,7 +52,7 @@
     <<
   </button>
 
-  <button class="noselect red" (click)="calcularNivelMadurez()" *ngIf="isActive">
+  <button class="noselect red" (click)="calcularNivelMadurez(true)" *ngIf="isActive">
     Evaluación de MM
   </button>
 

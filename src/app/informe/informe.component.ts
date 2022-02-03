@@ -14,6 +14,8 @@ export class InformeComponent implements OnInit {
   public chart: any;
   private lista = [];
   public promedio = 0;
+  public puntos: number = 0;
+  public nivel: string = ""; 
   constructor( @Inject(MAT_DIALOG_DATA) public niveles:{
     'niveles': {
       'Tic-Excluido': [],
@@ -25,12 +27,9 @@ export class InformeComponent implements OnInit {
     'promedio': number
   }) { }
 
+
+
   ngOnInit(): void {
-    this.promedio = this.niveles['promedio'];
-  }
-
-
-  ngAfterViewInit(): void {
     const nivel1 = this.niveles['niveles']['Tic-Excluido'].slice(-1);
     const nivel2 = this.niveles['niveles']['Tic-Basico'].slice(-1);
     const nivel3 = this.niveles['niveles']['Tic-Desarrollado'].slice(-1);
@@ -42,8 +41,31 @@ export class InformeComponent implements OnInit {
     console.log(nivel2);
     console.log(nivel3);
     console.log(nivel4);
+    this.promedio = this.niveles['promedio'];
+    this.evaluacionMM();
+    
+  }
 
+  ngAfterViewInit(): void {
     this.graficarInfo();
+    
+  }
+  evaluacionMM() {
+    let evaluacion: string = "";
+    const puntos = this.promedio;
+    if (puntos >= 0 && puntos <= 12) {
+      evaluacion = "1 - TIC Excluido";
+    } else if (puntos > 12 && puntos < 31) {
+      evaluacion = "2 - TIC Básico";
+    } else if (puntos > 30 && puntos < 56) {
+      evaluacion = "3 - TIC Desarrollado";
+    } else if (puntos > 55 && puntos < 76) {
+      evaluacion = "4 - TIC Avanzado";
+    } else if (puntos > 75 && puntos < 101) {
+      evaluacion = "5 - Hiper TIC";
+    }
+    this.nivel = evaluacion; 
+    console.log(evaluacion);
   }
 
   graficarInfo(tipo: ChartType = 'bar') {

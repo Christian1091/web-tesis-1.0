@@ -160,20 +160,21 @@ export class Grafica1Component {
       })
   }
   obtenerPromedio() {
-    this.promedioMadurez = 0;
+  this.promedioMadurez = 0;
     this.mmtd = 0;
     this.listCuestionarios.forEach(cuestionario => {
       this.respuestaCuestionarioService.getRespuestaByIdCuestionario(cuestionario._id).toPromise().then(response => {
         this.datosCuestionario = response as DatosCuestionario[];
         this.calcularNivelMadurez();
-        this.promedioTotal = this.promedioMadurez / this.listCuestionarios.length;
-        console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
-        this.mmtd = (this.promedioMadurez / this.listCuestionarios.length);
-        //console.log(this.mmtd);
-
-        //this.madurez = "";
+        
       });
     });
+    setTimeout(() => {
+      this.promedioTotal = this.promedioMadurez / this.listCuestionarios.length;
+      console.log("MMTD", (this.promedioMadurez / this.listCuestionarios.length), `${this.promedioMadurez} ${this.listCuestionarios.length}`);
+      this.mmtd = (this.promedioMadurez / this.listCuestionarios.length);
+      
+    }, 1500);
   }
 
   obtenerCuestionario(id) {
@@ -249,7 +250,7 @@ export class Grafica1Component {
     });
     this.isActive = true;  
   }
-  calcularNivelMadurez() {
+  calcularNivelMadurez(ok:boolean = false) {
     let temp = 0;
     let respuestas = {
       'respuestas': [],
@@ -260,7 +261,7 @@ export class Grafica1Component {
     const sizeTest: number = this.datosCuestionario.length;
     let cont: number = 0 ; 
     this.datosCuestionario.map((res, index) => {
-      cont += res.puntosTotales;
+      cont += (res.puntosTotales*100)/this.listCuestionarios[this.pos].puntajeCuestionario;
       res.listRespuestasUsuario.map(l => {
         respuestas['indice'].push(index)
         l.indexRespuestaSeleccionada.map(r => {
@@ -308,20 +309,23 @@ export class Grafica1Component {
       })
       zz += x * ps;
     });
-    console.log(zz);
+    console.log("Z..",zz);
     //this.madurez = zz + "";
     this.promedioMadurez += zz;
+   if(ok)
+   {
     this.getData();
-      const dialog = this.dialog.open(InformeComponent, {
-        width: '100%',
-        height: '95%',
-        data: {
-          'niveles': this.niveles,
-          'promedio': this.madurez,
-        },
-        panelClass: 'my-dialog',
-        disableClose: false
-      })
+    const dialog = this.dialog.open(InformeComponent, {
+      width: '100%',
+      height: '95%',
+      data: {
+        'niveles': this.niveles,
+        'promedio': this.madurez,
+      },
+      panelClass: 'my-dialog',
+      disableClose: false
+    })
+   }
   }
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
