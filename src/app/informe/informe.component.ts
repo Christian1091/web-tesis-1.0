@@ -26,8 +26,7 @@ export class InformeComponent implements OnInit {
   }) { }
 
   ngOnInit(): void {
-    
-    
+    this.promedio = this.niveles['promedio'];
   }
 
 
@@ -38,7 +37,12 @@ export class InformeComponent implements OnInit {
     const nivel4 = this.niveles['niveles']['Tic-Avanzado'].slice(-1);
     const nivel5 = this.niveles['niveles']['HiperTic'].slice(-1);
     this.lista = [(nivel1.length == 0) ? 0 : nivel1[0], (nivel2.length == 0) ? 0 : nivel2[0], (nivel3.length == 0) ? 0 : nivel3[0], (nivel4.length == 0) ? 0 : nivel4[0], (nivel5.length == 0) ? 0 : nivel5[0]];
-    this.promedio = this.niveles['promedio'];
+    console.log(this.lista);
+    console.log(nivel1);
+    console.log(nivel2);
+    console.log(nivel3);
+    console.log(nivel4);
+
     this.graficarInfo();
   }
 
@@ -52,7 +56,7 @@ export class InformeComponent implements OnInit {
         labels: x,
         title: {
           display: true,
-          text: "Niveles del modelo de madurez de Transformacion Digital",
+          text: "Niveles del modelo de madurez de Transformación Digital",
         },
         tooltips: {
           callbacks: {

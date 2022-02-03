@@ -22,14 +22,6 @@ import { InformeComponent } from '../informe/informe.component';
 })
 export class Grafica1Component {
 
-  public niveles = {
-    1: 'TIC excluido',
-    2: 'TIC basico',
-    3: 'TIC desarrollado',
-    4: 'TIC avanzado',
-    5: 'hiper TIC'
-  };
-
   public isActive: boolean = false;
   public chart: any;
   public id: string;
@@ -51,6 +43,13 @@ export class Grafica1Component {
   public promedioMadurez = 0;
   public promedioTotal = 0;
   public mmtd = 0;
+  public niveles = {
+    'Tic-Excluido': [],
+    'Tic-Basico': [],
+    'Tic-Desarrollado': [],
+    'Tic-Avanzado': [],
+    'HiperTic': []
+  }
 
   constructor(private cuestioanrioService: CuestionarioService,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
@@ -184,17 +183,60 @@ export class Grafica1Component {
     });
   }
 
+  getData() {
+		this.niveles['HiperTic'] = [];
+		this.niveles['Tic-Avanzado'] = [];
+		this.niveles['Tic-Basico'] = [];
+		this.niveles['Tic-Desarrollado'] = [];
+		this.niveles['Tic-Excluido'] = [];
+		const sumas = [];
+		this.datosCuestionario.map(dc => {
+			let suma = 0;
+			dc.listRespuestasUsuario.map(pre => {
+				suma += Number.parseFloat(pre.puntosObtenidos.toString());
+				const posi = this.texto.indexOf(pre.tituloPregunta);
+				if (posi == -1) {
+					this.texto.push(pre.tituloPregunta);
+				}
+				this.preguntas.push(pre);
+			});
+			sumas.push(suma);
+			suma = 0;
+		});
+
+		const total = sumas.length;
+		console.log(sumas, 'sumas');
+
+		sumas.map(suma => {
+			if (suma >= 0 && suma <= 12) {
+				const size = this.niveles['Tic-Excluido'].length + 1;
+				this.niveles['Tic-Excluido'].push((size * 100) / total);
+			} else if (suma >= 13 && suma <= 30) {
+				const size = this.niveles['Tic-Basico'].length + 1;
+				this.niveles['Tic-Basico'].push((size * 100) / total);
+			} else if (suma >= 31 && suma <= 55) {
+				const size = this.niveles['Tic-Desarrollado'].length + 1;
+				this.niveles['Tic-Desarrollado'].push((size * 100) / total);
+			} else if (suma >= 56 && suma <= 75) {
+				const size = this.niveles['Tic-Avanzado'].length + 1;
+				this.niveles['Tic-Avanzado'].push((size * 100) / total);
+			} else if (suma >= 76 && suma <= 100) {
+				const size = this.niveles['HiperTic'].length + 1;
+				this.niveles['HiperTic'].push((size * 100) / total);
+			}
+		});
+	}
 
   getListCuestionarioById(idC: string, i) {
     this.pos = i;
-    const sumas = [];
+    
     this.respuestaCuestionarioService.getRespuestaByIdCuestionario(idC).subscribe(response => {
       this.preguntas = [];
       this.texto = [];
       this.datosCuestionario = [];
       this.datosCuestionario = response as DatosCuestionario[];
       this.datosCuestionario.map(dc => {
-        let suma = 0 ; 
+        
         dc.listRespuestasUsuario.map(pre => {
           const posi = this.texto.indexOf(pre.tituloPregunta);
           if (posi == -1) {
@@ -202,59 +244,10 @@ export class Grafica1Component {
           }
           this.preguntas.push(pre);
         });
-        sumas.push(suma);
-        suma = 0;
       });
-      const niveles = {
-        'Tic-Excluido': [],
-        'Tic-Basico': [],
-        'Tic-Desarrollado': [],
-        'Tic-Avanzado': [],
-        'HiperTic': []
-      }
-      const total = sumas.length;
-      sumas.map(suma => {
-        if (suma >= 0 && suma <= 12) {
-          const size = niveles['Tic-Excluido'].length + 1;
-          niveles['Tic-Excluido'].push((size * 100) / total);
-        } else if (suma >= 13 && suma <= 30) {
-          const size = niveles['Tic-Basico'].length + 1;
-          niveles['Tic-Basico'].push((size * 100) / total);
-        } else if (suma >= 31 && suma <= 55) {
-          const size = niveles['Tic-Desarrollado'].length + 1;
-          niveles['Tic-Desarrollado'].push((size * 100) / total);
-        } else if (suma >= 56 && suma <= 75) {
-          const size = niveles['Tic-Avanzado'].length + 1;
-          niveles['Tic-Avanzado'].push((size * 100) / total);
-        } else if (suma >= 76 && suma <= 100) {
-          const size = niveles['HiperTic'].length + 1;
-          niveles['HiperTic'].push((size * 100) / total);
-        }
-      });
-      console.log(niveles['Tic-Excluido'].slice(-1));
-      console.log(niveles['Tic-Basico'].slice(-1));
-      console.log(niveles['Tic-Desarrollado'].slice(-1));
-      console.log(niveles['Tic-Avanzado'].slice(-1));
-      console.log(niveles['HiperTic'].slice(-1));
-      this.obtenerPromedio();
-      setTimeout(() => {
-
-        const dialog = this.dialog.open(InformeComponent, {
-          width: '100%',
-          height: '95%',
-          data: {
-            'niveles': niveles,
-            'promedio': this.madurez,
-          },
-          panelClass: 'my-dialog',
-          disableClose: false
-        })
-      }, 1000);
+    
     });
-    this.isActive = true;
-    this.madurez = ""; 
-    
-    
+    this.isActive = true;  
   }
   calcularNivelMadurez() {
     let temp = 0;
@@ -264,7 +257,10 @@ export class Grafica1Component {
       'total': []
     };
     console.log(this.datosCuestionario);
+    const sizeTest: number = this.datosCuestionario.length;
+    let cont: number = 0 ; 
     this.datosCuestionario.map((res, index) => {
+      cont += res.puntosTotales;
       res.listRespuestasUsuario.map(l => {
         respuestas['indice'].push(index)
         l.indexRespuestaSeleccionada.map(r => {
@@ -275,6 +271,8 @@ export class Grafica1Component {
         respuestas['total'].push(l.listRespuesta.length)
       })
     });
+    this.madurez = (cont/sizeTest).toFixed(2);
+
     console.log(respuestas);
     let porcentajes = {
 
@@ -311,8 +309,19 @@ export class Grafica1Component {
       zz += x * ps;
     });
     console.log(zz);
-    this.madurez = zz + "";
+    //this.madurez = zz + "";
     this.promedioMadurez += zz;
+    this.getData();
+      const dialog = this.dialog.open(InformeComponent, {
+        width: '100%',
+        height: '95%',
+        data: {
+          'niveles': this.niveles,
+          'promedio': this.madurez,
+        },
+        panelClass: 'my-dialog',
+        disableClose: false
+      })
   }
   onlyUnique(value, index, self) {
     return self.indexOf(value) === index;

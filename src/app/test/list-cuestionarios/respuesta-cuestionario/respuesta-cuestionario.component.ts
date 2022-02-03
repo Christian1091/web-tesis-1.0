@@ -16,6 +16,8 @@ export interface Pre {
   puntosObtenidos: number,
   indexRespuestaSeleccionada: [],
   puntajePregunta: number
+  
+
 }
 
 @Component({
@@ -26,7 +28,7 @@ export interface Pre {
   ]
 })
 export class RespuestaCuestionarioComponent implements OnInit {
-
+  public puntaje: number = 0 ;
   public id: string;
   public respuestaCuestionario: any;
   public rutaAnterior = '';
@@ -38,6 +40,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
   public institucionParticipante: String = "";
   public provinciaParticipante: string = "";
   public ciudadParticipante: string = "";
+  public puntajeCuest: string = ""; 
 
 
   constructor(private respuestaUsuarioService: RespuestaCuestionarioService,
@@ -121,7 +124,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
               color: 'blue',
             },
             {
-              text: "Puntos: " + this.puntos,
+              text: "Puntos: " + this.puntajeCuest,
               color: 'red',
             },
             {
@@ -223,33 +226,41 @@ export class RespuestaCuestionarioComponent implements OnInit {
   obtenerRespuestaUsuario() {
 
     this.rs = [];
-    this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(res => {
+    this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
 
-      const r = res['listRespuestasUsuario'];
+      const r = resp[0]['listRespuestasUsuario'];
+      this.puntaje = Number.parseInt(resp[1].toString());
+      console.log(resp[1])
+
       r.forEach(res => {
         let suma = 0;
         const indices: [] = res["indexRespuestaSeleccionada"];
         indices.map(indice => {
           suma += Number.parseFloat(res["listRespuesta"][indice].puntosRespuesta.toString())
+          console.log(res["listRespuesta"][indice].puntosRespuesta.toString());
         });
+        
         let pre: Pre = {
           tituloPregunta: res["tituloPregunta"],
           listRespuesta: res["listRespuesta"] as [],
-          indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],
+          indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],  
           puntosObtenidos: suma,
           puntajePregunta: res["puntajePregunta"]
         };
+        
         this.rs.push(pre);
         suma = 0;
       });
-      this.nombre = res["nombreParticipante"];
-      this.titulo = res["nombre"];
-      this.correo = res["correoParticipante"];
-      this.puntos = res["puntosTotales"].toString();
-      this.institucionParticipante = res["institucionParticipante"];
-      this.provinciaParticipante = res["provinciaParticipante"];
-      this.ciudadParticipante = res["ciudadParticipante"];
-      this.respuestaCuestionario = res;
+      this.nombre = resp[0]["nombreParticipante"];
+      this.titulo = resp[0]["nombre"];
+      this.correo = resp[0]["correoParticipante"];
+      this.puntos = resp[0]["puntosTotales"].toString();
+      this.institucionParticipante = resp[0]["institucionParticipante"];
+      this.provinciaParticipante = resp[0]["provinciaParticipante"];
+      this.ciudadParticipante = resp[0]["ciudadParticipante"];
+      this.respuestaCuestionario = resp[0];
+
+      this.puntajeCuest = ((Number.parseInt(this.puntos) * 100 ) / this.puntaje).toString();
 
     });
   }

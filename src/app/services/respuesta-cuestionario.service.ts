@@ -52,7 +52,7 @@ export class RespuestaCuestionarioService {
     const url =  `${ base_url }/respuestaCuestionarios/${ _id }`;
     return this.http.get( url, this.headers )
                 .pipe(
-                  map( (resp: {ok: boolean, respuestaUsuario: respuestaUsuario }) => resp.respuestaUsuario )
+                  map( (resp: {ok: boolean, respuestaUsuario: respuestaUsuario, puntaje:number }) => [resp.respuestaUsuario,resp.puntaje])
                 );
   }
 
