@@ -65,14 +65,28 @@ export class ValidarIngresoComponent implements OnInit {
      this.respuestaCuestionarioService.institucionParticipante = this.institucionParticipante;
      this.respuestaCuestionarioService.provinciaParticipante = this.provinciaParticipante;
      this.respuestaCuestionarioService.ciudadParticipante = this.ciudadParticipante;
-
+      console.log(this.provinciaParticipante);
+      console.log(this.ciudadParticipante);
+      
      this.router.navigateByUrl(`/pregunta/${this.id}`);
   }
 
   onSelect( id ) {
     //console.log(this.provinciaService.getCantones());
     this.cantones = this.provinciaService.getCantones(id).filter( item => item.provinciaId == id );
+    this.ciudadParticipante = this.cantones[0].nombreCanton;
+    this.ok = false;
     //console.log(this.cantones);
+  }
+
+  getCuidad(value) {
+    console.log(value);
+    this.ciudadParticipante = value;
+    this.ok = true;
+  }
+  getProvincia(value) {
+    console.log(value);
+    this.provinciaParticipante = value;
   }
 
 }
