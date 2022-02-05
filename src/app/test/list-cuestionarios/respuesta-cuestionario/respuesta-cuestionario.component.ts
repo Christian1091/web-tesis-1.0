@@ -70,7 +70,9 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
   async downloadAsPDF1() {
     let evaluacion: string = "";
-    const puntos = Number.parseInt(this.puntos);
+    const puntos = Number.parseInt(this.puntajeCuest);
+    console.log(this.puntajeCuest, "puntaje cues");
+    
     if (puntos >= 0 && puntos < 12) {
       evaluacion = "1 - TIC Excluido";
     } else if (puntos > 12 && puntos < 31) {
@@ -153,7 +155,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
               },
               ],
               ...this.rs.map(ed => {
-                return [ed.tituloPregunta, ed.puntosObtenidos];
+                return [ed.tituloPregunta, Number.parseFloat(ed.puntosObtenidos.toString()).toFixed(2)];
               })
             ]
           },

@@ -27,20 +27,32 @@
 
 
                 <div *ngIf="cargoPregunta">
-                    <ul class="list-group" *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
-                        <li *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
-                            <input type="checkbox" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)"  (click)="respuestaSeleccionada(respuesta, i, true)" [ngClass]="AddClassOption(respuesta)"/> {{respuesta.descripcion}}<br>
-                        </li>
-                        <li *ngIf="!respuesta.tipoRespuesta && !respuesta.texto">
-                            <input type="radio" [value]="respuesta.descripcion" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)" (click)="respuestaSeleccionada(respuesta, i, false)" [ngClass]="AddClassOption(respuesta)"/> {{respuesta.descripcion}}<br>
-                        </li>
-                        <li *ngIf="respuesta.texto">
-                            <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta"/>
-                        </li>
+                    <ul *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
+                        <div class="center">
+                            <div class="aline">
+                                <li  class="list-group-item" *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
+                                    <div class="line">
+                                        <input [id]="i" type="checkbox" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)"  (click)="respuestaSeleccionada(respuesta, i, true)" [ngClass]="AddClassOption(respuesta)"> 
+                                        <div style="width: 20px;"></div>
+                                        <label [for]="i">{{respuesta.descripcion}}</label>
+                                    </div>
+                                </li>
+                                <li  class="list-group-item" *ngIf="!respuesta.tipoRespuesta && !respuesta.texto" >
+                                    <div class="line">
+                                        <input [id]="i" type="radio"  [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)" (click)="respuestaSeleccionada(respuesta, i, false)" [ngClass]="AddClassOption(respuesta)">
+                                        
+                                         <label [for]="i">{{respuesta.descripcion}}</label>
+                                    </div>
+                                </li>
+                                <li class="list-group-item" *ngIf="respuesta.texto">
+                                    <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta"/>
+                                </li>
+                            </div>
+                        </div>
                     </ul>
                 </div>
 
-                <div class="mt-auto">
+                <div class="mt-auto btn-next">
                     <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada" (click)="siguiente(contador)">
             Siguiente
           </button>
