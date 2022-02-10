@@ -1,130 +1,222 @@
 <!-- Inicio del form pregunta unica -->
 <form [formGroup]="opcionRespuestas">
-
     <h3 class="card-title" *ngIf="!bandera">Actualizar Cuestionario</h3>
-
-    <input type="text" class="form-control" *ngIf="!bandera" placeholder="Ingrese el titulo del Cuestionario" [formControl]="tituloCuestionario">
-
+  
+    <input
+      type="text"
+      class="form-control"
+      *ngIf="!bandera"
+      placeholder="Ingrese el titulo del Cuestionario"
+      [formControl]="tituloCuestionario"
+    />
+  
     <div class="form-group">
-        <br/>
-        <textarea class="formControl" *ngIf="!bandera" placeholder="Ingrese la descripcion del cuestionario"  cols="100" rows="3" [formControl]="descripcionCuestionario"></textarea>
+      <br />
+      <textarea
+        class="formControl"
+        *ngIf="!bandera"
+        placeholder="Ingrese la descripcion del cuestionario"
+        cols="100"
+        rows="3"
+        [formControl]="descripcionCuestionario"
+      ></textarea>
     </div>
-
+  
     <div class="row">
-        <div calss="col-nd-2">
-            <input type="text" class="form-control text-center" *ngIf="!bandera" placeholder="Puntaje" [formControl]="puntajeCuestionario">
-        </div>
-
+      <div calss="col-nd-2">
+        <input
+          type="text"
+          class="form-control text-center"
+          *ngIf="!bandera"
+          placeholder="Puntaje"
+          [formControl]="puntajeCuestionario"
+        />
+      </div>
     </div>
-
+  
     <div class="row">
-        <div class="col-md-8">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Ingrese la pregunta" formControlName="titulo" />
-
-            </div>
-            <span class="text-danger"
-                *ngIf="opcionRespuestas.get('titulo').hasError('required') && opcionRespuestas.get('titulo').touched">
-                La pregunta es requerida
-            </span>
+      <div class="col-md-8">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Ingrese la pregunta"
+            formControlName="titulo"
+          />
         </div>
-        <div class="col-md-4">
-            <div class="input-group">
-                <input type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje" />
-            </div>
+        <span
+          class="text-danger"
+          *ngIf="
+            opcionRespuestas.get('titulo').hasError('required') &&
+            opcionRespuestas.get('titulo').touched
+          "
+        >
+          La pregunta es requerida
+        </span>
+      </div>
+      <div class="col-md-4">
+        <div class="input-group">
+          <input
+            type="text"
+            class="form-control text-center"
+            placeholder="Puntaje"
+            formControlName="puntaje"
+          />
         </div>
-
+      </div>
     </div>
-
+  
     <!-- Seleccion de opcion pregunta -->
     <div>
-        <button type="button" class="btn btn-secondary dropdown-toggle col-lg-12" data-toggle="dropdown">
-            Opcion Respuestas
-        </button>
-        <div class="dropdown-menu dropdown-menu-right">
-            <a class="dropdown-item" style="cursor: pointer" (click)="agregarRespuesta(false, false)">
-                <i class="fa fa-check-circle"></i> Opcion Unica
-            </a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" style="cursor: pointer" (click)="agregarRespuesta(true, false)">
-                <i class="fa fa-check-square"></i> Opcion Multiple
-            </a>
-            <div role="separator" class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="agregarRespuesta(false, true)">
-                <i class="fa fa-align-left"></i> Parrafo
-            </a>
-        </div>
+      <button
+        type="button"
+        class="btn btn-secondary dropdown-toggle col-lg-12"
+        data-toggle="dropdown"
+      >
+        Opcion Respuestas
+      </button>
+      <div class="dropdown-menu dropdown-menu-right">
+        <a
+          class="dropdown-item"
+          style="cursor: pointer"
+          (click)="agregarRespuesta(false, false)"
+        >
+          <i class="fa fa-check-circle"></i> Opcion Unica
+        </a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a
+          class="dropdown-item"
+          style="cursor: pointer"
+          (click)="agregarRespuesta(true, false)"
+        >
+          <i class="fa fa-check-square"></i> Opcion Multiple
+        </a>
+        <div role="separator" class="dropdown-divider"></div>
+        <a class="dropdown-item" (click)="agregarRespuesta(false, true)">
+          <i class="fa fa-align-left"></i> Parrafo
+        </a>
+      </div>
     </div>
-
+  
     <div *ngIf="!esMultiple" formArrayName="respuestas">
-        <div *ngFor="let item of getRespuestasUnicas.controls; let i = index">
-            <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
-
-                <div class="input-group-addon">
-                    <div *ngIf="!item.get('tipoRespuesta').value" class="input-group-text">
-                        <input type="radio" [value]="i" name="radio" />
-                    </div>
-                    <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
-                        <input type="checkbox" [value]="i" name="check" />
-                    </div>
-                </div>
-                <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}"
-                    formControlName="descripcion" />
-
-                <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Pts."
-                    formControlName="puntosRespuesta" />
-
-                <span class="material-icons delete-icon" (click)="eliminarRespuestasUnicas(i)">
-                    delete
-                </span>
+      <div *ngFor="let item of getRespuestasUnicas.controls; let i = index">
+        <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
+          <div class="input-group-addon">
+            <div
+              *ngIf="!item.get('tipoRespuesta').value"
+              class="input-group-text"
+            >
+              <input type="radio" [value]="i" name="radio" />
             </div>
-            <span class="text-danger"
-                *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
-                La respuesta es requerida
-            </span>
+            <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
+              <input type="checkbox" [value]="i" name="check" />
+            </div>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Respuesta {{ i + 1 }}"
+            formControlName="descripcion"
+          />
+  
+          <input
+            type="text"
+            class="form-control col-lg-2"
+            style="margin-left: 10px"
+            placeholder="Pts."
+            formControlName="puntosRespuesta"
+          />
+  
+          <span
+            class="material-icons delete-icon"
+            (click)="eliminarRespuestasUnicas(i)"
+          >
+            delete
+          </span>
         </div>
-
+        <span
+          class="text-danger"
+          *ngIf="
+            item.get('descripcion').hasError('required') &&
+            item.get('descripcion').touched
+          "
+        >
+          La respuesta es requerida
+        </span>
+      </div>
     </div>
-
-    <br>
-    <br>
-    
-     <div *ngIf="esMultiple" formArrayName="respuestas">
-
-        <div *ngFor="let item of getRespuestasMultiples.controls; let i = index">
-            <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
-
-                <div class="input-group-addon">
-                    <div *ngIf="!item.get('tipoRespuesta').value" class="input-group-text">
-                        <input type="radio" [value]="i" name="radio" />
-                    </div>
-                    <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
-                        <input type="checkbox" [value]="i" name="check" />
-                    </div>
-                </div>
-                <input type="text" class="form-control" placeholder="Respuesta {{ i + 1 }}"
-                    formControlName="descripcion" />
-
-                <input type="text" class="form-control col-lg-2" style="margin-left: 10px;" placeholder="Pts."
-                    formControlName="puntosRespuesta"  /> 
-
-                <span class="material-icons delete-icon" (click)="eliminarRespuestaMultiples(i)">
-                    delete
-                </span>
+  
+    <br />
+    <br />
+  
+    <div *ngIf="esMultiple" formArrayName="respuestas">
+      <div *ngFor="let item of getRespuestasMultiples.controls; let i = index">
+        <div class="input-group" [formGroupName]="i" style="padding-top: 10px">
+          <div class="input-group-addon">
+            <div
+              *ngIf="!item.get('tipoRespuesta').value"
+              class="input-group-text"
+            >
+              <input type="radio" [value]="i" name="radio" />
             </div>
-            <span class="text-danger"
-                *ngIf="item.get('descripcion').hasError('required') && item.get('descripcion').touched">
-                La respuesta es requerida
-            </span>
+            <div *ngIf="item.get('tipoRespuesta').value" class="input-group-text">
+              <input type="checkbox" [value]="i" name="check" />
+            </div>
+          </div>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Respuesta {{ i + 1 }}"
+            formControlName="descripcion"
+          />
+  
+          <input
+            type="text"
+            class="form-control col-lg-2"
+            style="margin-left: 10px"
+            placeholder="Pts."
+            formControlName="puntosRespuesta"
+          />
+  
+          <span
+            class="material-icons delete-icon"
+            (click)="eliminarRespuestaMultiples(i)"
+          >
+            delete
+          </span>
         </div>
-    </div> 
-    <br>
-    <br>
+        <span
+          class="text-danger"
+          *ngIf="
+            item.get('descripcion').hasError('required') &&
+            item.get('descripcion').touched
+          "
+        >
+          La respuesta es requerida
+        </span>
+      </div>
+    </div>
+    <div>
+      <mat-select
+        placeholder="Selecciona una area"
+        (valueChange)="getArea($event)"
+      >
+        <mat-option *ngFor="let area of areas" [value]="area">
+          {{ area.area }}
+        </mat-option>
+      </mat-select>
+    </div>
+    <br />
+    <br />
     <div class="row-md-2" id="brnAgr">
-        <button class="btn btn-info float-top btnAgregar" (click)="agregarPregunta()">
-            {{tittle}}
-            <span></span><span></span><span></span><span></span>
-        </button>
+      <button
+        class="btn btn-info float-top btnAgregar"
+        (click)="agregarPregunta()"
+      >
+        {{ tittle }}
+        <span></span><span></span><span></span><span></span>
+      </button>
     </div>
-</form>
-<!-- Fin del form pregunta unica -->
+  </form>
+  <!-- Fin del form pregunta unica -->
+  

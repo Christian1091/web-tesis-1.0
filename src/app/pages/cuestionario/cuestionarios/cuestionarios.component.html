@@ -34,6 +34,24 @@
 
                             </div>
                         </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                              <div class="col">
+                                <label for="">Tipo Cuestionario</label>
+                              </div>
+                              <div class="col">
+                                <mat-select
+                                  placeholder="Selecciona"
+                                  (valueChange)="obtenerTipo($event)"
+                                >
+                                  <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+                                    {{ tipo }}
+                                  </mat-option>
+                                </mat-select>
+                            </div>
+                                </div>
+
+                                  </div>
                         <div class="col-md-10">
                             <button [disabled]="cuestionarioForm.invalid" class="btn btn-info btn-md text-uppercase float-right" type="submit">Nuevo Cuestionario</button>
                         </div>

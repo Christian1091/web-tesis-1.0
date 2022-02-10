@@ -20,6 +20,7 @@ export class PreguntasComponent implements OnInit {
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;
+  tipo: string; 
   listPreguntas: Pregunta[] = [];
 
   cuestionarioAux: any;
@@ -32,6 +33,7 @@ export class PreguntasComponent implements OnInit {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
     this.descripcionCuestionario = this.cuestionarioService.descripcionCuestionario;
     this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
+    this.tipo = this.cuestionarioService.tipo;
   }
 
   guardarPregunta( pregunta: Pregunta) {
@@ -48,7 +50,8 @@ export class PreguntasComponent implements OnInit {
       nombre: this.tituloCuestionario,
       descripcion: this.descripcionCuestionario,
       puntajeCuestionario: this.puntajeCuestionario,
-      listPreguntas: this.listPreguntas
+      listPreguntas: this.listPreguntas,
+      tipo: this.tipo
     };
     //console.log(cuestionario);
     Swal.fire({

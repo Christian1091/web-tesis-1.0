@@ -2,11 +2,37 @@
 <section id="wrapper">
     <div class="container">
         <div class="card text-center">
-            <div>
-                <h4 class="card-title"> {{ obtenerPregunta() }} </h4>
+            <div *ngIf="indexPregunta == 0">
+                <br />
+                <br />
 
+                <h1 style="font-size: 40px; font-weight: bold">{{ titulo }}</h1>
+                <br />
+                <br />
+
+                <p style="font-size: 22px; font-weight: 400">{{ descripcion }}</p>
+
+                <br />
+                <br />
+
+            </div>
+            <div class="area" style="
+          border: 1px solid white;
+          background-color: rgba(126, 127, 182, 0.24);
+          width: 100%;
+        ">
+                <h4 class="area" style="font-size: 16px; font-weight: bold; color: rgb(26, 25, 25) ">
+                    {{ obtenerArea() }}
+                </h4>
+            </div>
+            <div>
+                <br />
+                <br />
+
+                <h4 class="card-title">{{ obtenerPregunta() }}</h4>
+                <br />
                 <!-- <ul class="list-group"> -->
-                    <!-- <div class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta; let i = index;" (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)" >{{respueta.descripcion}} <br>
+                <!-- <div class="list-group-item" *ngFor="let respuesta of this.listPreguntas[getIndex()]?.listRespuesta; let i = index;" (click)="respuestaSeleccionada(respuesta, i)" [ngClass]="AddClassOption(respuesta)" >{{respueta.descripcion}} <br>
                         <div *ngIf="respuesta.texto">
                             
                             <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i)" placeholder="Su respuesta..."/>
@@ -25,27 +51,37 @@
                     </div> -->
                 <!-- </ul> -->
 
-
                 <div *ngIf="cargoPregunta">
-                    <ul *ngFor="let respuesta of listPreguntas[getIndex()].listRespuesta; let i = index;">
+                    <ul *ngFor="
+              let respuesta of listPreguntas[getIndex()].listRespuesta;
+              let i = index
+            ">
                         <div class="center">
                             <div class="aline">
-                                <li  class="list-group-item" *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
+                                <li class="list-group-item" *ngIf="respuesta.tipoRespuesta && !respuesta.texto">
                                     <div class="line">
-                                        <input [id]="i" type="checkbox" [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)"  (click)="respuestaSeleccionada(respuesta, i, true)" [ngClass]="AddClassOption(respuesta)"> 
-                                        <div style="width: 20px;"></div>
-                                        <label [for]="i">{{respuesta.descripcion}}</label>
+                                        <input [id]="i" type="checkbox" [name]="listPreguntas[getIndex()].descripcion"
+                                            (change)="respSelect($event.target.value, i)"
+                                            (click)="respuestaSeleccionada(respuesta, i, true)"
+                                            [ngClass]="AddClassOption(respuesta)" />
+                                        <div style="width: 20px"></div>
+                                        <label [for]="i">{{ respuesta.descripcion }}</label>
                                     </div>
                                 </li>
-                                <li  class="list-group-item" *ngIf="!respuesta.tipoRespuesta && !respuesta.texto" >
+                                <li class="list-group-item" *ngIf="!respuesta.tipoRespuesta && !respuesta.texto">
                                     <div class="line">
-                                        <input [id]="i" type="radio"  [name]="listPreguntas[getIndex()].descripcion" (change)="respSelect($event.target.value,i)" (click)="respuestaSeleccionada(respuesta, i, false)" [ngClass]="AddClassOption(respuesta)">
-                                        
-                                         <label [for]="i">{{respuesta.descripcion}}</label>
+                                        <input [id]="i" type="radio" [name]="listPreguntas[getIndex()].descripcion"
+                                            (change)="respSelect($event.target.value, i)"
+                                            (click)="respuestaSeleccionada(respuesta, i, false)"
+                                            [ngClass]="AddClassOption(respuesta)" />
+
+                                        <label [for]="i">{{ respuesta.descripcion }}</label>
                                     </div>
                                 </li>
                                 <li class="list-group-item" *ngIf="respuesta.texto">
-                                    <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto" (change)="respuestaSeleccionada(respuesta, i, false)" placeholder="Su respuesta"/>
+                                    <input class="textoResp" name="respuesta" type="text" [formControl]="respuestaTexto"
+                                        (change)="respuestaSeleccionada(respuesta, i, false)"
+                                        placeholder="Su respuesta" />
                                 </li>
                             </div>
                         </div>
@@ -53,9 +89,10 @@
                 </div>
 
                 <div class="mt-auto btn-next">
-                    <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada" (click)="siguiente(contador)">
-            Siguiente
-          </button>
+                    <button class="btn btn-primary btn-lg btn-sig" [disabled]="!rtaConfirmada"
+                        (click)="siguiente(contador)">
+                        Siguiente
+                    </button>
                 </div>
             </div>
         </div>

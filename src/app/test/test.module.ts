@@ -10,6 +10,8 @@ import { WebModule } from '../web/web.module';
 import { RouterModule } from '@angular/router';
 
 import {ProgressBarModule} from "angular-progress-bar"
+import { MatDialogModule } from '@angular/material/dialog';
+import { GraficoComponent } from './grafico/grafico.component';
 
 
 
@@ -18,7 +20,8 @@ import {ProgressBarModule} from "angular-progress-bar"
     ListCuestionariosComponent,
     ValidarIngresoComponent,
     PreguntaComponent,
-    RespuestaCuestionarioComponent
+    RespuestaCuestionarioComponent,
+    GraficoComponent
   ],
   exports:[
     ListCuestionariosComponent,
@@ -33,7 +36,8 @@ import {ProgressBarModule} from "angular-progress-bar"
     WebModule,
     ReactiveFormsModule,
     ProgressBarModule,
-    HttpClientModule
+    HttpClientModule,
+    MatDialogModule
   ]
 })
 export class TestModule { }

@@ -30,6 +30,8 @@ export class CuestionariosComponent implements OnInit {
 
   public cuestionarios: Cuestionario[] = [];
   public cargando: boolean = true;
+  public tipos: string[] = ["GENERAL", "MD4U", "IES"];
+  public tipo: string = "";
 
   public cuestionarioForm = this.fb.group({
     titulo: ['',Validators.required],
@@ -51,13 +53,17 @@ export class CuestionariosComponent implements OnInit {
 
   }
 
+  obtenerTipo(value: string) {
+    this.tipo = value;
+  }
+
   /**Creamos las preguntas */
   crearPreguntas() {
 
     this.cuestionarioService.tituloCuestionario = this.cuestionarioForm.value.titulo;
     this.cuestionarioService.descripcionCuestionario = this.cuestionarioForm.value.descripcion;
     this.cuestionarioService.puntajecuestionario = this.cuestionarioForm.value.puntaje;
-
+    this.cuestionarioService.tipo = this.tipo ?? "General";
     //console.log("Nos vamos a las preguntas");
     this.router.navigateByUrl('/dashboard/preguntas');
 

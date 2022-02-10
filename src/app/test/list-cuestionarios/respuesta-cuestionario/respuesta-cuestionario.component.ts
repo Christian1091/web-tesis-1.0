@@ -9,14 +9,17 @@ import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
+import { MatDialog } from '@angular/material/dialog';
+import { GraficoComponent } from '../../grafico/grafico.component';
 
 export interface Pre {
   listRespuesta: [],
   tituloPregunta: string,
   puntosObtenidos: number,
   indexRespuestaSeleccionada: [],
-  puntajePregunta: number
-  
+  puntajePregunta: number,
+  area?: string,
+	areaValor?: number
 
 }
 
@@ -41,9 +44,11 @@ export class RespuestaCuestionarioComponent implements OnInit {
   public provinciaParticipante: string = "";
   public ciudadParticipante: string = "";
   public puntajeCuest: string = ""; 
+	public tipo: string = "";
 
 
-  constructor(private respuestaUsuarioService: RespuestaCuestionarioService,
+  constructor( private dialog: MatDialog,
+    private respuestaUsuarioService: RespuestaCuestionarioService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
     this.rutaAnterior = this.activatedRoute.snapshot.url[0].path;
@@ -229,7 +234,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
     this.rs = [];
     this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
-
+      this.tipo = resp[2].toString();
       const r = resp[0]['listRespuestasUsuario'];
       this.puntaje = Number.parseInt(resp[1].toString());
       console.log(resp[1])
@@ -247,7 +252,10 @@ export class RespuestaCuestionarioComponent implements OnInit {
           listRespuesta: res["listRespuesta"] as [],
           indexRespuestaSeleccionada: res["indexRespuestaSeleccionada"],  
           puntosObtenidos: suma,
-          puntajePregunta: res["puntajePregunta"]
+          puntajePregunta: res["puntajePregunta"],
+					area: res["area"],
+					areaValor: res["areaValor"],
+
         };
         
         this.rs.push(pre);
@@ -278,4 +286,32 @@ export class RespuestaCuestionarioComponent implements OnInit {
     }
   }
 
+  informacionCuestionario() {
+		const areas = [];
+		this.rs.map(res => {
+			if (!areas.includes(res['area'])) {
+				if (res['area'] !== '') {
+					areas.push(res['area']);
+				}
+			}
+		});
+		const info = {};
+		areas.map(area => {
+			info[area] = []
+		});
+		areas.map(area => {
+			this.rs.map(res => {
+				if (area === res['area']) {
+					info[area].push(res['puntosObtenidos'])
+				}
+			});
+		});
+
+		const modal = this.dialog.open(GraficoComponent, {
+			width: '80%',
+			disableClose: false,
+			data: info
+		});
+
+	}
 }

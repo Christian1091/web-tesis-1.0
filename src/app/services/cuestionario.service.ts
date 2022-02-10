@@ -8,6 +8,7 @@ import { Cuestionario } from '../models/cuestionario.model';
 import { CargarCuestionario } from '../interfaces/cargar-cuestionarios.interface';
 
 import { Observable } from 'rxjs';
+import { Area } from '../models/area.model';
 
 // Aqui llamamos al url que creamos en el envairoment
 const base_url = environment.base_url;
@@ -21,7 +22,7 @@ export class CuestionarioService {
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajecuestionario: number;
-
+  tipo: string; 
   constructor( private http: HttpClient ) { }
 
   get token(): string {
@@ -37,6 +38,10 @@ export class CuestionarioService {
     }
   }
 
+  getListAreas() {
+		const url = `${base_url}/area/areas`;
+		return this.http.get<{ 'ok': boolean, 'areas': Area[] }>(url, this.headers);
+	}
   // Este get es para visualizar publicamente
   getListCuestionarios() {
     const url =  `${ base_url }/cuestionarios/list-cuestionarios`;

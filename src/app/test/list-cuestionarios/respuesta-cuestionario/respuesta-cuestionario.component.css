@@ -26,4 +26,34 @@
     /*background-color: #f1f1f1;*/
 }
 
+.btnResultados{
+    
+        border-radius: 12px;
+        background-color: #5ca1e1;
+        border: none;
+        color: #fff;
+        text-align: center;
+        font-size: 18px;
+        padding: 8px;
+        width: 350px;
+        transition: all 0.5s;
+        cursor: pointer;
+        margin:9px;
+        box-shadow: 0 10px 20px -8px rgba(6, 9, 43, 0.7);
+      }
 
+      .btnResultados:hover{
+        padding-bottom: 10px;
+        padding-top:6px;
+        color: white;
+        font-size: 18.01px;
+      }
+      .btnResultados {
+        box-shadow: inset 5px 5px 10px rgb(71, 120, 155), inset -5px -5px 10px rgb(86, 149, 194);
+        font-size: 15px;
+        transition: 500ms;
+      }
+      
+
+      
+      
