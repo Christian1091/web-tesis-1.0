@@ -43,6 +43,7 @@
   outline: none;
 }
 
+
 .buttonC:hover {
   box-shadow: inset 5px 5px 10px rgb(71, 120, 155), inset -5px -5px 10px rgb(86, 149, 194);
   font-size: 15px;
