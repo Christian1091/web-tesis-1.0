@@ -37,6 +37,12 @@ export class CuestionarioService {
       }
     }
   }
+  
+  crearArea(area: string, descripcion: string, valor: number) {
+    const url =  `${ base_url }/area/crear`;
+    return this.http.post(url, {area, descripcion, valor}, this.headers);
+
+  }
 
   getListAreas() {
 		const url = `${base_url}/area/areas`;

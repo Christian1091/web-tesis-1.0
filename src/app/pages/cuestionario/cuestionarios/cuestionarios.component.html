@@ -62,6 +62,48 @@
     </div>
 </div>
 
+<div class="row">
+    <div class="col-md-12">
+        <div class="card cardList">
+            <h3>Crear área</h3>
+            <div class="card-body">
+                <div class="row mt-4">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del área" [(ngModel)]="nombreArea">
+                </div>
+                <div class="row mt-4">
+                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción del área" [(ngModel)]="descripcionArea">
+                </div>
+                <div class="row mt-4">
+                    <input type="text" class="form-control" name="valor" placeholder="Valor del área" [(ngModel)]="valorArea">
+                </div>
+                <div class="row mt-4">
+                    <button class="btn btn-success" (click)="crearArea()">Crear</button>
+                </div>
+                <hr>
+                <h3>Áreas</h3>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <td scope="col">Área</td>
+                            <td scope="col">Descripción</td>
+                            <td scope="col">Valor</td>
+                            <td scope="col">Acciones</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let area of areas">
+                            <td>{{ area.area }}</td>
+                            <td>{{ area.descripcion }}</td>
+                            <td>{{ area.valor }}</td>
+                            <td><button class="btn btn-danger">Eliminar</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
 <h3 *ngIf="cuestionarios.length == 0" class="text-center">No hay cuestionarios para mostrar</h3>
 
 <div class="row animated fadeIn fast" *ngIf="cargando">
@@ -92,7 +134,6 @@
                     <i class="fa fa-bar-chart-o icon" routerLink="../estadisticas/{{ cuestionario._id }}"></i>
 
                     <i class="fa fa-copy icon" style="color: #42910D;" (click)="crearLink(cuestionario)"></i>
-
 
                 </div>
             </div>

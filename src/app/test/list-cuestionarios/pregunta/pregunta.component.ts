@@ -118,7 +118,7 @@ export class PreguntaComponent implements OnInit {
 		console.log(index);
 		if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
 			respuesta.descripcion = this.respuestaTexto.value;
-			respuesta.descripcion = respuesta.descripcion.toUpperCase()
+			respuesta.descripcion = respuesta.descripcion.trim().toUpperCase()
 		}
 		if (esMultiple) {
 			let existe = false;

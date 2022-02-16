@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 import { CuestionarioService } from '../../../services/cuestionario.service';
+import { Area } from '../../../models/area.model';
 
 
 @Component({
@@ -39,6 +40,11 @@ export class CuestionariosComponent implements OnInit {
     puntaje: ['', Validators.required]
   })
 
+  public nombreArea: string = "";
+  public descripcionArea: string = "";
+  public valorArea: number = 0;
+  public areas: Area[] = [];
+
   constructor( private cuestionarioService: CuestionarioService,
                private fb: FormBuilder,
                private router: Router,
@@ -50,7 +56,28 @@ export class CuestionariosComponent implements OnInit {
     this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
 
     this.cargarListCuestioanrios();
+    this.cargarAreas();
+  }
 
+  cargarAreas() {
+    this.cuestionarioService.getListAreas().subscribe(({areas}) => {
+      this.areas = areas;
+    });
+  }
+
+  crearArea() {
+    if (this.nombreArea.trim().length > 0 && this.valorArea > 0) {
+      console.log("guardar area");
+      this.cuestionarioService.crearArea(this.nombreArea, this.descripcionArea, this.valorArea).subscribe(response => {
+        this.cargarAreas();
+        this.nombreArea = "";
+        this.descripcionArea = "";
+        this.valorArea = 0;
+      });
+     } else {
+       console.log("no guardar area");
+       
+     }
   }
 
   obtenerTipo(value: string) {
