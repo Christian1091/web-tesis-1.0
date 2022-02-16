@@ -43,6 +43,10 @@ export class CuestionarioService {
     return this.http.post(url, {area, descripcion, valor}, this.headers);
 
   }
+  eliminarArea( _id: string) {
+    const url = `${ base_url }/area/eliminar/${ _id }`;
+    return this.http.delete( url, this.headers );
+  }
 
   getListAreas() {
 		const url = `${base_url}/area/areas`;

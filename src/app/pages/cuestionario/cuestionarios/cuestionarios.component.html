@@ -91,11 +91,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let area of areas">
+                        <tr *ngFor="let area of areas; let i = index;">
                             <td>{{ area.area }}</td>
                             <td>{{ area.descripcion }}</td>
                             <td>{{ area.valor }}</td>
-                            <td><button class="btn btn-danger">Eliminar</button></td>
+                            <td><button class="btn btn-danger" (click)="eliminarArea(area._id, i)">Eliminar</button></td>
                         </tr>
                     </tbody>
                 </table>

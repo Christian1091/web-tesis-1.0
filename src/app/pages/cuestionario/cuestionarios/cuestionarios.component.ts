@@ -80,6 +80,13 @@ export class CuestionariosComponent implements OnInit {
      }
   }
 
+  eliminarArea(_id: string, i: number) {
+    this.cuestionarioService.eliminarArea(_id).subscribe(response => {
+      console.log(response);
+      this.areas.splice(i, 1);
+    });
+  }
+
   obtenerTipo(value: string) {
     this.tipo = value;
   }
