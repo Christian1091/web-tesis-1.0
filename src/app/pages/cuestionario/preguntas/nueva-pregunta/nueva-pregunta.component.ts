@@ -1,5 +1,5 @@
 import { VerCuestionarioComponent } from './../../ver-cuestionario/ver-cuestionario.component';
-import { Component, OnInit, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, Inject, ViewChild } from '@angular/core';
 import { FormBuilder, Validators, FormArray, FormGroup, FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
@@ -9,6 +9,7 @@ import { Pregunta } from '../../../../models/pregunta.model';
 import { Respuesta } from '../../../../models/respuesta.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Area } from '../../../../models/area.model';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-nueva-pregunta',
@@ -21,6 +22,7 @@ import { Area } from '../../../../models/area.model';
 
 export class NuevaPreguntaComponent implements OnInit {
 
+  @ViewChild('monedaSelect') public monedaSelect: MatSelect;
   public tituloCuestionario = new FormControl();
   public descripcionCuestionario = new FormControl();
   public puntajeCuestionario = new FormControl();
@@ -31,7 +33,7 @@ export class NuevaPreguntaComponent implements OnInit {
   public anterior: boolean = false;
   public area: string = "";
   public valorArea: number = -1;
-
+  checked = false;
   /**variable pregunta donde almacena la pregunta con las respuestas */
   pregunta: Pregunta;
   /**Incremento puntos */
@@ -47,6 +49,9 @@ export class NuevaPreguntaComponent implements OnInit {
   public pos = 0;
   public areas: Area[] = [];
 
+  changeState() {
+    this.checked = !this.checked;
+  }
   cargarFormulario() {
     this.opcionRespuestas = this.fb.group({
 
@@ -54,7 +59,6 @@ export class NuevaPreguntaComponent implements OnInit {
       puntaje: [''],
       respuestas: this.fb.array([]),
       respuestaOtros: [false]
-
     });
   }
 
@@ -63,7 +67,6 @@ export class NuevaPreguntaComponent implements OnInit {
     this.opcionRespuestas.get("respuestaOtros").setValue(this.habilitar)
   }
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private fb: FormBuilder, private cuestionarioService: CuestionarioService, private dialogRef: MatDialogRef<VerCuestionarioComponent>) {
-
     this.cuestionario = data["cuestionario"];
     this.pos = data["pos"]
 
@@ -87,6 +90,7 @@ export class NuevaPreguntaComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    
     this.cargarAreas();
     this.cargarFormulario();
     if (this.cuestionario == null || this.cuestionario == undefined) {
@@ -94,9 +98,10 @@ export class NuevaPreguntaComponent implements OnInit {
       this.tittle = "Agregar Pregunta";
       this.bandera = true;
     } else {
-
+      this.area =  this.cuestionario.listPreguntas[this.pos].area ?? "";
       this.tittle = "Actualizar";
       this.bandera = false;
+      
       this.opcionRespuestas.get("titulo").setValue(this.cuestionario.listPreguntas[this.pos].descripcion);
       this.opcionRespuestas.get("puntaje").setValue(this.cuestionario.listPreguntas[this.pos].puntajePregunta);
       //this.opcionRespuestas.get("respuestas").setValue(this.cuestionario.listPreguntas[this.pos].listRespuesta);
@@ -149,6 +154,7 @@ export class NuevaPreguntaComponent implements OnInit {
     if (texto) {
       for (let i = 0; i < this.getRespuestasMultiples.length; i++) {
         this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
+        this.getRespuestasMultiples.at(i).get('area').setValue(this.area)
         if (this.anterior == opcion) {
           this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
         } else {
@@ -161,6 +167,7 @@ export class NuevaPreguntaComponent implements OnInit {
       for (let i = 0; i < this.getRespuestasMultiples.length; i++) {
         this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
         this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
+        this.getRespuestasMultiples.at(i).get('area').setValue(this.area)
         console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
       }
     }

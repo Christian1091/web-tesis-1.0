@@ -71,9 +71,9 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
 
     for (let i = 0; i < this.listRespuestasUsuario.length; i++) {
       const puntosTotales = this.listRespuestasUsuario[i].puntosTotales;
-      this.puntosTotalCuestionarios = Number(this.puntosTotalCuestionarios) + Number(puntosTotales);
+      this.puntosTotalCuestionarios = Number(this.puntosTotalCuestionarios) + Number((puntosTotales).toFixed(2));
     }
-    console.log(this.puntosTotalCuestionarios)
+    console.log(this.puntosTotalCuestionarios.toFixed(2));
   }
 
   eliminarRespuestaUsuario(id: string) {

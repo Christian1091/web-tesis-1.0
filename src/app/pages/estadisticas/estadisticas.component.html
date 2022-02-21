@@ -34,7 +34,7 @@
                                 <td class="text-center"> {{ respuestas.provinciaParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.ciudadParticipante }} </td>
                                 <td class="text-center"> {{ respuestas.fechaCreacion | date:'dd/MM/yyyy' }} </td>
-                                <td class="text-center"> {{ respuestas.puntosTotales }}/{{obtenerPuntosCuestionario?.cuestionarios[0].puntajeCuestionario}} </td>
+                                <td class="text-center"> {{ respuestas.puntosTotales.toFixed(2) }}/{{obtenerPuntosCuestionario?.cuestionarios[0].puntajeCuestionario.toFixed(2)}} </td>
                                 <td class="text-center">
                                     <i class="fa fa-search" [routerLink]="['/dashboard/respuestaUsuarioAdmin', respuestas.id]"></i>
                                     <i class="fa fa-trash" (click)="eliminarRespuestaUsuario( respuestas.id )"></i>

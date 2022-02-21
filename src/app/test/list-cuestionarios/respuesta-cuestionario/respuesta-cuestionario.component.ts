@@ -269,7 +269,8 @@ export class RespuestaCuestionarioComponent implements OnInit {
       this.provinciaParticipante = resp[0]["provinciaParticipante"];
       this.ciudadParticipante = resp[0]["ciudadParticipante"];
       this.respuestaCuestionario = resp[0];
-      this.puntajeCuest = ((Number.parseInt(this.puntos) * 100 ) / this.puntaje).toString();
+      this.puntajeCuest = ((Number.parseInt(this.puntos) * 100 ) / this.puntaje).toFixed(2);
+//      this.puntajeCuest = ((Number.parseInt(this.puntos) * 100 ) / this.puntaje).toString();
 
       
     });

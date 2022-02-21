@@ -52,6 +52,14 @@ export class GraficoComponent implements OnInit {
 				},
 				tooltips: {
 					callbacks: {
+						
+							label: function (tooltipItem, data) {
+							  var dataset = data.datasets[tooltipItem.datasetIndex];
+							  var meta = dataset._meta[Object.keys(dataset._meta)[0]];
+							  var total = meta.total;
+							  var currentValue = dataset.data[tooltipItem.index];
+							  return currentValue + '%';
+							}
 
 					}
 				},

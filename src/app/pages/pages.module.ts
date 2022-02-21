@@ -34,6 +34,8 @@ import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuest
 import { VerPostComponent } from './dashboard/ver-post/ver-post.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSelectModule } from '@angular/material/select';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
 
 @NgModule({
   declarations: [
@@ -77,8 +79,8 @@ import { MatSelectModule } from '@angular/material/select';
     ClipboardModule,
     MatDialogModule,
     PdfViewerModule,
-    MatSelectModule
-
+    MatSelectModule,
+    MatSlideToggleModule
   ],
   providers: [{
     provide: MatDialogRef,
