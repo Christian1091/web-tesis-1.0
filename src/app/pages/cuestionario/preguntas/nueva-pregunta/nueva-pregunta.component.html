@@ -120,9 +120,8 @@
     <br>
   </div>
   <mat-slide-toggle *ngIf="cuestionario != null" [checked]="checked" (change)="changeState()">Cambiar Area
-    <p *ngIf="!checked">{{ area }}</p>
+     <p *ngIf="!checked">{{ area }}</p>
   </mat-slide-toggle>
-  <br>
   <br>
   <div *ngIf="checked">
     <mat-select placeholder="Selecciona una area" (valueChange)="getArea($event)">
@@ -131,6 +130,14 @@
       </mat-option>
     </mat-select>
   </div>
+  <br />
+
+  <mat-select *ngIf="cuestionario == null"placeholder="Selecciona una area" (valueChange)="getArea($event)">
+    <mat-option *ngFor="let area of areas" [value]="area">
+      {{ area.area }}
+    </mat-option>
+  </mat-select>
+  <br />
   <br />
   <br />
   <div class="row-md-2" id="brnAgr">
