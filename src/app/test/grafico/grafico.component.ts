@@ -58,7 +58,7 @@ export class GraficoComponent implements OnInit {
 							  var meta = dataset._meta[Object.keys(dataset._meta)[0]];
 							  var total = meta.total;
 							  var currentValue = dataset.data[tooltipItem.index];
-							  return currentValue + '%';
+							  return currentValue.toFixed(2) + '%';
 							}
 
 					}
