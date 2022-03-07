@@ -55,7 +55,11 @@ export class NuevopostComponent implements OnInit {
         _id: this.postSeleccionado._id
       }
 
-      this.postService.actulizarPost(data)
+      if (this.file) {
+        this.postService.uploadPdf(this.file).subscribe(response => {
+          data["nombrePdf"] = response['nombreArchivo'];
+          //this.postForm.get('nombrePdf').setValue(response['nombreArchivo']);
+          this.postService.actulizarPost(data)
         .subscribe(resp => {
           this.router.navigateByUrl('/');
           Swal.fire({
@@ -66,6 +70,21 @@ export class NuevopostComponent implements OnInit {
             timer: 1500
           })
         })
+          console.log(response);
+        });
+      } else {
+        this.postService.actulizarPost(data)
+        .subscribe(resp => {
+          this.router.navigateByUrl('/');
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Post Actualizado',
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
+      }
 
     } else {
       Swal.fire({
@@ -106,10 +125,10 @@ export class NuevopostComponent implements OnInit {
     this.postService.getVerContenidoPost(id)
       .subscribe(post => {
         //console.log(post);
-        const { titulo, descripcion, texto } = post;
+        const { titulo, descripcion, texto, nombrePdf } = post;
         //console.log(titulo, descripcion, texto);
         this.postSeleccionado = post;
-        this.postForm.setValue({ titulo, descripcion, texto });
+        this.postForm.setValue({ titulo, descripcion, texto, nombrePdf });
       })
   }
 
