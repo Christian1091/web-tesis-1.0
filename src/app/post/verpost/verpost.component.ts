@@ -29,6 +29,11 @@ export class VerpostComponent implements OnInit {
 
   }
 
+  regresar() {
+    window.location.href = "/web#team";
+    
+  }
+
   verContenidoPost() {
     //console.log('ID POST ' + this.id);
     this.postService.getPublicoContenidoPost( this.id )

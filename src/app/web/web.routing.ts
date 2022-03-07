@@ -6,6 +6,7 @@ import { MainComponent } from './main/main.component';
 const routes: Routes = [
 
   { path: 'web', component: MainComponent },
+  { path: 'web#team', component: MainComponent },
   //{ path: 'staticPath', component: ... },
   //{ path: '**', component: ... },
   //{ path: 'oldPath', redirectTo: '/staticPath' },
