@@ -2,14 +2,15 @@
 <header id="header" class="fixed-top">
   <nav>
     <!-- <input type="checkbox" id="nav-toggle"> -->
-    <h1 class="logo"><a routerLink="/web">UPS</a></h1>
+    <h1 class="logo"> <a routerLink="/web"> <img src="/assets/images/LOGO_UPS_COMPLETO_opt.png" alt="..."> </a></h1>
     <ul class="links">
       <li class="active"><a routerLink="/web">Inicio</a></li>
-        <li><a routerLink="/grafica1">Datos y Estadísticas</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/grafica1">Datos y Estadísticas</a></li>
         <li><a href="">Artículos</a></li>
         <li><a routerLink="/register">Quiero ser miembro</a></li>
-        <li><a routerLink="/listCuestionarios">Test</a></li>
+        <li *ngIf="isLoggedIn"><a routerLink="/listCuestionarios">Test</a></li>
         <li><a routerLink="/login">Acceder</a></li>
+        <li><img src="/assets/images/logo_grupo.png" width="60px" alt="..."></li>
     </ul>
     <label for="nav-toggle" class="icon-burger">
       <div class="line"></div>

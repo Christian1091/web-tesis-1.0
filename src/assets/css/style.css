@@ -920,7 +920,7 @@ When click on sidebar toggler and also for tablet
   .mini-sidebar .sidebar-nav #sidebarnav > li > a.has-arrow:after {
     display: none; }
   .mini-sidebar .left-sidebar {
-    width: 150px; }
+    width: 70px; }
   .mini-sidebar .sidebar-nav #sidebarnav .user-profile > a {
     padding: 12px 20px; }
   .mini-sidebar .scroll-sidebar {
@@ -979,7 +979,8 @@ File: scss
  ============================================================== */
 #main-wrapper {
   width: 100%;
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 .boxed #main-wrapper {
   width: 100%;
