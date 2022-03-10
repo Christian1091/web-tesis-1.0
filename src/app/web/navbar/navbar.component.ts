@@ -18,5 +18,9 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
   }
+  regresar() {
+    window.location.href = "/web#team";
+    
+  }
 
 }

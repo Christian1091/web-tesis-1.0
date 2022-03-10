@@ -518,6 +518,11 @@ section {
   overflow: hidden;
 }
 
+.pie{
+  padding: 10px 0;
+  overflow: hidden;
+}
+
 .section-bg {
   background-color: #f3f5fa;
 }

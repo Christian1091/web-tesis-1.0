@@ -6,7 +6,7 @@
     <ul class="links">
       <li class="active"><a routerLink="/web">Inicio</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/grafica1">Datos y Estadísticas</a></li>
-        <li><a href="">Artículos</a></li>
+        <li class="articulo" ><a (click)="regresar()">Artículos</a></li>
         <li><a routerLink="/register">Quiero ser miembro</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/listCuestionarios">Test</a></li>
         <li><a routerLink="/login">Acceder</a></li>
