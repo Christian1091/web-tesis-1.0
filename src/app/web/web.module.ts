@@ -5,6 +5,8 @@ import { RouterModule } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SectionsComponent } from './sections/sections.component';
+import {MatMenuModule} from '@angular/material/menu';
+
 
 
 @NgModule({
@@ -18,7 +20,8 @@ import { SectionsComponent } from './sections/sections.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    MatMenuModule
   ]
 })
 export class WebModule { }

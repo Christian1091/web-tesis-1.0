@@ -1,0 +1,25 @@
+<h2>Nueva Noticia</h2>
+
+
+<form>
+
+    <div class="form-group">
+        <label for="titulo">Título</label>
+        <input type="text" class="form-control" id="titulo"
+            placeholder="Ingrese el título" [(ngModel)]="noticia.titulo" name="titulo">
+    </div>
+    <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <input type="text" class="form-control" id="descripcion" [(ngModel)]="noticia.descripcion" name="descripcion"
+            placeholder="Ingrese la descripción">
+    </div>
+    <div class="form-group">
+        <label for="contenido">Contenido</label>
+        <textarea type="text" class="form-control" id="contenido" cols="30" rows="10" [(ngModel)]="noticia.texto" name="texto"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload />
+      </div>
+    <button type="submit" class="btn btn-primary" (click)="guardar()" >Crear</button>
+
+</form>

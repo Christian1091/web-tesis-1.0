@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Post } from 'src/app/models/post.model';
 import { PostService } from 'src/app/services/post.service';
+import { Noticia } from '../../models/noticia.model';
 
 @Component({
   selector: 'app-sections',
@@ -13,6 +14,7 @@ import { PostService } from 'src/app/services/post.service';
 export class SectionsComponent implements OnInit {
 
   public listPost: Post[] = [];
+  public noticias: Noticia[] = [];
 
   public contPost: any = {};
 
@@ -25,6 +27,7 @@ export class SectionsComponent implements OnInit {
 
   ngOnInit(): void {
     this.getListPost();
+    this.cargarNoticia();
   }
 
   getListPost() {
@@ -33,6 +36,14 @@ export class SectionsComponent implements OnInit {
                               //console.log(posts);
                               this.listPost = post;
                             });
+  }
+
+  cargarNoticia(){
+    this.postService.getListNoticias().subscribe(response => {
+      this.noticias = response['noticias'];
+      this.noticias = this.noticias.slice(0, 3);
+      console.log(this.noticias);
+    });
   }
 
 

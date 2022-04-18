@@ -2,34 +2,21 @@
 <section id="hero" class="d-flex align-items-center">
   <div class="container">
     <div class="row">
-      <div
-        class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
-        data-aos="fade-up"
+      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
         data-aos-delay="200">
 
         <h1>Transformación Digital en el Ecuador</h1>
         <h2>
-          La transformación digital no conoce fronteras ni sectores.        </h2>
+          La transformación digital no conoce fronteras ni sectores. </h2>
         <div class="d-lg-flex">
           <a href="#about" class="btn-get-started scrollto">Empecemos</a>
-          <a href="https://www.youtube.com/watch?v=JYYMENzITNc"
-              class="venobox btn-watch-video"
-              data-vbtype="video"
-              data-autoplay="true">
-            Ver Video <i class="icofont-play-alt-2"></i
-          ></a>
+          <a href="https://www.youtube.com/watch?v=JYYMENzITNc" class="venobox btn-watch-video" data-vbtype="video"
+            data-autoplay="true">
+            Ver Video <i class="icofont-play-alt-2"></i></a>
         </div>
       </div>
-      <div
-        class="col-lg-6 order-1 order-lg-2 hero-img"
-        data-aos="zoom-in"
-        data-aos-delay="200"
-      >
-        <img
-          src="../../../assets/images/hero-img.png"
-          class="img-fluid animated"
-          alt=""
-        />
+      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+        <img src="../../../assets/images/hero-img.png" class="img-fluid animated" alt="" />
       </div>
     </div>
   </div>
@@ -46,36 +33,16 @@
     </div>
 
     <div class="row">
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100">
+      <div class="col-xl-3 col-md-6 d-flex align-items-stretch" data-aos="zoom-in" data-aos-delay="100"
+        *ngFor="let noticia of noticias">
         <div class="icon-box">
           <div class="icon"><i class="bx bxl-dribbble"></i></div>
-          <h4><a href="">Nuevo test</a></h4>
-          <p>Evaluación de conectividad - Docentes
+          <h4><a href="">{{ noticia.titulo }}</a></h4>
+          <p>{{ noticia.descripcion }}
           </p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-md-0" data-aos="zoom-in" data-aos-delay="200">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-file"></i></div>
-          <h4><a href="">Nuevo test</a></h4>
-          <p>TEST DE TRANSFORMACIÓN DIGITAL PARA MI PYME</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="300">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-tachometer"></i></div>
-          <h4><a href="">Nuevo test</a></h4>
-          <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
-        </div>
-      </div>
-
-      <div class="col-xl-3 col-md-6 d-flex align-items-stretch mt-4 mt-xl-0" data-aos="zoom-in" data-aos-delay="400">
-        <div class="icon-box">
-          <div class="icon"><i class="bx bx-layer"></i></div>
-          <h4><a href="">Nuevo test</a></h4>
-          <p>Evaluación de conectividad - Estudiantes</p>
+          <p *ngIf="noticia.nombreImagen">
+            <img src="http://localhost:3000/api/noticia/view/{{noticia.nombreImagen}}" width="110">
+          </p>
         </div>
       </div>
 
@@ -85,12 +52,12 @@
 </section>
 <!-- End Services Section -->
 
- <!-- ======= Team Section ======= -->
- <section id="team" class="team section-bg fondo">
+<!-- ======= Team Section ======= -->
+<section id="team" class="team section-bg fondo">
   <div class="container" data-aos="fade-up">
 
     <div class="section-title">
-      <h2 style="color: white;" >Artículos</h2>
+      <h2 style="color: white;">Artículos</h2>
       <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
     </div>
 
@@ -104,7 +71,7 @@
             <p>{{ item.descripcion }}</p>
             <div class="social">
               <button type="button" class="btn waves-effect waves-light btn-block btn-info"
-                      [routerLink]="['/post/publico', item._id]">Leer mas</button>
+                [routerLink]="['/post/publico', item._id]">Leer mas</button>
             </div>
           </div>
         </div>
@@ -122,7 +89,7 @@
     <div class="section-title">
       <h2>Contacto</h2>
       <p>
-        Contáctanos: 
+        Contáctanos:
       </p>
     </div>
 
@@ -149,74 +116,43 @@
 
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m26!1m12!1m3!1d15939.180083077761!2d-78.9931874740881!3d-2.8754193164890722!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m11!3e6!4m3!3m2!1d-2.8647695!2d-78.9892936!4m5!1s0x91cd1826d90c7e47%3A0x8eb47b6b0138cb74!2sUniversidad%20Polit%C3%A9cnica%20Salesiana%20del%20Ecuador%20Universidad%20Polit%C3%A9cnica%20Salesiana%20del%20Ecuador%2C%20C.%20Vieja%2012-30%20y%2C%20Cuenca%20010105!3m2!1d-2.8865290999999997!2d-78.9898791!5e0!3m2!1ses!2sec!4v1643696729871!5m2!1ses!2sec"
-            frameborder="0"
-            style="border: 0; width: 100%; height: 290px"
-            allowfullscreen
-          ></iframe>
+            frameborder="0" style="border: 0; width: 100%; height: 290px" allowfullscreen></iframe>
         </div>
       </div>
 
       <div class="col-lg-7 mt-5 mt-lg-0 d-flex align-items-stretch">
-        <form
-          action="forms/contact.php"
-          method="post"
-          role="form"
-          class="php-email-form"
-        >
+        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
           <div class="form-row">
             <div class="form-group col-md-6">
               <label for="name">Ingrese su nombre</label>
-              <input
-                type="text"
-                name="name"
-                class="form-control"
-                id="name"
-                data-rule="minlen:4"
-                data-msg="Please enter at least 4 chars"
-              />
+              <input type="text" name="name" class="form-control" id="name" data-rule="minlen:4"
+                data-msg="Please enter at least 4 chars" />
               <div class="validate"></div>
             </div>
             <div class="form-group col-md-6">
               <label for="name">Ingrese su correo</label>
-              <input
-                type="email"
-                class="form-control"
-                name="email"
-                id="email"
-                data-rule="email"
-                data-msg="Please enter a valid email"
-              />
+              <input type="email" class="form-control" name="email" id="email" data-rule="email"
+                data-msg="Please enter a valid email" />
               <div class="validate"></div>
             </div>
           </div>
           <div class="form-group">
             <label for="name">Asunto</label>
-            <input
-              type="text"
-              class="form-control"
-              name="subject"
-              id="subject"
-              data-rule="minlen:4"
-              data-msg="Please enter at least 8 chars of subject"
-            />
+            <input type="text" class="form-control" name="subject" id="subject" data-rule="minlen:4"
+              data-msg="Please enter at least 8 chars of subject" />
             <div class="validate"></div>
           </div>
           <div class="form-group">
             <label for="name">Mensaje</label>
-            <textarea
-              class="form-control"
-              name="message"
-              rows="10"
-              data-rule="required"
-              data-msg="Please write something for us"
-            ></textarea>
+            <textarea class="form-control" name="message" rows="10" data-rule="required"
+              data-msg="Please write something for us"></textarea>
             <div class="validate"></div>
           </div>
           <div class="mb-3">
             <div class="loading">Cargando...</div>
             <div class="error-message"></div>
             <div class="sent-message">
-              Su mensaje ha sido enviado. Gracias! 
+              Su mensaje ha sido enviado. Gracias!
             </div>
           </div>
           <div class="text-center">
@@ -231,12 +167,14 @@
 <section class="pie" style="background-color: #000000e3; height: 160px;">
   <div style="display: flex; align-items: center;">
     <img src="/assets/images/GIHP4C12.png" alt="..." width="100px">
-      <p class="texto">El Grupo de Investigación en Cloud Computing, Smart Cities & High Performance Computing  (GIHP4C), de la Universidad Politécnica Salesiana, está conformado por docentes y estudiantes que realizan investigaciones acerca de la computación en la nube, internet de las cosas, minería de datos, procesamiento de imágenes y video, entre otros.</p>
+    <p class="texto">El Grupo de Investigación en Cloud Computing, Smart Cities & High Performance Computing (GIHP4C),
+      de la Universidad Politécnica Salesiana, está conformado por docentes y estudiantes que realizan investigaciones
+      acerca de la computación en la nube, internet de las cosas, minería de datos, procesamiento de imágenes y video,
+      entre otros.</p>
   </div>
-  
+
   <div style="display: flex; justify-content: center; align-items: flex-start;">
     <p> &#169; Grupo de Investigación en Cloud Computing, Smart Cities & High Performance Computing GIHP4C</p>
   </div>
-  </section>
+</section>
 <!-- End Contact Section -->
-

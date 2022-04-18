@@ -8,6 +8,7 @@ import { CargarPost } from '../interfaces/cargar-post.interface';
 import { Post } from '../models/post.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Noticia } from '../models/noticia.model';
 
 const base_url = environment.base_url;
 
@@ -40,10 +41,18 @@ export class PostService {
   }
 
   //servicio para cargar el archivo
+  
+  
   uploadPdf(pdf:File):Observable<any> {
     const data = new FormData();
     data.append('imagen',pdf);
     return this.http.post(`${base_url}/post/upload`, data, this.headers);
+  }
+
+  uploadImage(file:File):Observable<any> {
+    const data = new FormData();
+    data.append('imagen',file);
+    return this.http.post(`${base_url}/noticia/upload`, data, this.headers);
   }
 
   // Este get es para visualizar todos los post creados por todos los usuarios
@@ -94,6 +103,18 @@ export class PostService {
   eliminarPost( _id: string) {
     const url =  `${ base_url }/post/${ _id }`;
     return this.http.delete( url, this.headers );
+  }
+
+  crearNoticia( noticia: { titulo: string, descripcion: string, texto: string, nombreImagen: string }) {
+    //console.log('creando post');
+    return this.http.post(`${ base_url }/noticia/nueva`, noticia, this.headers);
+
+  }
+
+  getListNoticias() {
+    const url =  `${ base_url }/noticia/lista`;
+
+    return this.http.get<Noticia[]>( url, this.headers );
   }
 
 }

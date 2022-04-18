@@ -234,7 +234,10 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
     this.rs = [];
     this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
-      this.tipo = resp[2].toString();
+      console.log("AQUIIIIII");
+      console.log(resp[2]);
+      
+      this.tipo = (resp[2] == undefined)? " ": resp[2].toString();
       const r = resp[0]['listRespuestasUsuario'];
       this.puntaje = Number.parseInt(resp[1].toString());
       console.log(resp[1])

@@ -35,7 +35,7 @@ import { VerPostComponent } from './dashboard/ver-post/ver-post.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSelectModule } from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 @NgModule({
   declarations: [
@@ -80,7 +80,8 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogModule,
     PdfViewerModule,
     MatSelectModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatTabsModule
   ],
   providers: [{
     provide: MatDialogRef,

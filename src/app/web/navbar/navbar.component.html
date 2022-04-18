@@ -6,7 +6,14 @@
     <ul class="links">
       <li class="active"><a routerLink="/web">Inicio</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/grafica1">Datos y Estadísticas</a></li>
-        <li class="articulo" ><a (click)="regresar()">Artículos</a></li>
+        <li class="articulo" >
+          <a [matMenuTriggerFor]="belowMenu">Articulo</a>
+          <mat-menu  #belowMenu="matMenu" yPosition="below">
+            <div *ngFor="let item of listPost">
+              <button mat-menu-item (click)="ir(item)">{{ item.titulo | slice:0:40}}</button>
+            </div>
+          </mat-menu>
+        </li>
         <li><a routerLink="/register">Quiero ser miembro</a></li>
         <li *ngIf="isLoggedIn"><a routerLink="/listCuestionarios">Test</a></li>
         <li><a routerLink="/login">Acceder</a></li>

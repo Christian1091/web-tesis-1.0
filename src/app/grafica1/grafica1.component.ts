@@ -21,7 +21,7 @@ import { InformeComponent } from '../informe/informe.component';
   ]
 })
 export class Grafica1Component {
-
+  public selectOpcion: boolean = false;
   public isActive: boolean = false;
   public chart: any;
   public id: string;
@@ -229,6 +229,7 @@ export class Grafica1Component {
 	}
 
   getListCuestionarioById(idC: string, i) {
+    this.selectOpcion = true;
     this.pos = i;
     
     this.respuestaCuestionarioService.getRespuestaByIdCuestionario(idC).subscribe(response => {

@@ -18,8 +18,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { InformeComponent } from './informe/informe.component';
-
-
+import {MatIconModule} from '@angular/material/icon';
+import { NuevaNoticiaComponent } from './noticia/nueva-noticia/nueva-noticia.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +27,7 @@ import { InformeComponent } from './informe/informe.component';
     Grafica1Component,
     VerpostComponent,
     InformeComponent,
+    NuevaNoticiaComponent,
 
   ],
   imports: [
@@ -42,7 +43,8 @@ import { InformeComponent } from './informe/informe.component';
     FormsModule,
     ReactiveFormsModule,
     PdfViewerModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatIconModule
 
   ],
   providers: [],

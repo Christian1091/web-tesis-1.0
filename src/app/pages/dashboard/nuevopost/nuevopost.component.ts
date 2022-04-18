@@ -34,7 +34,12 @@ export class NuevopostComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.activatedRoute.params.subscribe(({ id }) => this.cargarPost(id));
+    this.activatedRoute.params.subscribe(({ id }) => {
+      if (id != undefined) {
+        this.cargarPost(id)
+      }
+
+    });
 
     this.postForm = this.fb.group({
       /**Si es que queremos una sola validacion podemos quitar los corchetes, si son mas van dentro de ellos */
@@ -60,30 +65,30 @@ export class NuevopostComponent implements OnInit {
           data["nombrePdf"] = response['nombreArchivo'];
           //this.postForm.get('nombrePdf').setValue(response['nombreArchivo']);
           this.postService.actulizarPost(data)
-        .subscribe(resp => {
-          this.router.navigateByUrl('/');
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Post Actualizado',
-            showConfirmButton: false,
-            timer: 1500
-          })
-        })
+            .subscribe(resp => {
+              this.router.navigateByUrl('/');
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Post Actualizado',
+                showConfirmButton: false,
+                timer: 1500
+              })
+            })
           console.log(response);
         });
       } else {
         this.postService.actulizarPost(data)
-        .subscribe(resp => {
-          this.router.navigateByUrl('/');
-          Swal.fire({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Post Actualizado',
-            showConfirmButton: false,
-            timer: 1500
+          .subscribe(resp => {
+            this.router.navigateByUrl('/');
+            Swal.fire({
+              position: 'top-end',
+              icon: 'success',
+              title: 'Post Actualizado',
+              showConfirmButton: false,
+              timer: 1500
+            })
           })
-        })
       }
 
     } else {

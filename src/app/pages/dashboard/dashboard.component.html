@@ -11,7 +11,7 @@
                 </form>
             </div>
             <div>
-                <hr/>
+                <hr />
             </div>
         </div>
     </div>
@@ -21,28 +21,21 @@
     <div class="col-lg-8 col-xlg-9 col-md-7">
         <div class="card cardList">
             <!-- Nav tabs -->
-
-            <div class="row">
-                <div class="col-12">
-                    <ul class="nav nav-tabs profile-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link active" data-toggle="tab" href="#post" role="tab">Mis artículos</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="tab-content">
-                <div class="tab-pane active" id="post" role="tabpanel" aria-expanded="true">
+            <mat-tab-group (selectedTabChange)="opcionTab($event)">
+                <mat-tab label="Mis Artículos">
                     <div class="card-body">
                         <div class="profiletimeline">
                             <div class="sl-item" *ngFor="let post of posts">
-                                <div class="sl-left"> <img src="../../../assets/images/icon/articulo.png" alt="user" class="img-circle"> </div>
+                                <div class="sl-left"> <img src="../../../assets/images/icon/articulo.png" alt="user"
+                                        class="img-circle"> </div>
                                 <div class="sl-right">
                                     <div>
-                                        <i class="fa fa-trash icon float-right" (click)="eliminarPost( post )" style="color: #EF2421;"></i>
-                                        <i class="fa fa-edit icon float-right" style="color: #168116" [routerLink]="['/dashboard/editarPost', post._id]"></i>
-                                        <i class="fa fa-eye icon float-right" style="color: #2269C7" (click)="verContenidoPost(post)"></i>
+                                        <i class="fa fa-trash icon float-right" (click)="eliminarPost( post )"
+                                            style="color: #EF2421;"></i>
+                                        <i class="fa fa-edit icon float-right" style="color: #168116"
+                                            [routerLink]="['/dashboard/editarPost', post._id]"></i>
+                                        <i class="fa fa-eye icon float-right" style="color: #2269C7"
+                                            (click)="verContenidoPost(post)"></i>
 
                                         <a>{{ post.titulo }}</a>
                                         <span class="sl-date"> Hace 5 minutos </span>
@@ -53,13 +46,39 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </mat-tab>
+                <mat-tab label="Mis Noticias">
+                    <div class="card-body">
+                        <div class="profiletimeline">
+                            <div class="sl-item" *ngFor="let noticia of noticias">
+                                <div class="sl-left"> <img src="../../../assets/images/icon/articulo.png" alt="user"
+                                        class="img-circle"> </div>
+                                <div class="sl-right">
+                                    <div>
+                                        <i class="fa fa-trash icon float-right" style="color: #EF2421;"></i>
+                                        <i class="fa fa-edit icon float-right" style="color: #168116"></i>
+                                        <i class="fa fa-eye icon float-right" style="color: #2269C7"></i>
 
-            </div>
+                                        <a>{{ noticia.titulo }}</a>
+                                        <span class="sl-date"> Hace 5 minutos </span>
+                                        <p> {{ noticia.descripcion }} </p>
+                                    </div>
+                                    <hr>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </div>
     </div>
 </div>
 <div>
-    <button class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add" routerLink="./nuevopost">
-    <i class="fa fa-plus"></i></button>
+    <button *ngIf="opcion == 0" class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add"
+        routerLink="./nuevopost">
+        <i class="fa fa-plus"></i></button>
+
+    <button *ngIf="opcion == 1" class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add" (click)="openDialog()">
+        <i class="fa fa-plus"></i></button>
+
 </div>

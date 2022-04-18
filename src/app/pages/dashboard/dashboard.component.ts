@@ -10,6 +10,8 @@ import { Post } from 'src/app/models/post.model';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
 import { VerPostComponent } from './ver-post/ver-post.component';
+import { NuevaNoticiaComponent } from '../../noticia/nueva-noticia/nueva-noticia.component';
+import { Noticia } from '../../models/noticia.model';
 
 
 @Component({
@@ -31,6 +33,10 @@ export class DashboardComponent implements OnInit{
    */
   public usuario: Usuario;
 
+  public cambiar: boolean = true;
+
+  public opcion: number = 0;
+
   //public post: Post;
 
   /**Creamos una propiedad para subir la imagen */
@@ -39,6 +45,8 @@ export class DashboardComponent implements OnInit{
   public imgTemp: any = null;
 
   public posts: Post[] = [];
+
+  public noticias: Noticia[] = [];
 
   constructor( private fb: FormBuilder,
                private usuarioService: UsuarioService,
@@ -53,8 +61,20 @@ export class DashboardComponent implements OnInit{
   }
 
   ngOnInit(): void {
-
+    this.cargarNoticia();
     this.cargarListPostByIdUser();
+  }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(NuevaNoticiaComponent, {
+      width: '450px',
+     
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      
+    });
   }
 
   cargarListPostByIdUser() {
@@ -67,6 +87,16 @@ export class DashboardComponent implements OnInit{
                             })
 
   }
+
+  cargarNoticia(){
+    this.postService.getListNoticias().subscribe(response => {
+      this.noticias = response['noticias'];
+      console.log(this.noticias);
+      
+    })
+  }
+
+
 
   verContenidoPost(post: Post) {
     const dialog = this.dialog.open(VerPostComponent,{
@@ -101,6 +131,12 @@ export class DashboardComponent implements OnInit{
             });
           }
     })
+  }
+
+
+  opcionTab(event) {
+    this.opcion = event.index;
+    
   }
 
 }

@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 
 <mat-drawer-container class="example-container" autosize>
-  <mat-drawer #drawer class="example-sidenav" mode="side">
+  <mat-drawer #drawer class="example-sidenav" mode="side" opened="true">
     <br /><br /><br /><br />
     <dl>CUESTIONARIOS</dl>
     <div *ngFor="let cuestionario of listCuestionarios; let i = index">
@@ -24,7 +24,14 @@
   </mat-drawer>
 
   <div class="controls">
-    <div class="space">
+    <div style="padding: 20px;" *ngIf="!selectOpcion">
+      <p style="font-size: 0.8rem; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">
+        * Seleccione el cuestionario que desea visualizar
+
+        <!-- *Por Favor seleccione un cuestionario para visualizar sus estadisticas. -->
+      </p>
+    </div>
+    <div class="space" *ngIf="selectOpcion">
       <label for="">Seleccione la pregunta</label>
       <input list="pre" [(ngModel)]="pregunta" (change)="mostrar()" placeholder="Seleccione la pregunta" />
       <datalist id="pre">
