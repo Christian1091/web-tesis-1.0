@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   //base_url: 'https://tranformaciondigitalgih4pc.tech/api'
-  base_url: 'http://172.16.26.11:8080/api'
+  base_url: 'http://0.0.0.0:8080/api'
  // base_url: 'http://localhost:3000/api'
 };
 
