@@ -37,11 +37,11 @@
         *ngFor="let noticia of noticias">
         <div class="icon-box">
           <div class="icon"><i class="bx bxl-dribbble"></i></div>
-          <h4><a href="">{{ noticia.titulo }}</a></h4>
+          <h4>{{ noticia.titulo }}</h4>
           <p>{{ noticia.descripcion }}
           </p>
           <p *ngIf="noticia.nombreImagen">
-            <img src="http://localhost:3000/api/noticia/view/{{noticia.nombreImagen}}" width="110">
+            <img src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{noticia.nombreImagen}}" width="110">
           </p>
         </div>
       </div>
