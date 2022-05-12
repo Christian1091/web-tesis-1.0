@@ -234,20 +234,17 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
     this.rs = [];
     this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
-      console.log("AQUIIIIII");
-      console.log(resp[2]);
       
       this.tipo = (resp[2] == undefined)? " ": resp[2].toString();
       const r = resp[0]['listRespuestasUsuario'];
       this.puntaje = Number.parseInt(resp[1].toString());
-      console.log(resp[1])
 
       r.forEach(res => {
         let suma = 0;
         const indices: [] = res["indexRespuestaSeleccionada"];
         indices.map(indice => {
-          suma += Number.parseFloat(res["listRespuesta"][indice].puntosRespuesta.toString())
-          console.log(res["listRespuesta"][indice].puntosRespuesta.toString());
+          suma += Number.parseFloat(res["listRespuesta"][indice].puntosRespuesta.toString()?res["listRespuesta"][indice].puntosRespuesta.toString():"0");
+
         });
         
         let pre: Pre = {

@@ -114,7 +114,7 @@ export class NuevaPreguntaComponent implements OnInit {
           puntosRespuesta: [r.puntosRespuesta, Validators.required],
           texto: [r.texto],
           tipoRespuesta: [r.tipoRespuesta]
-        }));
+                  }));
       })
       this.habilitar = this.cuestionario.listPreguntas[this.pos].otraRespuesta;
     }
@@ -145,7 +145,8 @@ export class NuevaPreguntaComponent implements OnInit {
       descripcion: ['', Validators.required],
       puntosRespuesta: ['', Validators.required],
       texto: [texto],
-      tipoRespuesta: [this.esMultiple]
+      tipoRespuesta: [this.esMultiple],
+      area:['']
     }));
     // this.getRespuestasMultiples.get("respuestas").get("tipoRespuesta").setValue(this.esMultiple);
     let size = this.getRespuestasMultiples.length;
