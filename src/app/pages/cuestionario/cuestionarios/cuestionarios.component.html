@@ -7,7 +7,7 @@
 
                     <h3 class="card-title">Crear Cuestionarios</h3>
                     <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-                    <input type="text" class="form-control" placeholder="Ingrese titulo del cuestionario"
+                    <input type="text" class="form-control" placeholder="Ingrese el título del cuestionario"
                         formControlName="titulo">
 
                     <div class="text-danger"
@@ -18,7 +18,7 @@
 
                     <div class="form-group">
                         <br />
-                        <textarea class="form-control" placeholder="Ingrese descripcion del cuestionario" rows="5"
+                        <textarea class="form-control" placeholder="Ingrese una descripción del cuestionario" rows="5"
                             formControlName="descripcion">
                     </textarea>
 
@@ -30,16 +30,17 @@
 
                     </div>
 
-                    <div class="row">
+                    <div class="col">
                         <div class="col-md-2">
                             <input type="text" class="form-control text-center" placeholder="Puntaje"
                                 formControlName="puntaje">
-                            <div class="text-danger"
+                            <div class="text-danger pt"
                                 *ngIf="cuestionarioForm.get('puntaje').hasError('required') && cuestionarioForm.get('puntaje').touched">
                                 El Puntaje <strong>es obligatorio</strong>
 
                             </div>
                         </div>
+
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col">
@@ -71,7 +72,7 @@
                         <div class="col-md-4">
                             <div class="row">
                                 <div class="col">
-                                    <label for="">A quien va dirijido?</label>
+                                    <label for="">Dirigido a</label>
                                 </div>
                                 <div class="col">
                                     <mat-select placeholder="Selecciona" (valueChange)="obtenerTipoPersona($event)">

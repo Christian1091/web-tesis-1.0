@@ -22,7 +22,9 @@ import { Area } from '../../../models/area.model';
 export class CuestionariosComponent implements OnInit {
 
   //public url = "http://localhost:4200";
-  public url = "https://ups.tranformaciondigitalgih4pc.tech/";
+  //public url = "https://ups.tranformaciondigitalgih4pc.tech/";
+  public url = "https://transformaciondigitalgihp4c.ups.edu.ec/";
+  
     //public url = "https://portalweb-tesis.netlify.app";
   tituloCuestionario: string;
   descripcionCuestionario: string;

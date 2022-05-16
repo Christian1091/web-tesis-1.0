@@ -26,3 +26,15 @@
     color: red;
     font-size: 1.2em;
 }
+
+div .row {
+    
+    padding: 15px;
+    border-radius: 5px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+    
+}
+
