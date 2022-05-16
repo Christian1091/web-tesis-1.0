@@ -107,7 +107,7 @@ export class Grafica1Component {
   mostrar() {
     if (this.chart != null || this.chart != undefined) {
       this.chart.destroy();
-      console.log('destruido');
+     
     }
     this.labels = [];
     this.data = [];
@@ -145,8 +145,7 @@ export class Grafica1Component {
       }
     });
 
-    console.log(this.labels);
-    console.log(this.data);
+   
 
     this.graficar()
   }
@@ -154,7 +153,6 @@ export class Grafica1Component {
   getListCuestionarios() {
     this.cuestioanrioService.getListCuestionarios()
       .subscribe(({ cuestionarios }) => {
-        //console.log(cuestionarios);
         this.listCuestionarios = cuestionarios;
         console.log(this.listCuestionarios);
       })
@@ -310,8 +308,6 @@ export class Grafica1Component {
       })
       zz += x * ps;
     });
-    console.log("Z..",zz);
-    //this.madurez = zz + "";
     this.promedioMadurez += zz;
    if(ok)
    {

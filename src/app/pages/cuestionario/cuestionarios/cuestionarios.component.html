@@ -7,19 +7,23 @@
 
                     <h3 class="card-title">Crear Cuestionarios</h3>
                     <!-- <p class="card-text">With supporting text below as a natural lead-in to additional content.</p> -->
-                    <input type="text" class="form-control" placeholder="Ingrese titulo del cuestionario" formControlName="titulo">
+                    <input type="text" class="form-control" placeholder="Ingrese titulo del cuestionario"
+                        formControlName="titulo">
 
-                    <div class="text-danger" *ngIf="cuestionarioForm.get('titulo').hasError('required') && cuestionarioForm.get('titulo').touched">
+                    <div class="text-danger"
+                        *ngIf="cuestionarioForm.get('titulo').hasError('required') && cuestionarioForm.get('titulo').touched">
                         El titulo <strong>es obligatorio</strong>
                     </div>
 
 
                     <div class="form-group">
-                        <br/>
-                        <textarea class="form-control" placeholder="Ingrese descripcion del cuestionario" rows="5" formControlName="descripcion">
+                        <br />
+                        <textarea class="form-control" placeholder="Ingrese descripcion del cuestionario" rows="5"
+                            formControlName="descripcion">
                     </textarea>
 
-                        <div class="text-danger" *ngIf="cuestionarioForm.get('descripcion').hasError('required') && cuestionarioForm.get('descripcion').touched">
+                        <div class="text-danger"
+                            *ngIf="cuestionarioForm.get('descripcion').hasError('required') && cuestionarioForm.get('descripcion').touched">
                             La descripcion <strong>es obligatorio</strong>
 
                         </div>
@@ -28,32 +32,67 @@
 
                     <div class="row">
                         <div class="col-md-2">
-                            <input type="text" class="form-control text-center" placeholder="Puntaje" formControlName="puntaje">
-                            <div class="text-danger" *ngIf="cuestionarioForm.get('puntaje').hasError('required') && cuestionarioForm.get('puntaje').touched">
+                            <input type="text" class="form-control text-center" placeholder="Puntaje"
+                                formControlName="puntaje">
+                            <div class="text-danger"
+                                *ngIf="cuestionarioForm.get('puntaje').hasError('required') && cuestionarioForm.get('puntaje').touched">
                                 El Puntaje <strong>es obligatorio</strong>
 
                             </div>
                         </div>
                         <div class="col-md-4">
                             <div class="row">
-                              <div class="col">
-                                <label for="">Tipo Cuestionario</label>
-                              </div>
-                              <div class="col">
-                                <mat-select
-                                  placeholder="Selecciona"
-                                  (valueChange)="obtenerTipo($event)"
-                                >
-                                  <mat-option *ngFor="let tipo of tipos" [value]="tipo">
-                                    {{ tipo }}
-                                  </mat-option>
-                                </mat-select>
-                            </div>
+                                <div class="col">
+                                    <label for="">Empresa</label>
                                 </div>
-
-                                  </div>
+                                <div class="col">
+                                    <mat-select placeholder="Selecciona" (valueChange)="obtenerEmpresa($event)">
+                                        <mat-option *ngFor="let emp of empresas" [value]="emp">
+                                            {{ emp }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Tipo Cuestionario</label>
+                                </div>
+                                <div class="col">
+                                    <mat-select placeholder="Selecciona" (valueChange)="obtenerTipo($event)">
+                                        <mat-option *ngFor="let tipo of tipos" [value]="tipo">
+                                            {{ tipo }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">A quien va dirijido?</label>
+                                </div>
+                                <div class="col">
+                                    <mat-select placeholder="Selecciona" (valueChange)="obtenerTipoPersona($event)">
+                                        <mat-option value="Docentes">
+                                            Docentes
+                                        </mat-option>
+                                        <mat-option value="Estudiantes">
+                                            Estudiantes
+                                        </mat-option>
+                                        <mat-option value="Administrativos">
+                                            Administrativos
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <div class="col-md-10">
-                            <button [disabled]="cuestionarioForm.invalid" class="btn btn-info btn-md text-uppercase float-right" type="submit">Nuevo Cuestionario</button>
+                            <button [disabled]="cuestionarioForm.invalid"
+                                class="btn btn-info btn-md text-uppercase float-right" type="submit">Nuevo
+                                Cuestionario</button>
                         </div>
                     </div>
                 </form>
@@ -68,13 +107,16 @@
             <h3>Crear área</h3>
             <div class="card-body">
                 <div class="row mt-4">
-                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del área" [(ngModel)]="nombreArea">
+                    <input type="text" class="form-control" name="nombre" placeholder="Nombre del área"
+                        [(ngModel)]="nombreArea">
                 </div>
                 <div class="row mt-4">
-                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción del área" [(ngModel)]="descripcionArea">
+                    <input type="text" class="form-control" name="descripcion" placeholder="Descripción del área"
+                        [(ngModel)]="descripcionArea">
                 </div>
                 <div class="row mt-4">
-                    <input type="text" class="form-control" name="valor" placeholder="Valor del área" [(ngModel)]="valorArea">
+                    <input type="text" class="form-control" name="valor" placeholder="Valor del área"
+                        [(ngModel)]="valorArea">
                 </div>
                 <div class="row mt-4">
                     <button class="btn btn-success" (click)="crearArea()">Crear</button>
@@ -95,7 +137,8 @@
                             <td>{{ area.area }}</td>
                             <td>{{ area.descripcion }}</td>
                             <td>{{ area.valor }}</td>
-                            <td><button class="btn btn-danger" (click)="eliminarArea(area._id, i)">Eliminar</button></td>
+                            <td><button class="btn btn-danger" (click)="eliminarArea(area._id, i)">Eliminar</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -125,11 +168,14 @@
                 <div class="card-body cardList">
                     <h4 class="card-title">{{ cuestionario.nombre }}</h4>
                     <!-- <p class="card-text">{{ cuestionario.descripcion }}</p> -->
-                    <a href="{{url}}/validarIngreso/{{ cuestionario._id }}" class="card-text">{{url}}/validarIngreso/{{ cuestionario._id }}</a>
+                    <a href="{{url}}/validarIngreso/{{ cuestionario._id }}" class="card-text">{{url}}/validarIngreso/{{
+                        cuestionario._id }}</a>
                     <hr>
-                    <i class="fa fa-eye icon" style="color: #2269C7" routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
+                    <i class="fa fa-eye icon" style="color: #2269C7"
+                        routerLink="../ver-cuestionario/{{ cuestionario._id }}"></i>
 
-                    <i class="fa fa-times icon" (click)="eliminarCuestionario( cuestionario )" style="color: #EF2421;"></i>
+                    <i class="fa fa-times icon" (click)="eliminarCuestionario( cuestionario )"
+                        style="color: #EF2421;"></i>
 
                     <i class="fa fa-bar-chart-o icon" routerLink="../estadisticas/{{ cuestionario._id }}"></i>
 

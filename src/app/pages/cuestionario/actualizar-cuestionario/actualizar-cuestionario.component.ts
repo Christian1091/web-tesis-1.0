@@ -21,7 +21,7 @@ export class ActualizarCuestionarioComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    console.log(this.cuestionario.listPreguntas[this.posicion]);
+   
   }
 
 

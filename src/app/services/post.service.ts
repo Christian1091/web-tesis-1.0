@@ -90,7 +90,6 @@ export class PostService {
   }
 
   crearPost( post: { titulo: string, descripcion: string, texto: string }) {
-    //console.log('creando post');
     return this.http.post(`${ base_url }/post`, post, this.headers);
 
   }
@@ -106,7 +105,7 @@ export class PostService {
   }
 
   crearNoticia( noticia: { titulo: string, descripcion: string, texto: string, nombreImagen: string }) {
-    //console.log('creando post');
+  
     return this.http.post(`${ base_url }/noticia/nueva`, noticia, this.headers);
 
   }

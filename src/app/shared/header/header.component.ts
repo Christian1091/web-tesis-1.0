@@ -36,7 +36,6 @@ export class HeaderComponent {
       //this.router.navigateByUrl('/dashboard');
       return;
     }
-    //console.log(termino);
     this.router.navigateByUrl(`/dashboard/buscar/${termino}`);
   }
 }

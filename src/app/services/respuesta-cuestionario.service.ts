@@ -43,7 +43,6 @@ export class RespuestaCuestionarioService {
 
   guardarRespuestaUsuario( respuestaUsuario: any ): Observable<any> {
     const url = `${ base_url }/respuestaCuestionarios`;
-    //console.log('probando' + respuestaUsuario);
     return this.http.post( url, respuestaUsuario, this.headers );
   }
 
@@ -60,7 +59,6 @@ export class RespuestaCuestionarioService {
   getRespuestaByIdCuestionario( _id: string ) {
 
     const url =  `${ base_url }/respuestaCuestionarios/estadisticas/${ _id }`;
-     //console.log('hoooola' + url);
     return this.http.get( url, this.headers )
                 .pipe(
                   map( (resp: {ok: boolean, respuestaByIdCuestionario: respuestaByIdCuestionario }) => resp.respuestaByIdCuestionario )

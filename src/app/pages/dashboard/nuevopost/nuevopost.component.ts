@@ -75,7 +75,6 @@ export class NuevopostComponent implements OnInit {
                 timer: 1500
               })
             })
-          console.log(response);
         });
       } else {
         this.postService.actulizarPost(data)
@@ -99,39 +98,32 @@ export class NuevopostComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
-      //console.log(this.postForm.value);
+
       if (this.file) {
         this.postService.uploadPdf(this.file).subscribe(response => {
           const estado = response['ok'] as boolean;
           if (estado) {
             this.postForm.get('nombrePdf').setValue(response['nombreArchivo']);
-            console.log(this.postForm.value);
             this.postService.crearPost(this.postForm.value)
               .subscribe((res: any) => {
-                console.log(res);
+
                 this.router.navigateByUrl('/');
               }, err => {
                 Swal.fire('Error', err.error.msg, 'error');
-                console.log(err);
               });
           }
-          console.log(response);
         });
       }
-
-
     }
-    //this.resetPostFormulario();
-
   }
 
   cargarPost(id: string) {
     this.cabeceraTitulo = "Editar Post";
     this.postService.getVerContenidoPost(id)
       .subscribe(post => {
-        //console.log(post);
+
         const { titulo, descripcion, texto, nombrePdf } = post;
-        //console.log(titulo, descripcion, texto);
+
         this.postSeleccionado = post;
         this.postForm.setValue({ titulo, descripcion, texto, nombrePdf });
       })

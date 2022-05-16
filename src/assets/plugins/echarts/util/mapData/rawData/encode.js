@@ -87,7 +87,6 @@ function encode(val, prev){
     // try{
     //     eval("(" + JSON.stringify(tmp) + ")");
     // }catch(e) {
-    //     console.log(val + 64);
     // }
 }
 

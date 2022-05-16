@@ -22,7 +22,9 @@ export class CuestionarioService {
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajecuestionario: number;
-  tipo: string; 
+  tipo: string;
+  tipoPersona: string;
+  empresa: string;
   constructor( private http: HttpClient ) { }
 
   get token(): string {

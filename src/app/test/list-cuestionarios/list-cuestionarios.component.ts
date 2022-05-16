@@ -14,11 +14,11 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
 })
 export class ListCuestionariosComponent implements OnInit {
 
-  public listCuestionarios: Cuestionario [] = [];
+  public listCuestionarios: Cuestionario[] = [];
 
-  constructor( private cuestioanrioService: CuestionarioService,
-               private respuestaCuestionarioService: RespuestaCuestionarioService,
-               private router: Router) { }
+  constructor(private cuestioanrioService: CuestionarioService,
+    private respuestaCuestionarioService: RespuestaCuestionarioService,
+    private router: Router) { }
 
   ngOnInit(): void {
     this.getListCuestionarios();
@@ -26,14 +26,14 @@ export class ListCuestionariosComponent implements OnInit {
 
   getListCuestionarios() {
     this.cuestioanrioService.getListCuestionarios()
-                              .subscribe(({ cuestionarios }) => {
-                                //console.log(cuestionarios);
-                                this.listCuestionarios = cuestionarios;
-                                console.log(this.listCuestionarios);
-                              })
+      .subscribe(({ cuestionarios }) => {
+
+        this.listCuestionarios = cuestionarios;
+        console.log(this.listCuestionarios);
+      })
   }
 
-  ingresarNombre( idCuestionario: string ) {
+  ingresarNombre(idCuestionario: string) {
     this.respuestaCuestionarioService.idCuestionario = idCuestionario;
     console.log(idCuestionario);
     this.router.navigateByUrl(`/validarIngreso/${idCuestionario}`);

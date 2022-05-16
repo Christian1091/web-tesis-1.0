@@ -46,7 +46,6 @@ export class RegisterComponent implements OnInit {
 
   crearUsuario(){
     this.formSubmitted = true;
-    console.log( this.registerForm.value );
 
     if( this.registerForm.invalid ){
       return;
@@ -55,8 +54,6 @@ export class RegisterComponent implements OnInit {
     // Si el formulario es valido, realizar el posteo
     this.usuarioService.crearUsuario( this.registerForm.value )
         .subscribe( resp =>  {
-          // console.log('usuario creado')
-          // console.log(resp);
           // Navegar al dashboard
           this.router.navigateByUrl('/');
 
@@ -109,7 +106,6 @@ export class RegisterComponent implements OnInit {
 
   }
 
-  //console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
   // Sign-in con el boton de google
   renderButton() {
     gapi.signin2.render('my-signin2', {
@@ -132,11 +128,10 @@ export class RegisterComponent implements OnInit {
   };
 
   attachSignin(element) {
-    //console.log(element.id);
     this.auth2.attachClickHandler( element, {},
         (googleUser) => {
            const id_token = googleUser.getAuthResponse().id_token;
-          //console.log( id_token );
+          
           this.usuarioService.loginGoogle( id_token).subscribe( resp => {
             // Navegar al dashboard
             // Este es en el login de google

@@ -32,7 +32,10 @@ export class CuestionariosComponent implements OnInit {
   public cuestionarios: Cuestionario[] = [];
   public cargando: boolean = true;
   public tipos: string[] = ["GENERAL", "MD4U", "IES"];
+  public empresas: string[] = ["UPS", "UDA", "SUPERMAXI"];
   public tipo: string = "";
+  public tipoPersona: string = "";
+  public empresa: string = "";
 
   public cuestionarioForm = this.fb.group({
     titulo: ['',Validators.required],
@@ -67,7 +70,7 @@ export class CuestionariosComponent implements OnInit {
 
   crearArea() {
     if (this.nombreArea.trim().length > 0 && this.valorArea > 0) {
-      console.log("guardar area");
+     
       this.cuestionarioService.crearArea(this.nombreArea, this.descripcionArea, this.valorArea).subscribe(response => {
         this.cargarAreas();
         this.nombreArea = "";
@@ -75,20 +78,25 @@ export class CuestionariosComponent implements OnInit {
         this.valorArea = 0;
       });
      } else {
-       console.log("no guardar area");
-       
      }
   }
 
   eliminarArea(_id: string, i: number) {
     this.cuestionarioService.eliminarArea(_id).subscribe(response => {
-      console.log(response);
       this.areas.splice(i, 1);
     });
   }
 
   obtenerTipo(value: string) {
     this.tipo = value;
+  }
+
+  obtenerTipoPersona(value: string) {
+    this.tipoPersona = value;
+  }
+
+  obtenerEmpresa(value: string) {
+    this.empresa = value
   }
 
   /**Creamos las preguntas */
@@ -98,14 +106,15 @@ export class CuestionariosComponent implements OnInit {
     this.cuestionarioService.descripcionCuestionario = this.cuestionarioForm.value.descripcion;
     this.cuestionarioService.puntajecuestionario = this.cuestionarioForm.value.puntaje;
     this.cuestionarioService.tipo = this.tipo ?? "General";
-    //console.log("Nos vamos a las preguntas");
+    this.cuestionarioService.tipoPersona = this.tipoPersona ?? "Docentes";
+    this.cuestionarioService.empresa = this.empresa ?? "UPS";
     this.router.navigateByUrl('/dashboard/preguntas');
 
   }
 
   guardarPregunta( pregunta: Pregunta ) {
     this.listPregunta.push(pregunta);
-    //console.log(this.listPregunta);
+    
   }
 
   cargarListCuestioanrios() {
@@ -113,14 +122,13 @@ export class CuestionariosComponent implements OnInit {
     this.cuestionarioService.getListCuestionarioByIdUser()
                             .subscribe( ({ cuestionarios }) => {
                               this.cuestionarios = cuestionarios;
-                              //console.log(cuestionarios)
                               this.cargando = false;
                             })
 
   }
 
   eliminarCuestionario( cuestionario: Cuestionario ) {
-    //console.log(cuestionario)
+    
     Swal.fire({
       title: '¿Eliminar cuestionario?',
       text: `Esta a punto de eliminar a ${ cuestionario.nombre }`,
@@ -150,7 +158,7 @@ export class CuestionariosComponent implements OnInit {
 
     const link =` ${this.url}/validarIngreso/${idCuestionario}`;
     this._clipboardService.copyFromContent(link);
-    //console.log(link);
+    
 
   }
 

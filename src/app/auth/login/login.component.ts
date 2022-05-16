@@ -47,7 +47,7 @@ export class LoginComponent implements OnInit {
     this.usuarioService.login( this.loginForm.value )
       .subscribe( resp => {
         // Aqui tenemos un login exitoso
-        //console.log(resp)
+      
 
         // Para recordar el email
         if ( this.loginForm.get('remember').value ){
@@ -64,15 +64,15 @@ export class LoginComponent implements OnInit {
       }, (err) => {
         // Si sucede un error
         Swal.fire('Error', err.error.msg, 'error');
-        console.log(err);
+        
       });
 
-    // console.log( this.loginForm.value )
+  
     // this.router.navigateByUrl('/');
   }
 
 
-  //console.log('Logged in as: ' + googleUser.getBasicProfile().getName());
+  
   // Sign-in con el boton de google
   renderButton() {
     gapi.signin2.render('my-signin2', {
@@ -95,11 +95,11 @@ export class LoginComponent implements OnInit {
   };
 
   attachSignin(element) {
-    //console.log(element.id);
+   
     this.auth2.attachClickHandler( element, {},
         (googleUser) => {
            const id_token = googleUser.getAuthResponse().id_token;
-          //console.log( id_token );
+         
           this.usuarioService.loginGoogle( id_token).subscribe( resp => {
             // Navegar al dashboard
             // Este es en el login de google

@@ -108,7 +108,6 @@ export class NuevaPreguntaComponent implements OnInit {
 
       this.cuestionario.listPreguntas[this.pos].listRespuesta.forEach(r => {
         //const valor = Math.round((r.puntosRespuesta+Number.EPSILON)*100)/100
-        //console.log("mi valor ", valor)
         this.getRespuestasMultiples.push(this.fb.group({
           descripcion: [r.descripcion, Validators.required],
           puntosRespuesta: [r.puntosRespuesta, Validators.required],
@@ -161,29 +160,24 @@ export class NuevaPreguntaComponent implements OnInit {
         } else {
           this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(!this.esMultiple)
         }
-        console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
-      }
+       }
     }
     else {
       for (let i = 0; i < this.getRespuestasMultiples.length; i++) {
         this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
         this.getRespuestasMultiples.at(i).get('tipoRespuesta').setValue(this.esMultiple)
         this.getRespuestasMultiples.at(i).get('area').setValue(this.area)
-        console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
-      }
+        }
     }
 
   }
 
   eliminarRespuestaMultiples(index: number) {
     this.getRespuestasMultiples.removeAt(index);
-    console.log(this.getRespuestasMultiples.length);
-
     let size = this.getRespuestasMultiples.length;
     let p = (size == 0) ? 1 : (1 / size);
     for (let i = 0; i < this.getRespuestasMultiples.length; i++) {
       this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
-      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
     }
 
   }
@@ -194,12 +188,10 @@ export class NuevaPreguntaComponent implements OnInit {
     let p = (size == 0) ? 1 : (1 / size);
     for (let i = 0; i < this.getRespuestasMultiples.length; i++) {
       this.getRespuestasMultiples.at(i).get('puntosRespuesta').setValue(p.toFixed(2))
-      console.log(this.getRespuestasMultiples.at(i).get('puntosRespuesta').value);
-    }
+     }
   }
 
   getArea(event: Area) {
-    console.log(event);
     this.area = event.area;
     this.valorArea = event.valor;
 
@@ -210,7 +202,6 @@ export class NuevaPreguntaComponent implements OnInit {
 
       this.actualizar();
     } else {
-      console.log(2222);
       /**Obtenemos el titulo de la pregunta */
       const descripcionPregunta = this.opcionRespuestas.get('titulo').value;
       const puntajePregunta = this.opcionRespuestas.get('puntaje').value;
@@ -239,7 +230,6 @@ export class NuevaPreguntaComponent implements OnInit {
       });
       /**Creamos un nuevo objeto pregunta en donde vamos almacenar*/
       const pregunta: Pregunta = new Pregunta(descripcionPregunta, puntajePregunta, arrayRta, otraRespuesta, this.area ?? "", this.valorArea ?? 0);
-      console.log(pregunta);
       this.enviarPregunta.emit(pregunta);
       this.resetFormulario();
       this.habilitar = false;
@@ -264,16 +254,12 @@ export class NuevaPreguntaComponent implements OnInit {
     this.cuestionario.listPreguntas[this.pos].valorArea = this.valorArea ?? 0;
     this.cuestionario.listPreguntas[this.pos].otraRespuesta = this.habilitar;
     this.cuestionario.listPreguntas[this.pos].listRespuesta = this.opcionRespuestas.get('respuestas').value;
-    console.log(this.cuestionario);
-    console.log("xdxdxd");
-
     this.cuestionario.nombre = this.tituloCuestionario.value;
     this.cuestionario.descripcion = this.descripcionCuestionario.value;
     this.cuestionario.puntajeCuestionario = this.puntajeCuestionario.value;
 
 
     this.cuestionarioService.actualizarCuestionario(this.cuestionario).subscribe(res => {
-      console.log(res);
       this.dialogRef.close();
 
     })

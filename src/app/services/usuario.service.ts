@@ -92,7 +92,7 @@ export class UsuarioService {
 
       this.ngZone.run(() => {
         this.router.navigateByUrl('/web');
-        //console.log('User signed out.');
+       
 
       })
     });
@@ -110,7 +110,7 @@ export class UsuarioService {
       }
     }).pipe(
       map( ( resp: any) => {
-        //console.log(resp);
+        
 
         // Destructuramos o extraemos las propiedades del objeto usuario
         const { email, google, nombre, role, img = '', uid } = resp.usuario;
@@ -222,7 +222,7 @@ export class UsuarioService {
   /**Puedo recibir el usuario o el uid depende de como
    * nosotros deseemos realizar */
   eliminarUsuario( usuario: Usuario) {
-    //console.log('eliminando');
+   
      // http://localhost:3000/api/usuarios/607cbcf1b55f3f2788a34450
      const url = `${ base_url }/usuarios/${ usuario.uid }`;
 

@@ -80,7 +80,6 @@ export class UsuariosComponent implements OnInit, OnDestroy {
       return this.usuarios = this.usuariosTemp;
 
     }
-    //console.log(termino);
     this.busquedasServicio.buscar( 'usuarios', termino )
         .subscribe( resultado => {
           this.usuarios = resultado;
@@ -94,10 +93,6 @@ export class UsuariosComponent implements OnInit, OnDestroy {
     if ( usuario.uid === this.usuarioService.uid ) {
       return Swal.fire('Error', 'Este usuario no pueder ser eliminado', 'error');
     }
-    //console.log('ID del usuario: => ' + usuario.uid);
-    //console.log('ID del usuario: => ' + this.usuarioService.uid);
-    //console.log(usuario);
-    //console.log('Usuario Service: => ' + this.usuarioService.eliminarUsuario( usuario ));
     Swal.fire({
       title: '¿Eliminar usuario?',
       text: `Esta a punto de eliminar a ${ usuario.nombre }`,
@@ -120,18 +115,13 @@ export class UsuariosComponent implements OnInit, OnDestroy {
   }
 
   cambiarRole( usuario: Usuario ) {
-    //console.log(usuario);
+
     this.usuarioService.guardarUsuario( usuario )
         .subscribe( resp => {
-          console.log(resp);
-
         });
-
   }
 
   abrirModal( usuario: Usuario ) {
-    console.log(usuario);
     this.modalImagenService.abrirModal('usuarios', usuario.uid, usuario.img);
   }
-
 }

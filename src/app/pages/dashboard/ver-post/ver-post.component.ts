@@ -14,11 +14,7 @@ export class VerPostComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: Post) {
     this.post= data;
-    console.log(data);
-    
    }
-
   ngOnInit(): void {
   }
-
 }

@@ -25,8 +25,6 @@ export class VerCuestionarioComponent implements OnInit {
     private dialog: MatDialog,
     private overlay: Overlay) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-    
-    //console.log('----- ' + this.id);
   }
 
   ngOnInit(): void {
@@ -36,12 +34,10 @@ export class VerCuestionarioComponent implements OnInit {
   obtenerCuestionario() {
     this.cuestionarioService.getVerCuestionario(this.id)
       .subscribe(data => {
-        //console.log(data);
         this.cuestionario = data;
-        //console.log(Object.values(data));
+    
         //this.cuestionario = Object.values(data);
       }, error => {
-        console.log(error);
       }
       )
   }
@@ -49,7 +45,6 @@ export class VerCuestionarioComponent implements OnInit {
   cargarCuestionario(r, i) {
     const scrollStrategy = this.overlay.scrollStrategies.block();
     let cuestionario: Cuestionario = r;
-    console.log(cuestionario.listPreguntas[i]);
     const modal = this.dialog.open(NuevaPreguntaComponent, {
       data: {
         "pos": i,

@@ -46,13 +46,8 @@ export class PerfilComponent implements OnInit {
   }
 
   actualizarPerfil() {
-    console.log(this.perfilForm.value);
     this.usuarioService.actulizarPerfil( this.perfilForm.value)
         .subscribe( resp => {
-          //console.log(resp);
-          /**Para que se me refresquen los cambios al actualizar
-           * los datos
-           */
           const { email, nombre } =  this.perfilForm.value;
           this.usuario.nombre = nombre;
           this.usuario.email = email;
@@ -60,13 +55,11 @@ export class PerfilComponent implements OnInit {
           Swal.fire('Guardado', 'Cambios realizados', 'success')
         }, (err) => {
           Swal.fire('Error', err.error.msg, 'error')
-          //console.log(err.error.msg)
         })
 
   }
 
   cambiarImagen( file: File ) {
-    //console.log(file);
     this.imagenSubir = file;
 
     if ( !file ) {
@@ -81,7 +74,6 @@ export class PerfilComponent implements OnInit {
 
     reader.onloadend = () => {
       this.imgTemp = reader.result;
-      //console.log(reader.result);
     }
   }
 
@@ -92,7 +84,6 @@ export class PerfilComponent implements OnInit {
           this.usuario.img = img; // En este punto tengo la imagen si lo hace correctamente
           Swal.fire('Guardado', 'Imagen actualizada', 'success');
         }).catch ( err => {
-          console.log(err);
           Swal.fire('Error', 'No s epudo subir la imagen', 'error');
         })
   }

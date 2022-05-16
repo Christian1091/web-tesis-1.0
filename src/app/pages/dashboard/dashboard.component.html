@@ -55,9 +55,9 @@
                                         class="img-circle"> </div>
                                 <div class="sl-right">
                                     <div>
-                                        <i class="fa fa-trash icon float-right" style="color: #EF2421;"></i>
+
                                         <i class="fa fa-edit icon float-right" style="color: #168116"></i>
-                                        <i class="fa fa-eye icon float-right" style="color: #2269C7"></i>
+
 
                                         <a>{{ noticia.titulo }}</a>
                                         <span class="sl-date"> Hace 5 minutos </span>
@@ -74,11 +74,14 @@
     </div>
 </div>
 <div>
-    <button *ngIf="opcion == 0" class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add"
+    <button *ngIf="opcion == 0"
+        class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add"
         routerLink="./nuevopost">
         <i class="fa fa-plus"></i></button>
 
-    <button *ngIf="opcion == 1" class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add" (click)="openDialog()">
+    <button *ngIf="opcion == 1"
+        class="right-side-toggle waves-effect waves-light btn-inverse btn btn-circle btn-sm pull-right m-l-10 add"
+        (click)="openDialog()">
         <i class="fa fa-plus"></i></button>
 
 </div>

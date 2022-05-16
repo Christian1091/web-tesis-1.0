@@ -1,5 +1,5 @@
 .container {
-  min-height: 155vh;
+  min-height: 125vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -7,7 +7,7 @@
 
 .card {
   padding: 20px;
-  width: 100%;
+  width: 80%;
 }
 
 .btn-sig {
@@ -33,7 +33,7 @@ ul li {
 
 .center {
   display: flex;
-justify-content: center;
+  justify-content: center;
 }
 
 .aline {
@@ -59,48 +59,97 @@ input[type='checkbox'] {
   padding-left: 50px;
 }
 
-h4 .area{ 
-  font-weight: bold;
+h4 {
+
 }
 
+.area{
+  font-weight: bold;
+  font-size: 16px;
+  color: #0c0c0c;
+  text-align: center;margin: 0 0;
+}
+
+div {
+} 
+.area {
+  border: 0.1px solid white;
+  background-color: rgba(126, 127, 182, 0.24);
+  border-radius: 3pc;
+}
+
+
+
+
 .fadein {
-  position:absolute;
-  top:0px;
-  left:50%;
+  position: absolute;
+  top: 0px;
+  left: 50%;
   /* margin:auto; */
 }
+
 .fadein img {
-  position:absolute;
-  left:-65px;
-  top:-20px;
+  position: absolute;
+  left: -65px;
+  top: 50px;
   -webkit-animation-name: fade;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 6s;
   animation-name: fade;
   animation-iteration-count: infinite;
   animation-duration: 6s;
-  
+
 }
 
 @-webkit-keyframes fade {
-  0% {opacity: 0;}
-  20% {opacity: 1;}
-  33% {opacity: 1;}
-  53% {opacity: 0;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  33% {
+    opacity: 1;
+  }
+
+  53% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
+
 @keyframes fade {
-  0% {opacity: 0;}
-  20% {opacity: 1;}
-  33% {opacity: 1;}
-  53% {opacity: 0;}
-  100% {opacity: 0;}
+  0% {
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 1;
+  }
+
+  33% {
+    opacity: 1;
+  }
+
+  53% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
 #f2 {
   -webkit-animation-delay: -4s;
- 
+
 }
+
 #f3 {
   -webkit-animation-delay: -2s;
 }

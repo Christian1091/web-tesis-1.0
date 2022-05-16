@@ -72,7 +72,6 @@ export class DashboardComponent implements OnInit{
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
       
     });
   }
@@ -82,7 +81,7 @@ export class DashboardComponent implements OnInit{
     this.postService.getListPostByIdUser()
                             .subscribe( ({ post }) => {
                               this.posts = post;
-                              //console.log(post)
+                            
                               //this.cargando = false;
                             })
 
@@ -90,9 +89,7 @@ export class DashboardComponent implements OnInit{
 
   cargarNoticia(){
     this.postService.getListNoticias().subscribe(response => {
-      this.noticias = response['noticias'];
-      console.log(this.noticias);
-      
+      this.noticias = response['noticias'];      
     })
   }
 
@@ -111,7 +108,6 @@ export class DashboardComponent implements OnInit{
   }
 
   eliminarPost( post: Post ) {
-    //console.log(cuestionario)
     Swal.fire({
       title: '¿Eliminar post?',
       text: `Esta a punto de eliminar a ${ post.titulo }`,

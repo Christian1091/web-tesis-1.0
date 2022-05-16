@@ -33,7 +33,6 @@ export class SectionsComponent implements OnInit {
   getListPost() {
     this.postService.getListPost()
                     .subscribe(({ post }) => {
-                              //console.log(posts);
                               this.listPost = post;
                             });
   }

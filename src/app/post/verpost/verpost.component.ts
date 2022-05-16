@@ -35,12 +35,9 @@ export class VerpostComponent implements OnInit {
   }
 
   verContenidoPost() {
-    //console.log('ID POST ' + this.id);
     this.postService.getPublicoContenidoPost( this.id )
                             .subscribe ( data => {
-                                //console.log(data);
                                 this.contPost = data;
-                                //console.log(Object.values(data));
                                 //this.cuestionario = Object.values(data);
                               }, error => {
                                 console.log(error);

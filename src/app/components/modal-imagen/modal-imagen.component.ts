@@ -31,7 +31,6 @@ export class ModalImagenComponent implements OnInit {
   }
 
   cambiarImagen( file: File ) {
-    //console.log(file);
     this.imagenSubir = file;
 
     if ( !file ) {
@@ -46,7 +45,6 @@ export class ModalImagenComponent implements OnInit {
 
     reader.onloadend = () => {
       this.imgTemp = reader.result;
-      //console.log(reader.result);
     }
   }
 
@@ -65,7 +63,6 @@ export class ModalImagenComponent implements OnInit {
 
           this.cerrarModal();
         }).catch ( err => {
-          console.log(err);
           Swal.fire('Error', 'No se pudo subir la imagen', 'error');
         })
   }

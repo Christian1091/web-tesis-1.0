@@ -3,10 +3,8 @@
 }
 
 img {
-  
-  
   filter: drop-shadow(0px 0px 4px white);
-  padding: 1px;
+  padding: 2px 5px 2px 15px;
 }
 
 p{
@@ -15,9 +13,44 @@ p{
   font-style: italic;
   font-family:  sans-serif;
   text-align: center;
-
 }
 
 .texto{
   font-size: 16px;
+}
+
+.social {
+height: 20px;
+
+
+}
+
+img {
+
+}
+.pie { 
+  
+}
+.piec {
+  width: auto; 
+  height: 40px;
+
+}
+
+.social{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+    align-content: flex-end;
+    justify-content: center;
+
+    margin-top: 20px;
+
+}
+p {
+
+}
+.textpie 
+{
+  margin-top: 40px;
 }

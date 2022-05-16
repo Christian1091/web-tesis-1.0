@@ -37,17 +37,13 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
   }
 
   getRespuestaByIdCuestionario() {
-    //console.log("id: " + this.id);
 
     this.respuestaCuestionario = this.respuestaCuestionarioService.getRespuestaByIdCuestionario(this.id)
       .subscribe((res: any) => {
-        //console.log(res);
-        //console.log('************************************');
         //Vaciamos para que no hay duplicidad de datos
         this.listRespuestasUsuario = [];
         //Iteramos lo que tenemos dentro de res
         res.forEach((element: any) => {
-          //console.log(element.nombreParticipante)
           this.listRespuestasUsuario.push({
             id: element._id,
             nombreParticipante: element.nombreParticipante,
@@ -60,10 +56,7 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
             listRespuestaUsuario: element.listRespuestasUsuario
           })
         });
-        console.log(this.listRespuestasUsuario);
-
       }, error => {
-        console.log(error);
       });
   }
 
@@ -73,11 +66,10 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
       const puntosTotales = this.listRespuestasUsuario[i].puntosTotales;
       this.puntosTotalCuestionarios = Number(this.puntosTotalCuestionarios) + Number(puntosTotales);
     }
-    console.log(this.puntosTotalCuestionarios);
   }
 
   eliminarRespuestaUsuario(id: string) {
-    //console.log();
+
     Swal.fire({
       title: '¿Eliminar post?',
       text: `Esta a punto de eliminar a`,
@@ -104,8 +96,6 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
     this.cuestionarioService.getVerCuestionario(this.id)
       .subscribe(res => {
         this.obtenerPuntosCuestionario = res;
-        //console.log("Puntos: ");
-        //console.log(res);
       });
 
   }
@@ -117,8 +107,6 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
       //const cuestionarios =  this.listRespuestasUsuario[i].listRespuestaUsuario[j].tituloPregunta;
       const cuestionarios = this.listRespuestasUsuario[i].listRespuestaUsuario[0].tituloPregunta;
       const puntos = this.listRespuestasUsuario[i].listRespuestaUsuario[0].puntosObtenidos;
-      console.log(cuestionarios);
-      console.log(puntos);
     }
     //}
   }

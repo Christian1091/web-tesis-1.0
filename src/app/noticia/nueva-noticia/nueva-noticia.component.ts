@@ -28,14 +28,14 @@ export class NuevaNoticiaComponent implements OnInit {
     this.noticia.descripcion.trim();
     this.noticia.texto.trim();
     if (this.file) {
-      console.log(this.file);
+      
       this.noticiaService.uploadImage(this.file).subscribe(response => {
         const estado = response['ok'] as boolean;
         if (estado) {
           nombreImagen = response['nombreArchivo'];
           if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
             this.noticiaService.crearNoticia({ titulo: this.noticia.titulo, descripcion: this.noticia.descripcion, texto: this.noticia.texto, nombreImagen: nombreImagen }).subscribe(response => {
-              console.log(response);
+             
             });
           }
         }

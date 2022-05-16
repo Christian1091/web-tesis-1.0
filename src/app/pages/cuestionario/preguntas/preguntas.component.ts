@@ -20,7 +20,9 @@ export class PreguntasComponent implements OnInit {
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;
-  tipo: string; 
+  tipo: string;
+  tipoPersona: string; 
+  empresa: string;
   listPreguntas: Pregunta[] = [];
 
   cuestionarioAux: any;
@@ -34,11 +36,12 @@ export class PreguntasComponent implements OnInit {
     this.descripcionCuestionario = this.cuestionarioService.descripcionCuestionario;
     this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
     this.tipo = this.cuestionarioService.tipo;
+    this.tipoPersona = this.cuestionarioService.tipoPersona;
+    this.empresa = this.cuestionarioService.empresa;
   }
 
   guardarPregunta( pregunta: Pregunta) {
     this.listPreguntas.push(pregunta);
-    console.log(this.listPreguntas);
   }
 
   eliminarPregunta( index: number ) {
@@ -51,9 +54,10 @@ export class PreguntasComponent implements OnInit {
       descripcion: this.descripcionCuestionario,
       puntajeCuestionario: this.puntajeCuestionario,
       listPreguntas: this.listPreguntas,
-      tipo: this.tipo
+      tipo: this.tipo,
+      tipoPersona: this.tipoPersona,
+      empresa: this.empresa
     };
-    //console.log(cuestionario);
     Swal.fire({
       position: 'top-end',
       icon: 'success',
@@ -61,20 +65,15 @@ export class PreguntasComponent implements OnInit {
       showConfirmButton: false,
       timer: 1500
     })
-
-    console.log(cuestionario);
     /**Enviamos el cuestionario al backend */
     this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
       this.router.navigateByUrl('/dashboard/cuestionarios');
-      //console.log(res);
+    
       this.cuestionarioAux = res;
       // const idCuestionario =  this.cuestionarioAux.cuestionario._id;
       // const linkCuestionario = '/validarIngreso';
-      // console.log("ID Cuestionario");
-      // console.log(idCuestionario);
     }, err => {
       Swal.fire('Error', err.error.msg, 'error');
-      console.log(err);
     });
   }
 

@@ -46,6 +46,7 @@ export class PreguntaComponent implements OnInit {
 	ciudadParticipante = '';
 	opcionOtros: boolean[] = [];
 	indices: number[] = [];
+	tipoPersona: string = "";
 
 	public descripcion: string = "";
 	public titulo: string = "";
@@ -73,9 +74,6 @@ export class PreguntaComponent implements OnInit {
 		//   return;
 		// }
 
-
-
-		//console.log(this.respuestaCuestionarioService.idCuestionario);
 	}
 
 	getCuestionario() {
@@ -83,8 +81,8 @@ export class PreguntaComponent implements OnInit {
 			.subscribe(res => {
 				this.descripcion = res.cuestionarios[0].descripcion;
 				this.titulo = res.cuestionarios[0].nombre;
-				console.log(res);
 				this.listPreguntas = res.cuestionarios[0].listPreguntas;
+				this.tipoPersona = res.cuestionarios[0].tipoPersona ?? "";
 				//this.listRespuesta = this.listPreguntas[1].listRespuesta;
 				this.listPreguntas.forEach(p => {
 					this.opcionOtros.push(p.otraRespuesta);
@@ -110,12 +108,9 @@ export class PreguntaComponent implements OnInit {
 	}
 
 	respuestaSeleccionada(respuesta: Respuesta, index: number, esMultiple: boolean) {
-		//console.log('************');
-		//console.log(respuesta);
 		this.opcionSeleccionada = respuesta;
 		this.rtaConfirmada = true;
 		this.indexSeleccionado = index;
-		console.log(index);
 		if (respuesta.texto && this.respuestaTexto.value?.length > 0) {
 			respuesta.descripcion = this.respuestaTexto.value;
 			respuesta.descripcion = respuesta.descripcion.trim().toUpperCase()
@@ -145,7 +140,6 @@ export class PreguntaComponent implements OnInit {
 			this.indices = []
 			this.indices.push(index);
 		}
-		console.log(this.indices);
 	}
 
 	respSelect(value, index) {
@@ -186,12 +180,8 @@ export class PreguntaComponent implements OnInit {
 			listRespuesta: this.listPreguntas[this.indexPregunta].listRespuesta,
 			area: this.listPreguntas[this.indexPregunta].area,
 			areaValor: this.listPreguntas[this.indexPregunta].valorArea,
-			
+
 		}
-
-		//console.log(respuestaUsuario);
-
-		//console.log(respuestaUsuario)
 		this.listRespuestaUsuario.push(respuestaUsuario);
 		this.opcionSeleccionada = undefined;
 		this.indexSeleccionado = undefined;
@@ -206,10 +196,7 @@ export class PreguntaComponent implements OnInit {
 			// Creamos un nuevo objeto para almacenar en la BD
 			this.guardamosRespuestaCuestionario();
 			// Redireccionamos al proximo componente
-			//console.log(this.listRespuestaUsuario);
-
 		}
-		console.log(this.indices);
 		this.indices = [];
 	}
 
@@ -223,7 +210,6 @@ export class PreguntaComponent implements OnInit {
 
 	obtenemosPuntosTotales(): number {
 
-		//console.log('Puntos Totales');
 		for (let i = 0; i < this.listRespuestaUsuario.length; i++) {
 			const puntosAux = this.listRespuestaUsuario[i].puntosObtenidos
 			this.puntosTotales = Number(this.puntosTotales) + Number(puntosAux);
@@ -231,7 +217,6 @@ export class PreguntaComponent implements OnInit {
 		}
 
 		return this.puntosTotales;
-		//console.log(this.puntosTotales);
 	}
 
 	guardamosRespuestaCuestionario() {
@@ -244,17 +229,16 @@ export class PreguntaComponent implements OnInit {
 			ciudadParticipante: this.ciudadParticipante,
 			fecha: new Date(),
 			puntosTotales: this.obtenemosPuntosTotales(),
-			listRespuestaUsuario: this.listRespuestaUsuario
+			listRespuestaUsuario: this.listRespuestaUsuario,
+			tipoPersona: this.tipoPersona
 		}
-		//console.log(respuestaCuestionario);
+		
 		// Almacenamos la respuesta en mongoDB
 		this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
-			console.log(res);
 			//console.log(res.respuestaCuestionario._id);
-			this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
+		this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
 		}, err => {
 			//Swal.fire('Error', err.error.msg, 'error');
-			console.log(err);
 			this.router.navigateByUrl('/');
 		});
 	}
