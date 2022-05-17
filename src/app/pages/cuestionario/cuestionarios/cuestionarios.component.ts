@@ -34,7 +34,7 @@ export class CuestionariosComponent implements OnInit {
   public cuestionarios: Cuestionario[] = [];
   public cargando: boolean = true;
   public tipos: string[] = ["GENERAL", "MD4U", "IES"];
-  public empresas: string[] = ["UPS", "UDA", "SUPERMAXI"];
+  public empresas: string[] = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
   public tipo: string = "";
   public tipoPersona: string = "";
   public empresa: string = "";

@@ -1,5 +1,5 @@
 
-import { Component, OnInit, Pipe } from '@angular/core';
+import { Component, OnInit, Pipe, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Provincias, Cantones } from '../../../interfaces/provincias.interfaces';
 import { ProvinciasService } from '../../../services/provincias.service';
@@ -31,8 +31,13 @@ export class ValidarIngresoComponent implements OnInit {
   //public nombrePro: any;
 
   public id: string;
-  public  ok: boolean = false; 
+  public  ok: boolean = false;
+  public check: boolean = false;
   public email = new FormControl('',[Validators.required, Validators.email]); 
+
+
+
+  
 
   constructor( private respuestaCuestionarioService: RespuestaCuestionarioService,
                 private cuestionarioService: CuestionarioService,
@@ -40,13 +45,9 @@ export class ValidarIngresoComponent implements OnInit {
                private router: Router,
                private provinciaService: ProvinciasService ) {
                 this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-                console.log(this.id);
+                
                }
-               activar ()
-               {
-                 this.ok = !this.ok; 
-               }
-
+               
   ngOnInit(): void {
     // if (this.respuestaCuestionarioService.idCuestionario === undefined ) {
     //   this.router.navigateByUrl('/');
@@ -63,6 +64,25 @@ export class ValidarIngresoComponent implements OnInit {
 
   }
 
+
+  validarCkeck() {
+    this.check = !this.check;
+    this.validar();
+  }
+
+  validar() {
+    const nombres = this.nombreParticipante.trim();
+    const provincia: string = this.provinciaParticipante.trim();
+    const ciudad: string = this.ciudadParticipante.trim();
+    const email: string = this.email.value;
+    if (nombres.length > 0 && nombres !== "" && !this.email.invalid && email.length >0 && email !== "" && provincia.length > 0 && provincia !== "" && ciudad.length > 0 && ciudad !== "" && this.check) {
+      this.ok = true;
+    } else {
+      this.ok = false;
+    }
+    console.log(this.email.touched);
+    this.email.touched;
+  }
   siguiente() {
      this.respuestaCuestionarioService.nombreParticipante = this.nombreParticipante;
      this.respuestaCuestionarioService.correoParticipante = this.email.value;
@@ -78,16 +98,12 @@ export class ValidarIngresoComponent implements OnInit {
   onSelect( id ) {
     this.cantones = this.provinciaService.getCantones(id).filter( item => item.provinciaId == id );
     this.ciudadParticipante = this.cantones[0].nombreCanton;
-    this.ok = false;
   }
 
   getCuidad(value) {
-    console.log(value);
     this.ciudadParticipante = value;
-    this.ok = true;
   }
   getProvincia(value) {
-    console.log(value);
     this.provinciaParticipante = value;
   }
 
