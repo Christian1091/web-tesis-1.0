@@ -1,5 +1,5 @@
 .container {
-  min-height: 125vh;
+  min-height: 15vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,6 +88,10 @@ div {
   /* margin:auto; */
 }
 
+.ic{
+  opacity: 0.2;
+}
+
 .fadein img {
   position: absolute;
   left: -65px;
@@ -163,7 +167,7 @@ div {
 }
 
 .card {
-  padding: 20px;
+  padding: 2px;
   width: 100%;
 }
 

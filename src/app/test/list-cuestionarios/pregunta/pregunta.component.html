@@ -1,13 +1,10 @@
 <!-- <app-navbar></app-navbar> -->
-
-<div class="fadein">
-    <img id="f3" src="../../../../assets/images/logo_ups.png" alt="..." width="120px">
-    <img id="f2" src="../../../../assets/images/logo_grupo.png" alt="..." width="120px">
-</div>
 <section id="wrapper">
     <div class="container">
+
         <div class="card text-center">
             <div *ngIf="indexPregunta == 0">
+
                 <br />
                 <br />
 
@@ -19,7 +16,26 @@
 
                 <br />
                 <br />
-
+            </div>
+            <div class="fadein" *ngIf="indexPregunta !== 0">
+                <img id="f3" src="../../../../assets/images/logo_ups.png" alt="..." width="120px">
+                <img id="f2" src="../../../../assets/images/logo_grupo.png" alt="..." width="120px">
+            </div>
+            <div class="fadein ic" *ngIf="indexPregunta == 0">
+                <img id="f3" src="../../../../assets/images/logo_ups.png" alt="..." width="120px">
+                <img id="f2" src="../../../../assets/images/logo_grupo.png" alt="..." width="120px">
+            </div>
+            <div *ngIf="indexPregunta !== 0">
+                <br />
+                <br />
+                <br />
+                <br />  
+                <br />
+                <br />
+                <br />
+                <br />  
+                <br />
+                <br />
             </div>
             <div class="area">
                 <h4 class="area">
