@@ -87,15 +87,15 @@ export class UsuarioService {
     // Primero vamos a borrar el token
     localStorage.removeItem('token');
     localStorage.removeItem('menu');
-
+    
     this.auth2.signOut().then(() => {
 
       this.ngZone.run(() => {
         this.router.navigateByUrl('/web');
        
-
       })
     });
+    this.router.navigateByUrl('/web');
 
   }
 
