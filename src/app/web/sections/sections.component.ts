@@ -42,7 +42,6 @@ export class SectionsComponent implements OnInit {
       this.noticias = response['noticias'];
       //this.noticias = this.noticias.slice(0, 3);
       this.noticias  = this.noticias.slice(this.noticias.length -4, this.noticias.length);
-      console.log(this.noticias);
     });
   }
 

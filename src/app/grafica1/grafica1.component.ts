@@ -154,7 +154,6 @@ export class Grafica1Component {
     this.cuestioanrioService.getListCuestionarios()
       .subscribe(({ cuestionarios }) => {
         this.listCuestionarios = cuestionarios;
-        console.log(this.listCuestionarios);
       })
   }
   obtenerPromedio() {
@@ -204,7 +203,6 @@ export class Grafica1Component {
 		});
 
 		const total = sumas.length;
-		console.log(sumas, 'sumas');
 
 		sumas.map(suma => {
 			if (suma >= 0 && suma <= 12) {
@@ -272,8 +270,6 @@ export class Grafica1Component {
       })
     });
     this.madurez = (cont/sizeTest).toFixed(2);
-
-    console.log(respuestas);
     let porcentajes = {
 
     };
@@ -290,7 +286,6 @@ export class Grafica1Component {
         }
       })
     });
-    console.log(porcentajes);
     let total: number = 0;
     let ps = 0;
     Object.values(porcentajes).map(v => {

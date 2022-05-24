@@ -6,7 +6,7 @@ import { PagesModule } from './pages/pages.module';
 import { AuthModule} from './auth/auth.module';
 import { WebModule } from './web/web.module';
 import { TestModule } from './test/test.module';
-
+import {MatTabsModule} from '@angular/material/tabs';
 import { AppComponent } from './app.component';
 import { NopagefoundComponent } from './nopagefound/nopagefound.component';
 import { Grafica1Component } from './grafica1/grafica1.component';
@@ -20,6 +20,10 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { InformeComponent } from './informe/informe.component';
 import {MatIconModule} from '@angular/material/icon';
 import { NuevaNoticiaComponent } from './noticia/nueva-noticia/nueva-noticia.component';
+import { GeneralComponent } from './general/general.component';
+import {MatSelectModule} from '@angular/material/select';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,9 +32,14 @@ import { NuevaNoticiaComponent } from './noticia/nueva-noticia/nueva-noticia.com
     VerpostComponent,
     InformeComponent,
     NuevaNoticiaComponent,
+    GeneralComponent,
 
   ],
   imports: [
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true,
+      
+    }),
     BrowserModule,
     AppRoutingModule,
     PagesModule,
@@ -44,8 +53,9 @@ import { NuevaNoticiaComponent } from './noticia/nueva-noticia/nueva-noticia.com
     ReactiveFormsModule,
     PdfViewerModule,
     MatSidenavModule,
-    MatIconModule
-
+    MatIconModule,
+    MatTabsModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

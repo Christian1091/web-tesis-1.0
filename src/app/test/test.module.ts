@@ -12,6 +12,7 @@ import { RouterModule } from '@angular/router';
 import {ProgressBarModule} from "angular-progress-bar"
 import { MatDialogModule } from '@angular/material/dialog';
 import { GraficoComponent } from './grafico/grafico.component';
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
 
 
@@ -21,7 +22,8 @@ import { GraficoComponent } from './grafico/grafico.component';
     ValidarIngresoComponent,
     PreguntaComponent,
     RespuestaCuestionarioComponent,
-    GraficoComponent
+    GraficoComponent,
+    
   ],
   exports:[
     ListCuestionariosComponent,
@@ -30,6 +32,7 @@ import { GraficoComponent } from './grafico/grafico.component';
     RespuestaCuestionarioComponent
   ],
   imports: [
+    
     CommonModule,
     RouterModule,
     FormsModule,
@@ -37,7 +40,7 @@ import { GraficoComponent } from './grafico/grafico.component';
     ReactiveFormsModule,
     ProgressBarModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
   ]
 })
 export class TestModule { }

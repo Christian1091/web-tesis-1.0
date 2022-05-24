@@ -120,12 +120,10 @@ export class PreguntaComponent implements OnInit {
 			if (this.indices.length == 0) {
 				this.indices.push(index)
 				existe = true;
-				console.log("primera vez")
 			} else {
 				this.indices.map((value, i) => {
 
 					if (value == index) {
-						console.log("ya existe")
 						existe = true;
 						this.indices.splice(i, 1);
 					}

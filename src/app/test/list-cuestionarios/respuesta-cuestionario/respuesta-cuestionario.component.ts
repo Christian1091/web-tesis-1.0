@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
+import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
 
 import html2canvas from 'html2canvas';
@@ -11,7 +11,7 @@ pdfMake.vfs = pdfFonts.pdfMake.vfs;
 import htmlToPdfmake from 'html-to-pdfmake';
 import { MatDialog } from '@angular/material/dialog';
 import { GraficoComponent } from '../../grafico/grafico.component';
-
+import { LocationStrategy } from '@angular/common';
 export interface Pre {
   listRespuesta: [],
   tituloPregunta: string,
@@ -47,22 +47,28 @@ export class RespuestaCuestionarioComponent implements OnInit {
 	public tipo: string = "";
 
 
-  constructor( private dialog: MatDialog,
+  constructor( 
+    private location: LocationStrategy,
+    private dialog: MatDialog,
     private respuestaUsuarioService: RespuestaCuestionarioService,
     private activatedRoute: ActivatedRoute,
     private router: Router) {
     this.rutaAnterior = this.activatedRoute.snapshot.url[0].path;
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    
   }
 
-
+  closeWindow() {
+    window.top.close();
+  }
 
   ngOnInit(): void {
+    
     this.obtenerRespuestaUsuario();
   }
 
   public downloadAsPDF(div_id) {
-
+    
     let data = document.getElementById(div_id);
     html2canvas(data).then(canvas => {
       const contentDataURL = canvas.toDataURL('image/png')
@@ -74,10 +80,9 @@ export class RespuestaCuestionarioComponent implements OnInit {
   }
 
   async downloadAsPDF1() {
+    this.closeWindow()
     let evaluacion: string = "";
     const puntos = Number.parseInt(this.puntajeCuest);
-    console.log(this.puntajeCuest, "puntaje cues");
-    
     if (puntos >= 0 && puntos < 12) {
       evaluacion = "1 - TIC Excluido";
     } else if (puntos > 12 && puntos < 31) {

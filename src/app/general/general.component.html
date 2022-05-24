@@ -1,0 +1,56 @@
+<app-navbar></app-navbar>
+<div style="padding: 100px;">
+    <h2>Estadísticas Generales</h2>
+    <mat-tab-group>
+        <mat-tab label="Provincia">
+            <div class="form-group col-md-6">
+                <select class="form-control" (change)="onSelect($event.target.value)"
+                    [(ngModel)]="provinciaParticipante">
+                    <option value="" selected disabled> Seleccione la Provincia </option>
+                    <option *ngFor="let provincia of provincias" value="{{provincia.id}}">
+                        {{ provincia.id }}
+                    </option>
+                </select>
+            </div>
+        </mat-tab>
+        <mat-tab label="Institución">
+            <div class="form-group col-md-6">
+                <select class="form-control" (change)="obtenerEmpresa($event.target.value)" [(ngModel)]="empresa">
+                    <option value="" selected disabled> Seleccione la Institución </option>
+                    <option *ngFor="let emp of empresas" value="{{emp}}">
+                        {{ emp }}
+                    </option>
+                </select>
+            </div>
+        </mat-tab>
+        <mat-tab label="Institución Personas">
+            <div class="form-group col-md-6">
+                <div class="row">
+                    <div class="col">
+                        <select class="form-control" (change)="obtenerEmpresaTipo(true)"
+                            [(ngModel)]="empresat">
+                            <option value="" selected disabled> Seleccione la Institución </option>
+                            <option *ngFor="let emp of empresas" value="{{emp}}">
+                                {{ emp }}
+                            </option>
+                        </select>
+                    </div>
+                    <div class="col">
+
+                        <select class="form-control" (change)="obtenerEmpresaTipo(false)" [(ngModel)]="tipo">
+                            <option value="" selected disabled> Seleccione el tipo de persona </option>
+                            <option *ngFor="let tip of tipos" value="{{tip}}">
+                                {{ tip }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+    <div class="grafico">
+        <div class="canvas">
+            <canvas #grafico></canvas>
+        </div>
+    </div>
+</div>

@@ -27,9 +27,7 @@ export class ListCuestionariosComponent implements OnInit {
   getListCuestionarios() {
     this.cuestioanrioService.getListCuestionarios()
       .subscribe(({ cuestionarios }) => {
-
         this.listCuestionarios = cuestionarios;
-        console.log(this.listCuestionarios);
       })
   }
 

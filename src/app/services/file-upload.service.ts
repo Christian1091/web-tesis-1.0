@@ -36,18 +36,14 @@ export class FileUploadService {
         body: formData
 
       });
-
-      console.log(resp);
       const data = await resp.json();
       if ( data.ok ) {
         return data.nombreArchivo;
       } else {
-        console.log(data.msg);
        return false;
       }
 
     } catch (error) {
-      console.log(error);
       return false;
 
     }
@@ -87,7 +83,6 @@ export class FileUploadService {
 
 
     } catch (error) {
-      console.log(error);
       return false;
 
     }

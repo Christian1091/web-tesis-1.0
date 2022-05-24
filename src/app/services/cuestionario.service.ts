@@ -17,6 +17,7 @@ const base_url = environment.base_url;
 @Injectable({
   providedIn: 'root'
 })
+
 export class CuestionarioService {
 
   tituloCuestionario: string;
@@ -57,7 +58,6 @@ export class CuestionarioService {
   // Este get es para visualizar publicamente
   getListCuestionarios() {
     const url =  `${ base_url }/cuestionarios/list-cuestionarios`;
-
     return this.http.get<CargarCuestionario>( url, this.headers );
     //return this.http.get<ReqCuestionario>( url, this.headers );
   }
@@ -65,26 +65,38 @@ export class CuestionarioService {
   // Este get es para visualizar los cuestionarios creados por el usuario ya autenticado en los cards
   getListCuestionarioByIdUser() {
     const url =  `${ base_url }/cuestionarios`;
-
     return this.http.get<CargarCuestionario>( url, this.headers );
+  }
+
+  /* servicio para estadistica general por provincia */
+  getListEstadisticaGeneralProvinvia(provincia: string) {
+    const url = `${base_url}/cuestionarios/list-cuestionarios-provincia/${provincia}`;
+    return this.http.get<any>(url);
+  }
+
+  getListEstadisticaGeneralInstitucion(institucion: string) {
+    const url = `${base_url}/cuestionarios/list-cuestionarios-institucion/${institucion}`;
+    return this.http.get<any>(url);
+  }
+
+  getListEstadisticaGeneralInstitucionTipo(institucion: string, tipo: string) {
+    const url = `${base_url}/cuestionarios/list-cuestionarios-institucion-tipo/${institucion}/${tipo}`;
+    return this.http.get<any>(url);
   }
 
  /* Este get es para visualizar el contenido de un cuestionario en especifico dentro del usuario autenticado */
   getVerCuestionario( _id: string ): Observable<any> {
     const url =  `${ base_url }/cuestionarios/ver-cuestionario/${ _id }`;
-
     return this.http.get( url, this.headers );
   }
 
   guardarCuestionario( cuestionario: Cuestionario ): Observable<any> {
     const url = `${ base_url }/cuestionarios`;
-
     return this.http.post( url, cuestionario, this.headers );
   }
 
   eliminarCuestionario( _id: string) {
     const url =  `${ base_url }/cuestionarios/${ _id }`;
-
     return this.http.delete( url, this.headers );
   }
 

@@ -20,7 +20,6 @@ export class SidebarComponent {
 
   constructor( public sidebarService: SidebarService,
                private usuarioService: UsuarioService) {
-    //console.log(this.menuItems);
 
     this.usuario = usuarioService.usuario;
 
