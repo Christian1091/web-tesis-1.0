@@ -52,6 +52,7 @@ const routes: Routes = [
 
       // Post
       { path: 'nuevopost', component: NuevopostComponent },
+      { path: 'grafica1', component: Grafica1Component },
       { path: 'editarPost/:id', component: NuevopostComponent },
 
       // Correo
