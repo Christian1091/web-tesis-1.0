@@ -17,6 +17,8 @@ export class GeneralComponent implements OnInit {
   public provinciaParticipante = '';
   public provincias: Provincias[];
   public empresas: string[] = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
+  public parametros: string[] = ["General"];
+  public parametro: string = "";
   public tipos: string[] = ["Estudiantes", "Administrativos", "Docentes"];
   public empresa: string = "";
   public empresat: string = "";
@@ -48,6 +50,24 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.service.getListEstadisticaGeneralInstitucion(this.empresa).subscribe(res => {
+      this.resultados = res["datos"]["resultados"];
+      if (this.resultados.length > 0) {
+        this.calculosMm();
+        
+        this.graficarInfo();
+      }
+    });
+  }
+
+  obtenerGeneral(value: string) {
+    this.limpiar();
+    this.parametro = value;
+    if (this.chart != null || this.chart != undefined) {
+      this.chart.destroy();
+    }
+    this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
+      console.log("entro");
+      
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.calculosMm();

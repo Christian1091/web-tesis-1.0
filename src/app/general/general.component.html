@@ -27,8 +27,7 @@
             <div class="form-group col-md-6">
                 <div class="row">
                     <div class="col">
-                        <select class="form-control" (change)="obtenerEmpresaTipo(true)"
-                            [(ngModel)]="empresat">
+                        <select class="form-control" (change)="obtenerEmpresaTipo(true)" [(ngModel)]="empresat">
                             <option value="" selected disabled> Seleccione la Institución </option>
                             <option *ngFor="let emp of empresas" value="{{emp}}">
                                 {{ emp }}
@@ -45,6 +44,16 @@
                         </select>
                     </div>
                 </div>
+            </div>
+        </mat-tab>
+        <mat-tab label="General">
+            <div class="form-group col-md-6">
+                <select class="form-control" (change)="obtenerGeneral($event.target.value)" [(ngModel)]="parametro">
+                    <option value="" selected disabled> Seleccione el parámetro </option>
+                    <option *ngFor="let pa of parametros" value="{{pa}}">
+                        {{ pa }}
+                    </option>
+                </select>
             </div>
         </mat-tab>
     </mat-tab-group>

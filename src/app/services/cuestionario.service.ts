@@ -74,6 +74,12 @@ export class CuestionarioService {
     return this.http.get<any>(url);
   }
 
+  /* servicio para estadistica general por provincia */
+  getListEstadisticaGeneralGeneral() {
+    const url = `${base_url}/cuestionarios/list-cuestionarios-general`;
+    return this.http.get<any>(url);
+  }
+
   getListEstadisticaGeneralInstitucion(institucion: string) {
     const url = `${base_url}/cuestionarios/list-cuestionarios-institucion/${institucion}`;
     return this.http.get<any>(url);
