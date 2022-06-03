@@ -16,10 +16,10 @@ export class GeneralComponent implements OnInit {
   public chart: any;
   public provinciaParticipante = '';
   public provincias: Provincias[];
-  public empresas: string[] = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
-  public parametros: string[] = ["General"];
+  public empresas: string[] = [];
+  public parametros: string[] = [];
   public parametro: string = "";
-  public tipos: string[] = ["Estudiantes", "Administrativos", "Docentes"];
+  public tipos: string[] = [];
   public empresa: string = "";
   public empresat: string = "";
   public tipo: string = "";
@@ -34,6 +34,19 @@ export class GeneralComponent implements OnInit {
     
   }
 
+  initParametros() {
+    this.empresas = [];
+    this.parametros = [];
+    this.tipos = [];
+    this.provincias = [];
+    this.empresas = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
+    this.parametros = ["General"];
+    this.tipos = ["Estudiantes", "Administrativos", "Docentes"];
+    this.provinciaService.getProvincias().subscribe((res: any) => {
+      this.provincias = res;
+    });
+  }
+
   limpiar() {
     this.n1 = 0;
     this.n2 = 0;
@@ -41,6 +54,18 @@ export class GeneralComponent implements OnInit {
     this.n4 = 0;
     this.n5 = 0;
     this.resultados = [];
+  }
+
+  cambiarTab() {
+    this.provinciaParticipante = "";
+    this.empresa = "";
+    this.tipo = "";
+    this.empresat = "";
+    this.parametro = "";
+    if (this.chart != null || this.chart != undefined) {
+      this.chart.destroy();
+    }
+    
   }
 
   obtenerEmpresa(value: string) {
@@ -97,9 +122,7 @@ export class GeneralComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.provinciaService.getProvincias().subscribe((res: any) => {
-      this.provincias = res;
-    });
+    this.initParametros();
   }
 
   graficarInfo(tipo: ChartType = 'polarArea') {

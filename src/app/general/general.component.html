@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div style="padding: 100px;">
     <h2>Estadísticas Generales</h2>
-    <mat-tab-group>
+    <mat-tab-group (selectedTabChange)="cambiarTab()">
         <mat-tab label="Provincia">
             <div class="form-group col-md-6">
                 <select class="form-control" (change)="onSelect($event.target.value)"

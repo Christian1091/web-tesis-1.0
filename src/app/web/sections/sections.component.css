@@ -3,8 +3,16 @@
 }
 
 img {
+  /* filter: drop-shadow(51px 14px gold); */
   filter: drop-shadow(0px 0px 4px white);
   padding: 2px 5px 2px 15px;
+}
+
+.princi { 
+  width: 200px; 
+  height: 40px;
+
+
 }
 
 p{
@@ -26,6 +34,7 @@ height: 20px;
 }
 
 img {
+  
 
 }
 .pie { 
@@ -43,7 +52,6 @@ img {
   flex-wrap: wrap;
     align-content: flex-end;
     justify-content: center;
-
     margin-top: 20px;
 
 }
@@ -57,13 +65,21 @@ p {
 
 
 body,
+
 html {
   background-color: #ddd;
   margin: 0px;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
+  background: #000;
+  color: #fff;
+  font-family: 'Times-New-Roman';
+
 }
+
+
+
 .grid {
   display: grid;
   width: 100%;
@@ -167,9 +183,9 @@ h4 .area{
 
 svg {
     display: block;
-    font: 6.5em 'Anton', sans-serif;
-    width: 110%;
-    height: 200px;
+    font: 3.0em 'Anton', sans-serif;
+    width: 140%;
+    height: 100px;
     margin: 0 auto;
 }
 
@@ -209,4 +225,147 @@ svg {
 
 @keyframes stroke-offset{
   100% {stroke-dashoffset: -35%;}
+}
+
+/* Titulo */ 
+
+
+
+.tituloDiv {
+  position: relative;
+  padding: 10px;
+  margin: 20px;
+  border-style: none;
+ 
+}
+
+ #tituloP { 
+  position: absolute;
+  top:100px;
+  left:0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 55%;
+  padding: 1px;
+  margin: 2px;
+  border-radius: 12px;
+  border-style: none;
+  mix-blend-mode: multiply;
+  /* filter: blur( 6px); */
+  transform: scale(4.2);
+  box-shadow: 5px 5px 100px rgba(0,0,0,0.6);
+  
+}
+
+
+h1 .tit { 
+  background: rgb(55 81 126);
+  font-size:  250px;
+  text-align: center;
+  font-weight: 400;
+  mix-blend-mode: multiply;
+  border-radius: 15px;
+  border-style: none;
+}
+
+
+
+#hero {
+  height: auto;
+  /* background-image: url("http://2.bp.blogspot.com/-xmjmQzG1SE8/VC2L9UZNYbI/AAAAAAAAikU/QGO0KFnjANk/s1600/Abstract%2BTriangles%2BWallpapers%2B2.jpg"); */
+  background-image: url("https://yaoware.com/wp-content/uploads/2019/03/banner-diagrama-15seg.gif");
+  background-blend-mode: hard-light;
+  background-position-x: 100%;
+    background-position-y: 25%;
+    mix-blend-mode: multiply;
+    transform: scale(1.0);
+  
+}
+
+#imgprincipal{
+  padding: 20px;
+  width: 80%;
+  height: 80%;
+  margin: 100px;
+  margin-top: 30px;
+}
+/*Titulo Principal*/
+html, body{
+  height: 100vh;
+}
+
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#text{
+  height: 20vw;
+  stroke-dasharray: 4004;
+  stroke-dashoffset: 300;
+  animation: 90s fillSvg linear;
+}
+
+@keyframes fillSvg{
+  0%{
+      stroke-dashoffset: 4004;
+  }
+  100%{
+      stroke-dashoffset: 0;
+  }
+}
+
+/**BOTON
+/* From uiverse.io by @adamgiebl */
+.only {
+  --green: #1BFD9C;
+  font-size: 15px;
+  padding: 0.7em 2.7em;
+  letter-spacing: 0.06em;
+  position: relative;
+  font-family: inherit;
+  border-radius: 0.6em;
+  overflow: hidden;
+  transition: all 0.3s;
+  line-height: 1.4em;
+  border: 2px solid var(--green);
+  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+  color: var(--green);
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+ }
+ 
+ .only:hover {
+  color: #82ffc9;
+  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.6), 0 0 9px 3px rgba(27, 253, 156, 0.2);
+ }
+ 
+ .only:before {
+  content: "";
+  position: absolute;
+  left: -4em;
+  width: 4em;
+  height: 100%;
+  top: 0;
+  transition: transform .4s ease-in-out;
+  background: linear-gradient(to right, transparent 1%, rgba(27, 253, 156, 0.1) 40%,rgba(27, 253, 156, 0.1) 60% , transparent 100%);
+ }
+ 
+ .only:hover:before {
+  transform: translateX(15em);
+ }
+
+
+ /* carrusel */
+ .product-item .product-item-content {
+  border: 1px solid var(--surface-d);
+  border-radius: 3px;
+  margin: 0.3rem;
+  text-align: center;
+  padding: 2rem 0;
+}
+.product-item .product-image {
+  width: 40%;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }

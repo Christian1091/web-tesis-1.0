@@ -54,6 +54,7 @@ export class ValidarIngresoComponent implements OnInit {
     // if (this.respuestaCuestionarioService.idCuestionario === undefined ) {
     //   this.router.navigateByUrl('/');
     // }
+    this.cuestionarioService.eliminarUsuarioRespondeTemp();
     this.cuestionarioService.getVerCuestionario(this.id).subscribe(response => {
 
       this.institucionParticipante = response.cuestionarios[0].empresa ?? "UPS"
@@ -79,7 +80,7 @@ export class ValidarIngresoComponent implements OnInit {
     const provincia: string = this.provinciaParticipante.trim();
     const ciudad: string = this.ciudadParticipante.trim();
     const email: string = this.email.value;
-    if (nombres.length > 0 && nombres !== "" && !this.email.invalid && email.length > 0 && email !== "" && provincia.length > 0 && provincia !== "" && ciudad.length > 0 && ciudad !== "" && this.check) {
+    if (provincia.length > 0 && provincia !== "" && ciudad.length > 0 && ciudad !== "" && this.check) {
       this.ok = true;
     } else {
       this.ok = false;
@@ -92,8 +93,12 @@ export class ValidarIngresoComponent implements OnInit {
     this.respuestaCuestionarioService.institucionParticipante = this.institucionParticipante;
     this.respuestaCuestionarioService.provinciaParticipante = this.provinciaParticipante;
     this.respuestaCuestionarioService.ciudadParticipante = this.ciudadParticipante;
-
+    this.cuestionarioService.guardarUsuarioRespondeTemp(this.ciudadParticipante, this.provinciaParticipante, this.institucionParticipante);
     this.router.navigateByUrl(`/pregunta/${this.id}`);
+  }
+
+  cerrar() {
+    window.top.close();
   }
 
   onSelect(id) {

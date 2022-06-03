@@ -9,6 +9,7 @@ import { CargarCuestionario } from '../interfaces/cargar-cuestionarios.interface
 
 import { Observable } from 'rxjs';
 import { Area } from '../models/area.model';
+import { Correo } from '../models/correo.model';
 
 // Aqui llamamos al url que creamos en el envairoment
 const base_url = environment.base_url;
@@ -40,6 +41,25 @@ export class CuestionarioService {
       }
     }
   }
+
+  guardarUsuarioRespondeTemp(ciudad: string, provincia: string, empresa: string) {
+      const usuarioResponde = {
+        "tipo": this.tipoPersona,
+        "ciudad": ciudad, 
+        "provincia": provincia,
+        "empresa": empresa
+      };
+      localStorage.setItem("usuarioResponse", JSON.stringify(usuarioResponde));
+  }
+
+  cargarUsuarioRespondeTemp() {
+    return JSON.parse(localStorage.getItem("usuarioResponse"));
+  }
+
+  eliminarUsuarioRespondeTemp() {
+    localStorage.removeItem("usuarioResponse");
+  }
+  
   
   crearArea(area: string, descripcion: string, valor: number) {
     const url =  `${ base_url }/area/crear`;
@@ -110,4 +130,10 @@ export class CuestionarioService {
     const url =  `${ base_url }/cuestionarios/${ cuestionario._id }`;
     return this.http.put(url, cuestionario, this.headers);
   }
+
+  enviarCorreo(correo: Correo) {
+    const url =  `${ base_url }/cuestionarios/enviar-correo`;
+    return this.http.post(url, correo);
+  }
+
 }

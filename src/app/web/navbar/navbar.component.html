@@ -5,13 +5,13 @@
     <!-- <input type="checkbox" id="nav-toggle"> -->
     <h1 class="logo"> <a href="https://www.ups.edu.ec/"> <img src="/assets/images/LOGO_UPS_COMPLETO_opt.png" alt="..."> </a></h1>
     <ul class="links navbar-nav mr-auto" >
-      <li class="active"><a style = "color:#37517e" class="menucolor" routerLink="/web">Inicio</a></li>
+      <li class="active"><a style = "color:#37517e" class="" routerLink="/web">Inicio</a></li>
         <li *ngIf="isLoggedIn"><a class="menucolor" style = "color:#37517e" routerLink="/general">Resultados</a></li>
         <li class="articulo" >
-          <a class="menucolor" style = "color:#37517e" [matMenuTriggerFor]="belowMenu">Artículos</a>
+          <a class="est" style = "color:#37517e" [matMenuTriggerFor]="belowMenu">Artículos</a>
           <mat-menu  #belowMenu="matMenu" yPosition="below">
             <div *ngFor="let item of listPost">
-              <button mat-menu-item (click)="ir(item)">{{ item.titulo | slice:0:40}}</button>
+              <button class="est" mat-menu-item>{{ item.titulo | slice:0:40}}</button>
             </div>
           </mat-menu>
 

@@ -1,3 +1,6 @@
+section {
+  padding: 0 !important;
+}
 
 .login-register {
   background-size: cover;
@@ -47,4 +50,17 @@
 
 .fondoL {
   background: linear-gradient( #eeeef1, #37517ea8);
+}
+
+.text-center {
+  width: 100%;
+}
+
+.text-left {
+  width: 50%;
+  margin-right: 100px;
+}
+
+small {
+  opacity: 50%;
 }

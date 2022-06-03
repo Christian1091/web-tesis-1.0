@@ -67,12 +67,20 @@ export class DashboardComponent implements OnInit{
 
   openDialog(): void {
     const dialogRef = this.dialog.open(NuevaNoticiaComponent, {
-      width: '450px',
-     
+      width: '450px'
     });
 
     dialogRef.afterClosed().subscribe(result => {
       
+    });
+  }
+
+  openDialogEditarNoticia(noticia: Noticia) {
+    const dialogRef = this.dialog.open(NuevaNoticiaComponent, {
+      width: '450px',
+      data: noticia
+    });
+    dialogRef.afterClosed().subscribe(result => {
     });
   }
 

@@ -60,7 +60,11 @@ export class PreguntaComponent implements OnInit {
 	}
 
 	ngOnInit(): void {
-
+		if (this.cuestionarioService.cargarUsuarioRespondeTemp() == undefined || this.cuestionarioService.cargarUsuarioRespondeTemp() == null) {
+			const url:string = this.router.url;
+			const cuestionario =  url.split("/")[2];
+			this.router.navigate([`/validarIngreso/${cuestionario}`]);
+		}
 		this.idCuestionario = this.id;
 		this.nombreParticipante = this.respuestaCuestionarioService.nombreParticipante;
 		this.correoParticipante = this.respuestaCuestionarioService.correoParticipante;
@@ -218,22 +222,24 @@ export class PreguntaComponent implements OnInit {
 	}
 
 	guardamosRespuestaCuestionario() {
+		const usuarioResponde = this.cuestionarioService.cargarUsuarioRespondeTemp();
+
 		const respuestaCuestionario: any = {
 			idCuestionario: this.idCuestionario,
 			nombreParticipante: this.nombreParticipante,
 			correoParticipante: this.correoParticipante,
-			institucionParticipante: this.institucionParticipante,
-			provinciaParticipante: this.provinciaParticipante,
-			ciudadParticipante: this.ciudadParticipante,
+			institucionParticipante: usuarioResponde["empresa"],
+			provinciaParticipante: usuarioResponde["provincia"],
+			ciudadParticipante: usuarioResponde["ciudad"],
 			fecha: new Date(),
 			puntosTotales: this.obtenemosPuntosTotales(),
 			listRespuestaUsuario: this.listRespuestaUsuario,
-			tipoPersona: this.tipoPersona
+			tipoPersona: usuarioResponde["tipo"]
 		}
-		
 		// Almacenamos la respuesta en mongoDB
 		this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
 			//console.log(res.respuestaCuestionario._id);
+			this.cuestionarioService.eliminarUsuarioRespondeTemp();
 		this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
 		}, err => {
 			//Swal.fire('Error', err.error.msg, 'error');
