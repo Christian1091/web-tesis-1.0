@@ -41,7 +41,7 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col">
                                     <label for="">Empresa</label>
@@ -53,9 +53,15 @@
                                         </mat-option>
                                     </mat-select>
                                 </div>
+                                <div class="col">
+                                    <input type="text" placeholder="Agregar Empresa" [formControl]="nuevaEmpresa" />
+                                </div>
+                                <div class="col">
+                                    <button type="button" (click)="agregarEmpresa()">Agregar</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col">
                                     <label for="">Tipo Cuestionario</label>
@@ -67,25 +73,31 @@
                                         </mat-option>
                                     </mat-select>
                                 </div>
+                                <div class="col">
+                                    <input type="text" placeholder="Agregar Tipo" [formControl]="nuevaTipoCuestionario" />
+                                </div>
+                                <div class="col">
+                                    <button type="button" (click)="agregarTipoCue()">Agregar</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-8">
                             <div class="row">
                                 <div class="col">
                                     <label for="">Dirigido a</label>
                                 </div>
                                 <div class="col">
                                     <mat-select placeholder="Selecciona" (valueChange)="obtenerTipoPersona($event)">
-                                        <mat-option value="Docentes">
-                                            Docentes
-                                        </mat-option>
-                                        <mat-option value="Estudiantes">
-                                            Estudiantes
-                                        </mat-option>
-                                        <mat-option value="Administrativos">
-                                            Administrativos
+                                        <mat-option *ngFor="let dirigido of dirigidos" [value]="dirigido">
+                                            {{ dirigido }}
                                         </mat-option>
                                     </mat-select>
+                                </div>
+                                <div class="col">
+                                    <input type="text" placeholder="Agregar Dirgido a" [formControl]="nuevaDirigido" />
+                                </div>
+                                <div class="col">
+                                    <button type="button" (click)="agregarDirigido()">Agregar</button>
                                 </div>
                             </div>
                         </div>

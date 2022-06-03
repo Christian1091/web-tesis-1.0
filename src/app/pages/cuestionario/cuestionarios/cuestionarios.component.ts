@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl } from '@angular/forms';
 
 import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
@@ -35,6 +35,7 @@ export class CuestionariosComponent implements OnInit {
   public cargando: boolean = true;
   public tipos: string[] = ["GENERAL", "MD4U", "IES"];
   public empresas: string[] = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
+  public dirigidos: string[] = ["Docentes", "Estudiantes", "Administrativos"];
   public tipo: string = "";
   public tipoPersona: string = "";
   public empresa: string = "";
@@ -45,10 +46,15 @@ export class CuestionariosComponent implements OnInit {
     puntaje: ['', Validators.required]
   })
 
+  public nuevaEmpresa = new FormControl("");
+  public nuevaTipoCuestionario = new FormControl("");
+  public nuevaDirigido = new FormControl("");
+
   public nombreArea: string = "";
   public descripcionArea: string = "";
   public valorArea: number = 0;
   public areas: Area[] = [];
+
 
   constructor( private cuestionarioService: CuestionarioService,
                private fb: FormBuilder,
@@ -62,6 +68,27 @@ export class CuestionariosComponent implements OnInit {
 
     this.cargarListCuestioanrios();
     this.cargarAreas();
+  }
+
+  agregarEmpresa() {
+    const ne: string = this.nuevaEmpresa.value;
+    if (ne.length > 0) {
+      this.empresas.push(ne);
+    }
+  }
+
+  agregarTipoCue() {
+    const ne: string = this.nuevaTipoCuestionario.value;
+    if (ne.length > 0) {
+      this.tipos.push(ne);
+    }
+  }
+
+  agregarDirigido() {
+    const ne: string = this.nuevaDirigido.value;
+    if (ne.length > 0) {
+      this.dirigidos.push(ne);
+    }
   }
 
   cargarAreas() {
@@ -94,6 +121,8 @@ export class CuestionariosComponent implements OnInit {
   }
 
   obtenerTipoPersona(value: string) {
+    console.log(value);
+    
     this.tipoPersona = value;
   }
 
