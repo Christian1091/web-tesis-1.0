@@ -114,14 +114,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
         {
           columns: [
 
-            [{
-              text: "Usuario: " + this.nombre,
-              style: 'name',
-
-            },
-            {
-              text: "Correo: " + this.correo,
-            },
+            [
             {
               text: "Institución: " + this.institucionParticipante,
             },

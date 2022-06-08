@@ -39,11 +39,20 @@ export class GeneralComponent implements OnInit {
     this.parametros = [];
     this.tipos = [];
     this.provincias = [];
-    this.empresas = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
+    this.empresas = [];
     this.parametros = ["General"];
-    this.tipos = ["Estudiantes", "Administrativos", "Docentes"];
+    this.tipos = [];
     this.provinciaService.getProvincias().subscribe((res: any) => {
       this.provincias = res;
+    });
+    this.service.obtenerEmpresas().subscribe(res => {
+      const emp: string[] = res['empresas'];
+      emp.map(e => this.empresas.push(e['nombre']));
+    });
+    this.service.obtenerTipoPersonas().subscribe(res => {
+      const tip: string[] = res['tiposPersonas'];
+      tip.map(e => this.tipos.push(e['tipo']));
+
     });
   }
 
@@ -91,9 +100,10 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
-      console.log("entro");
-      
+
       this.resultados = res["datos"]["resultados"];
+      console.log(this.resultados);
+      
       if (this.resultados.length > 0) {
         this.calculosMm();
         
