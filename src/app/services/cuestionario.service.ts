@@ -42,9 +42,11 @@ export class CuestionarioService {
     }
   }
 
-  guardarUsuarioRespondeTemp(ciudad: string, provincia: string, empresa: string) {
+
+
+  guardarUsuarioRespondeTemp(tipo: string, ciudad: string, provincia: string, empresa: string) {
       const usuarioResponde = {
-        "tipo": this.tipoPersona,
+        "tipo": tipo,
         "ciudad": ciudad, 
         "provincia": provincia,
         "empresa": empresa
@@ -60,7 +62,36 @@ export class CuestionarioService {
     localStorage.removeItem("usuarioResponse");
   }
   
-  
+  guardarEmpresa(nombre: string, descripcion: string) {
+    const url = `${ base_url }/empresa/registrar`;
+    return this.http.post(url, {"nombre": nombre, "descripcion": descripcion}, this.headers);
+  }
+
+  obtenerEmpresas() {
+    const url = `${ base_url }/empresa/empresas`;
+    return this.http.get(url, this.headers);
+  }
+
+  eliminarEmpresa(nombre: string) {
+    const url = `${ base_url }/empresa/${nombre}`;
+    return this.http.delete(url, this.headers);
+  }
+
+  guardarTipoPersonas(tipo: string, descripcion: string) {
+    const url = `${ base_url }/tipo-persona/registrar`;
+    return this.http.post(url, {"tipo": tipo, "descripcion": descripcion}, this.headers);
+  }
+
+  obtenerTipoPersonas() {
+    const url = `${ base_url }/tipo-persona/tipos`;
+    return this.http.get(url, this.headers);
+  }
+
+  eliminarTipoPersona(tipo: string) {
+    const url = `${ base_url }/tipo-persona/${tipo}`;
+    return this.http.delete(url, this.headers);
+  }
+
   crearArea(area: string, descripcion: string, valor: number) {
     const url =  `${ base_url }/area/crear`;
     return this.http.post(url, {area, descripcion, valor}, this.headers);

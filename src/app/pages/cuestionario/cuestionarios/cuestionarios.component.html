@@ -48,8 +48,9 @@
                                 </div>
                                 <div class="col">
                                     <mat-select placeholder="Selecciona" (valueChange)="obtenerEmpresa($event)">
-                                        <mat-option *ngFor="let emp of empresas" [value]="emp">
+                                        <mat-option *ngFor="let emp of empresas; let i = index;" [value]="emp">
                                             {{ emp }}
+                                            <button type="button" (click)="eliminar(i, emp)">X</button>
                                         </mat-option>
                                     </mat-select>
                                 </div>
@@ -73,12 +74,6 @@
                                         </mat-option>
                                     </mat-select>
                                 </div>
-                                <div class="col">
-                                    <input type="text" placeholder="Agregar Tipo" [formControl]="nuevaTipoCuestionario" />
-                                </div>
-                                <div class="col">
-                                    <button type="button" (click)="agregarTipoCue()">Agregar</button>
-                                </div>
                             </div>
                         </div>
                         <div class="col-md-8">
@@ -88,8 +83,9 @@
                                 </div>
                                 <div class="col">
                                     <mat-select placeholder="Selecciona" (valueChange)="obtenerTipoPersona($event)">
-                                        <mat-option *ngFor="let dirigido of dirigidos" [value]="dirigido">
+                                        <mat-option *ngFor="let dirigido of dirigidos; let i = index;" [value]="dirigido">
                                             {{ dirigido }}
+                                            <button type="button" (click)="eliminarTipoP(i, dirigido)">X</button>
                                         </mat-option>
                                     </mat-select>
                                 </div>

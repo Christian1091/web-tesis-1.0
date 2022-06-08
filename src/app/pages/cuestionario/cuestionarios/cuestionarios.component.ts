@@ -24,8 +24,8 @@ export class CuestionariosComponent implements OnInit {
   //public url = "http://localhost:4200";
   //public url = "https://ups.tranformaciondigitalgih4pc.tech/";
   public url = "https://transformaciondigitalgihp4c.ups.edu.ec/";
-  
-    //public url = "https://portalweb-tesis.netlify.app";
+
+  //public url = "https://portalweb-tesis.netlify.app";
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;
@@ -34,14 +34,14 @@ export class CuestionariosComponent implements OnInit {
   public cuestionarios: Cuestionario[] = [];
   public cargando: boolean = true;
   public tipos: string[] = ["GENERAL", "MD4U", "IES"];
-  public empresas: string[] = ["Universidad Politécnica Salesiana", "UDA", "SUPERMAXI"];
-  public dirigidos: string[] = ["Docentes", "Estudiantes", "Administrativos"];
+  public empresas: string[] = [];
+  public dirigidos: string[] = [];
   public tipo: string = "";
   public tipoPersona: string = "";
   public empresa: string = "";
 
   public cuestionarioForm = this.fb.group({
-    titulo: ['',Validators.required],
+    titulo: ['', Validators.required],
     descripcion: ['', Validators.required],
     puntaje: ['', Validators.required]
   })
@@ -56,10 +56,24 @@ export class CuestionariosComponent implements OnInit {
   public areas: Area[] = [];
 
 
-  constructor( private cuestionarioService: CuestionarioService,
-               private fb: FormBuilder,
-               private router: Router,
-               private _clipboardService: ClipboardService) { }
+  constructor(private cuestionarioService: CuestionarioService,
+    private fb: FormBuilder,
+    private router: Router,
+    private _clipboardService: ClipboardService) {
+
+      cuestionarioService.obtenerEmpresas().subscribe(res => {
+        const emp: string[] = res['empresas'];
+        emp.map(e => this.empresas.push(e['nombre']));
+      });
+
+      cuestionarioService.obtenerTipoPersonas().subscribe(res => {
+        console.log(res);
+        
+        const tip: string[] = res['tiposPersonas'];
+        tip.map(t => this.dirigidos.push(t['tipo']));
+      });
+
+  }
 
   ngOnInit(): void {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
@@ -72,42 +86,99 @@ export class CuestionariosComponent implements OnInit {
 
   agregarEmpresa() {
     const ne: string = this.nuevaEmpresa.value;
-    if (ne.length > 0) {
-      this.empresas.push(ne);
+    if (!this.verificarExiste(ne, this.empresas) && ne.length > 3) {
+      this.cuestionarioService.guardarEmpresa(ne, ne).subscribe(res => {
+        const ok: boolean = res['ok'];
+        if(ok) {
+          this.empresas.push(ne);
+          this.nuevaEmpresa.setValue("");
+        } else {
+          this.mostrarAlerta("Error", "Ocurrio un error", false);
+        }
+      });
     }
   }
 
+  verificarExiste(valor: string, arreglo: string[]): boolean {
+    arreglo = arreglo.map(e => {
+      return e.toLowerCase();
+    });
+    if (arreglo.indexOf(valor.trim().toLowerCase()) > -1) {
+      this.mostrarAlerta("Error", "Ya existe la propiedad", false);
+      return true;
+    } else {
+      this.mostrarAlerta("Correcto", "Propiedad creada", true);
+      return false;
+    }
+  }
+
+  eliminar(i: number, emp: string) {
+    this.cuestionarioService.eliminarEmpresa(emp).subscribe(res => {
+      const ok: boolean = res["ok"];
+      if (ok) {
+        this.mostrarAlerta("Correcto", "Empresa eliminada correctamente", true);
+        this.empresas.splice(i, i);
+      } else {
+        this.mostrarAlerta("Error", "Error al eliminar", false);
+      }
+    });
+  }
+
+  eliminarTipoP(i: number, dirigido: string) {
+    this.cuestionarioService.eliminarTipoPersona(dirigido).subscribe(res => {
+      const ok: boolean = res["ok"];
+      if (ok) {
+        this.mostrarAlerta("Correcto", "Tipo persona eliminada correctamente", true);
+        this.dirigidos.splice(i, i);
+      } else {
+        this.mostrarAlerta("Error", "Error al eliminar", false);
+      }
+    });
+  }
+
+
+
+
+
   agregarTipoCue() {
     const ne: string = this.nuevaTipoCuestionario.value;
-    if (ne.length > 0) {
-      this.tipos.push(ne);
+    if (!this.verificarExiste(ne, this.tipos) && ne.length > 3) {
+      this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
+        const ok: boolean = res['ok'];
+        if (ok) this.tipos.push(ne);
+        this.nuevaDirigido.setValue("");
+      });
     }
   }
 
   agregarDirigido() {
     const ne: string = this.nuevaDirigido.value;
-    if (ne.length > 0) {
-      this.dirigidos.push(ne);
+    if (!this.verificarExiste(ne, this.dirigidos) && ne.length > 3) {
+      this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
+        const ok: boolean = res['ok'];
+        if (ok) this.dirigidos.push(ne);
+        this.nuevaDirigido.setValue("");
+      });
     }
   }
 
   cargarAreas() {
-    this.cuestionarioService.getListAreas().subscribe(({areas}) => {
+    this.cuestionarioService.getListAreas().subscribe(({ areas }) => {
       this.areas = areas;
     });
   }
 
   crearArea() {
     if (this.nombreArea.trim().length > 0 && this.valorArea > 0) {
-     
+
       this.cuestionarioService.crearArea(this.nombreArea, this.descripcionArea, this.valorArea).subscribe(response => {
         this.cargarAreas();
         this.nombreArea = "";
         this.descripcionArea = "";
         this.valorArea = 0;
       });
-     } else {
-     }
+    } else {
+    }
   }
 
   eliminarArea(_id: string, i: number) {
@@ -122,7 +193,7 @@ export class CuestionariosComponent implements OnInit {
 
   obtenerTipoPersona(value: string) {
     console.log(value);
-    
+
     this.tipoPersona = value;
   }
 
@@ -143,53 +214,60 @@ export class CuestionariosComponent implements OnInit {
 
   }
 
-  guardarPregunta( pregunta: Pregunta ) {
+  guardarPregunta(pregunta: Pregunta) {
     this.listPregunta.push(pregunta);
-    
+
   }
 
   cargarListCuestioanrios() {
     this.cargando = true;
     this.cuestionarioService.getListCuestionarioByIdUser()
-                            .subscribe( ({ cuestionarios }) => {
-                              this.cuestionarios = cuestionarios;
-                              this.cargando = false;
-                            })
+      .subscribe(({ cuestionarios }) => {
+        this.cuestionarios = cuestionarios;
+        this.cargando = false;
+      })
 
   }
 
-  eliminarCuestionario( cuestionario: Cuestionario ) {
-    
+  mostrarAlerta(title: string, body: string, ok: boolean) {
+    Swal.fire(
+      title,
+      body,
+      ok? 'success': 'error');
+  }
+
+  eliminarCuestionario(cuestionario: Cuestionario) {
+
     Swal.fire({
       title: '¿Eliminar cuestionario?',
-      text: `Esta a punto de eliminar a ${ cuestionario.nombre }`,
+      text: `Esta a punto de eliminar a ${cuestionario.nombre}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cuestionarioService.eliminarCuestionario( cuestionario._id )
-            .subscribe( resp => {
-              /**Para refrescar la tabla despues de haber eliminado el usuario */
-              this.cargarListCuestioanrios();
-              Swal.fire(
+        this.cuestionarioService.eliminarCuestionario(cuestionario._id)
+          .subscribe(resp => {
+            /**Para refrescar la tabla despues de haber eliminado el usuario */
+            this.cargarListCuestioanrios();
+            Swal.fire(
               'Cuestionario borrado',
-              `${ cuestionario.nombre } Fue eliminado exitosamente!`,
+              `${cuestionario.nombre} Fue eliminado exitosamente!`,
               'success');
-            });
-          }
+          });
+      }
     })
   }
   // copyDynamicText() {
   //   this._clipboardService.copyFromContent(this.title)
   // }
 
-  crearLink( cuestionario: Cuestionario) {
+  crearLink(cuestionario: Cuestionario) {
     const idCuestionario = cuestionario._id;
 
-    const link =` ${this.url}/validarIngreso/${idCuestionario}`;
+    const link = ` ${this.url}/validarIngreso/${idCuestionario}`;
     this._clipboardService.copyFromContent(link);
-    
+
 
   }
 

@@ -145,7 +145,7 @@ export class PreguntaComponent implements OnInit {
 	}
 
 	respSelect(value, index) {
-		console.log(value, index);
+		
 	}
 
 	AddClassOption(respuesta: any): string {
@@ -164,8 +164,6 @@ export class PreguntaComponent implements OnInit {
 	agregarRespuesta(i) {
 		let indexAux;
 		//let respuestaUsuario;
-
-
 		// Creamos un objeto respuesta y lo agregamos al array
 		//for (let i = 0; i < this.listPreguntas.length; i++) {
 		indexAux = this.obtenemosIndexSeleccionado();
@@ -178,11 +176,9 @@ export class PreguntaComponent implements OnInit {
 			indexRespuestaSeleccionada: this.indices,
 			puntosObtenidos: this.listPreguntas[i].listRespuesta[indexAux].puntosRespuesta,
 			//puntos: this.obtenemosPuntosPregunta(),
-			// Hacemos una copia del listado respuestas
 			listRespuesta: this.listPreguntas[this.indexPregunta].listRespuesta,
 			area: this.listPreguntas[this.indexPregunta].area,
 			areaValor: this.listPreguntas[this.indexPregunta].valorArea,
-
 		}
 		this.listRespuestaUsuario.push(respuestaUsuario);
 		this.opcionSeleccionada = undefined;
@@ -234,13 +230,12 @@ export class PreguntaComponent implements OnInit {
 			fecha: new Date(),
 			puntosTotales: this.obtenemosPuntosTotales(),
 			listRespuestaUsuario: this.listRespuestaUsuario,
-			tipoPersona: usuarioResponde["tipo"]
+			tipoPersona: usuarioResponde["tipo"] ?? "Usuario"
 		}
 		// Almacenamos la respuesta en mongoDB
 		this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
-			//console.log(res.respuestaCuestionario._id);
 			this.cuestionarioService.eliminarUsuarioRespondeTemp();
-		this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
+			this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
 		}, err => {
 			//Swal.fire('Error', err.error.msg, 'error');
 			this.router.navigateByUrl('/');

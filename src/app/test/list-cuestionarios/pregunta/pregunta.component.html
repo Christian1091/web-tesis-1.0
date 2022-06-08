@@ -26,8 +26,8 @@
                 <img id="f2" src="../../../../assets/images/logo_grupo.png" alt="..." width="120px">
             </div>
             <div *ngIf="indexPregunta !== 0">
-                <br /><br /><br /><br />  
-                <br /><br /><br /><br />  
+                <br /><br /><br /><br />
+                <br /><br /><br /><br />
                 <br /><br />
             </div>
             <div class="area">
@@ -61,7 +61,7 @@
                     </div> -->
                 <!-- </ul> -->
 
-                <div *ngIf="cargoPregunta">
+                <div *ngIf="cargoPregunta && listPreguntas[getIndex()] != undefined">
                     <ul *ngFor="
               let respuesta of listPreguntas[getIndex()].listRespuesta;
               let i = index

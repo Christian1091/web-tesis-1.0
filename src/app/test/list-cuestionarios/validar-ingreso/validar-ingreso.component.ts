@@ -36,6 +36,7 @@ export class ValidarIngresoComponent implements OnInit {
   public check: boolean = false;
   public email = new FormControl('', [Validators.required, Validators.email]);
 
+  private tipoPersona: string = "";
 
 
 
@@ -56,7 +57,7 @@ export class ValidarIngresoComponent implements OnInit {
     // }
     this.cuestionarioService.eliminarUsuarioRespondeTemp();
     this.cuestionarioService.getVerCuestionario(this.id).subscribe(response => {
-
+      this.tipoPersona = response.cuestionarios[0].tipoPersona ?? "Usuario";
       this.institucionParticipante = response.cuestionarios[0].empresa ?? "UPS"
     })
     //this.provincias = this.provinciaService.getProvincias();
@@ -93,7 +94,7 @@ export class ValidarIngresoComponent implements OnInit {
     this.respuestaCuestionarioService.institucionParticipante = this.institucionParticipante;
     this.respuestaCuestionarioService.provinciaParticipante = this.provinciaParticipante;
     this.respuestaCuestionarioService.ciudadParticipante = this.ciudadParticipante;
-    this.cuestionarioService.guardarUsuarioRespondeTemp(this.ciudadParticipante, this.provinciaParticipante, this.institucionParticipante);
+    this.cuestionarioService.guardarUsuarioRespondeTemp(this.tipoPersona, this.ciudadParticipante, this.provinciaParticipante, this.institucionParticipante);
     this.router.navigateByUrl(`/pregunta/${this.id}`);
   }
 
