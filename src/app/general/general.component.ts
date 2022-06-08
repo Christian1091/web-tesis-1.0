@@ -30,6 +30,7 @@ export class GeneralComponent implements OnInit {
   public n3: number = 0;
   public n4: number = 0;
   public n5: number = 0;
+  public isEmpty: boolean = false;
   constructor(private service: CuestionarioService, private provinciaService: ProvinciasService) {
     
   }
@@ -86,9 +87,11 @@ export class GeneralComponent implements OnInit {
     this.service.getListEstadisticaGeneralInstitucion(this.empresa).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
+        this.isEmpty = false;
         this.calculosMm();
-        
         this.graficarInfo();
+      } else {
+        this.isEmpty = true;
       }
     });
   }
@@ -100,14 +103,13 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
-
       this.resultados = res["datos"]["resultados"];
-      console.log(this.resultados);
-      
       if (this.resultados.length > 0) {
+        this.isEmpty = false;
         this.calculosMm();
-        
         this.graficarInfo();
+      } else {
+        this.isEmpty = true;
       }
     });
   }
@@ -124,8 +126,11 @@ export class GeneralComponent implements OnInit {
       this.service.getListEstadisticaGeneralInstitucionTipo(this.empresat, this.tipo).subscribe(res => {
         this.resultados = res["datos"]["resultados"];
         if (this.resultados.length > 0) {
+          this.isEmpty = false;
           this.calculosMm();
           this.graficarInfo();
+        } else {
+          this.isEmpty = true;
         }
       });
     }
@@ -136,7 +141,6 @@ export class GeneralComponent implements OnInit {
   }
 
   graficarInfo(tipo: ChartType = 'polarArea') {
-    
     const x = [this.n1, this.n2, this.n3, this.n4 ,this.n5];
     const y = ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", "Nivel 5"];
     this.chart = new Chart(this.grafico?.nativeElement, {
@@ -173,9 +177,11 @@ export class GeneralComponent implements OnInit {
     this.service.getListEstadisticaGeneralProvinvia(this.provinciaParticipante).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
+        this.isEmpty = false;
         this.calculosMm();
-        
         this.graficarInfo();
+      } else {
+        this.isEmpty = true;
       }
     });
   }
