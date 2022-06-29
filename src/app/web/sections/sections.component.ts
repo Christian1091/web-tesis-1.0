@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CuestionarioService } from '../../services/cuestionario.service';
 import { Correo } from '../../models/correo.model';
 import Swal from 'sweetalert2';
+import { ProvinciasService } from '../../services/provincias.service';
 @Component({
   selector: 'app-sections',
   templateUrl: './sections.component.html',
@@ -21,6 +22,9 @@ export class SectionsComponent implements OnInit {
   public contPost: any = {};
   public id: string;
   public responsiveOptions;
+  public responsiveOptionsImages;
+  public images: any[];
+
 
   fillColor = 'rgb(255, 0, 0)';
 
@@ -60,57 +64,64 @@ export class SectionsComponent implements OnInit {
     const g = Math.floor(Math.random() * 256);
     const b = Math.floor(Math.random() * 256);
     this.fillColor = `rgb(${r}, ${g}, ${b})`;
-   
   }
 
-  constructor( private postService: PostService,
-                private cuestionarioService: CuestionarioService,
-               private activatedRoute: ActivatedRoute) {
-                this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
-                this.responsiveOptions = [
-                  {
-                      breakpoint: '1024px',
-                      numVisible: 3,
-                      numScroll: 3
-                  },
-                  {
-                      breakpoint: '768px',
-                      numVisible: 2,
-                      numScroll: 2
-                  },
-                  {
-                      breakpoint: '560px',
-                      numVisible: 1,
-                      numScroll: 1
-                  }
-              ];
-                }
-                
-
-                
+  constructor(private postService: PostService,
+    private cuestionarioService: CuestionarioService,
+    private imagesService: ProvinciasService,
+    private activatedRoute: ActivatedRoute) {
+    this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
+    this.responsiveOptions = [
+      {
+        breakpoint: '1024px',
+        numVisible: 3,
+        numScroll: 3
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 2,
+        numScroll: 2
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1,
+        numScroll: 1
+      }
+    ];
+    this.responsiveOptionsImages = [
+      {
+        breakpoint: '1024px',
+        numVisible: 1
+      },
+      {
+        breakpoint: '768px',
+        numVisible: 1
+      },
+      {
+        breakpoint: '560px',
+        numVisible: 1
+      }
+    ];
+  }
 
   ngOnInit(): void {
     this.getListPost();
     this.cargarNoticia();
+    this.imagesService.getImages().then(images => this.images = images);
   }
-
-
 
   getListPost() {
     this.postService.getListPost()
-                    .subscribe(({ post }) => {
-                              this.listPost = post;
-                            });
+      .subscribe(({ post }) => {
+        this.listPost = post;
+      });
   }
 
-  cargarNoticia(){
+  cargarNoticia() {
     this.postService.getListNoticias().subscribe(response => {
       this.noticias = response['noticias'];
       //this.noticias = this.noticias.slice(0, 3);
       //this.noticias  = this.noticias.slice(this.noticias.length -4, this.noticias.length);
     });
   }
-
-
-
 }

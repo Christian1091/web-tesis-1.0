@@ -38,3 +38,73 @@ div .row {
     
 }
 
+.deleteButton{
+    
+    float: right;
+    width: 10%;
+    line-height: inherit;
+    border: none;
+}
+
+/* eliminar btn  */
+/* From uiverse.io */
+ .noselectD {
+    width: 33px;
+    height: 33px;
+    cursor: pointer;
+    align-items: center;
+    background: red;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 3px rgba(0,0,0,0.15);
+    background: #e62222;
+    float:right;
+   }
+   
+    .noselectD,  button span {
+    transition: 20ms;
+   }
+   
+    .noselectD .text {
+    transform: translateX(15px);
+    color: white;
+    font-weight: bold;
+   }
+   
+    .noselectD .icon {
+    position: absolute;
+    border-left: 1px solid #c41b1b;
+    transform: translateX(58px);
+    height: 20px;
+    width: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   }
+   
+    .noselectD svg {
+    width: 15px;
+    fill: #eee;
+   }
+   
+    .noselectD:hover {
+    background: #ff3636;
+   }
+   
+    .noselectD:hover .text {
+    color: black;
+   }
+   
+    .noselectD:hover .icon {
+    width: 63px;
+    border-left: none;
+    transform: translateX(0);
+   }
+   
+    .noselectD:focus {
+    outline: none;
+   }
+   
+    .noselectD:active .icon svg {
+    transform: scale(0.2);
+   }

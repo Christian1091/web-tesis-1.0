@@ -33,6 +33,7 @@
     "ng2-pdf-viewer": "^7.0.2",
     "ngx-clipboard": "^14.0.2",
     "pdfmake": "^0.2.4",
+    "popper.js": "^1.16.1",
     "primeng": "^11.4.2",
     "rxjs": "~6.5.5",
     "sweetalert2": "^10.16.9",

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Provincias, Cantones } from '../interfaces/provincias.interfaces';
 import { Observable } from 'rxjs';
+import { Image } from 'angular-responsive-carousel';
 
 @Injectable({
   providedIn: 'root',
@@ -1094,6 +1095,13 @@ export class ProvinciasService {
 
   getProvincias(): Observable<Provincias[]> {
     return this.http.get<Provincias[]>('./assets/json/provinciasCantones.json');
+  }
+
+  getImages() {
+    return this.http.get<any>('./assets/json/images.json')
+    .toPromise()
+    .then(res => <Image[]>res.data)
+    .then(data => { return data; });
   }
 
   // getCantones(): Observable<Cantones[]>  {

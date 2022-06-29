@@ -1,34 +1,18 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
 
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- <input type="checkbox" id="nav-toggle"> -->
-    <h1 class="logo"> <a href="https://www.ups.edu.ec/"> <img src="/assets/images/LOGO_UPS_COMPLETO_opt.png" alt="...">
-      </a></h1>
-    <ul class="links navbar-nav mr-auto">
-      <li class="active"><a style="color:#37517e" class="" routerLink="/web">Inicio</a></li>
+  <p-menubar class="menustyle" [model]="items" [style]="{'background-color':'rgba(40, 58, 90, 0.9)','color':'#37517e'}" >
+    <ng-template pTemplate="start" >
+      <a href="https://www.ups.edu.ec/">
+      <img class="logos" src="/assets/images/LOGO_UPS_COMPLETO_opt.png" height="40" class="mr-2">
+      </a>
+    </ng-template>
+    <ng-template pTemplate="end">
+     
+    
+      <a routerLink="/dashboard"><img src="/assets/images/logo_grupo.png" width="60px" alt="..."></a>
+    </ng-template>
+  </p-menubar>
 
-      <li *ngIf="isLoggedIn"><a class="menucolor" style="color:#37517e" routerLink="/general">Resultados</a></li>
-
-      <li class="articulo">
-        <a class="" style="color:#37517e" [matMenuTriggerFor]="belowMenu">Artículos</a>
-        <mat-menu #belowMenu="matMenu" yPosition="below">
-          <div *ngFor="let item of listPost">
-            <button class="est" mat-menu-item>{{ item.titulo | slice:0:40}}</button>
-          </div>
-        </mat-menu>
-      </li>
-
-      <li><a class="menucolor" style="color:#37517e" routerLink="/register">Quiero ser miembro</a></li>
-      <li *ngIf="isLoggedIn"><a class="menucolor" style="color:#37517e" routerLink="/listCuestionarios">Test</a></li>
-      <li><a class="menucolor" style="color:#37517e" routerLink="/login">Iniciar sesión</a></li>
-      <li><a routerLink="/dashboard"><img src="/assets/images/logo_grupo.png" width="60px" alt="..."></a></li>
-    </ul>
-    <label for="nav-toggle" class="icon-burger">
-      <div class="line"></div>
-      <div class="line"></div>
-      <div class="line"></div>
-    </label>
-  </nav>
 </header>
 <!-- End Header -->

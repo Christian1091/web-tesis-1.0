@@ -1,16 +1,25 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
+  <!-- <div class="container"> -->
+    <!-- <div class="row"> -->
+      <!-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
         data-aos-delay="200">
-
+ -->
 
         <!-- <div class="tituloDiv">
           <img id="tituloP" src="/assets/images/background/ban.gif" alt="...">
           <h2 class="tit">Transformación digital innovacion que empienza por la Transformación Cultural</h2>
         </div> -->
-        <div>
+        
+          <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true">
+            <source src="../../../assets/video/td3.mp4" type="video/mp4">
+        </video>
+        <button class="only" routerLink="/register"> Registrarse </button> 
+
+          <!-- <video autoplay muted preload loop src="../../../assets/video/td3.mp4"></video>     -->
+        
+       
+        <!-- <div>
           <svg id="text" width="637" height="442" viewBox="0 0 1037 442" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -25,10 +34,10 @@
               </linearGradient>
             </defs>
           </svg>
-          <h2 class="tit">Transformación digital innovación que empienza por la Transformación Cultural</h2>
-          <button class="only"> Empecemos 
+          <h2 class="tit" style="margin-top: -150px;">Transformación digital innovación que empienza por la Transformación Cultural</h2>
+          <button class="only" routerLink="/register"> Registrarse 
           </button>
-        </div>
+        </div> -->
         <!--<div class="d-lg-flex">
           <a href="#about" class="btn-get-started scrollto">Empecemos</a>
           <a href="https://www.youtube.com/watch?v=JYYMENzITNc" class="venobox btn-watch-video" data-vbtype="video"
@@ -36,12 +45,12 @@
             Ver Video <i class="icofont-play-alt-2"></i></a>
         </div> -->
         <!-- <img class="princi" src="../../../assets/images/hero-img.png" class="img-fluid animated" alt="" /> -->
-      </div>
-      <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+      <!-- </div> -->
+      <!-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
         <img src="../../../assets/images/hero-img.png" id="imgprincipal" class="animated" alt="" />
-      </div>
-    </div>
-  </div>
+      </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
 </section>
 <!-- End Hero -->
 
@@ -83,14 +92,14 @@
   <div class="container" data-aos="fade-up">
 
     <div class="section-title">
-      <h2 style="color: white;">Artículos</h2>
+      <a name="articulos"> <h2 style="color: white;">Artículos</h2> </a>
       <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
     </div>
 
     <div class="row">
       <div class="col-lg-6" *ngFor="let item of listPost">
         <div class="member d-flex align-items-start" data-aos="zoom-in" data-aos-delay="100" style="margin-top: 15px;">
-          <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div>
+          <!-- <div class="pic"><img src="assets/img/team/team-1.jpg" class="img-fluid" alt=""></div> -->
           <div class="member-info">
             <h4> {{ item.usuario.nombre }} </h4>
             <span>{{ item.titulo }}</span>

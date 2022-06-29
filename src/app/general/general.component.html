@@ -50,11 +50,13 @@
             <div class="form-group col-md-6">
                 <select class="form-control" (change)="obtenerGeneral($event.target.value)" [(ngModel)]="parametro">
                     <option value="" selected disabled> Seleccione el parámetro </option>
+                    
                     <option *ngFor="let pa of parametros" value="{{pa}}">
                         {{ pa }}
-                    </option>
+                    </option>                  
                 </select>
             </div>
+            
         </mat-tab>
     </mat-tab-group>
     <div class="grafico">
