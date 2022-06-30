@@ -1,10 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component,  ElementRef, AfterViewInit, ViewChild,
+  ViewChildren, QueryList, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import Swal from 'sweetalert2';
 import { Subscription } from 'rxjs';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
+
 
 @Component({
   selector: 'app-estadisticas',
@@ -13,15 +15,25 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
     './estadisticas.component.css'
   ]
 })
-export class EstadisticasComponent implements OnInit, OnDestroy {
+export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   public id: string;
   public listRespuestasUsuario: any[] = [];
   public respuestaCuestionario: Subscription = new Subscription();
   public obtenerPuntosCuestionario: Cuestionario[];
   public puntosTotalCuestionarios = 0;
+  public totalRespuestas: number = 0;
 
-  constructor(private activatedRoute: ActivatedRoute,
+  title = "Animated Count";
+
+  nums: Array<number> = [25, 76, 48];
+
+  @ViewChild("oneItem") oneItem: any;
+  @ViewChildren("count") count: QueryList<any>;
+
+  constructor(
+    private elRef: ElementRef,
+    private activatedRoute: ActivatedRoute,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
     private cuestionarioService: CuestionarioService) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -30,6 +42,40 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getRespuestaByIdCuestionario();
     this.obtenerPuntajeCuestionario();
+  }
+
+  ngAfterViewInit() {
+    this.animateCount();
+  }
+
+  animateCount() {
+    let _this = this;
+
+     let single = this.oneItem.nativeElement.innerHTML;
+    
+    //let single = this.totalRespuestas;
+
+    this.counterFunc(single, this.oneItem, 7000);
+
+    this.count.forEach(item => {
+      _this.counterFunc(item.nativeElement.innerHTML, item, 2000);
+    });
+  }
+
+  counterFunc(end: number, element: any, duration: number) {
+    let range, current: number, step, timer;
+
+    range = end - 0;
+    current = 0;
+    step = Math.abs(Math.floor(duration / range));
+
+    timer = setInterval(() => {
+      current += 1;
+      element.nativeElement.textContent = current;
+      if (current == end) {
+        clearInterval(timer);
+      }
+    }, step);
   }
 
   ngOnDestroy(): void {
@@ -43,6 +89,8 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
         //Vaciamos para que no hay duplicidad de datos
         this.listRespuestasUsuario = [];
         //Iteramos lo que tenemos dentro de res
+        
+        this.totalRespuestas = res.length;
         res.forEach((element: any) => {
           this.listRespuestasUsuario.push({
             id: element._id,
@@ -110,5 +158,6 @@ export class EstadisticasComponent implements OnInit, OnDestroy {
     }
     //}
   }
+  
 
 }

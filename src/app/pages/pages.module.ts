@@ -36,6 +36,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSelectModule } from '@angular/material/select';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
+import { AnimatedDigitComponent } from './animated-digit/animated-digit.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,8 @@ import {MatTabsModule} from '@angular/material/tabs';
     NuevopostComponent,
     EstadisticasComponent,
     ActualizarCuestionarioComponent,
-    VerPostComponent
+    VerPostComponent,
+    AnimatedDigitComponent
   ],
   exports: [
     DashboardComponent,
