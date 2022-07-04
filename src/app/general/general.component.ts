@@ -140,7 +140,7 @@ export class GeneralComponent implements OnInit {
     this.initParametros();
   }
 
-  graficarInfo(tipo: ChartType = 'polarArea') {
+  graficarInfo(tipo: ChartType = 'pie') {
     const x = [this.n1, this.n2, this.n3, this.n4 ,this.n5];
     const y = ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", "Nivel 5"];
     this.chart = new Chart(this.grafico?.nativeElement, {
@@ -160,7 +160,7 @@ export class GeneralComponent implements OnInit {
       data: {
         labels: y,
         datasets: [{
-          backgroundColor: ['#2ecc71', '#E1755D', '#ECE20F', '#200FEC', '#D50FEC'],
+          backgroundColor: ['#2ecc71', '#E1755D', '#ECE20F', '#de9e31', '#D50FEC'],
           data: x,
           label: y,
         }]
