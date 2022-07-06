@@ -1,5 +1,11 @@
 {
-  "projects": {
-    "default": "mmtd-46785"
+  "targets": {
+    "mmtd-46785": {
+      "hosting": {
+        "adminpro": [
+          "mmtd-46785"
+        ]
+      }
+    }
   }
 }

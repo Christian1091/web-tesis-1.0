@@ -57,7 +57,6 @@ export class RespuestaCuestionarioService {
 
   // Este get es para visualizar los posts creados por el usuario ya autenticado en los cards
   getRespuestaByIdCuestionario( _id: string ) {
-
     const url =  `${ base_url }/respuestaCuestionarios/estadisticas/${ _id }`;
     return this.http.get( url, this.headers )
                 .pipe(

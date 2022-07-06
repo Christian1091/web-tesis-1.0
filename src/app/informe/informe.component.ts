@@ -25,7 +25,10 @@ export class InformeComponent implements OnInit {
   'HiperTic': []
     },
     'promedio': number
-  }) { }
+  }) {
+    console.log(niveles);
+    
+   }
 
 
 
@@ -36,8 +39,10 @@ export class InformeComponent implements OnInit {
     const nivel4 = this.niveles['niveles']['Tic-Avanzado'].slice(-1);
     const nivel5 = this.niveles['niveles']['HiperTic'].slice(-1);
     this.lista = [(nivel1.length == 0) ? 0 : nivel1[0], (nivel2.length == 0) ? 0 : nivel2[0], (nivel3.length == 0) ? 0 : nivel3[0], (nivel4.length == 0) ? 0 : nivel4[0], (nivel5.length == 0) ? 0 : nivel5[0]];
+
     this.promedio = this.niveles['promedio'];
     this.evaluacionMM();
+    
     
   }
 
@@ -63,8 +68,11 @@ export class InformeComponent implements OnInit {
   }
 
   graficarInfo(tipo: ChartType = 'bar') {
-    const x = this.lista;
-    const y = ["TIC Excluido", "TIC Básico", "TIC Desarrollado", "TIC Avanzado", "Hiper TIC"];
+    //const x = this.lista;
+    //const y = ["TIC Excluido", "TIC Básico", "TIC Desarrollado", "TIC Avanzado", "Hiper TIC"];
+    
+    const x = [this.promedio];
+    const y = [this.nivel];
 
     
     this.chart = new Chart(this.grafico?.nativeElement, {

@@ -225,6 +225,10 @@ export class Grafica1Component {
 	}
 
   getListCuestionarioById(idC: string, i) {
+    if (idC === '6282675f33cbba25705fa3d2') {
+      this.isActive = false;
+      return;
+    }
     this.selectOpcion = true;
     this.pos = i;
     
@@ -255,17 +259,19 @@ export class Grafica1Component {
       'total': []
     };
     console.log(this.datosCuestionario);
+    /* */
+    if (this.datosCuestionario.length == 0) return;
+    /* */
     const sizeTest: number = this.datosCuestionario.length;
     let cont: number = 0 ; 
     this.datosCuestionario.map((res, index) => {
       cont += (res.puntosTotales*100)/this.listCuestionarios[this.pos].puntajeCuestionario;
       res.listRespuestasUsuario.map(l => {
         respuestas['indice'].push(index)
-        l.indexRespuestaSeleccionada.map(r => {
-          respuestas['respuestas'].push(l.tituloPregunta + "/" + l.listRespuesta[r].descripcion + "/" + (1 / l.listRespuesta.length))
+        // l.indexRespuestaSeleccionada.forEach(r => {
+        //   respuestas['respuestas'].push(l.tituloPregunta + "/" + l.listRespuesta[r].descripcion + "/" + (1 / l.listRespuesta.length))
 
-        });
-        // respuestas['respuestas'].push(l.tituloPregunta+"/"+l.listRespuesta[l.indexRespuestaSeleccionada].descripcion+"/"+(1/l.listRespuesta.length))
+        // });
         respuestas['total'].push(l.listRespuesta.length)
       })
     });

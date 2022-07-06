@@ -23,6 +23,10 @@ import { GeneralComponent } from './general/general.component';
 import {MatSelectModule} from '@angular/material/select';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 
+import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,7 +60,7 @@ import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
     MatSidenavModule,
     MatIconModule,
     MatTabsModule,
-    MatSelectModule,
+    MatSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

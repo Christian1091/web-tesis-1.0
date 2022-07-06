@@ -4,6 +4,7 @@ import Chart from 'chart.js';
 import { CuestionarioService } from '../services/cuestionario.service';
 import { ProvinciasService } from '../services/provincias.service';
 import { Provincias } from '../interfaces/provincias.interfaces';
+import { RespuestaCuestionarioService } from '../services/respuesta-cuestionario.service';
 
 @Component({
   selector: 'app-general',
@@ -31,7 +32,7 @@ export class GeneralComponent implements OnInit {
   public n4: number = 0;
   public n5: number = 0;
   public isEmpty: boolean = false;
-  constructor(private service: CuestionarioService, private provinciaService: ProvinciasService) {
+  constructor(private service: CuestionarioService, private provinciaService: ProvinciasService, private crService: RespuestaCuestionarioService) {
     
   }
 
@@ -139,6 +140,129 @@ export class GeneralComponent implements OnInit {
   ngOnInit(): void {
     this.initParametros();
   }
+
+  estadisticasGeneralesMMtd() {
+    const sumas: [] = [];
+    this.crService.getRespuestaByIdCuestionario("6282675f33cbba25705fa3d2").subscribe(res => {
+      const data: [] = res as [];
+      const s = res[0]["listRespuestasUsuario"] as [];
+      const size = s.length;
+      let contador = 0;
+      let suma = 0;
+      const resultados = [];
+      data.map(res => {
+        const respuesta = res["listRespuestasUsuario"][contador];
+        const titulo = respuesta["area"];
+        suma += Number(respuesta["puntosObtenidos"]);
+        const body = {
+          "titulo": titulo,
+          "total": suma
+        }
+        // if (resultados.length > 0) {
+          
+        //   if (resultados[resultados.length-1]["titulo"] == titulo) {
+        //       resultados[resultados.length-1]["total"] += suma;
+        //   } else {
+        //     resultados.push(body);
+        //   }
+        // } else {
+          
+        // }
+        resultados.push(body);
+        contador += 1;
+        
+        if (contador == 32) {
+          contador = 0;
+        }
+      });
+      const p = resultados.length;
+      
+      const x = ["Ciudad Universitaria", "Infraestructura TIC", "Administración", "Docencia", "Investigación y transferencia ", "Marketing", "Comunicación", "Gobierno de la Transformación Digital"];
+      const y = [0, 0, 0, 0, 0, 0, 0, 0]
+      resultados.map(v => {
+        if (v["titulo"] === "Ciudad Universitaria") {
+          if (y[0] < v["total"]) {
+            y[0] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Infraestructura TIC") {
+          if (y[1] < v["total"]) {
+            y[1] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Administración") {
+          if (y[2] < v["total"]) {
+            y[2] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Docencia") {
+          if (y[3] < v["total"]) {
+            y[3] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Investigación y transferencia ") {
+          if (y[4] < v["total"]) {
+            y[4] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Marketing") {
+          if (y[5] < v["total"]) {
+            y[5] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Comunicación") {
+          if (y[6] < v["total"]) {
+            y[6] += v["total"];
+          }
+        }
+        if (v["titulo"] === "Gobierno de la Transformación Digital") {
+          if (y[7] < v["total"]) {
+            y[7] += v["total"];
+          }
+        }
+      });
+      console.log(y);
+      
+      for(let i = 0; i < y.length; i++) {
+        y[i] = Number(((y[i] * 100) / p).toFixed(0));
+      }
+      
+      this.graficarInfoMmtd(x, y);
+    });
+  }
+
+  graficarInfoMmtd(y:string[], x:number[], tipo: ChartType = 'bar') {
+    y.push("");
+    y.push("");
+    x.push(100);
+    x.push(0);
+    if (this.chart != null || this.chart != undefined) {
+      this.chart.destroy();
+    }
+    this.chart = new Chart(this.grafico?.nativeElement, {
+      options: {
+        labels: y,
+        title: {
+          display: true,
+          text: "Niveles del modelo de madurez de Transformación Digital",
+        },
+        tooltips: {
+          callbacks: {
+
+          }
+        },
+      },
+      type: tipo,
+      data: {
+        labels: y,
+        datasets: [{
+          backgroundColor: ['#2ecc71', '#E1755D', '#ECE20F', '#de9e31', '#D50FEC','#2ecc71', '#E1755D', '#ECE20F', "#ffffff00"],
+          data: x,
+        }]
+      }
+    });
+  }
+
 
   graficarInfo(tipo: ChartType = 'pie') {
     const x = [this.n1, this.n2, this.n3, this.n4 ,this.n5];
