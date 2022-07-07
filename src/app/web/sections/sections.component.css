@@ -4,6 +4,7 @@
 
 img {
   /* filter: drop-shadow(51px 14px gold); */
+  width: 100%;
   filter: drop-shadow(0px 0px 4px white);
   padding: 2px 5px 2px 15px;
 }
@@ -42,7 +43,7 @@ height: 20px;
   flex-wrap: wrap;
     align-content: flex-end;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 40px;
 
 }
 .textpie 

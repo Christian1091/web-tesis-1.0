@@ -72,11 +72,18 @@
               <div class="p-mb-3">
               </div>
               <div>
-                  <div class="mb-3">
+
+                <picture>
+                 
+                  <source media="(min-width:20px)" srcset="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}">
+                  <img media="(min-width:10px)" src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}" alt="Noticias">
+                </picture>
+                  <!-- <div class="mb-3">
                     <img src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}" class="product-image" />
-                </div>
+                </div> -->
                   <h4 class="p-mb-1">{{product.titulo | slice:0:20 }} ... </h4>
                   <span class="product-badge">{{product.descripcion | slice:0:80}} ...</span>
+                  <button type="button" (click)="verMas(product)" class="btn waves-effect waves-light btn-block btn-info">Ver más</button>
               </div>
           </div>
       </div>
@@ -104,7 +111,7 @@
             <h4> {{ item.usuario.nombre }} </h4>
             <span>{{ item.titulo }}</span>
             <p>{{ item.descripcion }}</p>
-            <div class="social">
+            <div class="social" style="margin-top: 20px;">
               <button type="button" class="btn waves-effect waves-light btn-block btn-info"
                 [routerLink]="['/post/publico', item._id]">Leer más</button>
             </div>

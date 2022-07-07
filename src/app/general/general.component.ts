@@ -5,6 +5,7 @@ import { CuestionarioService } from '../services/cuestionario.service';
 import { ProvinciasService } from '../services/provincias.service';
 import { Provincias } from '../interfaces/provincias.interfaces';
 import { RespuestaCuestionarioService } from '../services/respuesta-cuestionario.service';
+import { MatTabChangeEvent } from '@angular/material/tabs';
 
 @Component({
   selector: 'app-general',
@@ -32,6 +33,7 @@ export class GeneralComponent implements OnInit {
   public n4: number = 0;
   public n5: number = 0;
   public isEmpty: boolean = false;
+  public cargango: boolean = false;
   constructor(private service: CuestionarioService, private provinciaService: ProvinciasService, private crService: RespuestaCuestionarioService) {
     
   }
@@ -67,7 +69,7 @@ export class GeneralComponent implements OnInit {
     this.resultados = [];
   }
 
-  cambiarTab() {
+  cambiarTab(tabChangeEvent: MatTabChangeEvent) {
     this.provinciaParticipante = "";
     this.empresa = "";
     this.tipo = "";
@@ -75,6 +77,9 @@ export class GeneralComponent implements OnInit {
     this.parametro = "";
     if (this.chart != null || this.chart != undefined) {
       this.chart.destroy();
+    }
+    if (tabChangeEvent.index == 4) {
+      this.estadisticasGeneralesMMtd();
     }
     
   }
@@ -85,14 +90,17 @@ export class GeneralComponent implements OnInit {
     if (this.chart != null || this.chart != undefined) {
       this.chart.destroy();
     }
+    this.cargango = true;
     this.service.getListEstadisticaGeneralInstitucion(this.empresa).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.isEmpty = false;
         this.calculosMm();
         this.graficarInfo();
+        this.cargango = false;
       } else {
         this.isEmpty = true;
+        this.cargango = false;
       }
     });
   }
@@ -103,14 +111,17 @@ export class GeneralComponent implements OnInit {
     if (this.chart != null || this.chart != undefined) {
       this.chart.destroy();
     }
+    this.cargango = true;
     this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.isEmpty = false;
         this.calculosMm();
         this.graficarInfo();
+        this.cargango = false;
       } else {
         this.isEmpty = true;
+        this.cargango = false;
       }
     });
   }
@@ -124,14 +135,17 @@ export class GeneralComponent implements OnInit {
       if (this.chart != null || this.chart != undefined) {
         this.chart.destroy();
       }
+      this.cargango = true;
       this.service.getListEstadisticaGeneralInstitucionTipo(this.empresat, this.tipo).subscribe(res => {
         this.resultados = res["datos"]["resultados"];
         if (this.resultados.length > 0) {
           this.isEmpty = false;
           this.calculosMm();
           this.graficarInfo();
+          this.cargango = false;
         } else {
           this.isEmpty = true;
+          this.cargango = false;
         }
       });
     }
@@ -142,6 +156,7 @@ export class GeneralComponent implements OnInit {
   }
 
   estadisticasGeneralesMMtd() {
+    this.cargango = true;
     const sumas: [] = [];
     this.crService.getRespuestaByIdCuestionario("6282675f33cbba25705fa3d2").subscribe(res => {
       const data: [] = res as [];
@@ -232,6 +247,7 @@ export class GeneralComponent implements OnInit {
   }
 
   graficarInfoMmtd(y:string[], x:number[], tipo: ChartType = 'bar') {
+    this.cargango = false;
     y.push("");
     y.push("");
     x.push(100);
@@ -241,6 +257,15 @@ export class GeneralComponent implements OnInit {
     }
     this.chart = new Chart(this.grafico?.nativeElement, {
       options: {
+        animations: {
+          tension: {
+            duration: 0,
+            easing: 'linear',
+            from: 100,
+            to: 0,
+            loop: false
+          }
+        },
         labels: y,
         title: {
           display: true,
@@ -298,13 +323,16 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.provinciaParticipante = id;
+    this.cargango = true;
     this.service.getListEstadisticaGeneralProvinvia(this.provinciaParticipante).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
+        this.cargango = false;
         this.isEmpty = false;
         this.calculosMm();
         this.graficarInfo();
       } else {
+        this.cargango = false;
         this.isEmpty = true;
       }
     });

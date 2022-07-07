@@ -8,6 +8,8 @@ import { CuestionarioService } from '../../services/cuestionario.service';
 import { Correo } from '../../models/correo.model';
 import Swal from 'sweetalert2';
 import { ProvinciasService } from '../../services/provincias.service';
+import { MatDialog } from '@angular/material/dialog';
+import { VerNoticiaComponent } from '../ver-noticia/ver-noticia.component';
 @Component({
   selector: 'app-sections',
   templateUrl: './sections.component.html',
@@ -50,6 +52,14 @@ export class SectionsComponent implements OnInit {
     }
   }
 
+  verMas(p: Noticia) {
+    this.dialog.open(VerNoticiaComponent, {
+      data: p,
+      height: '85%',
+      width: '65%',
+    })
+  }
+
   mostrarMensaje(mensaje: string) {
     Swal.fire({
       position: 'center',
@@ -69,7 +79,7 @@ export class SectionsComponent implements OnInit {
   constructor(private postService: PostService,
     private cuestionarioService: CuestionarioService,
     private imagesService: ProvinciasService,
-    private activatedRoute: ActivatedRoute) {
+    private activatedRoute: ActivatedRoute, public dialog: MatDialog) {
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
     this.responsiveOptions = [
       {

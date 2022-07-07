@@ -12,12 +12,14 @@ import { MenubarModule } from 'primeng/menubar';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button'
 import { GalleriaModule } from 'primeng/galleria';
+import { VerNoticiaComponent } from './ver-noticia/ver-noticia.component';
 
 @NgModule({
   declarations: [
     MainComponent,
     NavbarComponent,
-    SectionsComponent
+    SectionsComponent,
+    VerNoticiaComponent
   ],
   exports: [
     NavbarComponent

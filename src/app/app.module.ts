@@ -22,6 +22,7 @@ import { NuevaNoticiaComponent } from './noticia/nueva-noticia/nueva-noticia.com
 import { GeneralComponent } from './general/general.component';
 import {MatSelectModule} from '@angular/material/select';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -60,7 +61,8 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatSidenavModule,
     MatIconModule,
     MatTabsModule,
-    MatSelectModule
+    MatSelectModule,
+    MatProgressSpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

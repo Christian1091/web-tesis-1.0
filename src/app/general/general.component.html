@@ -1,7 +1,7 @@
 <app-navbar></app-navbar>
 <div style="padding: 100px;">
     <h2>Estadísticas Generales</h2>
-    <mat-tab-group (selectedTabChange)="cambiarTab()">
+    <mat-tab-group (selectedTabChange)="cambiarTab($event)">
         <mat-tab label="Provincia">
             <div class="form-group col-md-6">
                 <select class="form-control" (change)="onSelect($event.target.value)"
@@ -58,10 +58,10 @@
             </div>
             
         </mat-tab>
-        <mat-tab label="General MMTD">
-            <div class="form-group col-md-6">
-                <button (click)="estadisticasGeneralesMMtd()">Grap</button>
-            </div>
+        <mat-tab label="General MMTD" (tabChange)="estadisticasGeneralesMMtd()">
+            <!-- <div class="form-group col-md-6">
+                <button (click)="estadisticasGeneralesMMtd()">Ver estadística general IES </button>
+            </div> -->
             
         </mat-tab>
     </mat-tab-group>
@@ -70,5 +70,8 @@
             <canvas #grafico></canvas>
         </div>
         <h3 *ngIf="isEmpty">No existe información</h3>
+    </div>
+    <div *ngIf="cargango">
+        <mat-spinner></mat-spinner>
     </div>
 </div>
