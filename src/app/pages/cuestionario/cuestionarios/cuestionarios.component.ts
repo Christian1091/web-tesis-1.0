@@ -86,7 +86,11 @@ export class CuestionariosComponent implements OnInit {
 
   agregarEmpresa() {
     const ne: string = this.nuevaEmpresa.value;
-    if (!this.verificarExiste(ne, this.empresas) && ne.length > 3) {
+    if (ne.trim().length < 3) {
+      this.mostrarAlerta("Error", "El nombre es de la empresa es muy corto", false);
+      return; 
+    } 
+    if (!this.verificarExiste(ne, this.empresas) && ne.length > 2) {
       this.cuestionarioService.guardarEmpresa(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
         if(ok) {
@@ -142,7 +146,11 @@ export class CuestionariosComponent implements OnInit {
 
   agregarTipoCue() {
     const ne: string = this.nuevaTipoCuestionario.value;
-    if (!this.verificarExiste(ne, this.tipos) && ne.length > 3) {
+    if (ne.length < 3) {
+        this.mostrarAlerta("Error", "El nombre es del cuestionario es muy corto", false);
+        return; 
+      }   
+    if (!this.verificarExiste(ne, this.tipos) && ne.length > 2) {
       this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
         if (ok) this.tipos.push(ne);
@@ -153,6 +161,10 @@ export class CuestionariosComponent implements OnInit {
 
   agregarDirigido() {
     const ne: string = this.nuevaDirigido.value;
+    if (ne.length < 3) {
+      this.mostrarAlerta("Error", "El nombre es muy corto", false);
+      return; 
+    } 
     if (!this.verificarExiste(ne, this.dirigidos) && ne.length > 3) {
       this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
