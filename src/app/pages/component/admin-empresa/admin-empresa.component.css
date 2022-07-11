@@ -1,0 +1,19 @@
+.headTipo{
+    padding: 12px;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.Atipo{
+
+    padding: 6px;
+    margin:12px ;
+
+}
+
+.btnI{
+    background-color: white;
+    border: none;
+    cursor: pointer;
+}

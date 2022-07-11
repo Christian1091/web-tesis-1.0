@@ -1,0 +1,24 @@
+<div class="headTipo">
+    <input class="Atipo" type="text" [(ngModel)]="tipo" />
+    <button class="btnI" (click)="agregarDirigido()"><i class="fa fa-plus-square float-right" style="color: #168116; font-size:xx-large; " 
+        (click)="agregarDirigido()" title="Agregar nuevo"></i></button>
+
+        
+                                    
+</div>
+<p-table [value]="tiposPersona" dataKey="id" styleClass="p-datatable-customers" [rows]="10"
+    [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" responsiveLayout="scroll" [paginator]="true"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries" [filterDelay]="0">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Nombre</th>
+            <th>Acciones</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-tipoPersona>
+        <tr>
+            <td>{{tipoPersona.tipo}}</td>
+            <button class="btn btn-danger" (click)="eliminar(tipoPersona.tipo)" title="Eliminar">Eliminar</button>
+        </tr>
+    </ng-template>
+</p-table>
