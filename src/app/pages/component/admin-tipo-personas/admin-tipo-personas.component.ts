@@ -3,6 +3,7 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CuestionariosComponent } from '../../cuestionario/cuestionarios/cuestionarios.component';
+import { Subscription } from 'rxjs';
 
 export class TipoPersona {
   descripcion: string;
@@ -19,20 +20,21 @@ export class AdminTipoPersonasComponent implements OnInit {
 
   public tiposPersona: TipoPersona[] = [];
   public tipo: string = "";
+  subscriptions: Subscription [] = [];
 
 
   constructor(private cuestionarioService: CuestionarioService, private matDialogRef: MatDialogRef<CuestionariosComponent>) {
-    cuestionarioService.obtenerTipoPersonas().subscribe(res => {
+  const searchObtenerTP =  cuestionarioService.obtenerTipoPersonas().subscribe(res => {
       this.tiposPersona = res['tiposPersonas'] as TipoPersona[];
       console.log(res);
-    }
-    );
+    });
+    this.subscriptions.push(searchObtenerTP);
   }
   ngOnInit(): void {
   }
 
   eliminar(emp: string) {
-    this.cuestionarioService.eliminarTipoPersona(emp).subscribe(res => {
+   const searchEliminarTP = this.cuestionarioService.eliminarTipoPersona(emp).subscribe(res => {
       const ok: boolean = res["ok"];
       if (ok) {
         this.mostrarAlerta("Correcto", "Tipo persona eliminado correctamente", true);
@@ -42,6 +44,7 @@ export class AdminTipoPersonasComponent implements OnInit {
         this.mostrarAlerta("Error", "Error al eliminar", false);
       }
     });
+    this.subscriptions.push(searchEliminarTP);
   }
 
   agregarDirigido() {
@@ -53,7 +56,7 @@ export class AdminTipoPersonasComponent implements OnInit {
       this.mostrarAlerta("Error", "El tipo de persona ya existe", false);
       return;
     }
-    this.cuestionarioService.guardarTipoPersonas(this.tipo, this.tipo).subscribe(res => {
+    const searchGuardarTP = this.cuestionarioService.guardarTipoPersonas(this.tipo, this.tipo).subscribe(res => {
       const ok: boolean = res['ok'];
       if(ok) {
         this.mostrarAlerta("Correcto", "Tipo de persona agregado correctamente", true);
@@ -62,7 +65,7 @@ export class AdminTipoPersonasComponent implements OnInit {
         this.mostrarAlerta("Error", "Ocurrió un error", false);
       }
     });
-  }
+  this.subscriptions.push(searchGuardarTP);  }
 
 
   mostrarAlerta(title: string, body: string, ok: boolean) {
@@ -72,5 +75,10 @@ export class AdminTipoPersonasComponent implements OnInit {
       ok ? 'success' : 'error');
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }
 

@@ -12,6 +12,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VerPostComponent } from './ver-post/ver-post.component';
 import { NuevaNoticiaComponent } from '../../noticia/nueva-noticia/nueva-noticia.component';
 import { Noticia } from '../../models/noticia.model';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -21,40 +22,26 @@ import { Noticia } from '../../models/noticia.model';
     './dashboard.component.css',
   ]
 })
-export class DashboardComponent implements OnInit{
+export class DashboardComponent implements OnInit {
 
-   public id: string;
-
-   cont_post: any = {};
-  /** Fin Obtener contenido cuestioanrio */
-
-  /**Para obtener nuestros datos en las etiquetas
-   * del fomrulario de editar perfil
-   */
+  public id: string;
+  cont_post: any = {};
   public usuario: Usuario;
-
   public cambiar: boolean = true;
-
   public opcion: number = 0;
-
-  //public post: Post;
-
-  /**Creamos una propiedad para subir la imagen */
   public imagenSubir: File;
-
   public imgTemp: any = null;
-
   public posts: Post[] = [];
-
   public noticias: Noticia[] = [];
+  subscriptions: Subscription [] = [];
 
-  constructor( private fb: FormBuilder,
-               private usuarioService: UsuarioService,
-               private postService: PostService,
-               private fileUploadService: FileUploadService,
-               private router: Router,
-               private dialog: MatDialog,
-               private activatedRoute: ActivatedRoute) {
+  constructor(private fb: FormBuilder,
+    private usuarioService: UsuarioService,
+    private postService: PostService,
+    private fileUploadService: FileUploadService,
+    private router: Router,
+    private dialog: MatDialog,
+    private activatedRoute: ActivatedRoute) {
 
     this.usuario = usuarioService.usuario;
     this.id = this.activatedRoute.snapshot.paramMap.get('id') || '';
@@ -69,10 +56,9 @@ export class DashboardComponent implements OnInit{
     const dialogRef = this.dialog.open(NuevaNoticiaComponent, {
       width: '450px'
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      
+    const searchAfter = dialogRef.afterClosed().subscribe(result => {
     });
+    this.subscriptions.push(searchAfter);
   }
 
   openDialogEditarNoticia(noticia: Noticia) {
@@ -80,67 +66,66 @@ export class DashboardComponent implements OnInit{
       width: '450px',
       data: noticia
     });
-    dialogRef.afterClosed().subscribe(result => {
+    const searchAfterClosed = dialogRef.afterClosed().subscribe(result => {
     });
+    this.subscriptions.push(searchAfterClosed);
   }
 
   cargarListPostByIdUser() {
     //this.cargando = true;
-    this.postService.getListPostByIdUser()
-                            .subscribe( ({ post }) => {
-                              this.posts = post;
-                            
-                              //this.cargando = false;
-                            })
-
+    const searchListPostBIU = this.postService.getListPostByIdUser()
+      .subscribe(({ post }) => {
+        this.posts = post;
+      //this.cargando = false;
+      });
+      this.subscriptions.push(searchListPostBIU);
   }
 
-  cargarNoticia(){
-    this.postService.getListNoticias().subscribe(response => {
-      this.noticias = response['noticias'];      
-    })
+  cargarNoticia() {
+    const searchListNoticias = this.postService.getListNoticias().subscribe(response => {
+      this.noticias = response['noticias'];
+    });
+    this.subscriptions.push(searchListNoticias);
   }
-
-
 
   verContenidoPost(post: Post) {
-    const dialog = this.dialog.open(VerPostComponent,{
-      width:'100%',
-      height:'95%',
-      data:post,
+    const dialog = this.dialog.open(VerPostComponent, {
+      width: '100%',
+      height: '95%',
+      data: post,
       panelClass: 'my-dialog',
-      disableClose:false
+      disableClose: false
     });
- 
-
   }
 
-  eliminarPost( post: Post ) {
+  eliminarPost(post: Post) {
     Swal.fire({
       title: '¿Eliminar post?',
-      text: `Esta a punto de eliminar a ${ post.titulo }`,
+      text: `Esta a punto de eliminar a ${post.titulo}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.postService.eliminarPost( post._id )
-            .subscribe( resp => {
-              /**Para refrescar la tabla despues de haber eliminado el usuario */
-              this.cargarListPostByIdUser();
-              Swal.fire(
+        const searchEliminarPost = this.postService.eliminarPost(post._id)
+          .subscribe(resp => {
+            /**Para refrescar la tabla despues de haber eliminado el usuario */
+            this.cargarListPostByIdUser();
+            Swal.fire(
               'Post eliminado',
-              `${ post.titulo } Fue eliminado exitosamente!`,
+              `${post.titulo} Fue eliminado exitosamente!`,
               'success');
-            });
-          }
+          });
+          this.subscriptions.push(searchEliminarPost);
+      }
     })
   }
-
-
   opcionTab(event) {
     this.opcion = event.index;
-    
   }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }

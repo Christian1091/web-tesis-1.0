@@ -50,28 +50,17 @@
                                     <mat-select placeholder="Selecciona" (valueChange)="obtenerEmpresa($event)">
                                         <mat-option *ngFor="let emp of empresas; let i = index;" [value]="emp">
                                             {{ emp }}
-                                            <button class="noselectD"><span class="text"
-                                                    (click)="eliminar(i, emp)">Eliminar</span><span class="icon"><svg
-                                                        xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                        viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
-                                                        </path>
-                                                    </svg></span></button>
-
-                                            <!-- <button class="deleteButton" type="button" (click)="eliminar(i, emp)">X</button> -->
                                         </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col">
-                                    <input type="text" placeholder="Agregar Empresa" [formControl]="nuevaEmpresa" />
-                                </div>
-                                <div class="col">
-                                    <button type="button" (click)="agregarEmpresa()">Agregar</button>
+                                    <!-- <button type="button" (click)="agregarEmpresa()">Agregar</button> -->
+                                    <i class="fa fa-edit icon float-right" style="color: #168116"
+                                        (click)="agregarEmpresa()" title="Editar"></i>
                                 </div>
                             </div>
                         </div>
-                       
+
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col">
@@ -82,28 +71,16 @@
                                         <mat-option *ngFor="let dirigido of dirigidos; let i = index;"
                                             [value]="dirigido">
                                             {{ dirigido }}
-
-                                            <button class="noselectD"><span class="text"
-                                                    (click)="eliminarTipoP(i, dirigido)">Eliminar</span><span
-                                                    class="icon"><svg xmlns="http://www.w3.org/2000/svg" width="24"
-                                                        height="24" viewBox="0 0 24 24">
-                                                        <path
-                                                            d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z">
-                                                        </path>
-                                                    </svg></span></button>
                                             <!-- <button class="deleteButton" type="button" (click)="eliminarTipoP(i, dirigido)">X</button> -->
                                         </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col">
-                                    <input type="text" placeholder="Agregar Dirgido a" [formControl]="nuevaDirigido" />
-                                </div>
-                                <div class="col">
-                                    <button type="button" (click)="agregarDirigido()">Agregar</button>
+                                    <i class="fa fa-edit icon float-right" style="color: #168116"
+                                        (click)="agregarDirigido()" title="Editar"></i>
                                 </div>
                             </div>
                         </div>
-
                         <div class="col-md-8">
                             <div class="row">
                                 <div class="col">
@@ -189,7 +166,6 @@
     </div>
 </div>
 
-
 <div class="card-body">
     <div class="row">
         <div class="column col-md-6" *ngFor="let cuestionario of cuestionarios">
@@ -210,13 +186,8 @@
                     <i class="fa fa-bar-chart-o icon" routerLink="../estadisticas/{{ cuestionario._id }}"></i>
 
                     <i class="fa fa-copy icon" style="color: #42910D;" (click)="crearLink(cuestionario)"></i>
-
                 </div>
             </div>
-            <!-- </div> -->
         </div>
     </div>
-
-
-
 </div>

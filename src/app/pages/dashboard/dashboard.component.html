@@ -31,11 +31,11 @@
                                 <div class="sl-right">
                                     <div>
                                         <i class="fa fa-trash icon float-right" (click)="eliminarPost( post )"
-                                            style="color: #EF2421;"></i>
+                                            style="color: #EF2421;" title="Eliminar"></i>
                                         <i class="fa fa-edit icon float-right" style="color: #168116"
-                                            [routerLink]="['/dashboard/editarPost', post._id]"></i>
+                                            [routerLink]="['/dashboard/editarPost', post._id]" title="Editar"></i>
                                         <i class="fa fa-eye icon float-right" style="color: #2269C7"
-                                            (click)="verContenidoPost(post)"></i>
+                                            (click)="verContenidoPost(post)" title="Ver"></i>
 
                                         <a>{{ post.titulo }}</a>
                                         <span class="sl-date"> Hace 5 minutos </span>

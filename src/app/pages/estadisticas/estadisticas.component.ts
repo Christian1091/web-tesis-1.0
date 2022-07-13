@@ -23,9 +23,8 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
   public obtenerPuntosCuestionario: Cuestionario[];
   public puntosTotalCuestionarios = 0;
   public totalRespuestas: number = 0;
-
+  subscriptions: Subscription[] = [];
   title = "Animated Count";
-
   nums: Array<number> = [25, 76, 48];
 
   @ViewChild("oneItem") oneItem: any;
@@ -50,11 +49,7 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
 
   animateCount() {
     let _this = this;
-
      let single = this.oneItem.nativeElement.innerHTML;
-    
-    //let single = this.totalRespuestas;
-
     this.counterFunc(single, this.oneItem, 7000);
 
     this.count.forEach(item => {
@@ -78,18 +73,11 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
     }, step);
   }
 
-  ngOnDestroy(): void {
-    this.respuestaCuestionario.unsubscribe();
-  }
-
   getRespuestaByIdCuestionario() {
 
-    this.respuestaCuestionario = this.respuestaCuestionarioService.getRespuestaByIdCuestionario(this.id)
+    const searchRespuestaByIdC = this.respuestaCuestionario = this.respuestaCuestionarioService.getRespuestaByIdCuestionario(this.id)
       .subscribe((res: any) => {
-        //Vaciamos para que no hay duplicidad de datos
         this.listRespuestasUsuario = [];
-        //Iteramos lo que tenemos dentro de res
-        
         this.totalRespuestas = res.length;
         res.forEach((element: any) => {
           this.listRespuestasUsuario.push({
@@ -104,8 +92,9 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
             listRespuestaUsuario: element.listRespuestasUsuario
           })
         });
-      }, error => {
-      });
+      }, 
+       error => {
+      }); this.subscriptions.push(searchRespuestaByIdC);
   }
 
   verPuntosRespuestaUsuario() {
@@ -126,7 +115,7 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.respuestaCuestionarioService.borrarRespuestaUsuario(id)
+        const searchBorrarRU = this.respuestaCuestionarioService.borrarRespuestaUsuario(id)
           .subscribe(resp => {
             this.getRespuestaByIdCuestionario();
             /**Para refrescar la tabla despues de haber eliminado el usuario */
@@ -135,17 +124,18 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
               'Cuestionario borrado',
               `Fue eliminado exitosamente!`,
               'success');
-          });
+          }); 
+          this.subscriptions.push(searchBorrarRU);
       }
     })
   }
 
   obtenerPuntajeCuestionario() {
-    this.cuestionarioService.getVerCuestionario(this.id)
+    const searchVerCuestionario = this.cuestionarioService.getVerCuestionario(this.id)
       .subscribe(res => {
         this.obtenerPuntosCuestionario = res;
       });
-
+      this.subscriptions.push(searchVerCuestionario);
   }
 
   /**Sacar puntos por preguntas */
@@ -156,8 +146,13 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
       const cuestionarios = this.listRespuestasUsuario[i].listRespuestaUsuario[0].tituloPregunta;
       const puntos = this.listRespuestasUsuario[i].listRespuestaUsuario[0].puntosObtenidos;
     }
-    //}
   }
-  
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
+//   ngOnDestroy(): void {
+//     this.respuestaCuestionario.unsubscribe();
+//  }
 }

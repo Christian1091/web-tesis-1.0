@@ -3,6 +3,7 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import Swal from 'sweetalert2';
 import { MatDialogRef } from '@angular/material/dialog';
 import { CuestionariosComponent } from '../../cuestionario/cuestionarios/cuestionarios.component';
+import { Subscription } from 'rxjs';
 
 export class Empresa {
   nombre: string;
@@ -17,19 +18,20 @@ export class AdminEmpresaComponent implements OnInit {
 
   public empresas: Empresa[] = [];
   public nombre: string = "";
+  subscriptions: Subscription [] = []; 
 
-  constructor(private cuestionarioService: CuestionarioService, private matDialogRef: MatDialogRef<CuestionariosComponent>) {
-    cuestionarioService.obtenerEmpresas().subscribe(res => {
+ constructor(private cuestionarioService: CuestionarioService, private matDialogRef: MatDialogRef<CuestionariosComponent>) {
+   const searchObtenerEmpresa = cuestionarioService.obtenerEmpresas().subscribe(res => {
       this.empresas = res['empresas'] as Empresa[];
-    }
-    );
+    }); 
+    this.subscriptions.push(searchObtenerEmpresa);
   }
 
   ngOnInit(): void {
   }
 
   eliminar(emp: string) {
-    this.cuestionarioService.eliminarEmpresa(emp).subscribe(res => {
+    const searchEliminarE = this.cuestionarioService.eliminarEmpresa(emp).subscribe(res => {
       const ok: boolean = res["ok"];
       if (ok) {
         this.mostrarAlerta("Correcto", "Empresa eliminada correctamente", true);
@@ -39,6 +41,7 @@ export class AdminEmpresaComponent implements OnInit {
         this.mostrarAlerta("Error", "Error al eliminar", false);
       }
     });
+    this.subscriptions.push(searchEliminarE);
   }
 
   agregarEmpresa() {
@@ -50,8 +53,10 @@ export class AdminEmpresaComponent implements OnInit {
       this.mostrarAlerta("Error", "Empresa ya existe", false);
       return;
     }
-    this.cuestionarioService.guardarEmpresa(this.nombre, this.nombre).subscribe(res => {
+    const searchGuardarE = this.cuestionarioService.guardarEmpresa(this.nombre, this.nombre).subscribe(res => {
       const ok: boolean = res['ok'];
+      console.log(ok);
+      
       if(ok) {
         this.mostrarAlerta("Correcto", "Empresa agregada correctamente", true);
         this.matDialogRef.close(true);
@@ -59,6 +64,7 @@ export class AdminEmpresaComponent implements OnInit {
         this.mostrarAlerta("Error", "Ocurrió un error", false);
       }
     });
+    this.subscriptions.push(searchGuardarE);
   }
 
   mostrarAlerta(title: string, body: string, ok: boolean) {
@@ -68,6 +74,11 @@ export class AdminEmpresaComponent implements OnInit {
       ok ? 'success' : 'error');
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }
 
 

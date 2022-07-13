@@ -28,6 +28,7 @@ export class Grafica1Component {
   public listCuestionarios: Cuestionario[] = [];
   public pregunta: string = "";
   public pos: number = 0;
+  subscriptions: Subscription[] = [];
 
   @ViewChild('grafico') grafico?: ElementRef;
   public datosCuestionario: DatosCuestionario[] = [];
@@ -61,7 +62,7 @@ export class Grafica1Component {
 
   ngOnInit(): void {
     this.getListCuestionarios();
-    this.tipo.valueChanges.subscribe(res => {
+    const searchtipo = this.tipo.valueChanges.subscribe(res => {
       const value: string = res;
       this.chart.destroy();
       if (value.localeCompare("0")) {
@@ -70,6 +71,7 @@ export class Grafica1Component {
         this.graficar();
       }
     });
+    this.subscriptions.push(searchtipo);
   }
 
   ngAfterViewInit(): void {
@@ -151,10 +153,11 @@ export class Grafica1Component {
   }
 
   getListCuestionarios() {
-    this.cuestioanrioService.getListCuestionarios()
+    const searchcuestService = this.cuestioanrioService.getListCuestionarios()
       .subscribe(({ cuestionarios }) => {
         this.listCuestionarios = cuestionarios;
       })
+      this.subscriptions.push(searchcuestService);
   }
   obtenerPromedio() {
   this.promedioMadurez = 0;
@@ -232,7 +235,7 @@ export class Grafica1Component {
     this.selectOpcion = true;
     this.pos = i;
     
-    this.respuestaCuestionarioService.getRespuestaByIdCuestionario(idC).subscribe(response => {
+   const respuestaCS = this.respuestaCuestionarioService.getRespuestaByIdCuestionario(idC).subscribe(response => {
       this.preguntas = [];
       this.texto = [];
       this.datosCuestionario = [];
@@ -249,6 +252,7 @@ export class Grafica1Component {
       });
     
     });
+    this.subscriptions.push(respuestaCS);
     this.isActive = true;  
   }
   calcularNivelMadurez(ok:boolean = false) {
@@ -376,6 +380,11 @@ export class Grafica1Component {
       }
     });
     this.pregunta = "";
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
   }
 
 }

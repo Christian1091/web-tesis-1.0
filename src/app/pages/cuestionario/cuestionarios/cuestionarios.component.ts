@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormControl } from '@angular/forms';
-
 import { Router } from '@angular/router';
 import { ClipboardService } from 'ngx-clipboard';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
 import { Pregunta } from 'src/app/models/pregunta.model';
+import { MatDialog } from '@angular/material/dialog';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-
 import { CuestionarioService } from '../../../services/cuestionario.service';
 import { Area } from '../../../models/area.model';
+import { AdminEmpresaComponent } from '../../component/admin-empresa/admin-empresa.component';
+import { AdminTipoPersonasComponent } from '../../component/admin-tipo-personas/admin-tipo-personas.component';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -30,6 +32,7 @@ export class CuestionariosComponent implements OnInit {
   descripcionCuestionario: string;
   puntajeCuestionario: number;
   listPregunta: Pregunta[] = [];
+  subscriptions: Subscription [] = [];
 
   public cuestionarios: Cuestionario[] = [];
   public cargando: boolean = true;
@@ -49,7 +52,6 @@ export class CuestionariosComponent implements OnInit {
   public nuevaEmpresa = new FormControl("");
   public nuevaTipoCuestionario = new FormControl("");
   public nuevaDirigido = new FormControl("");
-
   public nombreArea: string = "";
   public descripcionArea: string = "";
   public valorArea: number = 0;
@@ -59,47 +61,82 @@ export class CuestionariosComponent implements OnInit {
   constructor(private cuestionarioService: CuestionarioService,
     private fb: FormBuilder,
     private router: Router,
-    private _clipboardService: ClipboardService) {
+    private _clipboardService: ClipboardService, private dialog: MatDialog) {
 
-      cuestionarioService.obtenerEmpresas().subscribe(res => {
-        const emp: string[] = res['empresas'];
-        emp.map(e => this.empresas.push(e['nombre']));
-      });
 
-      cuestionarioService.obtenerTipoPersonas().subscribe(res => {
-        console.log(res);
-        
-        const tip: string[] = res['tiposPersonas'];
-        tip.map(t => this.dirigidos.push(t['tipo']));
-      });
+    this.cargarEmpresas();
+    this.cargarTipoPersonas();
 
+    // cuestionarioService.obtenerEmpresas().subscribe(res => {
+    //   const emp: string[] = res['empresas'];
+    //   emp.map(e => this.empresas.push(e['nombre']));
+    // });
+
+    // cuestionarioService.obtenerTipoPersonas().subscribe(res => {
+    //   console.log(res);
+    //   const tip: string[] = res['tiposPersonas'];
+    //   tip.map(t => this.dirigidos.push(t['tipo']));
+    // });
+
+  }
+
+  cargarEmpresas() {
+    this.empresas = [];
+    const searchObtenerE = this.cuestionarioService.obtenerEmpresas().subscribe(res => {
+      const emp: string[] = res['empresas'];
+      emp.map(e => this.empresas.push(e['nombre']));
+    });
+    this.subscriptions.push(searchObtenerE)
+  }
+
+  cargarTipoPersonas() {
+    this.dirigidos = [];
+    const searchObtenerTP = this.cuestionarioService.obtenerTipoPersonas().subscribe(res => {
+      const tip: string[] = res['tiposPersonas'];
+      tip.map(t => this.dirigidos.push(t['tipo']));
+      
+    });
+    this.subscriptions.push(searchObtenerTP);
   }
 
   ngOnInit(): void {
     this.tituloCuestionario = this.cuestionarioService.tituloCuestionario;
     this.descripcionCuestionario = this.cuestionarioService.descripcionCuestionario;
     this.puntajeCuestionario = this.cuestionarioService.puntajecuestionario;
-
     this.cargarListCuestioanrios();
     this.cargarAreas();
   }
 
   agregarEmpresa() {
+    const searchAdminEC = this.dialog.open(AdminEmpresaComponent, {
+      width: '800px',
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        this.cargarEmpresas();
+
+      }
+    });
+
+    this.subscriptions.push(searchAdminEC);
+
+    return;
+
     const ne: string = this.nuevaEmpresa.value;
     if (ne.trim().length < 3) {
       this.mostrarAlerta("Error", "El nombre es de la empresa es muy corto", false);
-      return; 
-    } 
+      return;
+    }
     if (!this.verificarExiste(ne, this.empresas) && ne.length > 2) {
-      this.cuestionarioService.guardarEmpresa(ne, ne).subscribe(res => {
+      const searchGuardarE = this.cuestionarioService.guardarEmpresa(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
-        if(ok) {
+        if (ok) {
           this.empresas.push(ne);
           this.nuevaEmpresa.setValue("");
         } else {
           this.mostrarAlerta("Error", "Ocurrio un error", false);
         }
       });
+      this.subscriptions.push(searchGuardarE);
     }
   }
 
@@ -117,7 +154,7 @@ export class CuestionariosComponent implements OnInit {
   }
 
   eliminar(i: number, emp: string) {
-    this.cuestionarioService.eliminarEmpresa(emp).subscribe(res => {
+    const searchEliminarEmpresa = this.cuestionarioService.eliminarEmpresa(emp).subscribe(res => {
       const ok: boolean = res["ok"];
       if (ok) {
         this.mostrarAlerta("Correcto", "Empresa eliminada correctamente", true);
@@ -126,10 +163,11 @@ export class CuestionariosComponent implements OnInit {
         this.mostrarAlerta("Error", "Error al eliminar", false);
       }
     });
+    this.subscriptions.push(searchEliminarEmpresa);
   }
 
   eliminarTipoP(i: number, dirigido: string) {
-    this.cuestionarioService.eliminarTipoPersona(dirigido).subscribe(res => {
+    const searchEliminarTP = this.cuestionarioService.eliminarTipoPersona(dirigido).subscribe(res => {
       const ok: boolean = res["ok"];
       if (ok) {
         this.mostrarAlerta("Correcto", "Tipo persona eliminada correctamente", true);
@@ -138,65 +176,77 @@ export class CuestionariosComponent implements OnInit {
         this.mostrarAlerta("Error", "Error al eliminar", false);
       }
     });
+    this.subscriptions.push(searchEliminarTP);
   }
-
-
-
-
 
   agregarTipoCue() {
     const ne: string = this.nuevaTipoCuestionario.value;
     if (ne.length < 3) {
-        this.mostrarAlerta("Error", "El nombre es del cuestionario es muy corto", false);
-        return; 
-      }   
+      this.mostrarAlerta("Error", "El nombre es del cuestionario es muy corto", false);
+      return;
+    }
     if (!this.verificarExiste(ne, this.tipos) && ne.length > 2) {
-      this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
+     const searchGuardarTP =  this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
         if (ok) this.tipos.push(ne);
         this.nuevaDirigido.setValue("");
       });
+      this.subscriptions.push(searchGuardarTP);
     }
   }
 
   agregarDirigido() {
+   const searchAdminTPC = this.dialog.open(AdminTipoPersonasComponent, {
+      width: '800px',
+    }).afterClosed().subscribe(res => {
+      if (res) {
+        this.cargarTipoPersonas();
+
+      }
+    });
+    this.subscriptions.push(searchAdminTPC);
+    return;
     const ne: string = this.nuevaDirigido.value;
     if (ne.length < 3) {
       this.mostrarAlerta("Error", "El nombre es muy corto", false);
-      return; 
-    } 
+      return;
+    }
     if (!this.verificarExiste(ne, this.dirigidos) && ne.length > 3) {
-      this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
+     const searchGuardarTP = this.cuestionarioService.guardarTipoPersonas(ne, ne).subscribe(res => {
         const ok: boolean = res['ok'];
         if (ok) this.dirigidos.push(ne);
         this.nuevaDirigido.setValue("");
       });
+      this.subscriptions.push(searchGuardarTP);
     }
   }
 
   cargarAreas() {
-    this.cuestionarioService.getListAreas().subscribe(({ areas }) => {
+    const searchListAreas = this.cuestionarioService.getListAreas().subscribe(({ areas }) => {
       this.areas = areas;
     });
+    this.subscriptions.push(searchListAreas);
   }
 
   crearArea() {
     if (this.nombreArea.trim().length > 0 && this.valorArea > 0) {
 
-      this.cuestionarioService.crearArea(this.nombreArea, this.descripcionArea, this.valorArea).subscribe(response => {
+    const searchCrearArea = this.cuestionarioService.crearArea(this.nombreArea, this.descripcionArea, this.valorArea).subscribe(response => {
         this.cargarAreas();
         this.nombreArea = "";
         this.descripcionArea = "";
         this.valorArea = 0;
       });
+      this.subscriptions.push(searchCrearArea);
     } else {
     }
   }
 
   eliminarArea(_id: string, i: number) {
-    this.cuestionarioService.eliminarArea(_id).subscribe(response => {
+   const searchEliminarArea = this.cuestionarioService.eliminarArea(_id).subscribe(response => {
       this.areas.splice(i, 1);
     });
+    this.subscriptions.push(searchEliminarArea);
   }
 
   obtenerTipo(value: string) {
@@ -245,7 +295,7 @@ export class CuestionariosComponent implements OnInit {
     Swal.fire(
       title,
       body,
-      ok? 'success': 'error');
+      ok ? 'success' : 'error');
   }
 
   eliminarCuestionario(cuestionario: Cuestionario) {
@@ -258,7 +308,7 @@ export class CuestionariosComponent implements OnInit {
       confirmButtonText: 'Si, eliminar!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cuestionarioService.eliminarCuestionario(cuestionario._id)
+        const searchEliminarC = this.cuestionarioService.eliminarCuestionario(cuestionario._id)
           .subscribe(resp => {
             /**Para refrescar la tabla despues de haber eliminado el usuario */
             this.cargarListCuestioanrios();
@@ -267,6 +317,7 @@ export class CuestionariosComponent implements OnInit {
               `${cuestionario.nombre} Fue eliminado exitosamente!`,
               'success');
           });
+          this.subscriptions.push(searchEliminarC);
       }
     })
   }
@@ -283,4 +334,9 @@ export class CuestionariosComponent implements OnInit {
 
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }

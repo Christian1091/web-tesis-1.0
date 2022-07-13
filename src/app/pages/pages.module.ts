@@ -2,10 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { RouterModule } from '@angular/router';
-import { FormsModule, ReactiveFormsModule} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 
 import { ClipboardModule } from 'ngx-clipboard';
-
 //Modulos
 import { SharedModule } from '../shared/shared.module';
 import { ComponentsModule } from '../components/components.module';
@@ -29,14 +28,17 @@ import { BuzonDetalleComponent } from './correo/buzon-detalle/buzon-detalle.comp
 import { EnviadosComponent } from './correo/enviados/enviados.component';
 import { NuevopostComponent } from './dashboard/nuevopost/nuevopost.component';
 import { EstadisticasComponent } from './estadisticas/estadisticas.component';
-import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ActualizarCuestionarioComponent } from './cuestionario/actualizar-cuestionario/actualizar-cuestionario.component';
 import { VerPostComponent } from './dashboard/ver-post/ver-post.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { MatSelectModule } from '@angular/material/select';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTabsModule } from '@angular/material/tabs';
 import { AnimatedDigitComponent } from './animated-digit/animated-digit.component';
+import { AdminEmpresaComponent } from './component/admin-empresa/admin-empresa.component';
+import { AdminTipoPersonasComponent } from './component/admin-tipo-personas/admin-tipo-personas.component';
+import {TableModule} from 'primeng/table';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,9 @@ import { AnimatedDigitComponent } from './animated-digit/animated-digit.componen
     EstadisticasComponent,
     ActualizarCuestionarioComponent,
     VerPostComponent,
-    AnimatedDigitComponent
+    AnimatedDigitComponent,
+    AdminEmpresaComponent,
+    AdminTipoPersonasComponent
   ],
   exports: [
     DashboardComponent,
@@ -78,19 +82,20 @@ import { AnimatedDigitComponent } from './animated-digit/animated-digit.componen
     SharedModule,
     RouterModule,
     ComponentsModule,
-    ClipboardModule,
     MatDialogModule,
     PdfViewerModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatTabsModule
+    MatTabsModule,
+    ClipboardModule,
+    TableModule
   ],
   providers: [{
     provide: MatDialogRef,
     useValue: {}
- }, {
+  }, {
     provide: MAT_DIALOG_DATA,
     useValue: {} // Add any data you wish to test if it is passed/used correctly
- }]
+  }]
 })
 export class PagesModule { }

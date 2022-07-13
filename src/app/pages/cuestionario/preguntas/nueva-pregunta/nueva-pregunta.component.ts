@@ -10,6 +10,7 @@ import { Respuesta } from '../../../../models/respuesta.model';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Area } from '../../../../models/area.model';
 import { MatSelect } from '@angular/material/select';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-nueva-pregunta',
@@ -21,6 +22,8 @@ import { MatSelect } from '@angular/material/select';
 
 
 export class NuevaPreguntaComponent implements OnInit {
+
+  subscriptions: Subscription [] = [];
 
   @ViewChild('monedaSelect') public monedaSelect: MatSelect;
   public tituloCuestionario = new FormControl();
@@ -81,9 +84,11 @@ export class NuevaPreguntaComponent implements OnInit {
   }
 
   cargarAreas() {
-    this.cuestionarioService.getListAreas().subscribe(response => {
+   const searchListAreas = this.cuestionarioService.getListAreas().subscribe(response => {
       this.areas = response.areas;
     });
+  this.subscriptions.push(searchListAreas);
+
   }
   cargarCuestionario() {
     //this.opcionRespuestas.get("titulo").setValue(this.cuestionario.titulo);
@@ -259,12 +264,17 @@ export class NuevaPreguntaComponent implements OnInit {
     this.cuestionario.puntajeCuestionario = this.puntajeCuestionario.value;
 
 
-    this.cuestionarioService.actualizarCuestionario(this.cuestionario).subscribe(res => {
+    const searchActualizarC = this.cuestionarioService.actualizarCuestionario(this.cuestionario).subscribe(res => {
       this.dialogRef.close();
 
-    })
+    });
+    this.subscriptions.push(searchActualizarC);
   }
-
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }
 
 

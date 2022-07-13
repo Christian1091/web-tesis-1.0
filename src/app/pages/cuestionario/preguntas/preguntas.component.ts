@@ -7,6 +7,7 @@ import { Pregunta } from '../../../models/pregunta.model';
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { Router } from '@angular/router';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-preguntas',
@@ -17,6 +18,7 @@ import { Cuestionario } from 'src/app/models/cuestionario.model';
 })
 export class PreguntasComponent implements OnInit {
 
+
   tituloCuestionario: string;
   descripcionCuestionario: string;
   puntajeCuestionario: number;
@@ -24,7 +26,7 @@ export class PreguntasComponent implements OnInit {
   tipoPersona: string; 
   empresa: string;
   listPreguntas: Pregunta[] = [];
-
+  subscriptions: Subscription [] = []; 
   cuestionarioAux: any;
 
   constructor( private fb: FormBuilder,
@@ -66,7 +68,7 @@ export class PreguntasComponent implements OnInit {
       timer: 1500
     })
     /**Enviamos el cuestionario al backend */
-    this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
+    const searchGuardarC = this.cuestionarioService.guardarCuestionario(cuestionario).subscribe( res => {
       this.router.navigateByUrl('/dashboard/cuestionarios');
     
       this.cuestionarioAux = res;
@@ -74,6 +76,12 @@ export class PreguntasComponent implements OnInit {
       // const linkCuestionario = '/validarIngreso';
     }, err => {
       Swal.fire('Error', err.error.msg, 'error');
+    });
+    this.subscriptions.push(searchGuardarC);
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
     });
   }
 

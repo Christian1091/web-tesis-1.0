@@ -6,6 +6,7 @@ import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { ActualizarCuestionarioComponent } from '../actualizar-cuestionario/actualizar-cuestionario.component';
 import { NuevaPreguntaComponent } from '../preguntas/nueva-pregunta/nueva-pregunta.component';
 import { Overlay } from '@angular/cdk/overlay';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class VerCuestionarioComponent implements OnInit {
   id: string;
 
   cuestionario: any = {};
+  subscriptions: Subscription [] = []; 
 
   constructor(private cuestionarioService: CuestionarioService,
     private activatedRoute: ActivatedRoute,
@@ -32,14 +34,15 @@ export class VerCuestionarioComponent implements OnInit {
   }
 
   obtenerCuestionario() {
-    this.cuestionarioService.getVerCuestionario(this.id)
+    const searchVerCuestionario = this.cuestionarioService.getVerCuestionario(this.id)
       .subscribe(data => {
         this.cuestionario = data;
     
         //this.cuestionario = Object.values(data);
       }, error => {
       }
-      )
+      ); 
+      this.subscriptions.push(searchVerCuestionario);
   }
 
   cargarCuestionario(r, i) {
@@ -60,5 +63,10 @@ export class VerCuestionarioComponent implements OnInit {
 			backdropClass: 'backdrop',
     });
 
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
   }
 }

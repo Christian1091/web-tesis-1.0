@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
 import { ChartType } from 'chart.js';
 import Chart from 'chart.js';
 import { CuestionarioService } from '../services/cuestionario.service';
@@ -6,13 +6,15 @@ import { ProvinciasService } from '../services/provincias.service';
 import { Provincias } from '../interfaces/provincias.interfaces';
 import { RespuestaCuestionarioService } from '../services/respuesta-cuestionario.service';
 import { MatTabChangeEvent } from '@angular/material/tabs';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-general',
   templateUrl: './general.component.html',
   styleUrls: ['./general.component.css']
 })
-export class GeneralComponent implements OnInit {
+export class GeneralComponent implements OnInit, OnDestroy {
+
+  subscriptions: Subscription[] = [];
 
   @ViewChild('grafico') grafico?: ElementRef;
   public chart: any;
@@ -35,9 +37,7 @@ export class GeneralComponent implements OnInit {
   public isEmpty: boolean = false;
   public cargango: boolean = false;
   constructor(private service: CuestionarioService, private provinciaService: ProvinciasService, private crService: RespuestaCuestionarioService) {
-    
   }
-
   initParametros() {
     this.empresas = [];
     this.parametros = [];
@@ -46,18 +46,23 @@ export class GeneralComponent implements OnInit {
     this.empresas = [];
     this.parametros = ["General"];
     this.tipos = [];
-    this.provinciaService.getProvincias().subscribe((res: any) => {
+
+
+    const searchProvincia = this.provinciaService.getProvincias().subscribe((res: any) => {
       this.provincias = res;
     });
-    this.service.obtenerEmpresas().subscribe(res => {
+    const searchEmpresa = this.service.obtenerEmpresas().subscribe(res => {
       const emp: string[] = res['empresas'];
       emp.map(e => this.empresas.push(e['nombre']));
     });
-    this.service.obtenerTipoPersonas().subscribe(res => {
+    const searchTipoP = this.service.obtenerTipoPersonas().subscribe(res => {
       const tip: string[] = res['tiposPersonas'];
       tip.map(e => this.tipos.push(e['tipo']));
-
     });
+    this.subscriptions.push(searchProvincia);
+    this.subscriptions.push(searchEmpresa);
+    this.subscriptions.push(searchTipoP);
+
   }
 
   limpiar() {
@@ -81,7 +86,7 @@ export class GeneralComponent implements OnInit {
     if (tabChangeEvent.index == 4) {
       this.estadisticasGeneralesMMtd();
     }
-    
+
   }
 
   obtenerEmpresa(value: string) {
@@ -91,7 +96,7 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.cargango = true;
-    this.service.getListEstadisticaGeneralInstitucion(this.empresa).subscribe(res => {
+    const searchListEGI = this.service.getListEstadisticaGeneralInstitucion(this.empresa).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.isEmpty = false;
@@ -103,7 +108,11 @@ export class GeneralComponent implements OnInit {
         this.cargango = false;
       }
     });
+    this.subscriptions.push(searchListEGI);
+
   }
+
+
 
   obtenerGeneral(value: string) {
     this.limpiar();
@@ -112,7 +121,7 @@ export class GeneralComponent implements OnInit {
       this.chart.destroy();
     }
     this.cargango = true;
-    this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
+    const searchListEGG = this.service.getListEstadisticaGeneralGeneral().subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.isEmpty = false;
@@ -124,6 +133,7 @@ export class GeneralComponent implements OnInit {
         this.cargango = false;
       }
     });
+    this.subscriptions.push(searchListEGG);
   }
 
   obtenerEmpresaTipo(estado: boolean) {
@@ -136,7 +146,7 @@ export class GeneralComponent implements OnInit {
         this.chart.destroy();
       }
       this.cargango = true;
-      this.service.getListEstadisticaGeneralInstitucionTipo(this.empresat, this.tipo).subscribe(res => {
+      const searchListEGIT = this.service.getListEstadisticaGeneralInstitucionTipo(this.empresat, this.tipo).subscribe(res => {
         this.resultados = res["datos"]["resultados"];
         if (this.resultados.length > 0) {
           this.isEmpty = false;
@@ -148,6 +158,7 @@ export class GeneralComponent implements OnInit {
           this.cargango = false;
         }
       });
+      this.subscriptions.push(searchListEGIT);
     }
   }
 
@@ -158,7 +169,7 @@ export class GeneralComponent implements OnInit {
   estadisticasGeneralesMMtd() {
     this.cargango = true;
     const sumas: [] = [];
-    this.crService.getRespuestaByIdCuestionario("6282675f33cbba25705fa3d2").subscribe(res => {
+    const searchrespuestaBIC = this.crService.getRespuestaByIdCuestionario("6282675f33cbba25705fa3d2").subscribe(res => {
       const data: [] = res as [];
       const s = res[0]["listRespuestasUsuario"] as [];
       const size = s.length;
@@ -173,25 +184,15 @@ export class GeneralComponent implements OnInit {
           "titulo": titulo,
           "total": suma
         }
-        // if (resultados.length > 0) {
-          
-        //   if (resultados[resultados.length-1]["titulo"] == titulo) {
-        //       resultados[resultados.length-1]["total"] += suma;
-        //   } else {
-        //     resultados.push(body);
-        //   }
-        // } else {
-          
-        // }
         resultados.push(body);
         contador += 1;
-        
+
         if (contador == 32) {
           contador = 0;
         }
       });
       const p = resultados.length;
-      
+
       const x = ["Ciudad Universitaria", "Infraestructura TIC", "Administración", "Docencia", "Investigación y transferencia ", "Marketing", "Comunicación", "Gobierno de la Transformación Digital"];
       const y = [0, 0, 0, 0, 0, 0, 0, 0]
       resultados.map(v => {
@@ -237,16 +238,17 @@ export class GeneralComponent implements OnInit {
         }
       });
       console.log(y);
-      
-      for(let i = 0; i < y.length; i++) {
+
+      for (let i = 0; i < y.length; i++) {
         y[i] = Number(((y[i] * 100) / p).toFixed(0));
       }
-      
+
       this.graficarInfoMmtd(x, y);
     });
+    this.subscriptions.push(searchrespuestaBIC);
   }
 
-  graficarInfoMmtd(y:string[], x:number[], tipo: ChartType = 'bar') {
+  graficarInfoMmtd(y: string[], x: number[], tipo: ChartType = 'bar') {
     this.cargango = false;
     y.push("");
     y.push("");
@@ -281,7 +283,7 @@ export class GeneralComponent implements OnInit {
       data: {
         labels: y,
         datasets: [{
-          backgroundColor: ['#2ecc71', '#E1755D', '#ECE20F', '#de9e31', '#D50FEC','#2ecc71', '#E1755D', '#ECE20F', "#ffffff00"],
+          backgroundColor: ['#2ecc71', '#E1755D', '#ECE20F', '#de9e31', '#D50FEC', '#2ecc71', '#E1755D', '#ECE20F', "#ffffff00"],
           data: x,
         }]
       }
@@ -290,7 +292,7 @@ export class GeneralComponent implements OnInit {
 
 
   graficarInfo(tipo: ChartType = 'pie') {
-    const x = [this.n1, this.n2, this.n3, this.n4 ,this.n5];
+    const x = [this.n1, this.n2, this.n3, this.n4, this.n5];
     const y = ["Nivel 1", "Nivel 2", "Nivel 3", "Nivel 4", "Nivel 5"];
     this.chart = new Chart(this.grafico?.nativeElement, {
       options: {
@@ -324,7 +326,7 @@ export class GeneralComponent implements OnInit {
     }
     this.provinciaParticipante = id;
     this.cargango = true;
-    this.service.getListEstadisticaGeneralProvinvia(this.provinciaParticipante).subscribe(res => {
+    const searchListaEGP = this.service.getListEstadisticaGeneralProvinvia(this.provinciaParticipante).subscribe(res => {
       this.resultados = res["datos"]["resultados"];
       if (this.resultados.length > 0) {
         this.cargango = false;
@@ -336,27 +338,32 @@ export class GeneralComponent implements OnInit {
         this.isEmpty = true;
       }
     });
+    this.subscriptions.push(searchListaEGP);
   }
 
   calculosMm() {
     this.resultados.forEach(res => {
       if (res >= 0 && res <= 12) {
         this.n1++;
-			} else if (res >= 13 && res <= 30) {
+      } else if (res >= 13 && res <= 30) {
         this.n2++;
-        
-			} else if (res >= 31 && res <= 55) {
-        this.n3++;
-        
-			} else if (res >= 56 && res <= 75) {
-        this.n4++;
-        
-			} else if (res >= 76 && res <= 100) {
-        this.n5++;
-			}
-    }); 
-  }
 
+      } else if (res >= 31 && res <= 55) {
+        this.n3++;
+
+      } else if (res >= 56 && res <= 75) {
+        this.n4++;
+
+      } else if (res >= 76 && res <= 100) {
+        this.n5++;
+      }
+    });
+  }
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
 }
 
 type tipoGeneral = {
@@ -366,3 +373,4 @@ type tipoGeneral = {
     "total": number
   }
 };
+
