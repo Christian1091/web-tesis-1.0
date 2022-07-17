@@ -211,17 +211,13 @@ svg {
 @keyframes stroke-offset{
   100% {stroke-dashoffset: -35%;}
 }
-
 /* Titulo */ 
-
-
 
 .tituloDiv {
   position: relative;
   padding: 10px;
   margin: 20px;
   border-style: none;
- 
 }
 
  #tituloP { 
@@ -236,7 +232,6 @@ svg {
   margin: 2px;
   border-radius: 12px;
   border-style: none;
-  
   /* filter: blur( 6px); */
   transform: scale(4.2);
   box-shadow: 5px 5px 100px rgba(0,0,0,0.6);
@@ -249,7 +244,6 @@ h1 .tit {
   font-size:  250px;
   text-align: center;
   font-weight: 400;
-  
   border-radius: 15px;
   border-style: none;
 }
@@ -311,8 +305,8 @@ body{
 /* From uiverse.io by @adamgiebl */
 .only {
   --green: hwb(184 11% 1%);
-  font-size: 15px;
-  padding: 0.7em 2.7em;
+  font-size: smaller;
+  /* padding: 0.7em 2.7em; */
   letter-spacing: 0.06em;
   position: relative;
   font-family: inherit;
@@ -367,9 +361,15 @@ body{
 
 video{
   position: relative;
+  width: 100%;
+
   
 }
  .only{
   position: absolute;
-  top: 480px; right: 40px;
+  /* top: 480px; right: 40px; */
+  top: 18%; 
+  width: 19%;
+  height: 4%;
+  right: 2%;
 }

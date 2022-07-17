@@ -1,25 +1,22 @@
 <!-- ======= Hero Section ======= -->
 <section id="hero" class="d-flex align-items-center">
   <!-- <div class="container"> -->
-    <!-- <div class="row"> -->
-      <!-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
+  <!-- <div class="row"> -->
+  <!-- <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1" data-aos="fade-up"
         data-aos-delay="200">
  -->
 
-        <!-- <div class="tituloDiv">
+  <!-- <div class="tituloDiv">
           <img id="tituloP" src="/assets/images/background/ban.gif" alt="...">
           <h2 class="tit">Transformación digital innovacion que empienza por la Transformación Cultural</h2>
         </div> -->
-        
-          <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true">
-            <source src="../../../assets/video/td3.mp4" type="video/mp4">
-        </video>
-        <button class="only" routerLink="/register"> Registrarse </button> 
 
-          <!-- <video autoplay muted preload loop src="../../../assets/video/td3.mp4"></video>     -->
-        
-       
-        <!-- <div>
+  <video loop muted autoplay oncanplay="this.play()" onloadedmetadata="this.muted = true">
+    <source src="../../../assets/video/td3.mp4" type="video/mp4">
+  </video>
+  <button class="only btn-block" routerLink="/register"> Registrarse </button>
+
+  <!-- <div>
           <svg id="text" width="637" height="442" viewBox="0 0 1037 442" fill="none"
             xmlns="http://www.w3.org/2000/svg">
             <path
@@ -38,18 +35,18 @@
           <button class="only" routerLink="/register"> Registrarse 
           </button>
         </div> -->
-        <!--<div class="d-lg-flex">
+  <!--<div class="d-lg-flex">
           <a href="#about" class="btn-get-started scrollto">Empecemos</a>
           <a href="https://www.youtube.com/watch?v=JYYMENzITNc" class="venobox btn-watch-video" data-vbtype="video"
             data-autoplay="true">
             Ver Video <i class="icofont-play-alt-2"></i></a>
         </div> -->
-        <!-- <img class="princi" src="../../../assets/images/hero-img.png" class="img-fluid animated" alt="" /> -->
-      <!-- </div> -->
-      <!-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
+  <!-- <img class="princi" src="../../../assets/images/hero-img.png" class="img-fluid animated" alt="" /> -->
+  <!-- </div> -->
+  <!-- <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
         <img src="../../../assets/images/hero-img.png" id="imgprincipal" class="animated" alt="" />
       </div> -->
-    <!-- </div> -->
+  <!-- </div> -->
   <!-- </div> -->
 </section>
 <!-- End Hero -->
@@ -64,32 +61,37 @@
 
     </div>
 
-    <p-carousel [value]="noticias" [styleClass]="'custom-carousel'" [numVisible]="3" [numScroll]="2" [circular]="true" [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
-       
-  <ng-template let-product pTemplate="item">
-      <div class="product-item icon-box">
-          <div class="">
-              <div class="p-mb-3">
-              </div>
-              <div>
+    <p-carousel [value]="noticias" [styleClass]="'custom-carousel'" [numVisible]="3" [numScroll]="2" [circular]="true"
+      [autoplayInterval]="3000" [responsiveOptions]="responsiveOptions">
 
-                <picture>
-                 
-                  <source media="(min-width:20px)" srcset="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}">
-                  <img media="(min-width:10px)" src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}" alt="Noticias">
-                </picture>
-                  <!-- <div class="mb-3">
+      <ng-template let-product pTemplate="item">
+        <div class="product-item icon-box">
+          <div class="">
+            <div class="p-mb-3">
+            </div>
+            <div>
+
+              <picture>
+
+                <source media="(min-width:20px)"
+                  srcset="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}">
+                <img media="(min-width:10px)"
+                  src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}"
+                  alt="Noticias">
+              </picture>
+              <!-- <div class="mb-3">
                     <img src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}" class="product-image" />
                 </div> -->
-                  <h4 class="p-mb-1">{{product.titulo | slice:0:20 }} ... </h4>
-                  <span class="product-badge">{{product.descripcion | slice:0:80}} ...</span>
-                  <button type="button" (click)="verMas(product)" class="btn waves-effect waves-light btn-block btn-info">Ver más</button>
-              </div>
+              <h4 class="p-mb-1">{{product.titulo | slice:0:20 }} ... </h4>
+              <span class="product-badge">{{product.descripcion | slice:0:80}} ...</span>
+              <button type="button" (click)="verMas(product)"
+                class="btn waves-effect waves-light btn-block btn-info">Ver más</button>
+            </div>
           </div>
-      </div>
-  </ng-template>
-</p-carousel>
-    
+        </div>
+      </ng-template>
+    </p-carousel>
+
   </div>
 </section>
 <!-- End Services Section -->
@@ -99,7 +101,9 @@
   <div class="container" data-aos="fade-up">
 
     <div class="section-title">
-      <a name="articulos"> <h2 style="color: white;">Artículos</h2> </a>
+      <a name="articulos">
+        <h2 style="color: white;">Artículos</h2>
+      </a>
       <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p> -->
     </div>
 

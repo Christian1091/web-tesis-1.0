@@ -39,7 +39,7 @@ import { AnimatedDigitComponent } from './animated-digit/animated-digit.componen
 import { AdminEmpresaComponent } from './component/admin-empresa/admin-empresa.component';
 import { AdminTipoPersonasComponent } from './component/admin-tipo-personas/admin-tipo-personas.component';
 import {TableModule} from 'primeng/table';
-
+import {SidebarModule} from 'primeng/sidebar';
 @NgModule({
   declarations: [
     DashboardComponent,
@@ -88,7 +88,8 @@ import {TableModule} from 'primeng/table';
     MatSlideToggleModule,
     MatTabsModule,
     ClipboardModule,
-    TableModule
+    TableModule,
+    SidebarModule
   ],
   providers: [{
     provide: MatDialogRef,

@@ -1,10 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Injectable } from '@angular/core';
 import { ActivatedRoute, CanDeactivate, Router } from '@angular/router';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
-
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
-
 import pdfMake from 'pdfmake/build/pdfmake';
 import pdfFonts from 'pdfmake/build/vfs_fonts';
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
@@ -12,6 +10,7 @@ import htmlToPdfmake from 'html-to-pdfmake';
 import { MatDialog } from '@angular/material/dialog';
 import { GraficoComponent } from '../../grafico/grafico.component';
 import { LocationStrategy } from '@angular/common';
+import { Subscription } from 'rxjs';
 export interface Pre {
   listRespuesta: [],
   tituloPregunta: string,
@@ -45,6 +44,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
   public ciudadParticipante: string = "";
   public puntajeCuest: string = ""; 
 	public tipo: string = "";
+   subscriptions: Subscription [] = [];
 
 
   constructor( 
@@ -231,7 +231,7 @@ export class RespuestaCuestionarioComponent implements OnInit {
   obtenerRespuestaUsuario() {
 
     this.rs = [];
-    this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
+    const searchRespuestaUsuario = this.respuestaUsuarioService.getRespuestaUsuario(this.id).subscribe(resp => {
       
       this.tipo = (resp[2] == undefined)? " ": resp[2].toString();
       const r = resp[0]['listRespuestasUsuario'];
@@ -272,8 +272,14 @@ export class RespuestaCuestionarioComponent implements OnInit {
 
       
     });
+    this.subscriptions.push(searchRespuestaUsuario);
   }
 
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
+  }
   volver() {
 
     if (this.rutaAnterior === 'respuestaUsuarioAdmin') {

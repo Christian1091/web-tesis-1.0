@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
 .logogih4{
     border-radius: 50px;
     width: 50px;
@@ -49,4 +50,38 @@ a {
   }
   #f3 {
     -webkit-animation-delay: -2s;
+  }
+
+  .navigation {
+    /* position: fixed;
+    inset: 20px 0 20px 20px;
+    width: 75px;
+    min-height: 500px;
+    background: #fff;
+    transition: 0.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center; */
+
+    display: flex;
+    height: 450px;
+
+  }
+
+  .navigation ul {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .navigation ul li {
+    list-style: none;
+    font-size: 20px;
+
+  }
+
+  .space {
+    padding-top: 25px;
   }

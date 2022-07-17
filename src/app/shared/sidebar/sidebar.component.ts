@@ -16,6 +16,7 @@ export class SidebarComponent {
    * Instanciamos nuestro modelo para llamar a nuestros atributos
    * en este caso la imagen y el nombre en el html
    */
+   display;
   public usuario: Usuario;
 
   constructor( public sidebarService: SidebarService,

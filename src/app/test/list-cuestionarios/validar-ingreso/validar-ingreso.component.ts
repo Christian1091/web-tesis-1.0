@@ -7,6 +7,7 @@ import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestio
 import { Validators, FormControl } from '@angular/forms';
 import { CuestionarioService } from '../../../services/cuestionario.service';
 import { LocationStrategy } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-validar-ingreso',
@@ -24,22 +25,14 @@ export class ValidarIngresoComponent implements OnInit {
   public institucionParticipante = '';
   public provinciaParticipante = '';
   public ciudadParticipante = '';
-
-  //public selectedProvincia: Provincias ={ id: 0, nombreProvincia: '' };
   public provincias: Provincias[];
   public cantones: Cantones[];
-
-  //public nombrePro: any;
-
   public id: string;
   public ok: boolean = false;
   public check: boolean = false;
   public email = new FormControl('', [Validators.required, Validators.email]);
-
   private tipoPersona: string = "";
-
-
-
+  subscriptions: Subscription [] = [];
 
   constructor(private location: LocationStrategy,
     private respuestaCuestionarioService: RespuestaCuestionarioService,
@@ -56,10 +49,10 @@ export class ValidarIngresoComponent implements OnInit {
     //   this.router.navigateByUrl('/');
     // }
     this.cuestionarioService.eliminarUsuarioRespondeTemp();
-    this.cuestionarioService.getVerCuestionario(this.id).subscribe(response => {
+    const searchVerCuestionario = this.cuestionarioService.getVerCuestionario(this.id).subscribe(response => {
       this.tipoPersona = response.cuestionarios[0].tipoPersona ?? "Usuario";
       this.institucionParticipante = response.cuestionarios[0].empresa ?? "UPS"
-    })
+    }); this.subscriptions.push(searchVerCuestionario);
     //this.provincias = this.provinciaService.getProvincias();
     this.provinciaService.getProvincias().subscribe((res: any) => {
       this.provincias = res;

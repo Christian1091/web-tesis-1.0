@@ -2,13 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Cuestionario } from 'src/app/models/cuestionario.model';
-
 import { Pregunta } from 'src/app/models/pregunta.model';
 import { Respuesta } from 'src/app/models/respuesta.model';
-
 import { CuestionarioService } from 'src/app/services/cuestionario.service';
 import { RespuestaCuestionarioService } from 'src/app/services/respuesta-cuestionario.service';
-
+import { Subscription } from 'rxjs';
 @Component({
 	selector: 'app-pregunta',
 	templateUrl: './pregunta.component.html',
@@ -21,23 +19,16 @@ export class PreguntaComponent implements OnInit {
 	public id: string;
 	respuestaTexto = new FormControl();
 	cuestionario!: Cuestionario;
-
 	idCuestionario: string;
 	listPreguntas: Pregunta[] = [];
 	listRespuesta: Respuesta[] = [];
 	rtaConfirmada = false;
 	indexPregunta = 0;
 	cargoPregunta = false;
-
-	//Agrego un contador: Para tener el index de pregunta
 	contador = 0;
-
-	// Respuesta Usuario
 	opcionSeleccionada: any; // Nos ayuda a pintar la respuesta seleccionada
 	indexSeleccionado: any; // Almacenar cual es la opcion seleccionada
-	//indexPuntosSeleccionado: any;
 	puntosTotales = 0;
-	//puntosPregunta = 0;
 	listRespuestaUsuario: any[] = [];
 	nombreParticipante = '';
 	correoParticipante = '';
@@ -47,9 +38,9 @@ export class PreguntaComponent implements OnInit {
 	opcionOtros: boolean[] = [];
 	indices: number[] = [];
 	tipoPersona: string = "";
-
 	public descripcion: string = "";
 	public titulo: string = "";
+	subscriptions: Subscription [] = [];
 
 	constructor(private respuestaCuestionarioService: RespuestaCuestionarioService,
 		private cuestionarioService: CuestionarioService,
@@ -81,7 +72,7 @@ export class PreguntaComponent implements OnInit {
 	}
 
 	getCuestionario() {
-		this.cuestionarioService.getVerCuestionario(this.id)
+		const searchVerCuestionario = this.cuestionarioService.getVerCuestionario(this.id)
 			.subscribe(res => {
 				this.descripcion = res.cuestionarios[0].descripcion;
 				this.titulo = res.cuestionarios[0].nombre;
@@ -93,6 +84,7 @@ export class PreguntaComponent implements OnInit {
 				})
 				this.cargoPregunta = true;
 			});
+			this.subscriptions.push(searchVerCuestionario);
 	}
 
 	obtenerPregunta(): string {
@@ -233,13 +225,19 @@ export class PreguntaComponent implements OnInit {
 			tipoPersona: usuarioResponde["tipo"] ?? "Usuario"
 		}
 		// Almacenamos la respuesta en mongoDB
-		this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
+		const searchRespuestaCuestionario = this.respuestaCuestionarioService.guardarRespuestaUsuario(respuestaCuestionario).subscribe(res => {
 			this.cuestionarioService.eliminarUsuarioRespondeTemp();
 			this.router.navigateByUrl(`/respuestaCuestionario/${res.respuestaCuestionario._id}`);
 		}, err => {
 			//Swal.fire('Error', err.error.msg, 'error');
 			this.router.navigateByUrl('/');
 		});
+		this.subscriptions.push(searchRespuestaCuestionario);
 	}
+	ngOnDestroy() {
+		this.subscriptions.forEach(res => {
+		  res.unsubscribe();
+		});
+	  }
 
 }

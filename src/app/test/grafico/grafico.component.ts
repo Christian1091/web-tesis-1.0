@@ -2,7 +2,6 @@ import { Component, Inject, OnInit, ElementRef, ViewChild } from '@angular/core'
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ChartType } from 'chart.js';
 import Chart from 'chart.js';
-
 @Component({
 	selector: 'app-grafico',
 	templateUrl: './grafico.component.html',

@@ -152,7 +152,4 @@ export class EstadisticasComponent implements OnInit, AfterViewInit, OnDestroy {
       res.unsubscribe();
     });
   }
-//   ngOnDestroy(): void {
-//     this.respuestaCuestionario.unsubscribe();
-//  }
 }

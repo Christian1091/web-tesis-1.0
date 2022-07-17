@@ -1,18 +1,17 @@
 <!-- ======= Header ======= -->
 <header id="header" class="fixed-top">
 
-  <p-menubar class="menustyle" [model]="items" [style]="{'background-color':'rgba(40, 58, 90, 0.9)','color':'#37517e'}" >
-    <ng-template pTemplate="start" >
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
       <a href="https://www.ups.edu.ec/">
       <img class="logos" src="/assets/images/LOGO_UPS_COMPLETO_opt.png" height="40" class="mr-2">
       </a>
     </ng-template>
-    <ng-template pTemplate="end">
-     
-    
+
+    <ng-template pTemplate="end">    
       <a routerLink="/dashboard"><img src="/assets/images/logo_grupo.png" width="60px" alt="..."></a>
     </ng-template>
+  
   </p-menubar>
-
 </header>
 <!-- End Header -->

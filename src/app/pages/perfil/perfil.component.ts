@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
-
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { FileUploadService } from '../../services/file-upload.service';
-
 import { Usuario } from 'src/app/models/usuario.model';
-
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-perfil',
   templateUrl: './perfil.component.html',
@@ -18,16 +16,10 @@ export class PerfilComponent implements OnInit {
 
   /**Nos creamos un pequeno formulario */
   public perfilForm: FormGroup;
-
-  /**Para obtener nuestros datos en las etiquetas
-   * del fomrulario de editar perfil
-   */
   public usuario: Usuario;
-
-  /**Creamos una propiedad para subir la imagen */
   public imagenSubir: File;
-
   public imgTemp: any = null;
+  public subscriptions: Subscription [] = [];
 
   constructor( private fb: FormBuilder,
                private usuarioService: UsuarioService,
@@ -46,7 +38,7 @@ export class PerfilComponent implements OnInit {
   }
 
   actualizarPerfil() {
-    this.usuarioService.actulizarPerfil( this.perfilForm.value)
+    const searchActualizarPerfil = this.usuarioService.actulizarPerfil( this.perfilForm.value)
         .subscribe( resp => {
           const { email, nombre } =  this.perfilForm.value;
           this.usuario.nombre = nombre;
@@ -55,8 +47,8 @@ export class PerfilComponent implements OnInit {
           Swal.fire('Guardado', 'Cambios realizados', 'success')
         }, (err) => {
           Swal.fire('Error', err.error.msg, 'error')
-        })
-
+        });
+        this.subscriptions.push(searchActualizarPerfil);
   }
 
   cambiarImagen( file: File ) {
@@ -86,5 +78,11 @@ export class PerfilComponent implements OnInit {
         }).catch ( err => {
           Swal.fire('Error', 'No s epudo subir la imagen', 'error');
         })
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
+    });
   }
 }

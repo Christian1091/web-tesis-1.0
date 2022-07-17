@@ -22,7 +22,7 @@ export class NavbarComponent implements OnInit {
   public lastPost: Post[] = [];
   public size: number = 0;
   private menuItems = [];
-   
+  display;
 
   constructor(private usuarioService: UsuarioService, private postService: PostService, private router: Router) {
     this.isLoggedIn = usuarioService.existeToken();
@@ -67,18 +67,19 @@ export class NavbarComponent implements OnInit {
     this.items = [
       {
         label: 'Inicio',
-        icon: 'pi pi-fw pi-file',
+        icon: 'pi pi-fw pi-home',
         routerLink: '/web',
         styleClass: 'styleItems'  
       },
       {
         label: 'Resultados',
-        icon: 'pi pi-fw pi-pencil',
+        icon: 'pi pi-fw pi-chart-bar',
         routerLink: '/general',
         styleClass: 'styleItems'
       },
       {
         label: 'Artículos',
+        icon: 'pi pi-fw pi-book',
         items: this.menuItems,
         styleClass: 'styleItems'
       },
@@ -92,7 +93,7 @@ export class NavbarComponent implements OnInit {
     if (this.isLoggedIn) {
       this.items.splice(3, 0, {
         label: 'Tests',
-        icon: 'pi pi-fw pi-calendar',
+        icon: 'pi pi-fw pi-file',
         routerLink: '/listCuestionarios',
         styleClass: 'styleItems'
       });

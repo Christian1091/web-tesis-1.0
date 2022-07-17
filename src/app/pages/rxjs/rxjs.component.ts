@@ -9,7 +9,8 @@ import { retry, take, map, filter } from 'rxjs/operators';
 })
 export class RxjsComponent implements OnDestroy{
 
-  public intervalSubs: Subscription;
+  
+  subscriptions: Subscription [] = []; 
 
   constructor() {
     // this.retornaObservable().pipe(
@@ -19,10 +20,8 @@ export class RxjsComponent implements OnDestroy{
     //   error => console.log('Error:', error),
     //   () => console.info('Obs terminado')
     // );
-    this.intervalSubs = this.retornaIntervalo().subscribe(console.log);
-  }
-  ngOnDestroy(): void {
-    this.intervalSubs.unsubscribe();
+    const searchIntervalSubs = this.retornaIntervalo().subscribe(console.log);
+    this.subscriptions.push(searchIntervalSubs);
   }
 
   retornaIntervalo(): Observable<number> {
@@ -50,6 +49,12 @@ export class RxjsComponent implements OnDestroy{
           observer.error('i llego al valor de 2');
         }
       }, 1000);
+    });
+  }
+
+  ngOnDestroy() {
+    this.subscriptions.forEach(res => {
+      res.unsubscribe();
     });
   }
 }
