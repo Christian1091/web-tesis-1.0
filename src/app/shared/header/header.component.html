@@ -5,16 +5,16 @@
     <div class="navigation" style="padding-top: 20px;">
 
         <ul class="list">
-            <li style="font-weight:bolder;"> {{ usuario.nombre }}</li>
+            <li style="font-weight:bolder; color: rgb(62, 239, 218);"> {{ usuario.nombre }}</li>
             <li>
                 <i class="pi pi-user " style="padding-right: 10px; color: #47b2e4;"></i>
                 <a routerLinkActive="active" routerLink="./perfil" style="font-weight: bolder; color: rgb(11, 5, 46)">Mi Perfil </a>
             </li>
             <li *ngFor="let item of sidebarService.menu">
                 <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i [class]="item.icono"></i>
-                    <span style="font-weight:bolder; color: rgb(11, 5, 46)">
+                    <span style="font-weight:bolder; color: rgb(11, 5, 46)" icono="pi pi-copy" >
                         {{ item.titulo }}
-                    </span></a>
+                    </span> </a>
                 <ul>
                     <li *ngFor="let subMenuItem of item.submenu">
                         <br />

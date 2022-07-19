@@ -2,14 +2,11 @@
   /* background: linear-gradient(to right top, #091045, #4c193a, #613736, #68584a, #747471); */
   /* background: linear-gradient(to right top, #ccd2f9, #969ac0, #64668a, #343658, #0a082a); */
   /* background: linear-gradient(to right top, #ccd2f9, #a5aeff, #8188ff, #5f61ff, #3d32f9); */
-  background: linear-gradient(to right top, #ccd2f9, #9da4f0, #7276e4, #4847d3, #1005be); 
+  /* background: linear-gradient( rgba(40, 58, 90, 0.9), rgba(40, 58, 90, 0.9));  */
+  /* background: radial-gradient(circle, #e0e2e5, #ced0d3, #bdbec0, #acacaf, #9b9b9d, #8d8d91, #7e7f86, #70717b, #5f6273, #4e546a, #3c4762, #283a5a); */
    border-radius: 25px;
   /* height: 100%; */
 } 
- 
-.p-sidebar{
-background: #1005be !important;
-}
 
 .logogih4{
     border-radius: 50px;
