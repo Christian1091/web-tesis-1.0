@@ -71,7 +71,6 @@ img {
   :host ::ng-deep .styleItems span.p-menuitem-text:hover {
     font-size: 17px;
     transition-delay: 0.2s;
- 
   }
 
 

@@ -18,6 +18,7 @@ export class HeaderComponent {
   
   constructor(public sidebarService: SidebarService, private usuarioService: UsuarioService,
     private router: Router) {
+      
     this.usuario = usuarioService.usuario;
   }
 

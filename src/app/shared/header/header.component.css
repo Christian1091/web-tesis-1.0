@@ -1,16 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+ .navigation{
+  /* background: linear-gradient(to right top, #091045, #4c193a, #613736, #68584a, #747471); */
+  /* background: linear-gradient(to right top, #ccd2f9, #969ac0, #64668a, #343658, #0a082a); */
+  /* background: linear-gradient(to right top, #ccd2f9, #a5aeff, #8188ff, #5f61ff, #3d32f9); */
+  background: linear-gradient(to right top, #ccd2f9, #9da4f0, #7276e4, #4847d3, #1005be); 
+   border-radius: 25px;
+  /* height: 100%; */
+} 
+ 
+.p-sidebar{
+background: #1005be !important;
+}
+
 .logogih4{
     border-radius: 50px;
     width: 50px;
-    height: 50px;
-    
+    height: 50px;    
 }
-
 
 a {
     align-items: center;
 }
-
 
 .fadein {
     /* position:absolute; */
@@ -61,17 +70,16 @@ a {
     transition: 0.5s;
     display: flex;
     justify-content: center;
-    align-items: center; */
-
+    align-items: center; */ 
     display: flex;
     height: 450px;
 
   }
 
-  .navigation ul {
+   .navigation ul {
     display: flex;
     flex-direction: column;
-    gap: 50px;
+    gap: 5px;
     width: 100%;
     justify-content: space-around;
   }
@@ -84,4 +92,4 @@ a {
 
   .space {
     padding-top: 25px;
-  }
+  } 
