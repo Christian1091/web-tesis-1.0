@@ -4,6 +4,7 @@ import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { SidebarService } from '../../services/sidebar.service';
 import { Subscription } from 'rxjs';
+import {PanelMenuModule} from 'primeng/panelmenu';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,8 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent {
 
+
+ 
   display;
   public usuario: Usuario;
   

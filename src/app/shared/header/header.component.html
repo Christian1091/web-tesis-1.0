@@ -5,7 +5,7 @@
     <div class="navigation" style="padding-top: 20px;">
 
         <ul class="list">
-            <li style="font-weight:bolder; color: rgb(62, 239, 218);"> {{ usuario.nombre }}</li>
+            <li style="font-weight:bolder; color: rgb(56, 6, 85);"> {{ usuario.nombre }}</li>
             <li>
                 <i class="pi pi-user " style="padding-right: 10px; color: #47b2e4;"></i>
                 <a routerLinkActive="active" routerLink="./perfil" style="font-weight: bolder; color: rgb(11, 5, 46)">Mi Perfil </a>
@@ -18,7 +18,7 @@
                 <ul>
                     <li *ngFor="let subMenuItem of item.submenu">
                         <br />
-                        <a class="has-arrow waves-effect waves-dark" style="color:rgb(1, 1, 28); " [class]="subMenuItem.icono"
+                        <a class="has-arrow waves-effect waves-dark"  [class]="subMenuItem.icono"
                             [routerLink]="subMenuItem.url" routerLinkActive="active"
                             [routerLinkActiveOptions]="{ exact: true }">
                             {{ subMenuItem.titulo }}

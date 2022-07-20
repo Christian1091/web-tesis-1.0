@@ -23,6 +23,8 @@ import { GeneralComponent } from './general/general.component';
 import {MatSelectModule} from '@angular/material/select';
 import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { PanelMenuModule } from 'primeng/panelmenu';
+import {CardModule} from 'primeng/card';
 
 import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
@@ -62,7 +64,9 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
     MatIconModule,
     MatTabsModule,
     MatSelectModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    PanelMenuModule,
+    CardModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
