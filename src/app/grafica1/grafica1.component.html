@@ -55,8 +55,9 @@
       <canvas #grafico></canvas>
     </div>
   </div>
-  <button class="btnBack" type="button" mat-button (click)="drawer.toggle()" title="Ampliar">
-    <<
+  <button  class="btnBack" type="button" mat-button (click)="drawer.toggle()" title="Ampliar">
+    <i *ngIf="btnAmpliar" (click)="cambiarBoton()" class="pi pi-arrow-up-right" style="font-size: 2rem"></i>
+    <i *ngIf="!btnAmpliar" (click)="cambiarBoton()" class="pi pi-arrow-down-left" style="font-size: 2rem"></i>
   </button>
 
   <button class="noselect red" (click)="calcularNivelMadurez(true)" *ngIf="isActive">

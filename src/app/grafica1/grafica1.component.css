@@ -162,13 +162,13 @@
 
   
   button:hover {
-    box-shadow:  5px 5px 15px rgb(165, 81, 3), inset 3px 3px 3px rgb(250, 193, 119), inset -3px -3px 3px rgb(164, 80, 2);
+    box-shadow:  5px 5px 15px rgb(205, 204, 203), inset 3px 3px 3px rgb(180, 168, 154), inset -3px -3px 3px rgb(86, 80, 75);
     font-size: 15px;
     transition: 500ms;
     
   }
   button:active{
-    color: rgb(59, 38, 7);
+    color: rgb(63, 57, 48);
   }
   
   button:focus {
@@ -177,7 +177,7 @@
   }
   
   .red:hover {
-    text-shadow: 1px 1px 5px #c26f03;
+    text-shadow: 1px 1px 5px #c3c2c0;
   }
 
   label{
@@ -219,10 +219,10 @@
   width: 70px;
   height: 50px;
   cursor: pointer;
-  background: #eb812a;
+  background: #5f5f5e;
   margin: 25px;
   border: none;
   border-radius: 10px;
-  box-shadow:  5px 5px 15px rgb(140, 140, 139), inset 5px 5px 5px #f7b662, inset -5px -5px 5px rgb(164, 80, 2);
+  box-shadow:  5px 5px 15px rgb(140, 140, 139), inset 5px 5px 5px #9e9d9c, inset -5px -5px 5px rgb(138, 137, 137);
   font-size: 18px;
   }

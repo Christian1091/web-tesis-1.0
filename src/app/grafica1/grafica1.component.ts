@@ -51,6 +51,11 @@ export class Grafica1Component {
     'Tic-Avanzado': [],
     'HiperTic': []
   }
+   public btnAmpliar: boolean = false;
+
+   public cambiarBoton() {
+    this.btnAmpliar = !this.btnAmpliar;
+   }
 
   constructor(private cuestioanrioService: CuestionarioService,
     private respuestaCuestionarioService: RespuestaCuestionarioService,

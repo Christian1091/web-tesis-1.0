@@ -6,6 +6,7 @@ import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import {SidebarModule} from 'primeng/sidebar';
+import { PanelMenuModule } from 'primeng/panelmenu';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {SidebarModule} from 'primeng/sidebar';
     CommonModule,
     RouterModule,
     FormsModule,
-    SidebarModule
+    SidebarModule,
+    PanelMenuModule
   ]
 })
 export class SharedModule { }

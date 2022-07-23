@@ -2,33 +2,8 @@
 <!-- Topbclass="pi pi-check"ar header - style you can find in pages.scss -->
 <!-- ============================================================== -->
 <p-sidebar [(visible)]="display">
-    <div class="navigation" style="padding-top: 20px;">
-
-        <ul class="list">
-            <li style="font-weight:bolder; color: rgb(56, 6, 85);"> {{ usuario.nombre }}</li>
-            <li>
-                <i class="pi pi-user " style="padding-right: 10px; color: #47b2e4;"></i>
-                <a routerLinkActive="active" routerLink="./perfil" style="font-weight: bolder; color: rgb(11, 5, 46)">Mi Perfil </a>
-            </li>
-            <li *ngFor="let item of sidebarService.menu">
-                <a class="has-arrow waves-effect waves-dark" href="#" aria-expanded="false"><i [class]="item.icono"></i>
-                    <span style="font-weight:bolder; color: rgb(11, 5, 46)" icono="pi pi-copy" >
-                        {{ item.titulo }}
-                    </span> </a>
-                <ul>
-                    <li *ngFor="let subMenuItem of item.submenu">
-                        <br />
-                        <a class="has-arrow waves-effect waves-dark"  [class]="subMenuItem.icono"
-                            [routerLink]="subMenuItem.url" routerLinkActive="active"
-                            [routerLinkActiveOptions]="{ exact: true }">
-                            {{ subMenuItem.titulo }}
-                        </a>
-                    </li>
-                </ul>
-            </li>
-        </ul>
-    </div>
-
+    {{ usuario.nombre }}
+    <p-panelMenu [model]="sidebarService.menu" [style]="{'width':'300px'}"></p-panelMenu>
 </p-sidebar>
 <header class="topbar">
     <nav class="navbar top-navbar navbar-expand-md navbar-light">
