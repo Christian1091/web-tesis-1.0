@@ -12,8 +12,6 @@ a:hover{
   color: rgb(158, 166, 249) !important;
 }
 
-
-
 .logogih4{
     border-radius: 50px;
     width: 50px;
@@ -97,3 +95,12 @@ a {
   .space {
     padding-top: 25px;
   } 
+
+
+
+  p-sidebar{
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;  
+
+  }

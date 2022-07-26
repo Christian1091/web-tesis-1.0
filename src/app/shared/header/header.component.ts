@@ -23,6 +23,7 @@ export class HeaderComponent  {
     private router: Router) {
       
     this.usuario = usuarioService.usuario;
+    
   }
 
   ngOnInit() {
