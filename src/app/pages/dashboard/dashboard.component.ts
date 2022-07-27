@@ -57,6 +57,9 @@ export class DashboardComponent implements OnInit {
       width: '450px'
     });
     const searchAfter = dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.cargarNoticia();        
+      }
     });
     this.subscriptions.push(searchAfter);
   }
@@ -82,6 +85,7 @@ export class DashboardComponent implements OnInit {
   }
 
   cargarNoticia() {
+    this.noticias = []; 
     const searchListNoticias = this.postService.getListNoticias().subscribe(response => {
       this.noticias = response['noticias'];
     });

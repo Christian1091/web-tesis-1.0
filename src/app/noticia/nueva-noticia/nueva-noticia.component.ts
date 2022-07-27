@@ -44,7 +44,7 @@ export class NuevaNoticiaComponent implements OnInit {
           if (this.data != null || this.data != undefined) {
             if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
               const searchActualizarN = this.noticiaService.actualizarNoticia({ titulo: this.noticia.titulo, descripcion: this.noticia.descripcion, texto: this.noticia.texto, nombreImagen: nombreImagen }).subscribe(response => {
-                this.dialogRef.close();
+                this.dialogRef.close(true);
                 console.log(response);
 
               });
@@ -53,7 +53,7 @@ export class NuevaNoticiaComponent implements OnInit {
           } else {
             if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
               const searchCrearN = this.noticiaService.crearNoticia({ titulo: this.noticia.titulo, descripcion: this.noticia.descripcion, texto: this.noticia.texto, nombreImagen: nombreImagen }).subscribe(response => {
-                this.dialogRef.close();
+                this.dialogRef.close(true);
               });
               this.subscriptions.push(searchCrearN);
             }
