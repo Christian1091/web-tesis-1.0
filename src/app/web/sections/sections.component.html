@@ -78,11 +78,19 @@
                   src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}"
                   alt="Noticias">
               </picture>
+              <!-- <picture>
+
+                <source media="(min-width:20px)"
+                  srcset="http://localhost:3000/api/noticia/view/{{product.nombreImagen}}">
+                <img media="(min-width:10px)"
+                  src="http://localhost:3000/api/noticia/view/{{product.nombreImagen}}"
+                  alt="Noticias">
+              </picture> -->
               <!-- <div class="mb-3">
                     <img src="https://lobster-app-mesmx.ondigitalocean.app/api/noticia/view/{{product.nombreImagen}}" class="product-image" />
                 </div> -->
               <h4 class="p-mb-1">{{product.titulo | slice:0:20 }} ... </h4>
-              <span class="product-badge">{{product.descripcion | slice:0:80}} ...</span>
+              <span class="product-badge">{{product.descripcion | slice:0:40}} ...</span>
               <button type="button" (click)="verMas(product)"
                 class="btn waves-effect waves-light btn-block btn-info">Ver más</button>
             </div>

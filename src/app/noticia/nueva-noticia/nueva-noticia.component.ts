@@ -25,6 +25,8 @@ export class NuevaNoticiaComponent implements OnInit {
       this.noticia = data;
       this.actualizar = true;
     }
+    console.log(this.noticia);
+    
   }
 
   ngOnInit(): void {
@@ -36,21 +38,39 @@ export class NuevaNoticiaComponent implements OnInit {
     this.noticia.titulo.trim();
     this.noticia.descripcion.trim();
     this.noticia.texto.trim();
-    if (this.file) {
-      const searchUploadI = this.noticiaService.uploadImage(this.file).subscribe(response => {
-        const estado = response['ok'] as boolean;
-        if (estado) {
-          nombreImagen = response['nombreArchivo'];
-          if (this.data != null || this.data != undefined) {
+    if (this.actualizar) {
+      console.log("actualizando la noticia");
+      if (this.file) {
+        const searchUploadI = this.noticiaService.uploadImage(this.file).subscribe(response => {
+          const estado = response['ok'] as boolean;
+          if (estado) {
+            nombreImagen = response['nombreArchivo'];
+            console.log(response);
             if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
-              const searchActualizarN = this.noticiaService.actualizarNoticia({ titulo: this.noticia.titulo, descripcion: this.noticia.descripcion, texto: this.noticia.texto, nombreImagen: nombreImagen }).subscribe(response => {
+              this.noticia.nombreImagen = nombreImagen;
+              const searchActualizarN = this.noticiaService.actualizarNoticia(this.noticia).subscribe(response => {
                 this.dialogRef.close(true);
-                console.log(response);
-
               });
               this.subscriptions.push(searchActualizarN);
             }
-          } else {
+          }
+        });
+        this.subscriptions.push(searchUploadI);
+      } else {
+        if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
+          const searchActualizarN = this.noticiaService.actualizarNoticia(this.noticia).subscribe(response => {
+            this.dialogRef.close(true);
+          });
+          this.subscriptions.push(searchActualizarN);
+        }
+      }
+    } else {
+      console.log("creandoo una nueva noticia");
+      if (this.file) {
+        const searchUploadI = this.noticiaService.uploadImage(this.file).subscribe(response => {
+          const estado = response['ok'] as boolean;
+          if (estado) {
+            nombreImagen = response['nombreArchivo'];
             if (this.noticia.titulo.length > 0 && this.noticia.descripcion.length > 0 && this.noticia.texto.length > 0) {
               const searchCrearN = this.noticiaService.crearNoticia({ titulo: this.noticia.titulo, descripcion: this.noticia.descripcion, texto: this.noticia.texto, nombreImagen: nombreImagen }).subscribe(response => {
                 this.dialogRef.close(true);
@@ -58,9 +78,9 @@ export class NuevaNoticiaComponent implements OnInit {
               this.subscriptions.push(searchCrearN);
             }
           }
-        }
-      });
-      this.subscriptions.push(searchUploadI);
+          this.subscriptions.push(searchUploadI);
+        });
+      }
     }
   }
 

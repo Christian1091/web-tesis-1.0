@@ -86,7 +86,7 @@ export class DashboardComponent implements OnInit {
 
   cargarNoticia() {
     this.noticias = []; 
-    const searchListNoticias = this.postService.getListNoticias().subscribe(response => {
+    const searchListNoticias = this.postService.getListNoticiasByUserId().subscribe(response => {
       this.noticias = response['noticias'];
     });
     this.subscriptions.push(searchListNoticias);

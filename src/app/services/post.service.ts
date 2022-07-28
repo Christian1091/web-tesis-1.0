@@ -110,16 +110,23 @@ export class PostService {
 
   }
 
-  actualizarNoticia( noticia: { titulo: string, descripcion: string, texto: string, nombreImagen: string }) {
+  actualizarNoticia( noticia: Noticia) {
   
-    return this.http.post(`${ base_url }/noticia/actualizar`, noticia, this.headers);
+    return this.http.put(`${ base_url }/noticia/actualizar`, noticia, this.headers);
 
   }
 
   getListNoticias() {
     const url =  `${ base_url }/noticia/lista`;
 
+    return this.http.get<Noticia[]>( url );
+  }
+
+  getListNoticiasByUserId() {
+    const url =  `${ base_url }/noticia/userId`;
     return this.http.get<Noticia[]>( url, this.headers );
   }
+
+
 
 }
